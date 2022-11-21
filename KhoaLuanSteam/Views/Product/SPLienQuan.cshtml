@@ -1,0 +1,43 @@
+﻿@model IEnumerable<KhoaLuanSteam.Models.THONGTINSANPHAM>
+<style>
+    .item_product_main .product-main-list-mini:hover {
+        box-shadow: 0 2px 2px #cecece;
+    }
+</style>
+<div class="owl_nav_custome1 related-product">
+    <div class="section_prd_feature">
+        <div class="heading">
+            <h2><a href="#" title="Sản phẩm liên quan">Sản phẩm liên quan</a></h2>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="products product_related products-view-grid-bb">
+                <div class="item_product_main related-item">
+                    <div class="product-box product-item-list product-main-list-mini">
+                        <div class="product-image">
+                            <a class="img_thumb" href="/Product/ChiTietSP/@item.MaSanPham">
+                                <img class="small-image lazyload loaded" src="~/HinhAnhSach/@item.HinhAnh" alt="@item.HinhAnh" />
+                            </a>
+                        </div>
+                        <div class="product-shop">
+                            <h3 class="product-name"><a>@item.TenSanPham</a></h3>
+                            <div class="product-summary">
+                                <span class="text2line">
+                                    Mô tả đang cập nhật
+                                </span>
+                            </div>
+                            <div class="product-item-price price-box">
+                                <span class="special-price">
+                                    <span class="price product-price">@item.GiaSanPham.Value.ToString("N0") VND</span>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+

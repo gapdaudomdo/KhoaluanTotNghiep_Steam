@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "PageDangNhap";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+@model KhoaLuanSteam.Models.KHACHHANG
+<link href="~/Css/StyleSheet3.css" rel="stylesheet" />
+<div id="loginbox" style="margin-top:50px;margin-bottom: 16px;" class="mainbox  col-md-6 offset-md-3 col-sm-8 col-offset-sm-2">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="panel-title">Đăng nhập</div>
+        </div>
+        <div style="padding-top:30px" class="panel-body">
+            <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+            @using (Html.BeginForm("PageDangNhap", "User", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="input-group">
+
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+
+                    @Html.TextBoxFor(model => model.TenDN, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Tên đăng nhập" })
+
+
+                </div>
+
+                <div style="margin-bottom: 25px;padding-left:7%" class="input-group">
+
+                    @Html.ValidationMessageFor(model => model.TenDN, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    @Html.PasswordFor(model => model.MatKhau, new { @class = "form-control", @placeholder = "Mật khẩu" })
+
+                </div>
+                <div style="margin-bottom: 25px;padding-left:7%" class="input-group">
+
+                    @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-group">
+                    <div class="checkbox">
+                        <label>
+                            <input id="login-remember" type="checkbox" name="remember" value="1"> Ghi nhớ?
+                        </label>
+                    </div>
+                </div>
+
+                <div style="margin-top:10px;margin-bottom:0px" class="form-group">
+                    <div class="col-sm-12 controls">
+                        <button type="submit" class="btn btn-primary">Đăng nhập </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 control">
+                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                            Bạn không có tài khoản!
+                            <a href="/User/DangKy">Đăng kí tại đây</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "AD_ShowAllPhieuNhapHang";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@model IEnumerable<KhoaLuanSteam.Models.PHIEUNHAPHANG>
+
+<h2>Quản lý Đơn Nhập Hàng</h2>
+<p>
+    @Html.ActionLink("Thêm phiếu nhập hàng", "InsertDonNhapHang")
+</p>
+<table class="table" id="example">
+    <thead>
+        <tr>
+            <th>
+                MaPNH
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NHACUNGCAP.MaNCC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NHANVIEN.MaNV)
+            </th>
+            <th>
+              Ngày Lập HD
+            </th>
+            <th>
+               Tổng SL
+            </th>
+            <th>
+                Tổng Tiền
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.MaPhieuNhapHang.Trim()">
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaPhieuNhapHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NHACUNGCAP.MaNCC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NHANVIEN.MaNV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayLap_PN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongSL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongTien_NH)
+                </td>
+                <td>
+                    @Html.ActionLink("Xem", "DetailsCT_PhieuNhapHang", new { id = item.MaPhieuNhapHang.Trim()})
+                </td>
+            </tr>}
+    </tbody>
+
+</table>

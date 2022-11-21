@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "DetailsCT_PDDH";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@model IEnumerable<KhoaLuanSteam.Models.CT_PHIEUDATHANG>
+
+<h2>Chi tiết đơn hàng</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PHIEUDATHANG.MaPhieuDH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.THONGTINSANPHAM.TenSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHIEUDATHANG.MaPhieuDH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.THONGTINSANPHAM.TenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                <p>@String.Format("{0:0,0}", item.DonGia) VND</p>
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    @Html.ActionLink("Trở về", "AD_ShowAllPhieuDatHang")
+</div>
+

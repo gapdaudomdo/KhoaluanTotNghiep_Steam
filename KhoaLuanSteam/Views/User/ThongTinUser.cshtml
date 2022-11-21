@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "ThongTinUser";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+@model  KhoaLuanSteam.Models.KHACHHANG
+
+<link href="~/Css/StyleSheet6.css" rel="stylesheet" />
+<div class="thongtin" style="padding-left: 20px; padding-top: 15px; padding-bottom: 30px;width: 100%;">
+    <h2 class="title-head" style="width: 100%; padding-left: 15px;font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; margin: 0; text-transform: none; font-weight: 600; color: #707070; padding-bottom: 10px; display: inline-block; position: relative; font-size: 18px; line-height: 22px; border-bottom:2px solid #707070; text-transform: uppercase; margin-bottom: 15px;">
+        <span>HỒ SƠ</span>
+    </h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-xs-12 col-sm-12 col-lg-3 col-left-ac" style="float:left">
+            <div class="block-account">
+                <h5 class="title-account">Trang tài khoản</h5>
+                <p>Xin chào, <span style="color:#0099ae; text-transform:uppercase">@Session["User"] </span>&nbsp;!</p>
+                <ul>
+                    <li>
+                        <a disabled="disabled" class="title-info active" href="javascript:void(0);">Thông tin tài khoản</a>
+                    </li>
+                    <li>
+                        <a class="title-info" href="/Cart/DonHang_KH">Đơn hàng của bạn</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-lg-9 col-right-ac" style="float:right">
+            <h1 class="title-head margin-top-0">Thông tin tài khoản</h1>
+            <div class="form-signup name-account m992">
+                <div class="form-group" style="float: left; width: 100%;">
+                    <label style="display: inline-block; max-width: 100%;    margin-bottom: 5px; float: left;    padding-top: 10px;   font-weight: 700;"> Tên Khách Hàng:</label>
+                    <div class="col-md-10" style="float:right">
+                        @Html.HiddenFor(model => model.MaKH)
+                        @Html.TextBoxFor(model => model.TenKH, new { style = "height:34px;", @class = "form-control", placeHolder = "" })
+                        @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group" style="float: left; width: 100%;">
+                    <label style="display: inline-block; max-width: 100%;    margin-bottom: 5px; float: left;    padding-top: 10px;   font-weight: 700;"> Địa Chỉ:</label>
+                    <div class="col-md-10" style="float:right">
+                        @Html.TextBoxFor(model => model.DiaChi, new { style = "height:34px;", @class = "form-control", placeHolder = "" })
+                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group" style="float: left; width: 100%;">
+                    <label style="display: inline-block; max-width: 100%;    margin-bottom: 5px; float: left;    padding-top: 10px;   font-weight: 700;"> Email:</label>
+                    <div class="col-md-10" style="float:right">
+                        @Html.TextBoxFor(model => model.Email, new { style = "height:34px;", @class = "form-control", placeHolder = "" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group" style="float: left; width: 100%;">
+                    <label style="display: inline-block; max-width: 100%;    margin-bottom: 5px; float: left;    padding-top: 10px;   font-weight: 700;"> SDT:</label>
+                    <div class="col-md-10" style="float:right">
+                        @Html.TextBoxFor(model => model.SDT, new { style = "height:34px;", @class = "form-control", placeHolder = "" })
+                        @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group" style="float: left; width: 100%;">
+                    <label style="display: inline-block; max-width: 100%;    margin-bottom: 5px; float: left;    padding-top: 10px;   font-weight: 700;"> Ngày Sinh:</label>
+                    <div class="col-md-10" style="float:right">
+                        @Html.TextBoxFor(model => model.NgaySinh, new { style = "height:34px;", @class = "form-control", placeHolder = "" })
+                        @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group" style="float: left; width: 100%;">
+                    <label style="display: inline-block; max-width: 100%;    margin-bottom: 5px; float: left;    padding-top: 10px;   font-weight: 700;"> Giới Tính:</label>
+                    <div class="col-md-10" style="float:right">
+                        @Html.TextBoxFor(model => model.GioiTinh, new { style = "height:34px;", @class = "form-control", @readonly = "readonly", placeHolder = "" })
+                        @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group" style="float: left; width: 100%;">
+                    <label style="display: inline-block; max-width: 100%;    margin-bottom: 5px; float: left;    padding-top: 10px;   font-weight: 700;"> Tên DN:</label>
+                    <div class="col-md-10" style="float:right">
+                        @Html.TextBoxFor(model => model.TenDN, new { style = "height:34px;", @class = "form-control", @readonly = "readonly", placeHolder = "" })
+                        @Html.ValidationMessageFor(model => model.TenDN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group" style="float: left; width: 100%;">
+                    <label style="display: inline-block; max-width: 100%;    margin-bottom: 5px; float: left;    padding-top: 10px;   font-weight: 700;"> Mật Khẩu:</label>
+                    <div class="col-md-10" style="float:right">
+                        @Html.TextBoxFor(model => model.MatKhau, new { style = "height:34px;", @class = "form-control", placeHolder = "", Type = "PassWord" })
+                        @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group" style="float: left; width: 100%; text-align: center;">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    }
+</div>

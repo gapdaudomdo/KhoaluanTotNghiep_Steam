@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+@section jsFooter{
+    <script type="text/javascript">
+        var cart = {
+            init: function () {
+                cart.regEvents();
+            },
+            regEvents: function () {
+                $('button#btnDelete').click(function () {
+                    var val = $(this).val();
+                    $.ajax({
+                        data: { id:val },
+                        url: '/Cart/Delete',
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.status == true) {
+                                window.location.href = "/Cart/Index";
+                            }
+                        }
+                    })
+                });
+                $('#btnDeleteAll').click(function () {
+                    $.ajax({
+                        url: '/Cart/DeleteAll',
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.status == true) {
+                                window.location.href = "/Cart/Index";
+                            }
+                        }
+                    })
+                });
+                $('#btnUpdate').click(function () {
+                    var listProduct = $('.txtQuantity');
+                    var cartList = [];
+                    $.each(listProduct, function (i, item) {
+                        cartList.push({
+                            iSoLuong: $(item).val(),
+                            sanpham: {
+                                MaSanPham: $(item).data('id')
+                            }
+                        });
+                    });
+
+                    $.ajax({
+                        url: '/Cart/Update',
+                        data: { cartModel: JSON.stringify(cartList) },
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.status == true) {
+                                window.location.href = "/Cart/Index";
+                            }
+                        }
+                    })
+                });
+            }
+        }
+        cart.init();
+    </script>
+}
+@model List<KhoaLuanSteam.Models.GioHang>
+
+<h2 style="margin-bottom: 20px;font-size: 24px;   font-weight: bold;   color: #0c0c0c;   margin-top: 0px;width: 100%;   padding-left: 21px;    padding-top: 21px;">Giỏ hàng của bạn</h2>
+@if (Model.Count > 0)
+{
+    <table id="cart" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th style="width:50%;font-size: 16px; font-weight: 700;" class="text-center">Sản phẩm</th>
+                <th style="width:10%;font-size: 16px; font-weight: 700;" class="text-center">Giá</th>
+                <th style="width:8%;font-size: 16px; font-weight: 700;" class="text-center">Số lượng</th>
+                <th style="width:22%;font-size: 16px; font-weight: 700;" class="text-center">Thành tiền</th>
+                <th style="width:10%;font-size: 16px; font-weight: 700;" class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td data-th="Product">
+                        <div class="row">
+                            <div class="col-sm-2 hidden-xs"><img src="~/HinhAnhSach/@item.sanpham.HinhAnh" alt="@item.sanpham.HinhAnh" class="img-responsive" style="width: 150px; height: auto; margin-left: 31px;" /></div>
+                            <div class="col-sm-10">
+                                <h4 class="nomargin" style="margin-left: 29%;font-size: 19px; font-weight: bold;">@item.sanpham.TenSanPham</h4>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-th="Price">
+                        @if (@item.sanpham.GiamGia <= 0)
+                        {
+                            <span>
+                                @item.sanpham.GiaSanPham.GetValueOrDefault(0).ToString("N0") VND
+                            </span>
+                        }
+                        else
+                        {
+                            <span>
+                                @Html.Action("giasachgiam", "Product", new { @masanpham = @item.sanpham.MaSanPham })
+                            </span>
+
+                        }
+                    </td>
+                    <td data-th="Quantity">
+                        <input type="number" class="txtQuantity" data-id="@item.sanpham.MaSanPham" value="@item.iSoLuong">
+                    </td>
+                    <td data-th="Subtotal" class="text-center">
+                        @if (@item.sanpham.GiamGia <= 0)
+                        {
+                            <span>
+                                @((item.sanpham.GiaSanPham.GetValueOrDefault(0) * item.iSoLuong).ToString("N0")) VND
+                            </span>
+                        }
+                        else
+                        {
+                            <span>
+
+                                @(((item.sanpham.GiaSanPham.GetValueOrDefault(0) - (item.sanpham.GiaSanPham.GetValueOrDefault(0) * item.sanpham.GiamGia.GetValueOrDefault(0))) * item.iSoLuong).ToString("N0")) VND
+                            </span>
+
+                        }
+
+                    </td>
+                    <td class="actions" data-th="">
+                        @*nút xóa*@
+                        <button id="btnDelete" type="submit" value="@item.sanpham.MaSanPham" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                        @*kết thúc nút xóa*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+
+            <tr>
+                <td>
+                    <a href="~/Home/SanPham" class="btn btn-primary btn-sm"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+                    @*nút cập nhật*@
+                    <button id="btnUpdate" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i> Cập nhật</button>
+                    @*kết thúc nút cập nhật*@
+                    @*nút xóa*@
+                    <button id="btnDeleteAll" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Xóa tất cả</button>
+                    @*kết thúc nút xóa*@
+                </td>
+                <td colspan="2" class="hidden-xs"></td>
+                <td class="hidden-xs text-center"><strong>Tổng cộng: @String.Format("{0:0,0}", ViewBag.Total) VND</strong></td>
+                <td><a href="/Cart/ThanhToan" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a></td>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <div class="wrap_background_aside padding-top-15 margin-bottom-40" style="padding-left:22px">
+        <div class="header-cart">
+
+            <div class="header-cart title_cart_pc hidden-sm hidden-xs"><p class="hidden-xs-down">Không có sản phẩm nào. Quay lại <a href="~/Home/SanPham">cửa hàng</a> để tiếp tục mua sắm.</p></div>
+        </div>
+        <a href="~/Home/SanPham" style="margin-top: 20px;margin-bottom:10px" class="btn btn-primary"> Tiếp tục mua hàng</a>
+    </div>
+}
+<style>
+    .product-price {
+        font-size: 13px;
+        line-height: 1.5;
+        color: #212529;
+        font-weight: 100;
+    }
+</style>

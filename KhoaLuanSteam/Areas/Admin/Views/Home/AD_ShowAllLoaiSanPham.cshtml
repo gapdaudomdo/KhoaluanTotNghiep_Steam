@@ -1,0 +1,94 @@
+﻿@*@model  DoAn_MonHoc.Models.LOAISANPHAM
+@{
+    ViewBag.Title = "AD_ShowAllLoaiSanPham"; 
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>Quản lý loại sản phẩm</h2>
+<p>
+    @Html.ActionLink("Thêm loại sản phẩm", "InsertLoaiSach")
+</p>
+<table class="table" id="example">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaLoai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenLoai)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.MaLoai">
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaLoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenLoai)
+                </td>
+                <td>
+                    @Html.ActionLink("Xem", "UpdateLoaiSach", new { id = item.MaLoai }) |
+                    @Ajax.ActionLink("Xóa", "DeleteLoaiSach", new { id = item.MaLoai }, new AjaxOptions
+               {
+                   Confirm = "Bạn có muốn xóa loại sản phẩm này không?",
+                   OnComplete = "$('#row_" + @item.MaLoai + "').remove()",
+                   HttpMethod = "Delete"
+               })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>*@
+
+
+@model IEnumerable<KhoaLuanSteam.Models.LOAISANPHAM>
+
+@{
+    ViewBag.Title = "AD_ShowAllLoaiSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>Quản lý loại sản phẩm</h2>
+
+<p>
+    @Html.ActionLink("Thêm loại sản phẩm", "InsertLoaiSanPham")
+</p>
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>Mã loại sản phẩm</th>
+            <th>Tên Loại</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.MaLoai">
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaLoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenLoai)
+                </td>
+                <td>
+                    @Html.ActionLink("Xem", "UpdateLoaiSanPham", new { id = item.MaLoai }) |
+                    @Ajax.ActionLink("Xóa", "DeleteLoaiSanPham", new { id = item.MaLoai }, new AjaxOptions
+               {
+                   Confirm = "Bạn có muốn xóa thể loại này không?",
+                   OnComplete = "$('#row_" + @item.MaLoai + "').remove()",
+                   HttpMethod = "Delete"
+               })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

@@ -1,0 +1,27 @@
+﻿@model KhoaLuanSteam.Models.NHANVIEN
+@{
+    var session = Session["LoginAdmin"];
+}
+<li class="dropdown" style="padding-left: 35px;">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="fa fa-user fa-fw" style="width: 100%; padding-right: 21px;"></i>  
+</a>
+  
+    <ul class="dropdown-menu dropdown-user">
+        @if (session != null)
+        {
+            <li>
+                <a href="/Admin/Login/AdminInfo"><i class="fa fa-user fa-fw"></i> Hồ sơ</a>
+            </li>
+        }
+        <li class="divider"></li>
+        <li>
+            @Html.ActionLink(" Đăng xuất", "Logout", "Login", new { @class = "fa fa-sign-out fa-fw" })
+        </li>
+    </ul>
+    <!-- /.dropdown-user -->
+</li>
+
+
+
+

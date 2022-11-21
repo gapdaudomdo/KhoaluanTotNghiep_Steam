@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "AD_ShowAllNhaCungCap";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@model IEnumerable<KhoaLuanSteam.Models.NHACUNGCAP>
+
+<h2>Quản lý nhà cung cấp</h2>
+<p>
+    @Html.ActionLink("Thêm nhà cung cấp", "InsertNhaCungCap")
+</p>
+<table class="table" id="example">
+    <thead>
+        <tr>
+            <th>
+                Mã
+            </th>
+            <th>
+                Nhà Cung Cấp
+            </th>
+            <th>
+                Địa Chỉ
+            </th>
+            <th>
+                Điện Thoại
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.MaNCC">
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaNCC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNCC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DienThoai)
+                </td>
+                <td>
+                    @Html.ActionLink("Xem", "UpdateNCC", new { id = item.MaNCC }) |
+                    @Ajax.ActionLink("Xóa", "DeleteNCC", new { id = item.MaNCC }, new AjaxOptions
+               {
+                   Confirm = "Bạn có muốn xóa nhà cung cấp này không?",
+                   OnComplete = "$('#row_" + @item.MaNCC + "').remove()",
+                   HttpMethod = "Delete"
+               })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

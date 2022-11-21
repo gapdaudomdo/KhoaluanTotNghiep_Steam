@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "SanPham";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+@model PagedList.IPagedList<KhoaLuanSteam.Models.THONGTINSANPHAM>
+@using PagedList.Mvc
+<style>
+    .aside-content ul li a {
+        color: #636363;
+    }
+
+        .aside-content ul li a:hover {
+            color: #0099ae;
+        }
+
+    .btn-light {
+        color: #898989;
+    }
+
+        .btn-light:hover {
+            background-color: #0099ae;
+            color: white;
+        }
+
+    .ul.pagination {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul.pagination li {
+        display: inline;
+    }
+
+        ul.pagination li a {
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            float: left;
+            margin: 0 2.5px;
+            border-radius: 0;
+            background: #fff;
+            text-align: center;
+            font-size: 14px;
+            color: #0c0c0c;
+            border: solid 1px #e1e1e1;
+        }
+
+            ul.pagination li a.active {
+                background-color: #0099ae;
+                color: white;
+            }
+
+            ul.pagination li a:hover:not(.active) {
+                background-color: #0099ae;
+            }
+</style>
+
+<link href="~/Css/StyleSheet4.css" rel="stylesheet" />
+
+<link href="~/Css/StyleSheet5.css" rel="stylesheet" />
+
+<aside class="sidebar left-content col-lg-3 col-lg-3-fix col-md-3 col-lg-pull-9 col-md-pull-9" style="margin-top:20px">
+    <div class="wrap_background_aside asidecollection" style=" padding: 0px; width: 100%; float: left; }">
+        <aside class="aside-item sidebar-category collection-category" style="margin-bottom: 25px;width: 100%; float: left;">
+            <div class="aside-title">
+                <h2 class="title-head" style="width: 100%; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; margin: 0; text-transform: none; font-weight: 600; color: #707070; padding-bottom: 10px; display: inline-block; position: relative; font-size: 18px; line-height: 22px; border-bottom:2px solid #707070; text-transform: uppercase; margin-bottom: 15px;">
+                    <span>Danh mục Sảm Phẩm</span>
+                </h2>
+            </div>
+            <div class="aside-content">
+                @Html.Action("ShowTheLoai", "Product")
+            </div>
+        </aside>
+        <aside class="aside-item sidebar-category collection-category" style="margin-bottom: 25px;width: 100%; float: left;">
+            <div class="aside-title">
+                <h2 class="title-head" style="width: 100%; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; margin: 0; text-transform: none; font-weight: 600; color: #707070; padding-bottom: 10px; display: inline-block; position: relative; font-size: 18px; line-height: 22px; border-bottom:2px solid #707070; text-transform: uppercase; margin-bottom: 15px;">
+                    <span>Danh mục NHÀ CUNG CẤP</span>
+                </h2>
+            </div>
+            <div class="aside-content">
+                @Html.Action("ShowNCC", "Product")
+            </div>
+        </aside>
+    </div>
+</aside>
+<div class="main_container collection  col-lg-9 col-md-9 col-lg-9-fix padding-col-left-0 col-lg-push-3 col-md-push-3" style="margin-top:20px">
+    <h2 class="title-head" style="width: 100%; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; margin: 0; text-transform: none; font-weight: 600; color: #707070; padding-bottom: 10px; display: inline-block; position: relative; font-size: 18px; line-height: 22px; border-bottom:2px solid #707070; text-transform: uppercase; margin-bottom: 20px;">
+        <span>Tất cả sản phẩm</span>
+    </h2>
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-xs-6 col-sm-4 col-sm-4 col-md-4 col-lg-4" style="">
+                <div class="item_product_main margin-bottom-20 item_product_main_relative">
+                    <div class="product-box product-item-main product-item-compare">
+                        <div class="product-thumbnail">
+                            <div class="content_hover">
+                                <a class="image_thumb p_img" title="@item.TenSanPham" href="/Product/ChiTietSP/@item.MaSanPham">
+                                    <div class="content-overlay"></div>
+                                    <img class="content-image" src="~/HinhAnhSach/@item.HinhAnh" alt="@item.HinhAnh" width="180px" height="242px" />
+                                    <a title="Xem nhanh" href="~/Product/ChiTietSP/@item.MaSanPham" data-handle="tren-duong-bang" class="xem_nhanh btn-circle btn_view btn right-to quick-view hidden-xs hidden-sm">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-info product-bottom mh" style="width:100%; float: left; padding: 0; position: relative; text-align: center; min-height: 99px;">
+                            <h3 class="product-name" style="font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; font-size: 14px; font-weight: 600; margin:0 0 5px; overflow: hidden; text-transform: uppercase; word-wrap: break-word; line-height: 22px; padding: 10px 15px 0; text-overflow: ellipsis; white-space: nowrap;">
+                                <a href="/chung-ta-roi-se-on-thoi" title="@item.TenSanPham" style="color: #636363;">
+                                    @item.TenSanPham
+                                </a>
+                            </h3>
+                            <div class="section">
+                                <div class="blockprice" style="min-height: 30px; width: 100%;">
+                                    <div class="product-item-price price-box">
+                                        @if (@item.GiamGia <= 0)
+                                        {
+                                            <span class="product-item-price-sale old-price">
+                                                <span class="compare-price price product-price-old" style="font-size: 20px; font-weight: 700; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; color: #f26522; font-weight: 600; line-height: 20px; ">
+                                                    @item.GiaSanPham.Value.ToString("N0") VND
+                                                </span>
+                                            </span>
+                                        }
+                                        else
+                                        {
+
+                                            @Html.Action("giasachgiam", "Product", new { @MaSanPham = @item.MaSanPham })
+                                            <span class="product-item-price-sale old-price">
+                                                <span class="compare-price price product-price-old" style="color: #636363; text-decoration: line-through;">
+                                                    @item.GiaSanPham.Value.ToString("N0") VND
+                                                </span>
+                                            </span>
+                                        }
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="product-action clearfix" style="text-align: center; height: 40px; width: 100%; float: left; z-index: 10;">
+                                <form action="#" method="post" class="variants form-nut-grid" data-id="product-actions-1272032" enctype="multipart/form-data">
+                                    <div class="group_action" style="text-align: center; width: 100%; display: flex;  justify-content:center">
+
+                                        <input type="hidden" name="variantId" value="1953228">
+
+                                        <a class="btn btn-light" href="/Cart/ThemGioHang/?id=@item.MaSanPham&soluong=1" style="border: 2px solid #e1e1e1; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; font-size: 13px; font-weight: 400; text-decoration: none;  display: inline-block; padding: 8px 20px 8px 20px;">
+
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                        </a>
+
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+        @*tạo link liên kết trang*@
+
+
+
+    </div>
+    @*tạo link liên kết trang*@
+
+
+    @*Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("SanPham", new { page = page }))*@
+
+
+    <nav class="clearfix relative nav_pagi f-right w_100" style="text-align: right; width:100%; margin: 15px 0 30px;  border-top: 1px solid #e1e1e1; border-bottom: 1px solid #e1e1e1;  float: right;">
+        <div class="pagination" style="float:right ;padding-top:10px">
+            @*Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount*@
+            @Html.PagedListPager(Model, page => Url.Action("SanPham", new { page = page }))
+        </div>
+    </nav>
+
+
+</div>
+

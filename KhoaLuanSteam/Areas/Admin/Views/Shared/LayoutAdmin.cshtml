@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Trang quản lý sản phẩm">
+    <meta name="author" content="MHN">
+    <title>Admin Homepage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <link href="~/Css/StyleSheet8.css" rel="stylesheet" />
+    <link href="/Content/Admin/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    @*DataTables*@
+    <link href="/Content/Admin/jquery.dataTables.min.css" rel="stylesheet" />
+    @*!DataTables*@
+    <!-- Bootstrap Core CSS -->
+    <link href="/Content/Admin/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="/Content/Admin/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- Timeline CSS -->
+    <link href="/Content/Admin/dist/css/timeline.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/Content/Admin/dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="/Content/Admin/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="/Content/Admin/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="wrapper" style="margin-left: 250px">
+        <nav class="navbar navbar-default navbar-static-top navbar-expand-lg navbar-light bg-light " style="margin-bottom: 0; height: 46px; position: fixed; top: 0; left: 250px; right: 0;z-index:1000 ">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Trang Quản Lý</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="float:right">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                @Html.Action("AdminProfile", "Login")
+                <!-- /.dropdown -->
+            </ul>
+            <div class="navbar-default sidebar " role="navigation">
+                <div class="wrapper sticky-top">
+                    <div id="sidebar1" style="top:0">
+                        <ul class="list-unstyled components" style="padding-top: 0px;">
+                            <li>
+                                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-bars"></i> Sản phẩm </a>
+
+                                <ul class="collapse list-unstyled" id="homeSubmenu">
+                                    <li> <a href="/Admin/Home/AD_ShowAllProduct">Sản Phẩm</a> </li>
+                                    <li> <a href="/Admin/Home/AD_ShowAllLoaiSanPham">Loại Sản Phẩm</a> </li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cogs"></i> Hệ thống</a>
+                                <ul class="collapse list-unstyled" id="pageSubmenu">
+                                    <li> <a href="/Admin/Home/AD_ShowAllKH">Tài Khoản</a> </li>
+                                    <li> <a href="/Admin/Home/AD_ShowNhaCungCap">Nhà Cung Cấp</a> </li>
+                                    <li> <a href="/Admin/Home/AD_ShowAllPhieuNhapHang">Phiếu Nhập Hàng</a> </li>
+                                    <li> <a href="/Admin/Home/AD_ShowAllPhieuDatHang">Đơn Hàng</a> </li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/Admin/Home/FeedBack_KH"><i class="fa fa-file"></i> Phản hồi</a>
+
+                            </li>
+                        </ul>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Content -->
+        <div id="page-wrapper" style="min-height: 671px;padding: 0 0px;margin-top:60px">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+  
+    @*!DataTables*@
+    <script src="/Content/Admin/js/jquery.unobtrusive-ajax.min.js"></script>
+    @*DataTables*@
+    <script src="/Content/Admin/js/jquery.dataTables.min.js"></script>
+    @*!DataTables*@
+    <script src="/Content/Admin/js/jquery.unobtrusive-ajax.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/Content/Admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/Content/Admin/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/Content/Admin/dist/js/sb-admin-2.js"></script>
+    <!--Thư viên javascripst su dung datatables Nó cung cấp tìm kiếm, sắp xếp và phân trang mà không cần bất kỳ cấu hình nào-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable();
+            $('#thongBaoThanhCong').delay(3000).slideUp();
+        });
+    </script>
+</body>
+</html>

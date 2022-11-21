@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "AD_ShowAllKH";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+@model IEnumerable<KhoaLuanSteam.Models.KHACHHANG>
+<h2>Danh sách người dùng</h2>
+<table class="table" id="example">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenKH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenDN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayTao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.MaKH">
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenKH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenDN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayTao)
+                </td>
+                <td>
+                    @Html.ActionLink("Xem", "DetailsUserKH", new { id = item.MaKH }) |
+                    @Ajax.ActionLink("Xóa", "DeleteUserKH", new { id = item.MaKH }, new AjaxOptions
+               {
+                   Confirm = "Bạn có muốn xóa người dùng này không?",
+                   OnComplete = "$('#row_" + @item.MaKH + "').remove()",
+                   HttpMethod = "Delete"
+               })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
