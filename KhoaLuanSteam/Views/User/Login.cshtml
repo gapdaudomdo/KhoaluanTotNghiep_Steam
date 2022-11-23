@@ -1,48 +1,16 @@
 ﻿@model KhoaLuanSteam.Models.KHACHHANG
 
-<style>
+<ul>
+     @if (Session["User"] == null){
+        <li><a href="/User/DangKy">Đăng ký</a></li>
+        <li class="click_menu"><a href="#" data-toggle="dropdown">Đăng Nhập<i class="fa fa-angle-down"></i></a>
+        <div style="left: -50%;">
 
-    .dropdown-user {
-        box-shadow: 0 1px 2px #e0e0e0;
-    }
-    .dropdown-user li:hover {
-        background-color: #fafafa;
-    }
-
-    .dropdown-user li a {
-        text-decoration: none;
-    }
-        .dropdown-user li {
-            padding: 7px 16px;
-            font-size: 1rem;
-            font-weight: 300;
-            font-family: 'Roboto', sans-serif;
-        }
-
-    .dropdown-user li:first-child {
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-     }
-
-    .dropdown-user li:last-child {
-        border-bottom-left-radius: 0.25rem;
-        border-bottom-right-radius: 0.25rem;
-     }
-
-</style>
-
-<ul class="nav justify-content-end">
-    @if (Session["User"] == null)
-    {
-        <li class="nav-item">
-            <a class="nav-link" href="/User/DangKy" style="padding: 7px 12px;text-transform: uppercase"><i class="fas fa-sign-in-alt"></i>Đăng ký</a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link dropdown-toggle" style="padding: 7px 12px;text-transform: uppercase" data-toggle="dropdown"> Đăng nhập <b class="caret"></b></a>
-            <ul class="dropdown-menu" style="padding: 15px;min-width: 250px">
+        </div>
+            <ul class="dropdown-menu nav-link" style="margin-left: -50%;margin-top: 13%;">
                 <li>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="padding-top: calc(var(--bs-gutter-x) * .5);">
                             @using (Html.BeginForm("PageDangNhap", "User", FormMethod.Post))
                             {
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -68,54 +36,20 @@
                 </li>
             </ul>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/Admin/Login" style="padding: 7px 12px;text-transform: uppercase"><i class="fas fa-user-secret"></i>Admin</a>
-        </li>
-    }
-    else
-    {
+        <li><a href="/Admin/Login">Admin</a></li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="~/User/DangXuat" style="padding: 7px 12px;text-transform: uppercase"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i>Đăng Xuất</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="~/User/ThongTinUser" style="padding: 7px 12px;text-transform: uppercase"><i class="fa fa-smile-o"></i>Hồ Sơ</a>
-        </li>
-        <li class="nav-item">
-            <a class=" nav-link dropdown-toggle" data-toggle="dropdown" href="#" style="padding: 7px 12px;text-transform: uppercase">
-                <i class="fa fa-user-o" aria-hidden="true"></i>
-                Tài Khoản : @Session["User"]
-            </a>
-            <ul class="dropdown-menu dropdown-user" style="padding:0">
-                <li>
-                    
-                        <a href="~/User/ThongTinUser" style="color:black;">
-                            <i class="fa fa-smile-o" style="width:16px" aria-hidden="true"></i>
-                            <span> Hồ sơ</span>
-                        </a>
-                   
-                </li>
-                <li>
-                    
-                        <a href="~/Cart/DonHang_KH" style="color: black;">
-                            <i class="fa fa-archive" style="width:16px"></i>
-                            <span>Đơn Hàng</span>
-
-                        </a>
-                              
-                </li>
-                <li style="border-top: 1px solid #f2f2f2;">
-                    
-                        <a href="~/User/DangXuat" style="color: black;">
-                            <i class="fa fa-arrow-circle-left" style="width:16px" aria-hidden="true"></i>
-                            <span>Đăng xuất</span>
-                        </a>
-                   
-                </li>
+     }else{
+        <li><a href="~/User/DangXuat">Đăng Xuất</a></li>
+        <li class="click_menu"><a href="#">Tài khoản: <span>@Session["User"]</span><i class="fa fa-angle-down"></i></a>
+            <ul class="click_menu_show" style="display: none;">
+                <li><a href="~/User/ThongTinUser">Hồ sơ</a></li>
+                <li><a href="~/Cart/DonHang_KH">Đơn Hàng</a></li>
+                <li><a href="~/User/DangXuat">Đăng xuất</a></li>
             </ul>
-
         </li>
-    }
+        <li><a href="~/User/ThongTinUser">Hồ sơ</a></li>
+     }
+
 </ul>
 
 

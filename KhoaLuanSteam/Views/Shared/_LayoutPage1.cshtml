@@ -23,34 +23,44 @@
     <link href="~/Css/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
 
 
+        <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+		<!-- animate css -->
+        <link rel="stylesheet" href="~/assets/css/animate.css">
+		<!-- jquery-ui.min css -->
+        <link rel="stylesheet" href="~/assets/css/jquery-ui.min.css">
+		<!-- meanmenu css -->
+        <link rel="stylesheet" href="~/assets/css/meanmenu.min.css">
+		<!-- nivo-slider css -->
+        <link rel="stylesheet" href="~/assets/css/nivo-slider.css">	
+		<!-- magnific-popup css -->
+        <link rel="stylesheet" href="~/assets/css/magnific-popup.css">		
+		<!-- owl.carousel css -->
+        <link rel="stylesheet" href="~/assets/css/owl.carousel.css">
+		<!--linearicons css -->
+        <link rel="stylesheet" href="~/assets/css/linearicons-icon-font.min.css">
+		<!-- font-awesome css -->
+        <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+		<!-- style css -->
+		<link rel="stylesheet" href="~/assets/style.css">
+		<!-- responsive css -->
+        <link rel="stylesheet" href="~/assets/css/responsive.css" />
+		<!-- modernizr css -->
+        <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+
+
+
 </head>
 <body>
     <div class="page">
         @*phần đầu*@
-        <div class="content" style="padding-left: 0; position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
+        @* <div class="content" style="padding-left: 0; position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
             <header id="header" class="">
                 <div class="header-top" style="background-color: #007f85;">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <nav class="header-top-nav">
-                                    @*Menu right*@
                                     @Html.Action("Login", "User")
-
-                                    @*ket thuc Menu right*@
-                                    @*<ul class="nav justify-content-end">
-
-                                            @*<li class="nav-item">
-                                                <a class="nav-link" href="#" style="padding: 7px 12px;text-transform: uppercase"><i class="fa fa fa-lock"></i>Đăng nhập</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#" style="padding: 7px 12px;text-transform: uppercase"><i class="fas fa-sign-in-alt"></i>Đăng ký</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#" style="padding: 7px 12px;text-transform: uppercase"><i class="fa fa-check-square"></i>Thanh toán</a>
-                                            </li>
-                                        </ul>*@
-
                                 </nav>
 
                             </div>
@@ -134,12 +144,8 @@
                                 <div class="header-search" style=" position: relative; margin: 10px 0;}">
                                     @using (Html.BeginForm("SearchResult", "Product", FormMethod.Post, new { @class = "navbar-form", @role = "search" }))
                                     {
-
-                                        @*<input style="width: 370px;" type="text" class="form-control" placeholder="Tìm kiếm sách..." name="search">*@
-                                        @*@Html.TextBox("txtSearch", "", htmlAttributes: new { @class = "form-control", @placeholder = "Tìm kiếm sách...", @style = "width: 370px;background: #FAFAFA;border-radius: 40px;" })*@
                                         <input type="text" name="txtSearch" class="hs-text" placeholder="Tìm kiếm sản phẩm..." value="" style=" width: 100%; padding: 0 10px; line-height: 26px; border: none; outline: none;">
                                         <button type="submit" class="hs-submit" style="position: absolute; top: 4px;right: 3px;color: #6b6b6b;background-color: transparent;border: none;"><i class="fa fa-search"></i></button>
-
                                     }
                                 </div>
                             </div>
@@ -147,9 +153,100 @@
                     </div>
                 </div>
             </header>
+        </div> *@
+
+
+
+
+        @* start phần header*@
+    <header>
+        <div class="header-top-area ptb-10 home-page-2 d-none d-md-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 col-md-8">
+                        <div class="header-top-left">
+                            @Html.Action("Login", "User")
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="header-bottom-area home-page-2 ptb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="menu-search-box scnd-fix">
+                            @using (Html.BeginForm("SearchResult", "Product", FormMethod.Post, new { @class = "navbar-form", @role = "search" }))
+                                    {
+                                        <input type="text" name="txtSearch" placeholder="Tìm kiếm sản phẩm...">
+                                        <button type="submit"><span class="lnr lnr-magnifier"></span></button>
+                                    }
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="logo logo2">
+                            <a href="/" class="logo-wrapper"><img src="~/img/logosteam.png" style="height:75px;box-shadow: none;" alt=""></a>
+                        </div>					
+                    </div>
+                    <div class="col-md-3">
+                        <div class="header-bottom-right header-bottom-right-2">
+                            <div class="shop-cart">
+                                @Html.Action("CartIcon", "Cart")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="mainmenu-area home-page-2" id="main_h">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="mainmenu d-none d-md-block">
+                        <nav>
+                            <ul>
+                                <li class="active"><a href="/">Trang chủ</a>
+                                </li>
+                                <li><a href="~/Home/About">Giới thiệu</a>
+                                </li>
+                                <li><a href="~/Home/SanPham">Sản phẩm</a>								
+                                </li>
+                                <li><a href="~/Home/Contact">Liên hệ</a>								
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-menu-area d-flex d-md-none">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="mobile-menu">
+							<nav id="mobile-menu">
+								<ul>
+									<li class="active"><a href="/">Trang Chủ</a>
+									</li>
+									<li><a href="~/Home/About">Giới thiệu</a>
+									</li>
+									<li><a href="~/Home/SanPham">Sản phẩm</a>
+									</li>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+         @* end phần header*@
+
         @*phần thân*@
-        <div class="container" style="margin-top:150px">
+        <div class="container" style="margin-top:-10px">
             <div class="row">
                 @RenderBody()
             </div>
@@ -573,14 +670,39 @@
 
 
     </div>
-    <script type="text/javascript">
+    @* <script type="text/javascript">
     $("a").click(function () {
         $("a").css("background-color", "");
         $(this).css("background-color", "#007f85");
     });
-    </script>
+    </script> *@
+
 
     @RenderSection("jsFooter", required: false)
+
+    <script src="~/assets/js/vendor/jquery-1.12.4.min.js"></script>
+		<!-- popper js -->
+        <script src="~/assets/js/popper.min.js"></script>
+		<!-- bootstrap js -->
+        <script src="~/assets/js/bootstrap.min.js"></script>
+		<!-- owl.carousel js -->
+        <script src="~/assets/js/owl.carousel.min.js"></script>
+		<!-- meanmenu js -->
+        <script src="~/assets/js/jquery.meanmenu.js"></script>
+		<!-- jquery-ui js -->
+        <script src="~/assets/js/jquery-ui.min.js"></script>
+		<!-- wow js -->
+        <script src="~/assets/js/wow.min.js"></script>
+		<!-- scrolly js -->
+        <script src="~/assets/js/jquery.scrolly.js"></script>
+		<!-- nivo.slider js -->
+        <script src="~/assets/js/jquery.nivo.slider.js"></script>				
+		<!-- magnific-popup js -->
+        <script src="~/assets/js/jquery.magnific-popup.min.js"></script>		
+		<!-- plugins js -->
+        <script src="~/assets/js/plugins.js"></script>
+		<!-- main js -->
+        <script src="~/assets/js/main.js"></script>
 
 </body>
 
