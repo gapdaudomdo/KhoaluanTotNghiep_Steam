@@ -4,18 +4,19 @@
 }
 @model KhoaLuanSteam.Models.KHACHHANG
 <link href="~/Css/StyleSheet3.css" rel="stylesheet" />
+<link href="~/Css/login.css" rel="stylesheet" />
 <div id="loginbox" style="margin-top:50px;margin-bottom: 16px;" class="mainbox  col-md-6 offset-md-3 col-sm-8 col-offset-sm-2">
     <div class="panel panel-info">
-        <div class="panel-heading">
+        @*<div class="panel-heading">
             <div class="panel-title">Đăng nhập</div>
-        </div>
+        </div>*@
         <div style="padding-top:30px" class="panel-body">
             <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
             @using (Html.BeginForm("PageDangNhap", "User", FormMethod.Post))
             {
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <div class="input-group">
+                @*<div class="input-group">
 
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
 
@@ -60,8 +61,75 @@
                             <a href="/User/DangKy">Đăng kí tại đây</a>
                         </div>
                     </div>
+                </div>*@
+
+                <div class="container_login" id="container_login">
+                    <div class="form-container sign-in-container">
+                        <form action="#">
+                            <h1>Sign in</h1>
+                            <div class="social-container">
+                                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                            <label for='user' style="float:left">Tên Đăng Nhập</label>
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.TenDN, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Tên đăng nhập" })
+                            </div>
+
+                            <div style="margin-bottom: 25px;padding-left:7%" class="input-group">
+                                @Html.ValidationMessageFor(model => model.TenDN, "", new { @class = "text-danger" })
+                            </div>
+                            
+                            <label for='pass' style="float:left">Mật Khẩu</label>
+                            <div class="input-group">
+                               
+                                @Html.PasswordFor(model => model.MatKhau, new { @class = "form-control", @placeholder = "Mật khẩu" })
+
+                            </div>
+                            <div style="margin-bottom: 25px;padding-left:7%" class="input-group">
+
+                                @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                            </div>
+                         
+                            <a href="#" style="margin-right:200px">Forgot your password?</a>
+                            <div class="form-group">
+                                <div class="col-sm-12 controls">
+                                    <button type="submit" class="btn btn-primary">Đăng nhập </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="overlay-container">
+                        <div class="overlay">
+                            <div class="overlay-panel overlay-left">
+                                <button class="ghost" id="signIn">Sign In</button>
+                            </div>
+                            <div class="overlay-panel overlay-right">
+                                <div>
+                                    <h1>HELLO</h1>
+                                    <p>Bạn không có tài khoản</p>
+                                    <button class="ghost" id="signUp"> <a href="/User/DangKy">Đăng Ký</a></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             }
         </div>
     </div>
 </div>
+
+<script>
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container_login');
+
+    signUpButton.addEventListener('click',  {
+        container:classList.add("right-panel-active")
+    });
+
+    signInButton.addEventListener('click', {
+        container:classList.remove("right-panel-active")
+    });
+</script>

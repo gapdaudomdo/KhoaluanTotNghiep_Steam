@@ -415,6 +415,7 @@
     <Content Include="Css\font-awesome-4.6.3\css\font-awesome.css" />
     <Content Include="Css\font-awesome-4.6.3\css\font-awesome.min.css" />
     <Content Include="Css\font-awesome-4.6.3\fonts\fontawesome-webfont.svg" />
+    <Content Include="Css\login.css" />
     <Content Include="Css\style.min.css" />
     <Content Include="Css\StyleSheet1.css" />
     <Content Include="Css\StyleSheet10.css" />
@@ -836,6 +837,7 @@
       <LastGenOutput>QLSTEAM_Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="js\boloc.js" />
+    <Content Include="js\login.js" />
     <Content Include="Models\QLSTEAM_Model.edmx.diagram">
       <DependentUpon>QLSTEAM_Model.edmx</DependentUpon>
     </Content>
