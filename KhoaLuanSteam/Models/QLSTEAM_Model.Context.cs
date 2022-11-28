@@ -25,6 +25,7 @@ namespace KhoaLuanSteam.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<CT_PHIEUDATHANG> CT_PHIEUDATHANG { get; set; }
         public DbSet<CT_PHIEUNHAPHANG> CT_PHIEUNHAPHANG { get; set; }
         public DbSet<KHACHHANG> KHACHHANGs { get; set; }
@@ -34,6 +35,7 @@ namespace KhoaLuanSteam.Models
         public DbSet<NHANVIEN> NHANVIENs { get; set; }
         public DbSet<PHIEUDATHANG> PHIEUDATHANGs { get; set; }
         public DbSet<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }
     }
 }

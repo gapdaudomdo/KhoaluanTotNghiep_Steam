@@ -1,4 +1,5 @@
-﻿using KhoaLuanSteam.Models;
+﻿using KhoaLuanSteam.Areas.Admin.Models;
+using KhoaLuanSteam.Models;
 using KhoaLuanSteam.Models.Process;
 using System;
 using System.Collections.Generic;
@@ -21,18 +22,18 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         }
         //POST : /Admin/Login/Index : thực hiện việc đăng nhập người quản lý
         [HttpPost]
-        public ActionResult LoginAdmin(Model_Login model)
+        public ActionResult LoginAdmin(LoginModel model)
         {
             //kiểm tra hợp lệ dữ liệu
             if (ModelState.IsValid)
             {
                 //gọi hàm đăng nhập trong AdminProcess và gán dữ liệu trong biến model
-                var result = new AdminProcess().Login(model.TenDN, model.MatKhau);
+                var result = new AdminProcess().Login(model.TaiKhoan, model.MatKhau);
                 //Nếu đúng
                 if (result == 1)
                 {
                     //gán Session["LoginAdmin"] bằng dữ liệu đã đăng nhập
-                    Session["LoginAdmin"] = model.TenDN;
+                    Session["LoginAdmin"] = model.TaiKhoan;
 
                     //trả về trang quản lý
                     return RedirectToAction("Index", "Home");

@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="QL_THIETBISTEAMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="IDAdmin" />
+    </Key>
+    <Property Name="IDAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaiKhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThai" Type="Boolean" />
+  </EntityType>
   <EntityType Name="CT_PHIEUDATHANG">
     <Key>
       <PropertyRef Name="MaPhieuDH" />
@@ -113,6 +123,16 @@
     <NavigationProperty Name="CT_PHIEUNHAPHANG" Relationship="Self.FK_CT_PHIEUNHAPHANG_PNH" FromRole="PHIEUNHAPHANG" ToRole="CT_PHIEUNHAPHANG" />
     <NavigationProperty Name="NHACUNGCAP" Relationship="Self.FK_PHIEUNHAPHANG_NHACUNGCAP" FromRole="PHIEUNHAPHANG" ToRole="NHACUNGCAP" />
     <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_PHIEUNHAPHANG_NHANVIEN" FromRole="PHIEUNHAPHANG" ToRole="NHANVIEN" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="THONGTINSANPHAM">
     <Key>
@@ -241,6 +261,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="QL_THIETBISTEAMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
     <EntitySet Name="CT_PHIEUDATHANG" EntityType="Self.CT_PHIEUDATHANG" />
     <EntitySet Name="CT_PHIEUNHAPHANG" EntityType="Self.CT_PHIEUNHAPHANG" />
     <EntitySet Name="KHACHHANGs" EntityType="Self.KHACHHANG" />
@@ -250,6 +271,7 @@
     <EntitySet Name="NHANVIENs" EntityType="Self.NHANVIEN" />
     <EntitySet Name="PHIEUDATHANGs" EntityType="Self.PHIEUDATHANG" />
     <EntitySet Name="PHIEUNHAPHANGs" EntityType="Self.PHIEUNHAPHANG" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="THONGTINSANPHAMs" EntityType="Self.THONGTINSANPHAM" />
     <AssociationSet Name="FK_CT_PHIEUDH_PDT" Association="Self.FK_CT_PHIEUDH_PDT">
       <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANGs" />

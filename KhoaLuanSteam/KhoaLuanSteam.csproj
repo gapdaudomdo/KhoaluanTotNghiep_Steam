@@ -139,12 +139,16 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Models\LoginModel.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CT_PHIEUDATHANG.cs">
       <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
@@ -194,6 +198,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QLSTEAM_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\THONGTINSANPHAM.cs">
       <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
@@ -2986,15 +2993,8 @@
     <Content Include="fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="fontawesome\webfonts\fa-solid-900.woff2" />
-    <EntityDeploy Include="Models\QLSTEAM_Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QLSTEAM_Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <Content Include="js\boloc.js" />
     <Content Include="js\login.js" />
-    <Content Include="Models\QLSTEAM_Model.edmx.diagram">
-      <DependentUpon>QLSTEAM_Model.edmx</DependentUpon>
-    </Content>
     <Content Include="EmailTemplate\Text.cshtml" />
     <Content Include="assets\fonts\fontawesome-webfont3295.eot" />
     <Content Include="assets\fonts\fontawesome-webfont3295.ttf" />
@@ -3556,6 +3556,13 @@
     <Content Include="Content\font-awesome-4.6.3\scss\_screen-reader.scss" />
     <Content Include="Content\font-awesome-4.6.3\scss\_stacked.scss" />
     <Content Include="Content\font-awesome-4.6.3\scss\_variables.scss" />
+    <EntityDeploy Include="Models\QLSTEAM_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLSTEAM_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\QLSTEAM_Model.edmx.diagram">
+      <DependentUpon>QLSTEAM_Model.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.8.2-vsdoc.js" />
     <Content Include="HinhAnhSach\Banhngon.jpg" />
     <Content Include="HinhAnhSach\bloc-sieu-dai.jpg" />
