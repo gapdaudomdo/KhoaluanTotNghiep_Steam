@@ -5,11 +5,13 @@
 
 @model IEnumerable<KhoaLuanSteam.Models.PHIEUNHAPHANG>
 
-<h2>Quản lý Đơn Nhập Hàng</h2>
+<h2 style="text-align: center;">Quản lý Đơn Nhập Hàng</h2>
 <p>
     @Html.ActionLink("Thêm phiếu nhập hàng", "InsertDonNhapHang")
 </p>
-<table class="table" id="example">
+<div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+        <table class="table" id="example">
     <thead>
         <tr>
             <th>
@@ -56,9 +58,12 @@
                     @Html.DisplayFor(modelItem => item.TongTien_NH)
                 </td>
                 <td>
-                    @Html.ActionLink("Xem", "DetailsCT_PhieuNhapHang", new { id = item.MaPhieuNhapHang.Trim()})
+                    @Html.ActionLink("Xem", "DetailsCT_PhieuNhapHang", new { id = item.MaPhieuNhapHang.Trim()},new { @class = "btn btn-primary"})
                 </td>
             </tr>}
     </tbody>
 
 </table>
+    </div>
+  </div>
+

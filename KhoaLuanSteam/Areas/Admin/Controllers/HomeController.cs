@@ -46,6 +46,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             //trả về trang quản lý sách
             return RedirectToAction("AD_ShowAllProduct");
         }
+        
         //GET : Admin/Home/DetailsBook/:id : Trang xem chi tiết 1 sản phẩm
         [HttpGet]
         public ActionResult DetailsSanPham(int id)

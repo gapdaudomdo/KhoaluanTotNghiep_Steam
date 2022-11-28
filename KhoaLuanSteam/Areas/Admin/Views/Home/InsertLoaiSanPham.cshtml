@@ -5,7 +5,7 @@
 }
 
 
-<h2>Thêm loại sản phẩm</h2>
+<h2 style="text-align: center;">Thêm loại sản phẩm</h2>
 @using (Html.BeginForm("InsertLoaiSanPham", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -23,14 +23,13 @@
                 @Html.ValidationMessageFor(model => model.TenLoai, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+        <div class="form-group" style="margin-left: 13px;">
+            <span>
+                @Html.ActionLink("Trở về", "AD_ShowAllLoaiSanPham", new { id = "" }, new { @class = "btn btn-primary"})
+            </span>
+            <span class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Thêm" class="btn btn-primary" />
-            </div>
+            </span>
         </div>
     </div>
 }
-<div style="text-transform: uppercase;
-    font-weight: bold;">
-    @Html.ActionLink("Trở về", "AD_ShowAllLoaiSanPham")
-</div>

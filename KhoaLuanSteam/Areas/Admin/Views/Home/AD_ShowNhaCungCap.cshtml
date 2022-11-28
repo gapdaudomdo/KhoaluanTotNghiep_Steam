@@ -5,11 +5,13 @@
 
 @model IEnumerable<KhoaLuanSteam.Models.NHACUNGCAP>
 
-<h2>Quản lý Nhà Cung Cấp</h2>
+<h2 style="text-align: center;">Quản lý Nhà Cung Cấp</h2>
 <p>
     @Html.ActionLink("Thêm Nhà Cung Cấp", "InsertNCC")
 </p>
-<table class="table" id="example">
+<div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+        <table class="table" id="example">
     <thead>
         <tr>
             <th>
@@ -33,17 +35,20 @@
                     @Html.DisplayFor(modelItem => item.TenNCC)
                 </td>
                 <td>
-                    @Html.ActionLink("Xem", "UpdateNCC", new {id=item.MaNCC.Trim()})|
+                    @Html.ActionLink("Xem", "UpdateNCC", new {id=item.MaNCC.Trim()},new { @class = "btn btn-primary"})|
                     @Ajax.ActionLink("Xóa", "DeleteNhaCungCap", new { id = item.MaNCC.Trim() }, new AjaxOptions
                {
                    Confirm = "Bạn có muốn xóa nhà cung cấp này không?",
                    OnComplete = "$('#row_"+@item.MaNCC.TrimEnd()+"').remove()",
                    HttpMethod = "Delete"
-               })
+               },new { @class = "btn btn-primary"})
                 </td>
             </tr>
         }
     </tbody>
 
 </table>
+    </div>
+  </div>
+
 

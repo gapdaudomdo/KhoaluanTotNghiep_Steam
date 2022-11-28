@@ -3,8 +3,10 @@
     Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
 }
 @model IEnumerable<KhoaLuanSteam.Models.KHACHHANG>
-<h2>Danh sách người dùng</h2>
-<table class="table" id="example">
+<h2 style="text-align: center;">Danh sách người dùng</h2>
+<div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+        <table class="table" id="example">
     <thead>
         <tr>
             <th>
@@ -40,16 +42,18 @@
                     @Html.DisplayFor(modelItem => item.NgayTao)
                 </td>
                 <td>
-                    @Html.ActionLink("Xem", "DetailsUserKH", new { id = item.MaKH }) |
+                    @Html.ActionLink("Xem", "DetailsUserKH", new { id = item.MaKH },new { @class = "btn btn-primary"}) |
                     @Ajax.ActionLink("Xóa", "DeleteUserKH", new { id = item.MaKH }, new AjaxOptions
                {
                    Confirm = "Bạn có muốn xóa người dùng này không?",
                    OnComplete = "$('#row_" + @item.MaKH + "').remove()",
                    HttpMethod = "Delete"
-               })
+               },new { @class = "btn btn-primary"})
                 </td>
             </tr>
         }
     </tbody>
 
 </table>
+    </div>
+  </div>

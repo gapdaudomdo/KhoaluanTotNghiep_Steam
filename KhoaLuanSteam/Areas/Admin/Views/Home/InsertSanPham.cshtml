@@ -4,7 +4,7 @@
 }
 
 @model KhoaLuanSteam.Models.THONGTINSANPHAM
-<h2>Thêm Sản Phẩm</h2>
+<h2 style="text-align: center;">Thêm Sản Phẩm</h2>
 <p>
     @Html.ActionLink("Thêm loại sản phẩm", "InsertLoaiSanPham") |
     @Html.ActionLink("Thêm nhà cung cấp", "InsertNCC")
@@ -75,15 +75,14 @@
                 @Html.ValidationMessageFor(model => model.SLTon, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+        <div class="form-group" style="margin-left: 13px;">
+            <span>
+                @Html.ActionLink("Trở về", "AD_ShowAllProduct", new { id = "" }, new { @class = "btn btn-primary"})
+            </span>
+            <span class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Thêm" class="btn btn-primary" />
-            </div>
+            </span>
         </div>
     </div>
 }
-<div style="text-transform: uppercase;
-    font-weight: bold;">
-    @Html.ActionLink("Trở về", "AD_ShowAllProduct")
-</div>
 

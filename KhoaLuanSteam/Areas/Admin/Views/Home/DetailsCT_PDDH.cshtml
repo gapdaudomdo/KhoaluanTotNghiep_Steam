@@ -5,8 +5,10 @@
 
 @model IEnumerable<KhoaLuanSteam.Models.CT_PHIEUDATHANG>
 
-<h2>Chi tiết đơn hàng</h2>
-<table class="table">
+<h2 style="text-align: center;">Chi tiết đơn hàng</h2>
+<div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+        <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PHIEUDATHANG.MaPhieuDH)
@@ -39,7 +41,10 @@
         </tr>
     }
 </table>
+    </div>
+  </div>
+
 <div>
-    @Html.ActionLink("Trở về", "AD_ShowAllPhieuDatHang")
+    @Html.ActionLink("Trở về", "AD_ShowAllPhieuDatHang",new {id=""},new { @class = "btn btn-primary"})
 </div>
 

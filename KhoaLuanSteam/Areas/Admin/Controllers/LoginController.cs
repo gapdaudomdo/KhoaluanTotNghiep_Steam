@@ -67,6 +67,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
 
             //trả về trang đăng nhập
             return Redirect("/Home/TrangChu");
+            return Redirect("/");
         }
         //GET : /Admin/Login/AdminInfo : trang xem thông tin người quản lý
         public ActionResult AdminInfo()

@@ -5,8 +5,10 @@
 
 @model IEnumerable<KhoaLuanSteam.Models.PHIEUDATHANG>
 
-<h2>Quản lý đơn hàng</h2>
-<table class="table" id="example">
+<h2 style="text-align: center;">Quản lý đơn hàng</h2>
+<div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+        <table class="table" id="example">
     <thead>
         <tr>
             <th>
@@ -48,12 +50,16 @@
                         new SelectListItem() {Text = "Đã Đóng Gói", Value="1"},
                         new SelectListItem() {Text = "Đang Giao", Value="2"},
                         new SelectListItem() {Text = "Giao Thành Công", Value="3"}
-    })
+    }, new { @class = "form-control"} )
                 </td>
                 <td>
-                    @Html.ActionLink("Xem", "DetailsCT_PDDH", new { id = item.MaPhieuDH })
+                    @Html.ActionLink("Xem", "DetailsCT_PDDH", new { id = item.MaPhieuDH },new { @class = "btn btn-primary"})
                 </td>
             </tr>}
     </tbody>
 
 </table>
+    </div>
+  </div>
+
+  
