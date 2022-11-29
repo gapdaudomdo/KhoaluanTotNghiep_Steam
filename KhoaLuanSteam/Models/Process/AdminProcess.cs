@@ -27,7 +27,7 @@ namespace KhoaLuanSteam.Models.Process
         /// <returns>int</returns>
         public int Login(string username, string password)
         {
-            var result = db.Admins.SingleOrDefault(x => x.TaiKhoan == username);
+            var result = db.Admins.Where(x => x.TaiKhoan == username).FirstOrDefault();
             if (result == null)
             {
                 return 0;
