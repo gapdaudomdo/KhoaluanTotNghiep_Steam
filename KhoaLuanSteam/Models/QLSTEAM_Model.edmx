@@ -562,7 +562,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QL_THIETBISTEAMEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QL_THIETBISTEAMEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="CT_PHIEUDATHANG" EntityType="Self.CT_PHIEUDATHANG" />
           <EntitySet Name="CT_PHIEUNHAPHANG" EntityType="Self.CT_PHIEUNHAPHANG" />
@@ -617,7 +617,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QL_THIETBISTEAMModelStoreContainer" CdmEntityContainer="QL_THIETBISTEAMEntities">
+        <EntityContainerMapping StorageEntityContainer="QL_THIETBISTEAMModelStoreContainer" CdmEntityContainer="QL_THIETBISTEAMEntities1">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.Admin">
               <MappingFragment StoreEntitySet="Admin">

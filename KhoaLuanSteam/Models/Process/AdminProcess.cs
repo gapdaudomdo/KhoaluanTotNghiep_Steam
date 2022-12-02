@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using System.Data.SqlClient;
+using System.Data;
+
 namespace KhoaLuanSteam.Models.Process
 {
     public class AdminProcess
@@ -11,12 +14,12 @@ namespace KhoaLuanSteam.Models.Process
         ///HÀM QUẢN LÝ CUA ADMIN
         ///
         //Khởi tạo biến dữ liệu : db
-        QL_THIETBISTEAMEntities db = null;
+        QL_THIETBISTEAMEntities1 db = null;
 
         //constructor :  khởi tạo đối tượng
         public AdminProcess()
         {
-            db = new QL_THIETBISTEAMEntities();
+            db = new QL_THIETBISTEAMEntities1();
         }
 
         /// <summary>
@@ -33,7 +36,7 @@ namespace KhoaLuanSteam.Models.Process
                 return 0;
             }
             else
-            {
+            { 
                 if (result.MatKhau == password)
                 {
 
@@ -125,6 +128,21 @@ namespace KhoaLuanSteam.Models.Process
             db.SaveChanges();
             return entity.MaSanPham;
         }
+
+        //------------------------------ start
+        /// <summary>
+        /// hàm thêm CT_Don nhap hang
+        /// </summary>
+        /// <param name="entity">CT_PHIEUNHAPHANG</param>
+        /// <returns>string</returns>
+        public int InsertCT_PhieuNhapHang(CT_PHIEUNHAPHANG entity)
+        {
+            db.CT_PHIEUNHAPHANG.Add(entity);
+            db.SaveChanges();
+            return 1;
+        }
+
+
 
         #endregion
 

@@ -7,6 +7,7 @@ using KhoaLuanSteam.Areas.Admin;
 using KhoaLuanSteam.Models;
 using KhoaLuanSteam.Models.Process;
 using System.IO;
+using System.Data.SqlClient;
 
 namespace KhoaLuanSteam.Areas.Admin.Controllers
 {
@@ -15,7 +16,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         //Trang quản lý
 
         //Khởi tạo biến dữ liệu : db
-        QL_THIETBISTEAMEntities db = new QL_THIETBISTEAMEntities();
+        QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1();
 
         // GET: Admin/Home : trang chủ Admin
 
@@ -323,6 +324,80 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             return View(model);
         }
 
+        //--------start
+        //GET : Admin/Home/InsertCT_PhieuNhapHang : trang thêm InsertCT_PhieuNhapHang
+        [HttpGet]
+        public ActionResult InsertCT_PhieuNhapHang()
+        {
+            return View();
+        }
+
+        //POST : Admin/Home/InsertCT_PhieuNhapHang/:model : thực hiện việc thêm InsertCT_PhieuNhapHang vào db
+        [HttpPost]
+        public ActionResult InsertCT_PhieuNhapHang(CT_PHIEUNHAPHANG model)
+        {
+            //kiểm tra dữ liệu hợp lệ
+            if (ModelState.IsValid)
+            {
+                //khởi tao biến admin trong WebBanSach.Models.Process
+                var admin = new AdminProcess();
+
+                //khởi tạo biến thuộc đối tượng CT_PHIEUNHAPHANG trong db
+                var t2 = new CT_PHIEUNHAPHANG();
+
+                //gán thuộc tính tên thể loại
+                //tl.TenLoai = model.TenLoai;
+
+                t2.MaSanPham= model.MaSanPham;
+                t2.MaPhieuNhapHang = model.MaPhieuNhapHang;
+                t2.Sluong = model.Sluong;
+                t2.DonGiaNhap = model.DonGiaNhap;
+                //t2.TongTien = model.TongTien;
+
+                t2.TongTien = t2.Sluong * t2.DonGiaNhap;
+
+                //gọi hàm thêm CT_PHIEUNHAPHANG (InsertCT_PHIEUNHAPHANG) trong biến admin
+                var result = admin.InsertCT_PhieuNhapHang(t2);
+
+                //kiểm tra hàm
+                if (result > 0)
+                {
+
+                    object[] parameters =
+                    {
+                        new SqlParameter("@MaSP",t2.MaSanPham),
+                        new SqlParameter("@MaPhieuNhapHang",t2.MaPhieuNhapHang)
+                    };
+                    db.Database.ExecuteSqlCommand("Update_SL_Ton @MaSP,@MaPhieuNhapHang", parameters);
+                    ViewBag.Success = "Thêm mới thành công";
+                    //xóa trạng thái
+                    ModelState.Clear();
+
+                    return View();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm không thành công.");
+                }
+            }
+
+            return View(model);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //GET : Admin/Home/UpdateLoaiSanPham/:id : trang cập nhật loại
         [HttpGet]
         public ActionResult UpdateLoaiSanPham(int id)
@@ -504,7 +579,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         #region Phiếu Nhập Hàng
 
         //GET : Admin/Home/D_ShowAllPhieuNhapHang : trang quản lý phiếu nhập hàng
-        public ActionResult AD_ShowAllPhieuNhapHang()
+        public ActionResult AD_ShowAllPhieuNhapHang() 
         {
             var result = new AdminProcess().AD_ShowAllphieunhaphang();
 
@@ -536,7 +611,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC", pnhaphang.MaNCC);
             pnhaphang.NgayLap_PN = DateTime.Now;
             //kiểm tra dữ liệu db có hợp lệ?
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) 
             {
                 //thực hiện lưu vào db
                 var result = new AdminProcess().Insertphieunhaphang(pnhaphang);

@@ -7,12 +7,12 @@ namespace KhoaLuanSteam.Models.Process
 {
     public class GioHangProcess
     {
-        QL_THIETBISTEAMEntities db = null;
+        QL_THIETBISTEAMEntities1 db = null;
 
         //constructor :  khởi tạo đối tượng
         public GioHangProcess()
         {
-            db = new QL_THIETBISTEAMEntities();
+            db = new QL_THIETBISTEAMEntities1();
         }
         /// <summary>
         /// hàm lấy mã sp

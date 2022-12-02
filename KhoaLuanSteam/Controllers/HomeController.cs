@@ -15,7 +15,7 @@ namespace KhoaLuanSteam.Controllers
 
         // GET: /Home/
         //Khởi tạo biến dữ liệu : db
-        QL_THIETBISTEAMEntities db = new QL_THIETBISTEAMEntities();
+        QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1();
 
         public ActionResult Index()
         {

@@ -3563,6 +3563,7 @@
     <Content Include="Models\QLSTEAM_Model.edmx.diagram">
       <DependentUpon>QLSTEAM_Model.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Home\InsertCT_PhieuNhapHang.cshtml" />
     <None Include="Scripts\jquery-1.8.2-vsdoc.js" />
     <Content Include="HinhAnhSach\Banhngon.jpg" />
     <Content Include="HinhAnhSach\bloc-sieu-dai.jpg" />

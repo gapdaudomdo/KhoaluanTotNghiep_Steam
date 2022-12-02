@@ -13,10 +13,10 @@ namespace KhoaLuanSteam.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QL_THIETBISTEAMEntities : DbContext
+    public partial class QL_THIETBISTEAMEntities1 : DbContext
     {
-        public QL_THIETBISTEAMEntities()
-            : base("name=QL_THIETBISTEAMEntities")
+        public QL_THIETBISTEAMEntities1()
+            : base("name=QL_THIETBISTEAMEntities1")
         {
         }
     

@@ -8,12 +8,12 @@ namespace KhoaLuanSteam.Models.Process
     public class HomeProcess
     {
         //Khởi tạo biến dữ liệu : db
-        QL_THIETBISTEAMEntities db = null;
-
+        QL_THIETBISTEAMEntities1 db = null;
+        
         //constructor :  khởi tạo đối tượng
         public HomeProcess()
         {
-            db = new QL_THIETBISTEAMEntities();
+            db = new QL_THIETBISTEAMEntities1();
         }
         /// <summary>
         /// hàm lưu phản hồi từ khách hàng vào db

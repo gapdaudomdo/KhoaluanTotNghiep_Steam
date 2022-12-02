@@ -14,7 +14,7 @@ namespace KhoaLuanSteam.Models
     
     public partial class PHIEUDATHANG
     {
-        public PHIEUDATHANG()
+        public PHIEUDATHANG() 
         {
             this.CT_PHIEUDATHANG = new HashSet<CT_PHIEUDATHANG>();
         }

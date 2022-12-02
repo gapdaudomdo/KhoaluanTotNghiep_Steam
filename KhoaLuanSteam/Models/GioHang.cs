@@ -7,7 +7,7 @@ namespace KhoaLuanSteam.Models
 {
     public class GioHang
     {
-        QL_THIETBISTEAMEntities db = new QL_THIETBISTEAMEntities();
+        QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1();
 
         public THONGTINSANPHAM sanpham { get; set; }
         public int iSoLuong { get; set; }

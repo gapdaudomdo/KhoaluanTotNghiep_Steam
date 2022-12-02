@@ -9,13 +9,13 @@ namespace KhoaLuanSteam.Models.Process
     {
         //Tầng xử lý dữ liệu khách hàng
 
-        QL_THIETBISTEAMEntities db = null;
+        QL_THIETBISTEAMEntities1 db = null;
         /// <summary>
         /// Contructor
         /// </summary>
         public UserProcess()
         {
-            db = new QL_THIETBISTEAMEntities();
+            db = new QL_THIETBISTEAMEntities1();
         }
         /// <summary>
         /// Hàm thêm khách hàng mới

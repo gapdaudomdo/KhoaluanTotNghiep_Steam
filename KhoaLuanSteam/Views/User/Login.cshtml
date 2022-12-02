@@ -1,12 +1,14 @@
 ﻿@model KhoaLuanSteam.Models.KHACHHANG
 
 <ul>
-     @if (Session["User"] == null){
+    @if (Session["User"] == null)
+    {
         <li><a href="/User/DangKy">Đăng ký</a></li>
-        <li class="click_menu"><a href="#" data-toggle="dropdown">Đăng Nhập<i class="fa fa-angle-down"></i></a>
-        <div style="left: -50%;">
+        <li class="click_menu">
+            <a href="#" data-toggle="dropdown">Đăng Nhập<i class="fa fa-angle-down"></i></a>
+            <div style="left: -50%;">
 
-        </div>
+            </div>
             <ul class="dropdown-menu nav-link" style="margin-left: -50%;margin-top: 13%;">
                 <li>
                     <div class="row">
@@ -38,9 +40,12 @@
         </li>
         <li><a href="/Admin/Login">Admin</a></li>
 
-     }else{
+    }
+    else
+    {
         <li><a href="~/User/DangXuat">Đăng Xuất</a></li>
-        <li class="click_menu"><a href="#">Tài khoản: <span>@Session["User"]</span><i class="fa fa-angle-down"></i></a>
+        <li class="click_menu">
+            <a href="#">Tài khoản: <span>@Session["User"]</span><i class="fa fa-angle-down"></i></a>
             <ul class="click_menu_show" style="display: none;">
                 <li><a href="~/User/ThongTinUser">Hồ sơ</a></li>
                 <li><a href="~/Cart/DonHang_KH">Đơn Hàng</a></li>
@@ -48,7 +53,7 @@
             </ul>
         </li>
         <li><a href="~/User/ThongTinUser">Hồ sơ</a></li>
-     }
+    }
 
 </ul>
 

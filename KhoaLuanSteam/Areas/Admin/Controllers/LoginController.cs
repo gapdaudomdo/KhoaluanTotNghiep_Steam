@@ -12,7 +12,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
     public class LoginController : Controller
     {
         //Khởi tạo biến dữ liệu : db
-        QL_THIETBISTEAMEntities db = new QL_THIETBISTEAMEntities();
+        QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1();
         //
         // GET: /Admin/Login/
 
@@ -38,7 +38,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                     //trả về trang quản lý
                     return RedirectToAction("Index", "Home");
                 }
-                //nếu tài khoản không tồn tại
+                //nếu tài khoản không tồn tại 
                 else if (result == 0)
                 {
                     ModelState.AddModelError("", "Tài khoản không tồn tại.");

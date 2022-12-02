@@ -18,7 +18,7 @@ namespace KhoaLuanSteam.Controllers
     public class CartController : Controller
     {
         //Khởi tạo biến dữ liệu : db
-        QL_THIETBISTEAMEntities db = new QL_THIETBISTEAMEntities();
+        QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1();
 
         //tạo 1 chuỗi hằng để gán session
         private const string GioHang = "GioHang";
@@ -209,7 +209,7 @@ namespace KhoaLuanSteam.Controllers
         [HttpPost]
         public ActionResult ThanhToan(int MaKH, FormCollection f)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) 
             {
                 var order = new PHIEUDATHANG();
 
@@ -266,7 +266,7 @@ namespace KhoaLuanSteam.Controllers
             var list_sl = new List<CT_PHIEUDATHANG>();
             ViewBag.Madh = MaDH;
             var cart = Session[GioHang];
-            var list = new List<GioHang>();
+            var list = new List<GioHang>(); 
             var sl = 0;
             double? total = 0;
             if (cart != null)
