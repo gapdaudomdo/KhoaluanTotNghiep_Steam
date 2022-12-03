@@ -369,6 +369,18 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                         new SqlParameter("@MaPhieuNhapHang",t2.MaPhieuNhapHang)
                     };
                     db.Database.ExecuteSqlCommand("Update_SL_Ton @MaSP,@MaPhieuNhapHang", parameters);
+
+                    object[] update_TongSL_NhapHang =
+                    {
+                        new SqlParameter("@MaPhieuNhapHang",t2.MaPhieuNhapHang)
+                    };
+                    db.Database.ExecuteSqlCommand("Update_TongSL_PN @MaPhieuNhapHang", update_TongSL_NhapHang);
+
+                    object[] update_TongTien_NhapHang =
+                    {
+                        new SqlParameter("@MaPhieuNhapHang",t2.MaPhieuNhapHang)
+                    };
+                    db.Database.ExecuteSqlCommand("Update_TongTien_PN @MaPhieuNhapHang", update_TongTien_NhapHang);
                     ViewBag.Success = "Thêm mới thành công";
                     //xóa trạng thái
                     ModelState.Clear();
