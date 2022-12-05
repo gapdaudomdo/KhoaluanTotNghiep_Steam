@@ -329,6 +329,8 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult InsertCT_PhieuNhapHang()
         {
+            ViewBag.MaSanPham = new SelectList(db.THONGTINSANPHAMs.ToList().OrderBy(x => x.TenSanPham), "MaSanPham", "TenSanPham");
+            ViewBag.MaPhieuNhapHang = new SelectList(db.PHIEUNHAPHANGs.ToList().OrderBy(x => x.MaPhieuNhapHang), "MaPhieuNhapHang", "MaPhieuNhapHang");
             return View();
         }
 
@@ -336,6 +338,10 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult InsertCT_PhieuNhapHang(CT_PHIEUNHAPHANG model)
         {
+            //lấy mã mà hiển thị tên
+            //ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC", pnhaphang.MaNCC);
+            ViewBag.MaSanPham = new SelectList(db.THONGTINSANPHAMs.ToList().OrderBy(x => x.TenSanPham), "MaSanPham", "TenSanPham", model.MaSanPham);
+            ViewBag.MaPhieuNhapHang = new SelectList(db.PHIEUNHAPHANGs.ToList().OrderBy(x => x.MaPhieuNhapHang), "MaPhieuNhapHang", "MaPhieuNhapHang", model.MaPhieuNhapHang);
             //kiểm tra dữ liệu hợp lệ
             if (ModelState.IsValid)
             {
@@ -611,6 +617,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         {
             //lấy mã mà hiển thị tên
             ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC");
+            ViewBag.MaNV = new SelectList(db.NHANVIENs.ToList().OrderBy(x => x.MaNV), "MaNV", "TenNV");
             return View();
         }
 
@@ -621,6 +628,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             var list = new CT_PHIEUNHAPHANG();
             //lấy mã mà hiển thị tên
             ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC", pnhaphang.MaNCC);
+            ViewBag.MaNV = new SelectList(db.NHANVIENs.ToList().OrderBy(x => x.MaNV), "MaNV", "TenNV", pnhaphang.MaNV);
             pnhaphang.NgayLap_PN = DateTime.Now;
             //kiểm tra dữ liệu db có hợp lệ?
             if (ModelState.IsValid) 
