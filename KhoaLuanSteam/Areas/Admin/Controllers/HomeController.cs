@@ -475,11 +475,17 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         //GET : Admin/Home/D_ShowAllPhieuDatHang : trang quản lý đơn đặt hàng
         public ActionResult AD_ShowAllPhieuDatHang()
         {
-            var result = new AdminProcess().AD_ShowAllphieudathang();
+            var result = db.PHIEUDATHANGs.OrderByDescending(s=>s.MaPhieuDH).ToList();
 
             return View(result);
         }
+        public ActionResult demo()
+        {
+            var result = db.PHIEUDATHANGs.OrderByDescending(s => s.MaPhieuDH).ToList();
 
+            return View(result);
+        }
+     
         //GET : /Admin/Home/DetailsCT_PDDH : trang xem chi tiết đơn hàng
         public ActionResult DetailsCT_PDDH(int id)
         {

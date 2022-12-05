@@ -3004,7 +3004,6 @@
     <Content Include="Areas\Admin\Views\Home\AD_ShowAllKH.cshtml" />
     <Content Include="Areas\Admin\Views\Home\AD_ShowAllLoaiSanPham.cshtml" />
     <Content Include="Areas\Admin\Views\Home\AD_ShowAllNhaCungCap.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\AD_ShowAllPhieuDatHang.cshtml" />
     <Content Include="Areas\Admin\Views\Home\AD_ShowAllPhieuNhapHang.cshtml" />
     <Content Include="Areas\Admin\Views\Home\AD_ShowAllProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Home\AD_ShowNhaCungCap.cshtml" />
@@ -3564,6 +3563,8 @@
       <DependentUpon>QLSTEAM_Model.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Home\InsertCT_PhieuNhapHang.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\AD_ShowAllPhieuDatHang.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\demo.cshtml" />
     <None Include="Scripts\jquery-1.8.2-vsdoc.js" />
     <Content Include="HinhAnhSach\Banhngon.jpg" />
     <Content Include="HinhAnhSach\bloc-sieu-dai.jpg" />
