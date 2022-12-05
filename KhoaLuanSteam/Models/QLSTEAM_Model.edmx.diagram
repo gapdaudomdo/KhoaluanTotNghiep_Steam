@@ -13,19 +13,19 @@
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.LOAISANPHAM" Width="1.5" PointX="3.75" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.NHACUNGCAP" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUDATHANG" Width="1.5" PointX="6" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUNHAPHANG" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.sysdiagram" Width="1.5" PointX="10.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.THONGTINSANPHAM" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
-        <AssociationConnector Association="QL_THIETBISTEAMModel.FK_CT_PHIEUDH_PDT" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_CT_PHIEUDH_TTSP" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_CT_PHIEUNHAPHANG_PNH" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_CT_PHIEUNHAPHANG_TTSP" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUDATHANG_KH" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_THONGTINSACH_LOAISANPHAM" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUNHAPHANG_NHACUNGCAP" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_THONGTINSACH_NHACUNGCAP" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUNHAPHANG_NHANVIEN" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUDATHANG" Width="1.5" PointX="6" PointY="9.75" />
+        <AssociationConnector Association="QL_THIETBISTEAMModel.FK_CT_PHIEUDH_PDT" />
+        <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUDATHANG_KH" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

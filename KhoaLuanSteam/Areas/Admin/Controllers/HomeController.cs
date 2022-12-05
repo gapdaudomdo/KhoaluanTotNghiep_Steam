@@ -486,6 +486,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             return View(result);
         }
      
+
         //GET : /Admin/Home/DetailsCT_PDDH : trang xem chi tiết đơn hàng
         public ActionResult DetailsCT_PDDH(int id)
         {
@@ -494,6 +495,42 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             return View(result);
         }
 
+        [HttpPost]
+        public ActionResult CapNhatTinhTrangDonDatHang(int maDonHang)
+        {
+            THONGTINSANPHAM sachs = new THONGTINSANPHAM();
+            var pdhUpdate = new AdminProcess().GetIdPDH(maDonHang);
+            string tinhTrang = Request.Form["item.TinhTrang"].ToString();
+            var list = new AdminProcess().detailsCT_PDDH(maDonHang);
+
+            if (tinhTrang == "0")
+                pdhUpdate.TinhTrang = 0;
+            else if (tinhTrang == "1")
+                pdhUpdate.TinhTrang = 1;
+            else if (tinhTrang == "2")
+                pdhUpdate.TinhTrang = 2;
+            else
+            {
+                pdhUpdate.TinhTrang = 3;
+                if (pdhUpdate.TinhTrang == 3)
+                {
+                    foreach (var sp in list)
+                    {
+                        sachs = db.THONGTINSANPHAMs.FirstOrDefault(s => s.MaSanPham == sp.MaSanPham);
+                        sachs.SLTon = sachs.SLTon - sp.SoLuong;
+                        db.SaveChanges();
+                    }
+                }
+            }
+
+            int kq = new AdminProcess().UpdatePdh(pdhUpdate);
+
+
+            // 1. Cap nhat cot TinhTrang PhieuDatHang tu kieu bool -> int
+            // 2. Cap nhat doi tuong pdhUpdate (nho DbSaveChange)
+
+            return RedirectToAction("AD_ShowAllPhieuDatHang");
+        }
         #endregion
 
 

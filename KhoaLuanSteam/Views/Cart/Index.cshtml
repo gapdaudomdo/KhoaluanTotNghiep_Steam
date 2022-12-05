@@ -69,8 +69,23 @@
     </script>
 }
 @model List<KhoaLuanSteam.Models.GioHang>
-
+@section QuantityScript{
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+        }, 4000);
+    </script>
+}
 <h2 style="margin-bottom: 20px;font-size: 24px;   font-weight: bold;   color: #0c0c0c;   margin-top: 0px;width: 100%;   padding-left: 21px;    padding-top: 21px;">Giỏ hàng của bạn</h2>
+@if (ViewBag.Success != null)
+{
+    foreach (var item in Model)
+    {
+        <div id="msgAlert" class="alert alert-warning" role="alert">
+            @ViewBag.Success
+        </div>
+    }
+}
 @if (Model.Count > 0)
 {
     <table id="cart" class="table table-hover table-condensed">

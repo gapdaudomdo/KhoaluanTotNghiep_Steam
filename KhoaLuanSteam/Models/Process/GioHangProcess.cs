@@ -43,6 +43,15 @@ namespace KhoaLuanSteam.Models.Process
             return db.PHIEUDATHANGs.OrderBy(x => x.MaPhieuDH).ToList();
         }
 
+        public List<CT_PHIEUDATHANG> DanhSachCT_DDH(int id)
+        {
+            return db.CT_PHIEUDATHANG.Where(x => x.MaPhieuDH == id).ToList();
+        }
+
+        public PHIEUDATHANG GetDDHLoadCT_DDH(int id)
+        {
+            return db.PHIEUDATHANGs.Where(x => x.MaPhieuDH == id).FirstOrDefault();
+        }
         /// <summary>
         /// hàm thêm đơn hàng
         /// </summary>
@@ -63,7 +72,12 @@ namespace KhoaLuanSteam.Models.Process
         {
             return db.CT_PHIEUDATHANG.Find(id);
         }
+        public CT_PHIEUDATHANG GetidCT_DDH(int id)
+        {
+            return db.CT_PHIEUDATHANG.Where(x => x.MaPhieuDH == id).FirstOrDefault();
+        }
 
+       
         /// <summary>
         /// hàm thêm sản phẩm vào đơn đặt hàng
         /// </summary>

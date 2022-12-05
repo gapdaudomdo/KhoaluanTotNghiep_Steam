@@ -33,9 +33,9 @@ namespace KhoaLuanSteam.Models
         public DbSet<LOAISANPHAM> LOAISANPHAMs { get; set; }
         public DbSet<NHACUNGCAP> NHACUNGCAPs { get; set; }
         public DbSet<NHANVIEN> NHANVIENs { get; set; }
-        public DbSet<PHIEUDATHANG> PHIEUDATHANGs { get; set; }
         public DbSet<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }
+        public DbSet<PHIEUDATHANG> PHIEUDATHANGs { get; set; }
     }
 }

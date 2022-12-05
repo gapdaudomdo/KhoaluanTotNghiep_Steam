@@ -14,7 +14,7 @@ namespace KhoaLuanSteam.Models
     
     public partial class PHIEUDATHANG
     {
-        public PHIEUDATHANG() 
+        public PHIEUDATHANG()
         {
             this.CT_PHIEUDATHANG = new HashSet<CT_PHIEUDATHANG>();
         }
@@ -24,7 +24,7 @@ namespace KhoaLuanSteam.Models
         public Nullable<System.DateTime> NgayDat { get; set; }
         public Nullable<int> Tong_SL_Dat { get; set; }
         public Nullable<double> ThanhTien { get; set; }
-        public Nullable<bool> TinhTrang { get; set; }
+        public Nullable<int> TinhTrang { get; set; }
     
         public virtual ICollection<CT_PHIEUDATHANG> CT_PHIEUDATHANG { get; set; }
         public virtual KHACHHANG KHACHHANG { get; set; }

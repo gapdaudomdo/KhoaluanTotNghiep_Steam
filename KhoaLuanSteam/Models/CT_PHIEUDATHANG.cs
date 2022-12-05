@@ -19,7 +19,7 @@ namespace KhoaLuanSteam.Models
         public Nullable<int> SoLuong { get; set; }
         public Nullable<double> DonGia { get; set; }
     
-        public virtual PHIEUDATHANG PHIEUDATHANG { get; set; }
         public virtual THONGTINSANPHAM THONGTINSANPHAM { get; set; }
+        public virtual PHIEUDATHANG PHIEUDATHANG { get; set; }
     }
 }

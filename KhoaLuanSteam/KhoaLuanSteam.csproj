@@ -206,6 +206,7 @@
       <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ChiTietDDHViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\assets_admin\css\sb-admin-2.css" />
@@ -3665,7 +3666,7 @@
     <Content Include="Views\Cart\ThanhToan.cshtml" />
     <Content Include="Views\Cart\ThongTinKhachHang.cshtml" />
     <Content Include="Views\Cart\XacNhan.cshtml" />
-    <Content Include="Views\Shared\SanPham.cshtml" />
+    <Content Include="Views\Home\SanPham.cshtml" />
     <Content Include="Views\Product\ChiTietSP.cshtml" />
     <Content Include="Views\Product\FavoriteProduct.cshtml" />
     <Content Include="Views\Product\giasachgiam.cshtml" />

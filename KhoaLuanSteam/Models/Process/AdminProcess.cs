@@ -397,6 +397,11 @@ namespace KhoaLuanSteam.Models.Process
         //Xu ly Thong Tin Phieu Dat Hang
 
         #region Xu ly Thong Tin PhieuDatHang
+
+        public PHIEUDATHANG GetIdPDH(int id)
+        {
+            return db.PHIEUDATHANGs.Find(id);
+        }
         /// <summary>
         /// hàm xuất danh sách đơn đặt hàng
         /// </summary>
@@ -414,6 +419,21 @@ namespace KhoaLuanSteam.Models.Process
         public List<CT_PHIEUDATHANG> detailsCT_PDDH(int id)
         {
             return db.CT_PHIEUDATHANG.Where(x => x.MaPhieuDH == id).OrderBy(x => x.MaPhieuDH).ToList();
+        }
+
+        public int UpdatePdh(PHIEUDATHANG entity)
+        {
+            try
+            {
+                var tg = db.PHIEUDATHANGs.Find(entity.MaPhieuDH);
+                tg.TinhTrang = entity.TinhTrang;
+                db.SaveChanges();
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
         #endregion
 

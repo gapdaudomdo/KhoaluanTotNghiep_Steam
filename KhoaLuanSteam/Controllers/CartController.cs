@@ -12,6 +12,7 @@ using System.Text;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Web.Hosting;
+using DoAn_MonHoc.ViewModels;
 
 namespace KhoaLuanSteam.Controllers
 {
@@ -36,6 +37,10 @@ namespace KhoaLuanSteam.Controllers
                 list = (List<GioHang>)cart;
                 sluong = list.Sum(x => x.iSoLuong);
                 thanhtien = list.Sum(x => x.iThanhTien);
+            }
+            if (TempData["message"] != null)
+            {
+                ViewBag.Success = TempData["message"];
             }
             ViewBag.Quantity = sluong;
             ViewBag.Total = thanhtien;
@@ -135,6 +140,8 @@ namespace KhoaLuanSteam.Controllers
         //Cập nhật giỏ hàng
         public JsonResult Update(string cartModel)
         {
+            THONGTINSANPHAM sanphams = new THONGTINSANPHAM();
+
             //tạo 1 đối tượng dạng json
             var jsonCart = new JavaScriptSerializer().Deserialize<List<GioHang>>(cartModel);
 
@@ -144,11 +151,19 @@ namespace KhoaLuanSteam.Controllers
             foreach (var item in sessionCart)
             {
                 var jsonItem = jsonCart.Single(x => x.sanpham.MaSanPham == item.sanpham.MaSanPham);
+                sanphams = db.THONGTINSANPHAMs.Where(x => x.MaSanPham == item.sanpham.MaSanPham).FirstOrDefault();
                 if (jsonItem != null)
                 {
                     item.iSoLuong = jsonItem.iSoLuong;
                 }
+                if (item.iSoLuong > sanphams.SLTon)
+                {
+                    item.iSoLuong = (int)sanphams.SLTon;
+                    TempData["message"] = "Sản phẩm: " + sanphams.TenSanPham + " chỉ còn  số lượng là : " + sanphams.SLTon;
+                }
             }
+
+
             //cập nhật lại session
             Session[GioHang] = sessionCart;
 
@@ -226,7 +241,7 @@ namespace KhoaLuanSteam.Controllers
                 ViewBag.Quantity = sl;
                 ViewBag.Total = total;
                 order.NgayDat = DateTime.Now;
-                order.TinhTrang = false; //chưa xac nhan
+                order.TinhTrang = -1; //chưa xac nhan
                 order.MaKH = MaKH;
                 order.Tong_SL_Dat = ViewBag.Quantity;
                 order.ThanhTien = ViewBag.Total;
@@ -275,12 +290,7 @@ namespace KhoaLuanSteam.Controllers
                 sl = list.Sum(x => x.iSoLuong);
                 total = list.Sum(x => x.iThanhTien);
             }
-            foreach (var sp in list)
-            {
-                sanphams = db.THONGTINSANPHAMs.FirstOrDefault(s => s.MaSanPham == sp.sanpham.MaSanPham);
-                sanphams.SLTon = sanphams.SLTon - sp.iSoLuong;
-                db.SaveChanges();
-            }
+          
             ViewBag.Quantity = sl;
             ViewBag.Total = total;
 
@@ -292,7 +302,7 @@ namespace KhoaLuanSteam.Controllers
         public JsonResult XacNhanEmail(int MaDH)
         {
             PHIEUDATHANG Data = db.PHIEUDATHANGs.Where(x => x.MaPhieuDH == MaDH).FirstOrDefault();
-            Data.TinhTrang = true;
+            Data.TinhTrang = 0;
             db.SaveChanges();
             var msg = "Mua hàng thành công.";
             //thêm dữ liệu vào đơn đặt hàng
@@ -315,7 +325,7 @@ namespace KhoaLuanSteam.Controllers
         public JsonResult DeleteDonDatHang(int MaDH)
         {
             PHIEUDATHANG Data = db.PHIEUDATHANGs.Where(x => x.MaPhieuDH == MaDH).FirstOrDefault();
-            Data.TinhTrang = false;
+            Data.TinhTrang = -1;
             db.SaveChanges();
             var msg = "Hủy Đơn Hàng Thành Công";
             //thêm dữ liệu vào đơn đặt hàng         
@@ -424,9 +434,42 @@ namespace KhoaLuanSteam.Controllers
             return View(donDatHang);
 
         }
-        public ActionResult DetailsDonDatHang()
+        [HttpGet]
+        public ActionResult DetailsDonDatHang(int id)
         {
-            return View();
+           var tinhtrang = new GioHangProcess().GetDDHLoadCT_DDH(id);
+            List<ChiTietDDHViewModel> lst = new List<ChiTietDDHViewModel>();
+            List<CT_PHIEUDATHANG> lstCT = new GioHangProcess().DanhSachCT_DDH(id);
+
+            foreach (var item in lstCT)
+            {
+                THONGTINSANPHAM sanphams = db.THONGTINSANPHAMs.Where(x => x.MaSanPham == item.MaSanPham).FirstOrDefault();
+                lst.Add(new ChiTietDDHViewModel() { HinhAnh = sanphams.HinhAnh, TenSanPham = sanphams.TenSanPham, Gia = sanphams.GiaSanPham, SoLuong = item.SoLuong });
+            }
+
+            double? thanhtien = 0;   
+            thanhtien = tinhtrang.ThanhTien;
+
+            ViewBag.Total = thanhtien;
+            if (tinhtrang.TinhTrang == 0)
+            {
+                ViewBag.TinhTrang = "Xử lý";
+            }
+            else if (tinhtrang.TinhTrang == 1)
+            {
+                ViewBag.TinhTrang = "Đã đóng gói";
+            }
+            else if (tinhtrang.TinhTrang == 2)
+            {
+                ViewBag.TinhTrang = "Đang giao";
+            }
+            else
+            {
+                ViewBag.TinhTrang = "Giao thành công";
+            }
+
+            return View(lst);
+        
         }
     }
 }

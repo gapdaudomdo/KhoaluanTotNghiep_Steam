@@ -5,60 +5,104 @@
     Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2 style="text-align: center;">Quản lý đơn hàng</h2>
-<div class="card-body" style="padding: 0;">
-    <div class="table-responsive">
-        <table class="table" id="example">
-            <thead>
-                <tr>
-                    <th>
-                       @Html.DisplayNameFor(model => model.MaPhieuDH)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.KHACHHANG.TenKH)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.NgayDat)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TinhTrang)
-                    </th>
-                    <th>Xử Lý Đơn Hàng</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr id="row_@item.MaPhieuDH">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MaPhieuDH)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.KHACHHANG.TenKH)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NgayDat)
-                        </td>
-                        <td>
-                            <a href="#" class="btn-active" data-id="@item.MaKH">@Html.Raw(item.TinhTrang != null ? "<strong>Xác Nhận Thành Công</strong>" : "Chưa Xác Nhận")</a>
-                        </td>
-                        <td>
-                            @Html.DropDownList("Tracking", new List<SelectListItem>
-{
-                        new SelectListItem() {Text = "Xử Lý", Value="0"},
-                        new SelectListItem() {Text = "Đã Đóng Gói", Value="1"},
-                        new SelectListItem() {Text = "Đang Giao", Value="2"},
-                        new SelectListItem() {Text = "Giao Thành Công", Value="3"}
-    }, new { @class = "form-control" })
-                        </td>
-                        <td>
-                            @Html.ActionLink("Xem", "DetailsCT_PDDH", new { id = item.MaPhieuDH }, new { @class = "btn btn-primary" })
-                        </td>
-                    </tr>}
-            </tbody>
+@{
+    var items = new List<SelectListItem>()
+    {
+         new SelectListItem() {Text = "Xử Lý", Value="0"},
+         new SelectListItem() {Text = "Đã Đóng Gói", Value="1"},
+        new SelectListItem() {Text = "Đang Giao", Value="2"},
+        new SelectListItem() {Text = "Giao Thành Công", Value="3"}
+    };
+}
 
-        </table>
-    </div>
-</div>
+<h2>Quản lý đơn hàng</h2>
+<table class="table" id="example">
+    <thead>
+        <tr>
+            <th>
+                MaDDH
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KHACHHANG.TenKH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayDat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
+            <th>Xử Lý Đơn Hàng</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.MaPhieuDH">
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaPhieuDH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KHACHHANG.TenKH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDat)
+                </td>
+                <td>
+                    <a href="#" class="btn-active" data-id="@item.MaKH">@Html.Raw(item.TinhTrang >= 0 ? "<strong>Xác Nhận Thành Công</strong>" : "Chưa Xác Nhận")</a>
+                </td>
+                <td>
+                    <form method="post" action='@Url.Action("CapNhatTinhTrangDonDatHang", "Home", new { maDonHang = item.MaPhieuDH})'>
+                        @*@if (item.TinhTrang == true)
+                            {
+                                items[0].Selected = false;
+                                items[1].Selected = true;
+                            }
+                            else
+                            {
+                                items[0].Selected = true;
+                                items[1].Selected = false;
+                            }*@
+
+                        @if (item.TinhTrang == 0)
+                        {
+                            items[0].Selected = true;
+                            items[1].Selected = false;
+                            items[2].Selected = false;
+                            items[3].Selected = false;
+                        }
+                        else if (item.TinhTrang == 1)
+                        {
+                            items[0].Selected = false;
+                            items[1].Selected = true;
+                            items[2].Selected = false;
+                            items[3].Selected = false;
+                        }
+                        else if (item.TinhTrang == 2)
+                        {
+                            items[0].Selected = false;
+                            items[1].Selected = false;
+                            items[2].Selected = true;
+                            items[3].Selected = false;
+                        }
+                        else
+                        {
+                            items[0].Selected = false;
+                            items[1].Selected = false;
+                            items[2].Selected = false;
+                            items[3].Selected = true;
+                        }
+                        @Html.DropDownListFor(modelItem => item.TinhTrang, items)
+                        <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                    </form>
+                </td>
+                <td>
+                    @Html.ActionLink("Xem", "DetailsCT_PDDH", new { id = item.MaPhieuDH })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
 

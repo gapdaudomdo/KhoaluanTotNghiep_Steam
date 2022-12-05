@@ -95,18 +95,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PHIEUDATHANGs">
-      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHIEUDATHANG">
-        <MappingFragment StoreEntitySet="PHIEUDATHANG">
-          <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
-          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-          <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
-          <ScalarProperty Name="Tong_SL_Dat" ColumnName="Tong_SL_Dat" />
-          <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
-          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PHIEUNHAPHANGs">
       <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHIEUNHAPHANG">
         <MappingFragment StoreEntitySet="PHIEUNHAPHANG">
@@ -142,6 +130,18 @@
           <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
           <ScalarProperty Name="GiamGia" ColumnName="GiamGia" />
           <ScalarProperty Name="SLTon" ColumnName="SLTon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PHIEUDATHANGs">
+      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHIEUDATHANG">
+        <MappingFragment StoreEntitySet="PHIEUDATHANG">
+          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+          <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+          <ScalarProperty Name="Tong_SL_Dat" ColumnName="Tong_SL_Dat" />
+          <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

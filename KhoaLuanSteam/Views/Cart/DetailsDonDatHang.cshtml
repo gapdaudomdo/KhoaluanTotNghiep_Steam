@@ -2,8 +2,66 @@
     ViewBag.Title = "DetailsDonDatHang";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
-
-@model IEnumerable<KhoaLuanSteam.Models.PHIEUDATHANG>
+@model List<DoAn_MonHoc.ViewModels.ChiTietDDHViewModel>
 <h2 style="width: 100%;    padding-left: 23px;    padding-top: 13px;">Chi Tiết Đơn Hàng</h2>
-<h5 style="width: 100%;    padding-left: 40px;    padding-top: 13px;">Lên Đơn Hàng Thành Công , Cảm Ơn Quí Khách Hàng</h5>
 
+<h5 style="width: 100%;    padding-left: 40px;    padding-top: 13px;">Lên Đơn Hàng Thành Công !!! Cảm Ơn Quí Khách</h5>
+
+<h2 style="width: 100%;    padding-left: 23px;    padding-top: 13px;">Trạng thái đơn hàng của bạn là : @ViewBag.TinhTrang</h2>
+
+<table id="cart" class="table table-hover table-condensed">
+    <thead>
+        <tr>
+            <th style="width:50%;font-size: 16px; font-weight: 700;" class="text-center">Sản phẩm</th>
+            <th style="width:10%;font-size: 16px; font-weight: 700;" class="text-center">Giá</th>
+            <th style="width:8%;font-size: 16px; font-weight: 700;" class="text-center">Số lượng</th>
+            <th style="width:22%;font-size: 16px; font-weight: 700;" class="text-center">Thành tiền</th>
+            <th style="width:10%;font-size: 16px; font-weight: 700;" class="text-center"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td data-th="Product">
+                    <div class="row">
+                        <div class="col-sm-2 hidden-xs"><img src="~/HinhAnhSach/@item.HinhAnh" alt="@item.HinhAnh" class="img-responsive" style="width: 150px; height: auto; margin-left: 31px;" /></div>
+                        <div class="col-sm-10">
+                            <h4 class="nomargin" style="margin-left: 29%;font-size: 19px; font-weight: bold;">@item.TenSanPham</h4>
+                        </div>
+                    </div>
+                </td>
+                <td data-th="Price">
+                    <span>
+                        @item.Gia
+                    </span>
+                <td data-th="Quantity">
+                    <input id="Quantity" type="text" class="txtQuantity" value="@item.SoLuong" readonly>
+                </td>
+                <td data-th="Subtotal" class="text-center">
+                    <span>
+                        @((item.Gia * item.SoLuong)) VND
+                    </span>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+
+        <tr>
+            <td class="hidden-xs text-center"><strong>Tổng cộng: @String.Format("{0:0,0}", ViewBag.Total) VND</strong></td>
+
+        </tr>
+    </tfoot>
+</table>
+
+
+<style>
+    .product-price {
+        font-size: 13px;
+        line-height: 1.5;
+        color: #212529;
+        font-weight: 100;
+    }
+</style>
