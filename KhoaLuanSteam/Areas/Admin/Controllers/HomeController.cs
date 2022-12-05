@@ -694,6 +694,58 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
 
         #endregion
 
+        public ActionResult DangKyTK_Admin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DangKyTK_Admin(NHANVIEN nv, HttpPostedFileBase fileUpload)
+        {
+            if (fileUpload == null)
+            {
+                ViewBag.Alert = "Vui lòng chọn ảnh bìa";
+                return View();
+            }
+            else
+            {
+                //kiểm tra dữ liệu db có hợp lệ?
+                if (ModelState.IsValid)
+                {
+                    //lấy file đường dẫn
+                    var fileName = Path.GetFileName(fileUpload.FileName);
+                    //chuyển file đường dẫn và biên dịch vào /images
+                    var path = Path.Combine(Server.MapPath("/HinhAnhSach"), fileName);
+
+                    //kiểm tra đường dẫn ảnh có tồn tại?
+                    if (System.IO.File.Exists(path))
+                    {
+                        ViewBag.Alert = "Hình ảnh đã tồn tại";
+                    }
+                    else
+                    {
+                        fileUpload.SaveAs(path);
+                    }
+
+                    //thực hiện việc lưu đường dẫn ảnh vào link ảnh sản phẩm
+                    nv.HinhAnh = fileName;
+                    //thực hiện lưu vào db
+                    var result = new AdminProcess().InsertNhanVien(nv);
+                    if (result > 0)
+                    {
+                        ViewBag.Success = "Thêm mới thành công";
+                        //xóa trạng thái để thêm mới
+                        ModelState.Clear();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "thêm không thành công.");
+                    }
+                }
+            }
+
+            return View();
+        }
 
     }
 }

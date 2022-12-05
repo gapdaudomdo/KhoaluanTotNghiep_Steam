@@ -221,3 +221,4 @@ D:\steam_28_11\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.csp
 D:\steam_28_11\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.csproj.CopyComplete
 D:\steam_28_11\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.dll
 D:\steam_28_11\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.pdb
+D:\Webtest\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.csprojResolveAssemblyReference.cache

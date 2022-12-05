@@ -49,7 +49,7 @@ namespace KhoaLuanSteam.Models.Process
             }
         }
 
-        //Xử Lý Thông Tin Sách
+        //Xử Lý Thông Tin Sản Phẩm
         #region Xử Lý Thông Tin Sản Phẩm
         /// <summary>
         /// hàm lấy mã sách
@@ -145,6 +145,18 @@ namespace KhoaLuanSteam.Models.Process
 
 
         #endregion
+
+
+
+        // thêm tk nhân viên:
+        public int InsertNhanVien(NHANVIEN entity)
+        {
+            db.NHANVIENs.Add(entity);
+            db.SaveChanges();
+            return entity.MaNV;
+        }
+
+
 
         //Liên hệ từ khách hàng
 
