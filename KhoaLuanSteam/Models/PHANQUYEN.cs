@@ -12,12 +12,16 @@ namespace KhoaLuanSteam.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Admin
+    public partial class PHANQUYEN
     {
-        public int IDAdmin { get; set; }
-        public string TaiKhoan { get; set; }
-        public string MatKhau { get; set; }
-        public string HoTen { get; set; }
-        public Nullable<bool> TrangThai { get; set; }
+        public PHANQUYEN()
+        {
+            this.NHANVIENs = new HashSet<NHANVIEN>();
+        }
+    
+        public int ID_PhanQuyen { get; set; }
+        public string TenPQ { get; set; }
+    
+        public virtual ICollection<NHANVIEN> NHANVIENs { get; set; }
     }
 }

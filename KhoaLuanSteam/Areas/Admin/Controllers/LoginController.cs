@@ -28,12 +28,16 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //gọi hàm đăng nhập trong AdminProcess và gán dữ liệu trong biến model
-                var result = new AdminProcess().Login(model.TaiKhoan, model.MatKhau);
+                var result = new AdminProcess().Login(model.TenDN, model.MatKhau);
                 //Nếu đúng
                 if (result == 1)
                 {
                     //gán Session["LoginAdmin"] bằng dữ liệu đã đăng nhập
-                    Session["LoginAdmin"] = model.TaiKhoan;
+                    Session["LoginAdmin"] = model.TenDN;
+
+                    var nv = db.NHANVIENs.Where(x => x.TenDN == model.TenDN).FirstOrDefault();
+                    //Session["CheckPQ"] = nv.MaNV;
+                    Session["CheckPQ"] = nv.ID_PhanQuyen;
 
                     //trả về trang quản lý
                     return RedirectToAction("Index", "Home");

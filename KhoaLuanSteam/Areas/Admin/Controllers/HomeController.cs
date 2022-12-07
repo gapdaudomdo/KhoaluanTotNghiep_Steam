@@ -673,6 +673,8 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC", pnhaphang.MaNCC);
             ViewBag.MaNV = new SelectList(db.NHANVIENs.ToList().OrderBy(x => x.MaNV), "MaNV", "TenNV", pnhaphang.MaNV);
             pnhaphang.NgayLap_PN = DateTime.Now;
+            pnhaphang.TongSL = 0;
+            pnhaphang.TongTien_NH = 0;
             //kiểm tra dữ liệu db có hợp lệ?
             if (ModelState.IsValid) 
             {

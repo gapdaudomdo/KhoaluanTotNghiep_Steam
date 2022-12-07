@@ -28,5 +28,6 @@ namespace KhoaLuanSteam.Models
     
         public virtual ICollection<CT_PHIEUDATHANG> CT_PHIEUDATHANG { get; set; }
         public virtual KHACHHANG KHACHHANG { get; set; }
+        public virtual TINHTRANGDH TINHTRANGDH { get; set; }
     }
 }

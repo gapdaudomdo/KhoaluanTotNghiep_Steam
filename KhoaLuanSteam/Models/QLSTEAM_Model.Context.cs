@@ -12,6 +12,9 @@ namespace KhoaLuanSteam.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class QL_THIETBISTEAMEntities1 : DbContext
     {
@@ -25,7 +28,6 @@ namespace KhoaLuanSteam.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Admin> Admins { get; set; }
         public DbSet<CT_PHIEUDATHANG> CT_PHIEUDATHANG { get; set; }
         public DbSet<CT_PHIEUNHAPHANG> CT_PHIEUNHAPHANG { get; set; }
         public DbSet<KHACHHANG> KHACHHANGs { get; set; }
@@ -33,9 +35,41 @@ namespace KhoaLuanSteam.Models
         public DbSet<LOAISANPHAM> LOAISANPHAMs { get; set; }
         public DbSet<NHACUNGCAP> NHACUNGCAPs { get; set; }
         public DbSet<NHANVIEN> NHANVIENs { get; set; }
-        public DbSet<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
-        public DbSet<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }
+        public DbSet<PHANQUYEN> PHANQUYENs { get; set; }
         public DbSet<PHIEUDATHANG> PHIEUDATHANGs { get; set; }
+        public DbSet<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
+        public DbSet<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }
+        public DbSet<TINHTRANGDH> TINHTRANGDHs { get; set; }
+    
+        public virtual int Update_SL_Ton(Nullable<int> maSP, string maPhieuNhapHang)
+        {
+            var maSPParameter = maSP.HasValue ?
+                new ObjectParameter("MaSP", maSP) :
+                new ObjectParameter("MaSP", typeof(int));
+    
+            var maPhieuNhapHangParameter = maPhieuNhapHang != null ?
+                new ObjectParameter("MaPhieuNhapHang", maPhieuNhapHang) :
+                new ObjectParameter("MaPhieuNhapHang", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_SL_Ton", maSPParameter, maPhieuNhapHangParameter);
+        }
+    
+        public virtual int Update_TongSL_PN(string maPhieuNH)
+        {
+            var maPhieuNHParameter = maPhieuNH != null ?
+                new ObjectParameter("MaPhieuNH", maPhieuNH) :
+                new ObjectParameter("MaPhieuNH", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_TongSL_PN", maPhieuNHParameter);
+        }
+    
+        public virtual int Update_TongTien_PN(string maPhieuNH)
+        {
+            var maPhieuNHParameter = maPhieuNH != null ?
+                new ObjectParameter("MaPhieuNH", maPhieuNH) :
+                new ObjectParameter("MaPhieuNH", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_TongTien_PN", maPhieuNHParameter);
+        }
     }
 }

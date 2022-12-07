@@ -10,7 +10,8 @@ namespace KhoaLuanSteam.Areas.Admin.Models
     {
         [Required(ErrorMessage = "Bạn chưa nhập tài khoản")]
         [Display(Name = "Tài khoản")]
-        public string TaiKhoan { get; set; }
+        //public string TaiKhoan { get; set; }
+        public string TenDN { get; set; }
 
         [Required(ErrorMessage = "Bạn chưa nhập mật khẩu")]
         [Display(Name = "Mật khẩu")]

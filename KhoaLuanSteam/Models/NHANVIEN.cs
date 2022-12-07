@@ -28,7 +28,9 @@ namespace KhoaLuanSteam.Models
         public string HinhAnh { get; set; }
         public string TenDN { get; set; }
         public string MatKhau { get; set; }
+        public Nullable<int> ID_PhanQuyen { get; set; }
     
+        public virtual PHANQUYEN PHANQUYEN { get; set; }
         public virtual ICollection<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
     }
 }
