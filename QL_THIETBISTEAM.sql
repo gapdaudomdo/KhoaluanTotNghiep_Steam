@@ -179,21 +179,22 @@ INSERT INTO TINHTRANGDH VALUES(3,N'Đang Thàng Công')
 
 --************BẢNG NHÂN VIÊN 
 SET DATEFORMAT DMY
-INSERT INTO NhanVien VALUES(N'Do Gia Huy','23/7/2001',N'Nam',N'giahuydo@gmail.com',0356322754,N'NV1.JPG','GIABO','12345',2)
-INSERT INTO NhanVien VALUES(N'Nguyen Thanh Loc','01/5/2001',N'Nam',N'locdaubuoi@gmail.com',0355467282,N'NV2.JPG','THANHLOC','12345',2)
-INSERT INTO NhanVien VALUES(N'Le Xuan Huy','12/8/2001',N'Nam',N'huyle@gmail.com',0355467282,N'NV2.JPG','XUANHUY','12345',1)
+INSERT INTO NhanVien VALUES(N'Do Gia Huy','23/7/2001',N'Nam',N'giahuydo@gmail.com','0356322754',N'NV1.JPG','GIABO','12345',2)
+INSERT INTO NhanVien VALUES(N'Nguyen Thanh Loc','01/5/2001',N'Nam',N'locdaubuoi@gmail.com','0355467282',N'NV2.JPG','THANHLOC','12345',2)
+INSERT INTO NhanVien VALUES(N'Le Xuan Huy','12/8/2001',N'Nam',N'huyle@gmail.com','0355467282',N'NV2.JPG','XUANHUY','12345',1)
 select * from NHANVIEN
 INSERT INTO NhanVien VALUES(N'Admin','01/01/2001',N'Nam',N'admin@gmail.com',0355467282,N'NV2.JPG','admin','12345',1)
+INSERT INTO NhanVien VALUES(N'Nguyễn Văn Chính','02/08/2001',N'Nam',N'nguyenvanchinh@gmail.com','0355923282',N'NV2.JPG','vanchinh','12345',2)
 
 
 --************BẢNG KHÁCH HÀNG
 SET DATEFORMAT DMY
-INSERT INTO KHACHHANG VALUES(N'Đỗ Gia Huy',N'TP.HCM',0763512628,N'giahuydo01@gmail.com',N'25/1/2001',N'Nam',N'13/10/2020','giahuydo','12345')
-INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM',0987654321,N'locdaubuoi@gmail.com',N'25/12/2001',N'Nam',N'12/10/2020','loc','12345')
-INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM',0987654321,N'gapdaudomdo01@gmail.com',N'25/12/2001',N'Nam',N'12/10/2020','locu','12345')
+INSERT INTO KHACHHANG VALUES(N'Đỗ Gia Huy',N'TP.HCM','0763512628',N'giahuydo01@gmail.com',N'25/1/2001',N'Nam',N'13/10/2020','giahuydo','12345')
+INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM','0987654321',N'locdaubuoi@gmail.com',N'25/12/2001',N'Nam',N'12/10/2020','loc','12345')
+INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM','0987654321',N'gapdaudomdo01@gmail.com',N'25/12/2001',N'Nam',N'12/10/2020','locu','12345')
 
 
-INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM',0987654321,N'conca8048@gmail.com',N'25/12/2001',N'Nam',N'12/10/2020','locumap','12345')
+INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM','0987654321',N'conca8048@gmail.com',N'25/12/2001',N'Nam',N'12/10/2020','locumap','12345')
 select * from KHACHHANG
 
 

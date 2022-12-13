@@ -259,6 +259,35 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         #endregion
 
 
+        //huy le 13/12
+        #region Admin_QuanLy_Người dùng nhân viên
+
+        //GET : /Admin/Home/AD_ShowAllNV : trang quản lý nhân viên
+        public ActionResult AD_ShowAllNV()
+        {
+            var result = new AdminProcess().ListUserNV();
+
+            return View(result);
+        }
+
+        //GET : /Admin/Home/DetailsUserNV/:id : trang xem chi tiết nhân viên
+        public ActionResult DetailsUserNV(int id)
+        {
+            var result = new AdminProcess().GetIdNV(id);
+
+            return View(result);
+        }
+
+        //DELETE : Admin/Home/DeleteUserNV/:id : xóa thông tin nhân viên
+        [HttpDelete]
+        public ActionResult DeleteUserNV(int id)
+        {
+            new AdminProcess().DeleteUserNV(id);
+
+            return RedirectToAction("AD_ShowAllNV");
+        }
+        #endregion
+
         #region Admin_ThemXoaSua_Loai
 
         //GET : /Admin/Home/AD_ShowAllLoaiSanPham: trang quản lý  loại

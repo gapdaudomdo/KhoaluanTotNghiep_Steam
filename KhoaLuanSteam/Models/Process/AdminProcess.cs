@@ -204,7 +204,7 @@ namespace KhoaLuanSteam.Models.Process
         #endregion
 
 
-        //Quản lý người dùng
+        //Quản lý người dùng kh
         #region quản lý người dùng
         /// <summary>
         /// Hàm lấy mã khách hàng tham quan
@@ -245,8 +245,46 @@ namespace KhoaLuanSteam.Models.Process
         }
         #endregion
 
+        //Quản lý người nhân viên
+        #region quản lý người nhân viên
+        /// <summary>
+        /// Hàm lấy mã nhân viên tham quan
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>NhanVie </returns>
+        public NHANVIEN GetIdNV(int id)
+        {
+            return db.NHANVIENs.Find(id);
+        }
+        /// <summary>
+        /// hàm xuất danh sách nhân viên
+        /// </summary>
+        /// <returns>List</returns>
+        public List<NHANVIEN> ListUserNV()
+        {
+            return db.NHANVIENs.OrderBy(x => x.MaNV).ToList();
+        }
 
-
+        /// <summary>
+        /// hàm xóa người dùng nhân viên
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+        public bool DeleteUserNV(int id)
+        {
+            try
+            {
+                var user = db.NHANVIENs.Find(id);
+                db.NHANVIENs.Remove(user);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        #endregion
 
 
         //Xu ly thong tin Loai SanPham
