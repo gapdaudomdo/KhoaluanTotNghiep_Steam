@@ -29,6 +29,14 @@ namespace KhoaLuanSteam.Models.Process
             return entity.MaKH;
         }
 
+        //13/12
+        public int InsertUserNV(NHANVIEN entity)
+        {
+            db.NHANVIENs.Add(entity);
+            db.SaveChanges();
+            return entity.MaNV;
+        }
+
         /// <summary>
         /// hàm đăng nhập của khách hàng
         /// </summary>
@@ -105,5 +113,30 @@ namespace KhoaLuanSteam.Models.Process
                 return 0;
             }
         }
+
+        //huy le 13/12
+        /// <summary>
+        /// hàm kiểm tra đã tồn tại tài khoản nhân viên trong db
+        /// </summary>
+        /// <param name="username">string</param>
+        /// <param name="password">string</param>
+        /// <returns>int</returns>
+        public int CheckUsernameNV(string username, string password)
+        {
+            var result = db.NHANVIENs.SingleOrDefault(x => x.TenDN == username);
+            if (result == null)
+            {
+                return 0;
+            }
+            else
+            {
+                if (result.MatKhau == password)
+                {
+                    return 1;
+                }
+                return -1;
+            }
+        }
+
     }
 }

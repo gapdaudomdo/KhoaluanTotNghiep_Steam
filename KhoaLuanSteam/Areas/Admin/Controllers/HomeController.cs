@@ -17,6 +17,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
 
         //Khởi tạo biến dữ liệu : db
         QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1();
+        public static NHANVIEN nhanvienstatic;
 
         // GET: Admin/Home : trang chủ Admin
 
@@ -776,6 +777,57 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             }
 
             return View();
+        }
+
+        //huy le 13/12
+        //GET: /User/DangKy : đăng kí tài khoản thành viên
+        [HttpGet]
+        public ActionResult InsertNhanVien()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        //POST: /User/DangKy : thực hiện lưu dữ liệu đăng ký tài khoản thành viên
+        public ActionResult InsertNhanVien(NHANVIEN model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new UserProcess();
+
+                var nv = new NHANVIEN();
+
+                if (user.CheckUsernameNV(model.TenDN, model.MatKhau) == 1)
+                {
+                    ModelState.AddModelError("", "Tài khoản đã tồn tại");
+                }
+                else if (user.CheckUsername(model.TenDN, model.MatKhau) == -1)
+                {
+                    ModelState.AddModelError("", "Tài khoản đã tồn tại");
+                }
+                else
+                {
+                    nv.TenNV = model.TenNV;
+                    nv.NgaySinh = model.NgaySinh;
+                    nv.GioiTinh = model.GioiTinh;
+                    nv.Email = model.Email;
+                    nv.SoDT = model.SoDT;
+                    nv.HinhAnh = model.HinhAnh;
+                    nv.TenDN = model.TenDN;
+                    nv.MatKhau = model.MatKhau;
+                    nv.ID_PhanQuyen = 2;
+                    //nv.NgayTao = DateTime.Now;
+
+                    var result = user.InsertUserNV(nv);
+                    ViewBag.success = "Đã Đăng Ký Tài Khoản Thành Công";
+                    nhanvienstatic = nv;
+                    Session["UserNV"] = model.TenDN;
+                    return RedirectToAction("AD_ShowAllNV", "Home");
+                }
+
+
+            }
+            return View(model);
         }
 
     }

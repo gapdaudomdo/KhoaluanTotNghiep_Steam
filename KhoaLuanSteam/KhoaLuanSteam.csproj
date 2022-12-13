@@ -3571,6 +3571,7 @@
     </Content>
     <Content Include="Areas\Admin\Views\Home\AD_ShowAllNV.cshtml" />
     <Content Include="Areas\Admin\Views\Home\DetailsUserNV.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\InsertNhanVien.cshtml" />
     <None Include="Scripts\jquery-1.8.2-vsdoc.js" />
     <Content Include="HinhAnhSach\Banhngon.jpg" />
     <Content Include="HinhAnhSach\bloc-sieu-dai.jpg" />
