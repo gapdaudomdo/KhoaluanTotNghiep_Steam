@@ -36,8 +36,8 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                     Session["LoginAdmin"] = model.TenDN;
 
                     var nv = db.NHANVIENs.Where(x => x.TenDN == model.TenDN).FirstOrDefault();
-                    //Session["CheckPQ"] = nv.MaNV;
                     Session["CheckPQ"] = nv.ID_PhanQuyen;
+                    Session["GetMaNV"] = nv.MaNV;
 
                     //trả về trang quản lý
                     return RedirectToAction("Index", "Home");

@@ -385,7 +385,8 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                 //tl.TenLoai = model.TenLoai;
 
                 t2.MaSanPham= model.MaSanPham;
-                t2.MaPhieuNhapHang = model.MaPhieuNhapHang;
+                //t2.MaPhieuNhapHang = model.MaPhieuNhapHang;
+                t2.MaPhieuNhapHang = (string)Session["getMaPNH"];
                 t2.Sluong = model.Sluong;
                 t2.DonGiaNhap = model.DonGiaNhap;
                 //t2.TongTien = model.TongTien;
@@ -690,7 +691,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         {
             //lấy mã mà hiển thị tên
             ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC");
-            ViewBag.MaNV = new SelectList(db.NHANVIENs.ToList().OrderBy(x => x.MaNV), "MaNV", "TenNV");
+            //ViewBag.MaNV = new SelectList(db.NHANVIENs.ToList().OrderBy(x => x.MaNV), "MaNV", "TenNV");
             return View();
         }
 
@@ -701,7 +702,14 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             var list = new CT_PHIEUNHAPHANG();
             //lấy mã mà hiển thị tên
             ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC", pnhaphang.MaNCC);
-            ViewBag.MaNV = new SelectList(db.NHANVIENs.ToList().OrderBy(x => x.MaNV), "MaNV", "TenNV", pnhaphang.MaNV);
+            //ViewBag.MaNV = new SelectList(db.NHANVIENs.ToList().OrderBy(x => x.MaNV), "MaNV", "TenNV", pnhaphang.MaNV);
+
+            //var getMaNhapHang = db.PHIEUNHAPHANGs.Where(x => x.MaPhieuNhapHang == pnhaphang.MaPhieuNhapHang).FirstOrDefault();
+            //Session["getMaPNH"] = getMaNhapHang.MaPhieuNhapHang;
+
+            Session["getMaPNH"] = pnhaphang.MaPhieuNhapHang;
+
+            pnhaphang.MaNV = (int)Session["GetMaNV"];
             pnhaphang.NgayLap_PN = DateTime.Now;
             pnhaphang.TongSL = 0;
             pnhaphang.TongTien_NH = 0;
@@ -721,7 +729,9 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                     ModelState.AddModelError("", "thêm không thành công.");
                 }
             }
-            return View();
+            //return View();
+            return RedirectToAction("InsertCT_PhieuNhapHang", "Home");
+            //return RedirectToAction("AD_ShowAllProduct");
         }
 
         #endregion

@@ -6,7 +6,7 @@
 @model KhoaLuanSteam.Models.PHIEUNHAPHANG
 
 
-<h2 style="text-align: center;">Thêm phiếu nhập hàng</h2>
+<h2 style="text-align: center;">Chọn nhà cung cấp</h2>
 @using (Html.BeginForm("InsertDonNhapHang", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -38,13 +38,13 @@
                 @Html.ValidationMessageFor(model => model.MaNV, "", new { @class = "text-danger" })
             </div>
         </div>*@
-        <div class="form-group">
+        @*<div class="form-group">
                 <label class="control-label col-md-2">Nhân Viên</label>
                 <div class="col-md-10">
                     @Html.DropDownList("MaNV", null, "Chọn Nhân Viên", new { @class = "form-control", style = "height: 35px" })
                     @Html.ValidationMessageFor(model => model.MaNV, "", new { @class = "text-danger" })
                 </div>
-         </div>
+         </div>*@
 
         @* <div class="form-group">
                 @Html.LabelFor(model => model.TongSL, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -75,7 +75,8 @@
                 @Html.ActionLink("Trở về", "AD_ShowAllPhieuNhapHang", new { id = "" }, new { @class = "btn btn-primary" })
             </span>
             <span class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Thêm" class="btn btn-primary" />
+                @*<input type="submit" value="Thêm" class="btn btn-primary" />*@
+                <input type="submit" value="Tiếp tục" class="btn btn-primary" />
             </span>
         </div>
     </div>
