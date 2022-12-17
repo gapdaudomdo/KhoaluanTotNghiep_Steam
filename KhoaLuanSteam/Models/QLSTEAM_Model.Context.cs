@@ -38,8 +38,14 @@ namespace KhoaLuanSteam.Models
         public DbSet<PHANQUYEN> PHANQUYENs { get; set; }
         public DbSet<PHIEUDATHANG> PHIEUDATHANGs { get; set; }
         public DbSet<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }
         public DbSet<TINHTRANGDH> TINHTRANGDHs { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> getMaxMaPhieuNhapHang()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getMaxMaPhieuNhapHang");
+        }
     
         public virtual int Update_SL_Ton(Nullable<int> maSP, string maPhieuNhapHang)
         {

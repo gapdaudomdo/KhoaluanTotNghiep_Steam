@@ -24,6 +24,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.SoDT)
                     </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.ID_PhanQuyen)
+                    </th>*@
                     <th></th>
                 </tr>
             </thead>
@@ -44,6 +47,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.SoDT)
                     </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.ID_PhanQuyen)
+                    </td>*@
                     <td>
                         @Html.ActionLink("Xem", "DetailsUserNV", new { id = item.MaNV }, new { @class = "btn btn-primary" }) |
                         @Ajax.ActionLink("Xóa", "DeleteUserNV", new { id = item.MaNV }, new AjaxOptions

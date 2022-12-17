@@ -17,11 +17,12 @@
         </EntityType>
         <EntityType Name="CT_PHIEUNHAPHANG">
           <Key>
-            <PropertyRef Name="MaSanPham" />
+            <PropertyRef Name="MaCTPhieuNhapHang" />
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
+          <Property Name="MaCTPhieuNhapHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaSanPham" Type="int" Nullable="false" />
-          <Property Name="MaPhieuNhapHang" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaPhieuNhapHang" Type="int" Nullable="false" />
           <Property Name="Sluong" Type="int" />
           <Property Name="DonGiaNhap" Type="float" />
           <Property Name="TongTien" Type="float" />
@@ -35,7 +36,7 @@
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
           <Property Name="SDT" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="NgaySinh" Type="datetime" />
+          <Property Name="NgaySinh" Type="date" />
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="TenDN" Type="nvarchar" MaxLength="50" />
@@ -106,12 +107,22 @@
           <Key>
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
-          <Property Name="MaPhieuNhapHang" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaPhieuNhapHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaNCC" Type="nchar" MaxLength="10" />
           <Property Name="MaNV" Type="int" />
           <Property Name="NgayLap_PN" Type="date" />
           <Property Name="TongSL" Type="int" />
           <Property Name="TongTien_NH" Type="float" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="THONGTINSANPHAM">
           <Key>
@@ -266,6 +277,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="getMaxMaPhieuNhapHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Update_SL_Ton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaSP" Type="int" Mode="In" />
           <Parameter Name="MaPhieuNhapHang" Type="nchar" Mode="In" />
@@ -287,6 +299,7 @@
           <EntitySet Name="PHANQUYEN" EntityType="Self.PHANQUYEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHIEUDATHANG" EntityType="Self.PHIEUDATHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHIEUNHAPHANG" EntityType="Self.PHIEUNHAPHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THONGTINSANPHAM" EntityType="Self.THONGTINSANPHAM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TINHTRANGDH" EntityType="Self.TINHTRANGDH" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CT_PHIEUDH_PDT" Association="Self.FK_CT_PHIEUDH_PDT">
@@ -353,11 +366,12 @@
         </EntityType>
         <EntityType Name="CT_PHIEUNHAPHANG">
           <Key>
-            <PropertyRef Name="MaSanPham" />
+            <PropertyRef Name="MaCTPhieuNhapHang" />
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
+          <Property Name="MaCTPhieuNhapHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaSanPham" Type="Int32" Nullable="false" />
-          <Property Name="MaPhieuNhapHang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaPhieuNhapHang" Type="Int32" Nullable="false" />
           <Property Name="Sluong" Type="Int32" />
           <Property Name="DonGiaNhap" Type="Double" />
           <Property Name="TongTien" Type="Double" />
@@ -373,7 +387,7 @@
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
           <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="TenDN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -454,7 +468,7 @@
           <Key>
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
-          <Property Name="MaPhieuNhapHang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaPhieuNhapHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaNCC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="MaNV" Type="Int32" />
           <Property Name="NgayLap_PN" Type="DateTime" Precision="0" />
@@ -463,6 +477,16 @@
           <NavigationProperty Name="CT_PHIEUNHAPHANG" Relationship="Self.FK_CT_PHIEUNHAPHANG_PNH" FromRole="PHIEUNHAPHANG" ToRole="CT_PHIEUNHAPHANG" />
           <NavigationProperty Name="NHACUNGCAP" Relationship="Self.FK_PHIEUNHAPHANG_NHACUNGCAP" FromRole="PHIEUNHAPHANG" ToRole="NHACUNGCAP" />
           <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_PHIEUNHAPHANG_NHANVIEN" FromRole="PHIEUNHAPHANG" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="THONGTINSANPHAM">
           <Key>
@@ -633,6 +657,7 @@
           <EntitySet Name="PHANQUYENs" EntityType="Self.PHANQUYEN" />
           <EntitySet Name="PHIEUDATHANGs" EntityType="Self.PHIEUDATHANG" />
           <EntitySet Name="PHIEUNHAPHANGs" EntityType="Self.PHIEUNHAPHANG" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="THONGTINSANPHAMs" EntityType="Self.THONGTINSANPHAM" />
           <EntitySet Name="TINHTRANGDHs" EntityType="Self.TINHTRANGDH" />
           <AssociationSet Name="FK_CT_PHIEUDH_PDT" Association="Self.FK_CT_PHIEUDH_PDT">
@@ -679,6 +704,7 @@
             <End Role="TINHTRANGDH" EntitySet="TINHTRANGDHs" />
             <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANGs" />
           </AssociationSet>
+          <FunctionImport Name="getMaxMaPhieuNhapHang" ReturnType="Collection(Int32)" />
           <FunctionImport Name="Update_SL_Ton">
             <Parameter Name="MaSP" Mode="In" Type="Int32" />
             <Parameter Name="MaPhieuNhapHang" Mode="In" Type="String" />
@@ -709,6 +735,7 @@
           <EntitySetMapping Name="CT_PHIEUNHAPHANG">
             <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.CT_PHIEUNHAPHANG">
               <MappingFragment StoreEntitySet="CT_PHIEUNHAPHANG">
+                <ScalarProperty Name="MaCTPhieuNhapHang" ColumnName="MaCTPhieuNhapHang" />
                 <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
                 <ScalarProperty Name="MaPhieuNhapHang" ColumnName="MaPhieuNhapHang" />
                 <ScalarProperty Name="Sluong" ColumnName="Sluong" />
@@ -812,6 +839,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="THONGTINSANPHAMs">
             <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.THONGTINSANPHAM">
               <MappingFragment StoreEntitySet="THONGTINSANPHAM">
@@ -835,6 +873,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getMaxMaPhieuNhapHang" FunctionName="QL_THIETBISTEAMModel.Store.getMaxMaPhieuNhapHang" />
           <FunctionImportMapping FunctionImportName="Update_SL_Ton" FunctionName="QL_THIETBISTEAMModel.Store.Update_SL_Ton" />
           <FunctionImportMapping FunctionImportName="Update_TongSL_PN" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongSL_PN" />
           <FunctionImportMapping FunctionImportName="Update_TongTien_PN" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongTien_PN" />

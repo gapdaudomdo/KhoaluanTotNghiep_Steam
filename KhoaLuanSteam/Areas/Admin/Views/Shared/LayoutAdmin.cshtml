@@ -62,10 +62,10 @@
 </head>
 <body>
     @* container start *@
-        <div id="page-top">
-            <!-- Page Wrapper -->
+    <div id="page-top">
+        <!-- Page Wrapper -->
         <div id="wrapper">
-    
+
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -122,10 +122,15 @@
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            @*<a class="collapse-item" href="/Admin/Home/AD_ShowAllKH">Tài khoản</a>*@
-                            <a class="collapse-item" href="/Admin/Home/AD_ShowNhaCungCap">Nhà cung cấp</a>
-                            <a class="collapse-item" href="/Admin/Home/AD_ShowAllPhieuNhapHang">Phiếu nhập hàng</a>
-                            <a class="collapse-item" href="/Admin/Home/AD_ShowAllPhieuDatHang">Đơn hàng</a>
+                            @if ((int)@Session["CheckPQ"] == 1 || (int)@Session["CheckPQ"] == 3)
+                            {
+                                <a class="collapse-item" href="/Admin/Home/AD_ShowNhaCungCap">Nhà cung cấp</a>
+                                <a class="collapse-item" href="/Admin/Home/AD_ShowAllPhieuNhapHang">Phiếu nhập hàng</a>
+                            }
+                            @if ((int)@Session["CheckPQ"] == 1 || (int)@Session["CheckPQ"] == 2)
+                            {
+                                <a class="collapse-item" href="/Admin/Home/AD_ShowAllPhieuDatHang">Đơn hàng</a>
+                            }
                         </div>
                     </div>
                 </li>
@@ -141,6 +146,8 @@
                 <!-- Nav Item - Pages Collapse Menu -->
                 <!-- Nav Item - Charts -->
                 <!-- Nav Item - Tables -->
+                @if ((int)@Session["CheckPQ"] == 1 || (int)@Session["CheckPQ"] == 2)
+                {
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                            aria-expanded="true" aria-controls="collapsePages">
@@ -149,7 +156,10 @@
                         </a>
                         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="/Admin/Home/AD_ShowAllKH">Khách hàng</a>
+                                @if ((int)@Session["CheckPQ"] == 1 || (int)@Session["CheckPQ"] == 2)
+                                {
+                                    <a class="collapse-item" href="/Admin/Home/AD_ShowAllKH">Khách hàng</a>
+                                }
                                 @if ((int)@Session["CheckPQ"] == 1)
                                 {
                                     <a class="collapse-item" href="/Admin/Home/AD_ShowAllNV">Nhân viên</a>
@@ -157,17 +167,33 @@
                             </div>
                         </div>
                     </li>
-          
-                <li class="nav-item">
-                    <a class="nav-link" href="/Admin/Home/FeedBack_KH">
-                        @* <i class="fas fa-fw fa-table"></i> *@
-                        <i class="fas fa-comments"></i>
-                        <span>Phản hồi</span>
+                }
+
+
+                @if ((int)@Session["CheckPQ"] == 1 || (int)@Session["CheckPQ"] == 2)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/Home/FeedBack_KH">
+                            @* <i class="fas fa-fw fa-table"></i> *@
+                            <i class="fas fa-comments"></i>
+                            <span>Phản hồi</span>
+                        </a>
+                    </li>
+                    <!-- Divider -->
+                    <hr class="sidebar-divider d-none d-md-block">
+                }
+
+                <!-- Nav Item - Charts -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="ThongKe">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Thống kê</span>
                     </a>
                 </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
+
+
+
 
                 <!-- Sidebar Toggler (Sidebar) -->
                 <div class="text-center d-none d-md-inline">
@@ -178,27 +204,25 @@
 
             </ul>
             <!-- End of Sidebar -->
-    
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
-    
+
                 <!-- Main Content -->
                 <div id="content">
-    
+
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-    
+
                         <!-- Sidebar Toggle (Topbar) -->
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
-    
+
                         <!-- Topbar Search -->
-                        <form
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group">
                                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                    aria-label="Search" aria-describedby="basic-addon2">
+                                       aria-label="Search" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="button">
                                         <i class="fas fa-search fa-sm"></i>
@@ -206,24 +230,24 @@
                                 </div>
                             </div>
                         </form>
-    
+
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
-    
+
                             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                             <li class="nav-item dropdown no-arrow d-sm-none">
                                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-search fa-fw"></i>
                                 </a>
                                 <!-- Dropdown - Messages -->
                                 <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                    aria-labelledby="searchDropdown">
+                                     aria-labelledby="searchDropdown">
                                     <form class="form-inline mr-auto w-100 navbar-search">
                                         <div class="input-group">
                                             <input type="text" class="form-control bg-light border-0 small"
-                                                placeholder="Search for..." aria-label="Search"
-                                                aria-describedby="basic-addon2">
+                                                   placeholder="Search for..." aria-label="Search"
+                                                   aria-describedby="basic-addon2">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button">
                                                     <i class="fas fa-search fa-sm"></i>
@@ -233,30 +257,27 @@
                                     </form>
                                 </div>
                             </li>
-    
+
                             <!-- Nav Item - Alerts -->
-    
                             <!-- Nav Item - Messages -->
-    
+
                             <div class="topbar-divider d-none d-sm-block"></div>
-    
+
                             <!-- Nav Item - User Information -->
                             @Html.Action("AdminProfile", "Login")
-    
+
                         </ul>
-    
+
                     </nav>
                     <!-- End of Topbar -->
-    
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         @RenderBody()
                     </div>
                     <!-- /.container-fluid -->
-    
+
                 </div>
                 <!-- End of Main Content -->
-    
                 <!-- Footer -->
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
@@ -267,21 +288,20 @@
                     </div>
                 </footer>
                 <!-- End of Footer -->
-    
+
             </div>
             <!-- End of Content Wrapper -->
-    
+
         </div>
         <!-- End of Page Wrapper -->
-    
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-    
+
         <!-- Logout Modal-->
         <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -298,7 +318,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
     @* container end *@
 
@@ -307,12 +327,12 @@
 
 
 
-  
-   
+
+
     <script src="/Content/Admin/js/jquery.unobtrusive-ajax.min.js"></script>
-   
+
     <script src="/Content/Admin/js/jquery.dataTables.min.js"></script>
-    
+
     <script src="/Content/Admin/js/jquery.unobtrusive-ajax.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/Content/Admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -336,7 +356,7 @@
 
 
     @*admin update  *@
-     <!-- Bootstrap core JavaScript-->
+    <!-- Bootstrap core JavaScript-->
     <script src="~/Areas/assets_admin/vendor/jquery/jquery.min.js"></script>
     <script src="~/Areas/assets_admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -361,8 +381,6 @@
 
     <!-- Page level custom scripts -->
     <script src="~/Areas/assets_admin/js/demo/datatables-demo.js"></script>
-
-
 
 </body>
 </html>

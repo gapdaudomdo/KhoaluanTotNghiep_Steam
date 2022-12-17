@@ -77,7 +77,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         {
             //thực hiện việc lấy mã nhưng hiển thị tên ngay đúng mã đã chọn và gán vào ViewBag
             ViewBag.MaLoai = new SelectList(db.LOAISANPHAMs.ToList().OrderBy(x => x.TenLoai), "MaLoai", "TenLoai", sanpham.MaLoai);
-            ViewBag.MaNXB = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.TenNCC), "MaNCC", "TenNCC", sanpham.MaNCC);
+            ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.TenNCC), "MaNCC", "TenNCC", sanpham.MaNCC);
 
 
             //Nếu không thay đổi ảnh bìa thì làm
@@ -385,12 +385,10 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                 //tl.TenLoai = model.TenLoai;
 
                 t2.MaSanPham= model.MaSanPham;
-                //t2.MaPhieuNhapHang = model.MaPhieuNhapHang;
-                t2.MaPhieuNhapHang = (string)Session["getMaPNH"];
+                //t2.MaPhieuNhapHang = (int)Session["getMaPNH"];
+                t2.MaPhieuNhapHang = (int)Session["getMaPNH"];
                 t2.Sluong = model.Sluong;
                 t2.DonGiaNhap = model.DonGiaNhap;
-                //t2.TongTien = model.TongTien;
-
                 t2.TongTien = t2.Sluong * t2.DonGiaNhap;
 
                 //gọi hàm thêm CT_PHIEUNHAPHANG (InsertCT_PHIEUNHAPHANG) trong biến admin
@@ -399,13 +397,14 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                 //kiểm tra hàm
                 if (result > 0)
                 {
-
+                    var MaxMaCTPhieuNhapHang = db.CT_PHIEUNHAPHANG.Where(p => p.MaCTPhieuNhapHang > 0).Max(p => p.MaCTPhieuNhapHang);
                     object[] parameters =
                     {
+                        new SqlParameter("@MaCTPhieuNhapHang",MaxMaCTPhieuNhapHang),
                         new SqlParameter("@MaSP",t2.MaSanPham),
                         new SqlParameter("@MaPhieuNhapHang",t2.MaPhieuNhapHang)
                     };
-                    db.Database.ExecuteSqlCommand("Update_SL_Ton @MaSP,@MaPhieuNhapHang", parameters);
+                    db.Database.ExecuteSqlCommand("Update_SL_Ton @MaCTPhieuNhapHang,@MaSP,@MaPhieuNhapHang", parameters);
 
                     object[] update_TongSL_NhapHang =
                     {
@@ -432,20 +431,6 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
 
             return View(model);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //GET : Admin/Home/UpdateLoaiSanPham/:id : trang cập nhật loại
         [HttpGet]
@@ -679,9 +664,16 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         }
 
         //GET : /Admin/Home/DetailsCT_PhieuNhapHang : trang xem chi tiết phiếu nhập hàng
-        public ActionResult DetailsCT_PhieuNhapHang(string id)
+        //public ActionResult DetailsCT_PhieuNhapHang(string id)
+        //{
+        //    var result = new AdminProcess().detailsCT_PNhaphang(id.Trim());
+
+        //    return View(result);
+        //}
+
+        public ActionResult DetailsCT_PhieuNhapHang(int id)
         {
-            var result = new AdminProcess().detailsCT_PNhaphang(id.Trim());
+            var result = new AdminProcess().detailsCT_PNhaphang(id);
 
             return View(result);
         }
@@ -707,7 +699,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             //var getMaNhapHang = db.PHIEUNHAPHANGs.Where(x => x.MaPhieuNhapHang == pnhaphang.MaPhieuNhapHang).FirstOrDefault();
             //Session["getMaPNH"] = getMaNhapHang.MaPhieuNhapHang;
 
-            Session["getMaPNH"] = pnhaphang.MaPhieuNhapHang;
+  
 
             pnhaphang.MaNV = (int)Session["GetMaNV"];
             pnhaphang.NgayLap_PN = DateTime.Now;
@@ -729,9 +721,10 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                     ModelState.AddModelError("", "thêm không thành công.");
                 }
             }
+            var MaxMaPhieuNhapHang = db.PHIEUNHAPHANGs.Where(p => p.MaPhieuNhapHang > 0).Max(p => p.MaPhieuNhapHang);
+            Session["getMaPNH"] = MaxMaPhieuNhapHang;
             //return View();
             return RedirectToAction("InsertCT_PhieuNhapHang", "Home");
-            //return RedirectToAction("AD_ShowAllProduct");
         }
 
         #endregion
@@ -839,6 +832,106 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             }
             return View(model);
         }
+
+
+        ////----------------------------------------
+        public ActionResult UpdateNhanVien(int id)
+        {
+            //gọi hàm lấy mã nhân viên
+            var nv = new AdminProcess().GetIdNV(id);
+
+            //thực hiện việc lấy mã nhưng hiển thị tên và đúng tại mã đang chỉ định và gán vào ViewBag
+            //ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.TenNCC), "MaNCC", "TenNCC", sanpham.MaNCC);
+            ViewBag.ID_PhanQuyen = new SelectList(db.PHANQUYENs.ToList().OrderBy(x => x.TenPQ), "ID_PhanQuyen", "TenPQ", nv.ID_PhanQuyen);
+            return View(nv);
+        }
+
+        //POST : /Admin/Home/UpdateNhanVien
+        [HttpPost]
+        public ActionResult UpdateNhanVien(NHANVIEN nv, HttpPostedFileBase fileUpload)
+        {
+            //thực hiện việc lấy mã nhưng hiển thị tên ngay đúng mã đã chọn và gán vào ViewBag
+            ViewBag.ID_PhanQuyen = new SelectList(db.PHANQUYENs.ToList().OrderBy(x => x.TenPQ), "ID_PhanQuyen", "TenPQ", nv.ID_PhanQuyen);
+
+            //Nếu không thay đổi ảnh bìa thì làm
+            if (fileUpload == null)
+            {
+                //kiểm tra hợp lệ dữ liệu
+                if (ModelState.IsValid)
+                {
+                    //gọi hàm UpdateSanPham cho việc cập nhật sách
+                    var result = new AdminProcess().UpdateNhanVien(nv);
+
+                    if (result == 1)
+                    {
+                        ViewBag.Success = "Cập nhật thành công";
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Cập nhật không thành công.");
+                    }
+                }
+            }
+
+            return View(nv);
+        }
+
+        //GET : /Admin/Home/ThongKe
+        public ActionResult ThongKe()
+        {
+            using (var ctx = new QL_THIETBISTEAMEntities1())
+            {
+                //thông kê doanh thu
+                double thang1 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 1 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+                double thang2 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 2 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+                double thang3 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 3 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+                double thang4 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 4 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+                double thang5 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 5 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+                double thang6 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 6 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+                double thang7 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 7 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+                double thang8 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 8 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+                double thang9 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 9 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+                double thang10 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 10 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+                double thang11 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 11 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+                double thang12 = ctx.Database.SqlQuery<double>("select ISNULL(SUM(ThanhTien), 0 ) from PHIEUDATHANG where MONTH(NgayDat) = 12 and YEAR(NgayDat) = YEAR(GETDATE()) and TinhTrang = 3").FirstOrDefault();
+
+                Session["thang1"] = thang1;
+                Session["thang2"] = thang2;
+                Session["thang3"] = thang3;
+                Session["thang4"] = thang4;
+                Session["thang5"] = thang5;
+                Session["thang6"] = thang6;
+                Session["thang7"] = thang7;
+                Session["thang8"] = thang8;
+                Session["thang9"] = thang9;
+                Session["thang10"] = thang10;
+                Session["thang11"] = thang11;
+                Session["thang12"] = thang12;
+
+                //thống kế tỉ lệ loại sản phẩm bán chạy nhất
+                int TongLoạiTatCa = ctx.Database.SqlQuery<int>("select ISNULL(SUM(CT_PHIEUDATHANG.SoLuong), 0 ) from CT_PHIEUDATHANG, THONGTINSANPHAM, LOAISANPHAM where CT_PHIEUDATHANG.MaSanPham = THONGTINSANPHAM.MaSanPham and THONGTINSANPHAM.MaLoai = LOAISANPHAM.MaLoai").FirstOrDefault();
+                int TongLoaiMamNon = ctx.Database.SqlQuery<int>("select ISNULL(SUM(CT_PHIEUDATHANG.SoLuong), 0 ) from CT_PHIEUDATHANG, THONGTINSANPHAM, LOAISANPHAM where CT_PHIEUDATHANG.MaSanPham = THONGTINSANPHAM.MaSanPham and THONGTINSANPHAM.MaLoai = LOAISANPHAM.MaLoai and LOAISANPHAM.MaLoai = 1").FirstOrDefault();
+                int TongLoaiC1 = ctx.Database.SqlQuery<int>("select ISNULL(SUM(CT_PHIEUDATHANG.SoLuong), 0 ) from CT_PHIEUDATHANG, THONGTINSANPHAM, LOAISANPHAM where CT_PHIEUDATHANG.MaSanPham = THONGTINSANPHAM.MaSanPham and THONGTINSANPHAM.MaLoai = LOAISANPHAM.MaLoai and LOAISANPHAM.MaLoai = 2").FirstOrDefault();
+                int TongLoaiC2 = ctx.Database.SqlQuery<int>("select ISNULL(SUM(CT_PHIEUDATHANG.SoLuong), 0 ) from CT_PHIEUDATHANG, THONGTINSANPHAM, LOAISANPHAM where CT_PHIEUDATHANG.MaSanPham = THONGTINSANPHAM.MaSanPham and THONGTINSANPHAM.MaLoai = LOAISANPHAM.MaLoai and LOAISANPHAM.MaLoai = 3").FirstOrDefault();
+                int TongLoaiC3 = ctx.Database.SqlQuery<int>("select ISNULL(SUM(CT_PHIEUDATHANG.SoLuong), 0 ) from CT_PHIEUDATHANG, THONGTINSANPHAM, LOAISANPHAM where CT_PHIEUDATHANG.MaSanPham = THONGTINSANPHAM.MaSanPham and THONGTINSANPHAM.MaLoai = LOAISANPHAM.MaLoai and LOAISANPHAM.MaLoai = 4").FirstOrDefault();
+
+                double TileLoaiMamNon = (double)((TongLoaiMamNon * 100) / TongLoạiTatCa);
+                double TileLoaiC1 = (double)((TongLoaiC1 * 100) / TongLoạiTatCa);
+                double TileLoaiC2 = (double)((TongLoaiC2 * 100) / TongLoạiTatCa);
+                double TileLoaiC3 = (double)((TongLoaiC3 * 100) / TongLoạiTatCa);
+
+                double TileLoaiKhac = (double)(100 - (TileLoaiMamNon + TileLoaiC1 + TileLoaiC2 + TileLoaiC3));
+
+                Session["TileLoaiMamNon"] = TileLoaiMamNon;
+                Session["TileLoaiC1"] = TileLoaiC1;
+                Session["TileLoaiC2"] = TileLoaiC2;
+                Session["TileLoaiC3"] = TileLoaiC3;
+                Session["TileLoaiKhac"] = TileLoaiKhac;
+
+            }
+            return View();
+        }
+
 
     }
 }
