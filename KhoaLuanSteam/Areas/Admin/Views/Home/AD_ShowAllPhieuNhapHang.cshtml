@@ -39,7 +39,8 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr id="row_@item.MaPhieuNhapHang.Trim()">
+            @*<tr id="row_@item.MaPhieuNhapHang.Trim()">*@
+            <tr id="row_@item.MaPhieuNhapHang">
                 <td>
                     @Html.DisplayFor(modelItem => item.MaPhieuNhapHang)
                 </td>
@@ -59,10 +60,11 @@
                     @Html.DisplayFor(modelItem => item.TongTien_NH)
                 </td>
                 <td>
-                    @Html.ActionLink("Xem", "DetailsCT_PhieuNhapHang", new { id = item.MaPhieuNhapHang.Trim()},new { @class = "btn btn-primary"})
+                    @*@Html.ActionLink("Xem", "DetailsCT_PhieuNhapHang", new { id = item.MaPhieuNhapHang.Trim() }, new { @class = "btn btn-primary" })*@
+                    @Html.ActionLink("Xem", "DetailsCT_PhieuNhapHang", new { id = item.MaPhieuNhapHang }, new { @class = "btn btn-primary" })
                 </td>
             </tr>}
-    </tbody>
+        </tbody>
 
 </table>
     </div>

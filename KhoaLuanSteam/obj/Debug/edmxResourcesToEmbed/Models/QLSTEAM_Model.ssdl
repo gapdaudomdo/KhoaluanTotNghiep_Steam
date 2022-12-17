@@ -12,11 +12,12 @@
   </EntityType>
   <EntityType Name="CT_PHIEUNHAPHANG">
     <Key>
-      <PropertyRef Name="MaSanPham" />
+      <PropertyRef Name="MaCTPhieuNhapHang" />
       <PropertyRef Name="MaPhieuNhapHang" />
     </Key>
+    <Property Name="MaCTPhieuNhapHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaSanPham" Type="int" Nullable="false" />
-    <Property Name="MaPhieuNhapHang" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="MaPhieuNhapHang" Type="int" Nullable="false" />
     <Property Name="Sluong" Type="int" />
     <Property Name="DonGiaNhap" Type="float" />
     <Property Name="TongTien" Type="float" />
@@ -30,7 +31,7 @@
     <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
     <Property Name="SDT" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
-    <Property Name="NgaySinh" Type="datetime" />
+    <Property Name="NgaySinh" Type="date" />
     <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
     <Property Name="NgayTao" Type="datetime" />
     <Property Name="TenDN" Type="nvarchar" MaxLength="50" />
@@ -101,12 +102,22 @@
     <Key>
       <PropertyRef Name="MaPhieuNhapHang" />
     </Key>
-    <Property Name="MaPhieuNhapHang" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="MaPhieuNhapHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaNCC" Type="nchar" MaxLength="10" />
     <Property Name="MaNV" Type="int" />
     <Property Name="NgayLap_PN" Type="date" />
     <Property Name="TongSL" Type="int" />
     <Property Name="TongTien_NH" Type="float" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="THONGTINSANPHAM">
     <Key>
@@ -261,6 +272,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="getMaxMaPhieuNhapHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Update_SL_Ton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MaSP" Type="int" Mode="In" />
     <Parameter Name="MaPhieuNhapHang" Type="nchar" Mode="In" />
@@ -282,6 +294,7 @@
     <EntitySet Name="PHANQUYEN" EntityType="Self.PHANQUYEN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PHIEUDATHANG" EntityType="Self.PHIEUDATHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PHIEUNHAPHANG" EntityType="Self.PHIEUNHAPHANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="THONGTINSANPHAM" EntityType="Self.THONGTINSANPHAM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TINHTRANGDH" EntityType="Self.TINHTRANGDH" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CT_PHIEUDH_PDT" Association="Self.FK_CT_PHIEUDH_PDT">

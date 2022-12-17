@@ -19,7 +19,7 @@ namespace KhoaLuanSteam.Models
             this.CT_PHIEUNHAPHANG = new HashSet<CT_PHIEUNHAPHANG>();
         }
     
-        public string MaPhieuNhapHang { get; set; }
+        public int MaPhieuNhapHang { get; set; }
         public string MaNCC { get; set; }
         public Nullable<int> MaNV { get; set; }
         public Nullable<System.DateTime> NgayLap_PN { get; set; }

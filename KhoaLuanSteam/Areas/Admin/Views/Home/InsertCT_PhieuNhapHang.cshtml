@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2 style="text-align: center;">Nhập Sản phẩm từ nhà cung cấp</h2>
+<h2 style="text-align: center;">Nhập sản phẩm từ nhà cung cấp</h2>
 @using (Html.BeginForm("InsertCT_PhieuNhapHang", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -39,20 +39,22 @@
     </div>*@
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Sluong, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.Sluong, new { @class = "form-control", placeHolder = "" })
-            @Html.ValidationMessageFor(model => model.Sluong, "", new { @class = "text-danger" })
-        </div>
+<div class="form-group">
+    @*@Html.LabelFor(model => model.Sluong, htmlAttributes: new { @class = "control-label col-md-2" })*@
+    <label class="control-label col-md-2">Số lượng</label>
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Sluong, new { @class = "form-control", placeHolder = "" })
+        @Html.ValidationMessageFor(model => model.Sluong, "", new { @class = "text-danger" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.DonGiaNhap, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.DonGiaNhap, new { @class = "form-control", placeHolder = "" })
-            @Html.ValidationMessageFor(model => model.DonGiaNhap, "", new { @class = "text-danger" })
-        </div>
+</div>
+<div class="form-group">
+    @*@Html.LabelFor(model => model.DonGiaNhap, htmlAttributes: new { @class = "control-label col-md-2" })*@
+    <label class="control-label col-md-2">Đơn giá</label>
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.DonGiaNhap, new { @class = "form-control", placeHolder = "" })
+        @Html.ValidationMessageFor(model => model.DonGiaNhap, "", new { @class = "text-danger" })
     </div>
+</div>
     @* <div class="form-group">
             @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -60,13 +62,13 @@
                 @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
             </div>
         </div> *@
-    <div class="form-group" style="margin-left: 13px;">
-        <span>
-            @Html.ActionLink("Trở về", "AD_ShowAllPhieuNhapHang", new { id = "" }, new { @class = "btn btn-primary" })
-        </span>
-        <span class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Thêm" class="btn btn-primary" />
-        </span>
-    </div>
+<div class="form-group" style="margin-left: 13px;">
+    <span class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Thêm" class="btn btn-primary" />
+    </span>
+    <span>
+        @Html.ActionLink("Hoàn tất", "AD_ShowAllPhieuNhapHang", new { id = "" }, new { @class = "btn btn-primary" })
+    </span>
+</div>
 </div>
 }
