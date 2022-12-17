@@ -37,7 +37,7 @@ namespace KhoaLuanSteam.Models.Process
                 return 0;
             }
             else
-            { 
+            {
                 if (result.MatKhau == password)
                 {
 
@@ -256,6 +256,7 @@ namespace KhoaLuanSteam.Models.Process
         {
             return db.NHANVIENs.Find(id);
         }
+
         /// <summary>
         /// hàm xuất danh sách nhân viên
         /// </summary>
@@ -264,6 +265,7 @@ namespace KhoaLuanSteam.Models.Process
         {
             return db.NHANVIENs.OrderBy(x => x.MaNV).ToList();
         }
+
 
         /// <summary>
         /// hàm xóa người dùng nhân viên
@@ -284,6 +286,36 @@ namespace KhoaLuanSteam.Models.Process
                 return false;
             }
         }
+
+        /// <summary>
+        /// hàm cập nhật sản phẩm
+        /// </summary>
+        /// <param name="entity">Sách</param>
+        /// <returns>int</returns>
+        public int UpdateNhanVien(NHANVIEN entity)
+        {
+            try
+            {
+                var nhanvien = db.NHANVIENs.Find(entity.MaNV);
+                nhanvien.TenNV = entity.TenNV;
+                nhanvien.NgaySinh = entity.NgaySinh;
+                nhanvien.GioiTinh = entity.GioiTinh;
+                nhanvien.Email = entity.Email;
+                nhanvien.SoDT = entity.SoDT;
+                //nhanvien.HinhAnh = entity.HinhAnh;
+                nhanvien.TenDN = entity.TenDN;
+                nhanvien.MatKhau = entity.MatKhau;
+                nhanvien.ID_PhanQuyen = entity.ID_PhanQuyen;
+                db.SaveChanges();
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+
         #endregion
 
 
@@ -581,9 +613,13 @@ namespace KhoaLuanSteam.Models.Process
         /// </summary>
         /// <param name="id">int</param>
         /// <returns>List</returns>
-        public List<CT_PHIEUNHAPHANG> detailsCT_PNhaphang(string id)
+        //public List<CT_PHIEUNHAPHANG> detailsCT_PNhaphang(string id)
+        //{
+        //    return db.CT_PHIEUNHAPHANG.Where(x => x.MaPhieuNhapHang == id.Trim()).OrderBy(x => x.MaPhieuNhapHang).ToList();
+        //}
+        public List<CT_PHIEUNHAPHANG> detailsCT_PNhaphang(int id)
         {
-            return db.CT_PHIEUNHAPHANG.Where(x => x.MaPhieuNhapHang == id.Trim()).OrderBy(x => x.MaPhieuNhapHang).ToList();
+            return db.CT_PHIEUNHAPHANG.Where(x => x.MaPhieuNhapHang == id).OrderBy(x => x.MaPhieuNhapHang).ToList();
         }
         /// <summary>
         /// hàm thêm phiếu nhập hàng

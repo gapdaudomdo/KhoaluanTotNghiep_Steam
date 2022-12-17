@@ -41,17 +41,21 @@ namespace KhoaLuanSteam.Models
         public DbSet<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }
         public DbSet<TINHTRANGDH> TINHTRANGDHs { get; set; }
     
-        public virtual int Update_SL_Ton(Nullable<int> maSP, string maPhieuNhapHang)
+        public virtual int Update_SL_Ton(Nullable<int> maCTPhieuNhapHang, Nullable<int> maSP, Nullable<int> maPhieuNhapHang)
         {
+            var maCTPhieuNhapHangParameter = maCTPhieuNhapHang.HasValue ?
+                new ObjectParameter("MaCTPhieuNhapHang", maCTPhieuNhapHang) :
+                new ObjectParameter("MaCTPhieuNhapHang", typeof(int));
+    
             var maSPParameter = maSP.HasValue ?
                 new ObjectParameter("MaSP", maSP) :
                 new ObjectParameter("MaSP", typeof(int));
     
-            var maPhieuNhapHangParameter = maPhieuNhapHang != null ?
+            var maPhieuNhapHangParameter = maPhieuNhapHang.HasValue ?
                 new ObjectParameter("MaPhieuNhapHang", maPhieuNhapHang) :
-                new ObjectParameter("MaPhieuNhapHang", typeof(string));
+                new ObjectParameter("MaPhieuNhapHang", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_SL_Ton", maSPParameter, maPhieuNhapHangParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_SL_Ton", maCTPhieuNhapHangParameter, maSPParameter, maPhieuNhapHangParameter);
         }
     
         public virtual int Update_TongSL_PN(string maPhieuNH)

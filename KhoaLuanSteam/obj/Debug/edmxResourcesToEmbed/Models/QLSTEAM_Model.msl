@@ -14,6 +14,7 @@
     <EntitySetMapping Name="CT_PHIEUNHAPHANG">
       <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.CT_PHIEUNHAPHANG">
         <MappingFragment StoreEntitySet="CT_PHIEUNHAPHANG">
+          <ScalarProperty Name="MaCTPhieuNhapHang" ColumnName="MaCTPhieuNhapHang" />
           <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
           <ScalarProperty Name="MaPhieuNhapHang" ColumnName="MaPhieuNhapHang" />
           <ScalarProperty Name="Sluong" ColumnName="Sluong" />

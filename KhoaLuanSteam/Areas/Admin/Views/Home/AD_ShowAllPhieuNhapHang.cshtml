@@ -13,58 +13,60 @@
 <div class="card-body" style="padding: 0;">
     <div class="table-responsive">
         <table class="table" id="example">
-    <thead>
-        <tr>
-            <th>
-                MaPNH
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NHACUNGCAP.MaNCC)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NHANVIEN.MaNV)
-            </th>
-            <th>
-              Ngày Lập HD
-            </th>
-            <th>
-               Tổng SL
-            </th>
-            <th>
-                Tổng Tiền
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr id="row_@item.MaPhieuNhapHang.Trim()">
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaPhieuNhapHang)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NHACUNGCAP.MaNCC)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NHANVIEN.MaNV)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NgayLap_PN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TongSL)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TongTien_NH)
-                </td>
-                <td>
-                    @Html.ActionLink("Xem", "DetailsCT_PhieuNhapHang", new { id = item.MaPhieuNhapHang.Trim()},new { @class = "btn btn-primary"})
-                </td>
-            </tr>}
-    </tbody>
+            <thead>
+                <tr>
+                    <th>
+                        MaPNH
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NHACUNGCAP.MaNCC)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NHANVIEN.MaNV)
+                    </th>
+                    <th>
+                        Ngày Lập HD
+                    </th>
+                    <th>
+                        Tổng SL
+                    </th>
+                    <th>
+                        Tổng Tiền
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    @*<tr id="row_@item.MaPhieuNhapHang.Trim()">*@
+                    <tr id="row_@item.MaPhieuNhapHang">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaPhieuNhapHang)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NHACUNGCAP.MaNCC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NHANVIEN.MaNV)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgayLap_PN)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TongSL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TongTien_NH)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Xem", "DetailsCT_PhieuNhapHang", new { id = item.MaPhieuNhapHang.Trim() }, new { @class = "btn btn-primary" })*@
+                            @Html.ActionLink("Xem", "DetailsCT_PhieuNhapHang", new { id = item.MaPhieuNhapHang }, new { @class = "btn btn-primary" })
+                        </td>
+                    </tr>
+}
+            </tbody>
 
-</table>
+        </table>
     </div>
-  </div>
-
+</div>

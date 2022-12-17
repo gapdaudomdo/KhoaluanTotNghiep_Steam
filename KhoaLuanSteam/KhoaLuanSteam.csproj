@@ -3563,6 +3563,12 @@
     <Content Include="Areas\Admin\Views\Home\AD_ShowAllPhieuDatHang.cshtml" />
     <Content Include="Areas\Admin\Views\Home\demo.cshtml" />
     <Content Include="Areas\Admin\Views\Home\DangKyTK_Admin.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\AD_ShowAllNV.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\DetailsUserNV.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\InsertNhanVien.cshtml" />
+    <Content Include="malefashion-master.zip" />
+    <Content Include="Areas\Admin\Views\Home\UpdateNhanVien.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\ThongKe.cshtml" />
     <EntityDeploy Include="Models\QLSTEAM_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QLSTEAM_Model.Designer.cs</LastGenOutput>
@@ -3570,10 +3576,6 @@
     <Content Include="Models\QLSTEAM_Model.edmx.diagram">
       <DependentUpon>QLSTEAM_Model.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\Home\AD_ShowAllNV.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\DetailsUserNV.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\InsertNhanVien.cshtml" />
-    <Content Include="malefashion-master.zip" />
     <None Include="Scripts\jquery-1.8.2-vsdoc.js" />
     <Content Include="HinhAnhSach\Banhngon.jpg" />
     <Content Include="HinhAnhSach\bloc-sieu-dai.jpg" />

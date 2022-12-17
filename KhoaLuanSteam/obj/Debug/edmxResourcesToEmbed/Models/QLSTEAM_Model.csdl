@@ -14,11 +14,12 @@
   </EntityType>
   <EntityType Name="CT_PHIEUNHAPHANG">
     <Key>
-      <PropertyRef Name="MaSanPham" />
+      <PropertyRef Name="MaCTPhieuNhapHang" />
       <PropertyRef Name="MaPhieuNhapHang" />
     </Key>
+    <Property Name="MaCTPhieuNhapHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="MaSanPham" Type="Int32" Nullable="false" />
-    <Property Name="MaPhieuNhapHang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="MaPhieuNhapHang" Type="Int32" Nullable="false" />
     <Property Name="Sluong" Type="Int32" />
     <Property Name="DonGiaNhap" Type="Double" />
     <Property Name="TongTien" Type="Double" />
@@ -34,7 +35,7 @@
     <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
     <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="NgayTao" Type="DateTime" Precision="3" />
     <Property Name="TenDN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -115,7 +116,7 @@
     <Key>
       <PropertyRef Name="MaPhieuNhapHang" />
     </Key>
-    <Property Name="MaPhieuNhapHang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="MaPhieuNhapHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="MaNCC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="MaNV" Type="Int32" />
     <Property Name="NgayLap_PN" Type="DateTime" Precision="0" />
@@ -341,8 +342,9 @@
       <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANGs" />
     </AssociationSet>
     <FunctionImport Name="Update_SL_Ton">
+      <Parameter Name="MaCTPhieuNhapHang" Mode="In" Type="Int32" />
       <Parameter Name="MaSP" Mode="In" Type="Int32" />
-      <Parameter Name="MaPhieuNhapHang" Mode="In" Type="String" />
+      <Parameter Name="MaPhieuNhapHang" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Update_TongSL_PN">
       <Parameter Name="MaPhieuNH" Mode="In" Type="String" />

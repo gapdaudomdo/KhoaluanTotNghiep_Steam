@@ -17,11 +17,12 @@
         </EntityType>
         <EntityType Name="CT_PHIEUNHAPHANG">
           <Key>
-            <PropertyRef Name="MaSanPham" />
+            <PropertyRef Name="MaCTPhieuNhapHang" />
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
+          <Property Name="MaCTPhieuNhapHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaSanPham" Type="int" Nullable="false" />
-          <Property Name="MaPhieuNhapHang" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaPhieuNhapHang" Type="int" Nullable="false" />
           <Property Name="Sluong" Type="int" />
           <Property Name="DonGiaNhap" Type="float" />
           <Property Name="TongTien" Type="float" />
@@ -35,7 +36,7 @@
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
           <Property Name="SDT" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="NgaySinh" Type="datetime" />
+          <Property Name="NgaySinh" Type="date" />
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="TenDN" Type="nvarchar" MaxLength="50" />
@@ -106,7 +107,7 @@
           <Key>
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
-          <Property Name="MaPhieuNhapHang" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaPhieuNhapHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaNCC" Type="nchar" MaxLength="10" />
           <Property Name="MaNV" Type="int" />
           <Property Name="NgayLap_PN" Type="date" />
@@ -267,8 +268,9 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="Update_SL_Ton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaCTPhieuNhapHang" Type="int" Mode="In" />
           <Parameter Name="MaSP" Type="int" Mode="In" />
-          <Parameter Name="MaPhieuNhapHang" Type="nchar" Mode="In" />
+          <Parameter Name="MaPhieuNhapHang" Type="int" Mode="In" />
         </Function>
         <Function Name="Update_TongSL_PN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaPhieuNH" Type="nchar" Mode="In" />
@@ -353,11 +355,12 @@
         </EntityType>
         <EntityType Name="CT_PHIEUNHAPHANG">
           <Key>
-            <PropertyRef Name="MaSanPham" />
+            <PropertyRef Name="MaCTPhieuNhapHang" />
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
+          <Property Name="MaCTPhieuNhapHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaSanPham" Type="Int32" Nullable="false" />
-          <Property Name="MaPhieuNhapHang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaPhieuNhapHang" Type="Int32" Nullable="false" />
           <Property Name="Sluong" Type="Int32" />
           <Property Name="DonGiaNhap" Type="Double" />
           <Property Name="TongTien" Type="Double" />
@@ -373,7 +376,7 @@
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
           <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="TenDN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -454,7 +457,7 @@
           <Key>
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
-          <Property Name="MaPhieuNhapHang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaPhieuNhapHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaNCC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="MaNV" Type="Int32" />
           <Property Name="NgayLap_PN" Type="DateTime" Precision="0" />
@@ -680,8 +683,9 @@
             <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANGs" />
           </AssociationSet>
           <FunctionImport Name="Update_SL_Ton">
+            <Parameter Name="MaCTPhieuNhapHang" Mode="In" Type="Int32" />
             <Parameter Name="MaSP" Mode="In" Type="Int32" />
-            <Parameter Name="MaPhieuNhapHang" Mode="In" Type="String" />
+            <Parameter Name="MaPhieuNhapHang" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Update_TongSL_PN">
             <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
@@ -709,6 +713,7 @@
           <EntitySetMapping Name="CT_PHIEUNHAPHANG">
             <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.CT_PHIEUNHAPHANG">
               <MappingFragment StoreEntitySet="CT_PHIEUNHAPHANG">
+                <ScalarProperty Name="MaCTPhieuNhapHang" ColumnName="MaCTPhieuNhapHang" />
                 <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
                 <ScalarProperty Name="MaPhieuNhapHang" ColumnName="MaPhieuNhapHang" />
                 <ScalarProperty Name="Sluong" ColumnName="Sluong" />
