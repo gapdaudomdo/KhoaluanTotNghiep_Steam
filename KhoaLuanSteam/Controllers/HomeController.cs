@@ -44,6 +44,10 @@ namespace KhoaLuanSteam.Controllers
             ViewBag.Message = "Your application description page.";
             return View();
         }
+        public ActionResult TinTuc()
+        {
+            return View();
+        }
         //Trang quy định của web
         public ActionResult QuyDinh()
         {
