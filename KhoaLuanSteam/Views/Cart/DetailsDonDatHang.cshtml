@@ -7,6 +7,31 @@
 
 <h5 style="width: 100%;    padding-left: 40px;    padding-top: 13px;">Lên Đơn Hàng Thành Công !!! Cảm Ơn Quí Khách</h5>
 
+@*@if (ViewBag.TinhTrang == "Doi xu ly")
+{
+    <div>
+        <div style="color: green"></div>
+        <div></div>
+        <div></div>
+    </div>
+}
+else if (ViewBag.TinhTrang == "Dong goi")
+{
+    <div>
+        <div style="color: green"></div>
+        <div style="color: green"></div>
+        <div></div>
+    </div>
+}
+else /// Giao hang thanh cong
+{
+    <div>
+        <div style="color: green"></div>
+        <div style="color: green"></div>
+        <div style="color: green"></div>
+    </div>
+}*@
+
 <h2 style="width: 100%;    padding-left: 23px;    padding-top: 13px;">Trạng thái đơn hàng của bạn là : @ViewBag.TinhTrang</h2>
 
 <table id="cart" class="table table-hover table-condensed">

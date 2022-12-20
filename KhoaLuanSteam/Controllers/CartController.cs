@@ -342,9 +342,22 @@ namespace KhoaLuanSteam.Controllers
                 System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplate/") + "Text" + ".cshtml");
             var inforKH = db.PHIEUDATHANGs.Include("KHACHHANG").Where(x => x.MaPhieuDH == MaDH).First();
             //var inforDH = db.PHIEUDATHANGs.Include("PHIEUDATHANG").Where(x => x.MaPhieuDH == MaDH).First();
-            //var inforSP = db.CT_PHIEUDATHANG.Include("PHIEUDATHANG").Where(x => x.MaPhieuDH == MaDH).First();
+            //var inforCTPDH = db.CT_PHIEUDATHANG.Include("PHIEUDATHANG").Where(x => x.MaPhieuDH == MaDH).ToList();
 
-            var lstSP = new List<GioHang>();
+            var cart = Session[GioHang];
+            var list = new List<GioHang>();
+            if (cart != null)
+            {
+                list = (List<GioHang>)cart;
+            }
+
+            string dsSP = "";
+
+            foreach (var item in list)
+            {
+                dsSP += item.sanpham.TenSanPham + "<br>";
+            }
+
             THONGTINSANPHAM tt = new THONGTINSANPHAM();
 
 
@@ -354,7 +367,7 @@ namespace KhoaLuanSteam.Controllers
 
             var url = "http://localhost:57161/" + "Cart/XacNhan?MaDH=" + MaDH;
             body = body.Replace("@ViewBag.MaDH", MaDH.ToString());
-            body = body.Replace("@ViewBag.TenSanPham", lstSP.ToString());
+            body = body.Replace("@ViewBag.TenSanPham", dsSP);
             body = body.Replace("@ViewBag.LinkXacNhan", url);
             body = body.Replace("@ViewBag.TenUser", inforKH.KHACHHANG.TenKH);
             body = body.Replace("@ViewBag.NgayDat", inforKH.NgayDat.ToString());
