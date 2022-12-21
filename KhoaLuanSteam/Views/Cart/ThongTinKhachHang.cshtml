@@ -46,7 +46,7 @@
         @using (Html.BeginForm("ThanhToan", "Cart", FormMethod.Post))
         {
             <div class="form-group">
-                <h4>Thông tin khách hàng</h4>
+                <h4>Thông tin giao hàng</h4>
                 <input name="MaKH" class="form-control" value="@Model.MaKH" type="hidden" />
             </div>
             <div class="form-group">
@@ -58,11 +58,11 @@
                 <input name="Email" type="email" class="form-control" value="@Model.Email" readonly="readonly" />
             </div>
             <div class="form-group">
-                <label>Địa chỉ</label>
+                <label>Địa chỉ giao hàng</label>
                 <input name="DiaChi" class="form-control" value="@Model.DiaChi" readonly="readonly" />
             </div>
             <div class="form-group">
-                <label>Điện thoại</label>
+                <label>Số điện thoại</label>
                 <input name="DienThoai" class="form-control" value="@Model.SDT" readonly="readonly" />
             </div>
             <div class="checkout-button">

@@ -35,7 +35,7 @@
     <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="3" />
     <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="NgayTao" Type="DateTime" Precision="3" />
     <Property Name="TenDN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -111,6 +111,7 @@
     <NavigationProperty Name="CT_PHIEUDATHANG" Relationship="Self.FK_CT_PHIEUDH_PDT" FromRole="PHIEUDATHANG" ToRole="CT_PHIEUDATHANG" />
     <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_PHIEUDATHANG_KH" FromRole="PHIEUDATHANG" ToRole="KHACHHANG" />
     <NavigationProperty Name="TINHTRANGDH" Relationship="Self.FK_PHIEUDATHANG_TINHTRANGDH" FromRole="PHIEUDATHANG" ToRole="TINHTRANGDH" />
+    <NavigationProperty Name="PHIEUGIAOHANGs" Relationship="QL_THIETBISTEAMModel.FK_PHIEUGIAOHANG_PDH" FromRole="PHIEUDATHANG" ToRole="PHIEUGIAOHANG" />
   </EntityType>
   <EntityType Name="PHIEUNHAPHANG">
     <Key>
@@ -342,9 +343,8 @@
       <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANGs" />
     </AssociationSet>
     <FunctionImport Name="Update_SL_Ton">
-      <Parameter Name="MaCTPhieuNhapHang" Mode="In" Type="Int32" />
       <Parameter Name="MaSP" Mode="In" Type="Int32" />
-      <Parameter Name="MaPhieuNhapHang" Mode="In" Type="Int32" />
+      <Parameter Name="MaPhieuNhapHang" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="Update_TongSL_PN">
       <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
@@ -352,5 +352,35 @@
     <FunctionImport Name="Update_TongTien_PN">
       <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="PHIEUGIAOHANGs" EntityType="QL_THIETBISTEAMModel.PHIEUGIAOHANG" />
+    <AssociationSet Name="FK_PHIEUGIAOHANG_PDH" Association="QL_THIETBISTEAMModel.FK_PHIEUGIAOHANG_PDH">
+      <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANGs" />
+      <End Role="PHIEUGIAOHANG" EntitySet="PHIEUGIAOHANGs" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="PHIEUGIAOHANG">
+    <Key>
+      <PropertyRef Name="MaGH" />
+    </Key>
+    <Property Name="MaGH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaPhieuDH" Type="Int32" Nullable="false" />
+    <Property Name="TenKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="PHIEUDATHANG" Relationship="QL_THIETBISTEAMModel.FK_PHIEUGIAOHANG_PDH" FromRole="PHIEUGIAOHANG" ToRole="PHIEUDATHANG" />
+  </EntityType>
+  <Association Name="FK_PHIEUGIAOHANG_PDH">
+    <End Type="QL_THIETBISTEAMModel.PHIEUDATHANG" Role="PHIEUDATHANG" Multiplicity="1" />
+    <End Type="QL_THIETBISTEAMModel.PHIEUGIAOHANG" Role="PHIEUGIAOHANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PHIEUDATHANG">
+        <PropertyRef Name="MaPhieuDH" />
+      </Principal>
+      <Dependent Role="PHIEUGIAOHANG">
+        <PropertyRef Name="MaPhieuDH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

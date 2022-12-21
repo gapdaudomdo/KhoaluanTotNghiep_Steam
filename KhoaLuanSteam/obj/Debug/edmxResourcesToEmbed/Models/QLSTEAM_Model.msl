@@ -14,7 +14,6 @@
     <EntitySetMapping Name="CT_PHIEUNHAPHANG">
       <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.CT_PHIEUNHAPHANG">
         <MappingFragment StoreEntitySet="CT_PHIEUNHAPHANG">
-          <ScalarProperty Name="MaCTPhieuNhapHang" ColumnName="MaCTPhieuNhapHang" />
           <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
           <ScalarProperty Name="MaPhieuNhapHang" ColumnName="MaPhieuNhapHang" />
           <ScalarProperty Name="Sluong" ColumnName="Sluong" />
@@ -82,15 +81,6 @@
           <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
           <ScalarProperty Name="TenDN" ColumnName="TenDN" />
           <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-          <ScalarProperty Name="ID_PhanQuyen" ColumnName="ID_PhanQuyen" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PHANQUYENs">
-      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHANQUYEN">
-        <MappingFragment StoreEntitySet="PHANQUYEN">
-          <ScalarProperty Name="ID_PhanQuyen" ColumnName="ID_PhanQuyen" />
-          <ScalarProperty Name="TenPQ" ColumnName="TenPQ" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -133,16 +123,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TINHTRANGDHs">
-      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.TINHTRANGDH">
-        <MappingFragment StoreEntitySet="TINHTRANGDH">
-          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
-          <ScalarProperty Name="TenTinhTrang" ColumnName="TenTinhTrang" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Update_SL_Ton" FunctionName="QL_THIETBISTEAMModel.Store.Update_SL_Ton" />
     <FunctionImportMapping FunctionImportName="Update_TongSL_PN" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongSL_PN" />
     <FunctionImportMapping FunctionImportName="Update_TongTien_PN" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongTien_PN" />
+    <EntitySetMapping Name="PHIEUGIAOHANGs">
+      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHIEUGIAOHANG">
+        <MappingFragment StoreEntitySet="PHIEUGIAOHANG">
+          <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+          <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
+          <ScalarProperty Name="MaGH" ColumnName="MaGH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

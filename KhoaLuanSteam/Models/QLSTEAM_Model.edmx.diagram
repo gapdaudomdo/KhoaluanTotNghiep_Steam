@@ -28,6 +28,8 @@
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_NHANVIEN_PHANQUYEN" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUNHAPHANG_NHANVIEN" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUDATHANG_TINHTRANGDH" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUGIAOHANG" Width="1.5" PointX="11.25" PointY="11.25" />
+        <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUGIAOHANG_PDH" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

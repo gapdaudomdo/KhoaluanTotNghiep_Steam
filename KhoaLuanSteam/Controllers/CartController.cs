@@ -227,7 +227,8 @@ namespace KhoaLuanSteam.Controllers
             if (ModelState.IsValid) 
             {
                 var order = new PHIEUDATHANG();
-
+                var giaohang = new PHIEUGIAOHANG();
+                var kh = db.KHACHHANGs.Where(x => x.MaKH == MaKH).FirstOrDefault();
                 var cart = Session[GioHang];
                 var list = new List<GioHang>();
                 var sl = 0;
@@ -249,9 +250,15 @@ namespace KhoaLuanSteam.Controllers
                 //thêm dữ liệu vào đơn đặt hàng
 
                 var result = new GioHangProcess().InsertDDH(order);
-
-
-
+                string diachi = Convert.ToString(f["DiaChi"]);
+                string SDT = Convert.ToString(f["DienThoai"]);
+                giaohang.MaPhieuDH = result;
+                giaohang.TenKH = kh.TenKH;
+                giaohang.Email = kh.Email;
+                giaohang.DiaChi = diachi;
+                giaohang.SDT = SDT;
+                giaohang.NgayTao = DateTime.Now;
+                var kq = new GioHangProcess().InsertPGH(giaohang);
                 ViewBag.MaPhieuDDH = result;
                 //var idUser = db.PHIEUDATHANGs.Where(n=>n.MaKH==order.MaKH).Last();
                 BuildUserTemplate(ViewBag.MaPhieuDDH);

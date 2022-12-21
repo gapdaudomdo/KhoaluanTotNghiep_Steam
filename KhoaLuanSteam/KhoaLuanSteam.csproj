@@ -176,6 +176,9 @@
     <Compile Include="Models\PHIEUDATHANG.cs">
       <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PHIEUGIAOHANG.cs">
+      <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PHIEUNHAPHANG.cs">
       <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
     </Compile>

@@ -40,22 +40,19 @@ namespace KhoaLuanSteam.Models
         public DbSet<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
         public DbSet<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }
         public DbSet<TINHTRANGDH> TINHTRANGDHs { get; set; }
+        public DbSet<PHIEUGIAOHANG> PHIEUGIAOHANGs { get; set; }
     
-        public virtual int Update_SL_Ton(Nullable<int> maCTPhieuNhapHang, Nullable<int> maSP, Nullable<int> maPhieuNhapHang)
+        public virtual int Update_SL_Ton(Nullable<int> maSP, string maPhieuNhapHang)
         {
-            var maCTPhieuNhapHangParameter = maCTPhieuNhapHang.HasValue ?
-                new ObjectParameter("MaCTPhieuNhapHang", maCTPhieuNhapHang) :
-                new ObjectParameter("MaCTPhieuNhapHang", typeof(int));
-    
             var maSPParameter = maSP.HasValue ?
                 new ObjectParameter("MaSP", maSP) :
                 new ObjectParameter("MaSP", typeof(int));
     
-            var maPhieuNhapHangParameter = maPhieuNhapHang.HasValue ?
+            var maPhieuNhapHangParameter = maPhieuNhapHang != null ?
                 new ObjectParameter("MaPhieuNhapHang", maPhieuNhapHang) :
-                new ObjectParameter("MaPhieuNhapHang", typeof(int));
+                new ObjectParameter("MaPhieuNhapHang", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_SL_Ton", maCTPhieuNhapHangParameter, maSPParameter, maPhieuNhapHangParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_SL_Ton", maSPParameter, maPhieuNhapHangParameter);
         }
     
         public virtual int Update_TongSL_PN(string maPhieuNH)

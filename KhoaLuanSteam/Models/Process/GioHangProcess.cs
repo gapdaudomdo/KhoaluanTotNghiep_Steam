@@ -97,5 +97,12 @@ namespace KhoaLuanSteam.Models.Process
 
             }
         }
+
+        public int InsertPGH(PHIEUGIAOHANG delivery)
+        {
+            db.PHIEUGIAOHANGs.Add(delivery);
+            db.SaveChanges();
+            return delivery.MaGH;
+        }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QL_THIETBISTEAMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QL_THIETBISTEAMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CT_PHIEUDATHANG">
           <Key>
             <PropertyRef Name="MaPhieuDH" />
@@ -17,12 +17,11 @@
         </EntityType>
         <EntityType Name="CT_PHIEUNHAPHANG">
           <Key>
-            <PropertyRef Name="MaCTPhieuNhapHang" />
+            <PropertyRef Name="MaSanPham" />
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
-          <Property Name="MaCTPhieuNhapHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaSanPham" Type="int" Nullable="false" />
-          <Property Name="MaPhieuNhapHang" Type="int" Nullable="false" />
+          <Property Name="MaPhieuNhapHang" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Sluong" Type="int" />
           <Property Name="DonGiaNhap" Type="float" />
           <Property Name="TongTien" Type="float" />
@@ -36,7 +35,7 @@
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
           <Property Name="SDT" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="NgaySinh" Type="date" />
+          <Property Name="NgaySinh" Type="datetime" />
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="TenDN" Type="nvarchar" MaxLength="50" />
@@ -83,14 +82,6 @@
           <Property Name="HinhAnh" Type="nchar" MaxLength="100" />
           <Property Name="TenDN" Type="nvarchar" MaxLength="50" />
           <Property Name="MatKhau" Type="nvarchar" MaxLength="30" />
-          <Property Name="ID_PhanQuyen" Type="int" />
-        </EntityType>
-        <EntityType Name="PHANQUYEN">
-          <Key>
-            <PropertyRef Name="ID_PhanQuyen" />
-          </Key>
-          <Property Name="ID_PhanQuyen" Type="int" Nullable="false" />
-          <Property Name="TenPQ" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PHIEUDATHANG">
           <Key>
@@ -103,11 +94,23 @@
           <Property Name="ThanhTien" Type="float" />
           <Property Name="TinhTrang" Type="int" />
         </EntityType>
+        <EntityType Name="PHIEUGIAOHANG">
+          <Key>
+            <PropertyRef Name="MaGH" />
+          </Key>
+          <Property Name="MaGH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaPhieuDH" Type="int" Nullable="false" />
+          <Property Name="TenKH" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayTao" Type="datetime" />
+        </EntityType>
         <EntityType Name="PHIEUNHAPHANG">
           <Key>
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
-          <Property Name="MaPhieuNhapHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaPhieuNhapHang" Type="nchar" MaxLength="10" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="MaNCC" Type="nchar" MaxLength="10" />
           <Property Name="MaNV" Type="int" />
           <Property Name="NgayLap_PN" Type="date" />
@@ -127,13 +130,6 @@
           <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
           <Property Name="GiamGia" Type="float" />
           <Property Name="SLTon" Type="int" />
-        </EntityType>
-        <EntityType Name="TINHTRANGDH">
-          <Key>
-            <PropertyRef Name="TinhTrang" />
-          </Key>
-          <Property Name="TinhTrang" Type="int" Nullable="false" />
-          <Property Name="TenTinhTrang" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_CT_PHIEUDH_PDT">
           <End Role="PHIEUDATHANG" Type="Self.PHIEUDATHANG" Multiplicity="1" />
@@ -183,18 +179,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NHANVIEN_PHANQUYEN">
-          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="0..1" />
-          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PHANQUYEN">
-              <PropertyRef Name="ID_PhanQuyen" />
-            </Principal>
-            <Dependent Role="NHANVIEN">
-              <PropertyRef Name="ID_PhanQuyen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PHIEUDATHANG_KH">
           <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
           <End Role="PHIEUDATHANG" Type="Self.PHIEUDATHANG" Multiplicity="*" />
@@ -207,15 +191,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PHIEUDATHANG_TINHTRANGDH">
-          <End Role="TINHTRANGDH" Type="Self.TINHTRANGDH" Multiplicity="0..1" />
-          <End Role="PHIEUDATHANG" Type="Self.PHIEUDATHANG" Multiplicity="*" />
+        <Association Name="FK_PHIEUGIAOHANG_PDH">
+          <End Role="PHIEUDATHANG" Type="Self.PHIEUDATHANG" Multiplicity="1" />
+          <End Role="PHIEUGIAOHANG" Type="Self.PHIEUGIAOHANG" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TINHTRANGDH">
-              <PropertyRef Name="TinhTrang" />
+            <Principal Role="PHIEUDATHANG">
+              <PropertyRef Name="MaPhieuDH" />
             </Principal>
-            <Dependent Role="PHIEUDATHANG">
-              <PropertyRef Name="TinhTrang" />
+            <Dependent Role="PHIEUGIAOHANG">
+              <PropertyRef Name="MaPhieuDH" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -268,9 +252,8 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="Update_SL_Ton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="MaCTPhieuNhapHang" Type="int" Mode="In" />
           <Parameter Name="MaSP" Type="int" Mode="In" />
-          <Parameter Name="MaPhieuNhapHang" Type="int" Mode="In" />
+          <Parameter Name="MaPhieuNhapHang" Type="nchar" Mode="In" />
         </Function>
         <Function Name="Update_TongSL_PN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaPhieuNH" Type="nchar" Mode="In" />
@@ -286,11 +269,10 @@
           <EntitySet Name="LOAISANPHAM" EntityType="Self.LOAISANPHAM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHACUNGCAP" EntityType="Self.NHACUNGCAP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PHANQUYEN" EntityType="Self.PHANQUYEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHIEUDATHANG" EntityType="Self.PHIEUDATHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHIEUGIAOHANG" EntityType="Self.PHIEUGIAOHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHIEUNHAPHANG" EntityType="Self.PHIEUNHAPHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THONGTINSANPHAM" EntityType="Self.THONGTINSANPHAM" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TINHTRANGDH" EntityType="Self.TINHTRANGDH" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CT_PHIEUDH_PDT" Association="Self.FK_CT_PHIEUDH_PDT">
             <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANG" />
             <End Role="CT_PHIEUDATHANG" EntitySet="CT_PHIEUDATHANG" />
@@ -307,17 +289,13 @@
             <End Role="THONGTINSANPHAM" EntitySet="THONGTINSANPHAM" />
             <End Role="CT_PHIEUNHAPHANG" EntitySet="CT_PHIEUNHAPHANG" />
           </AssociationSet>
-          <AssociationSet Name="FK_NHANVIEN_PHANQUYEN" Association="Self.FK_NHANVIEN_PHANQUYEN">
-            <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />
-            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
-          </AssociationSet>
           <AssociationSet Name="FK_PHIEUDATHANG_KH" Association="Self.FK_PHIEUDATHANG_KH">
             <End Role="KHACHHANG" EntitySet="KHACHHANG" />
             <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANG" />
           </AssociationSet>
-          <AssociationSet Name="FK_PHIEUDATHANG_TINHTRANGDH" Association="Self.FK_PHIEUDATHANG_TINHTRANGDH">
-            <End Role="TINHTRANGDH" EntitySet="TINHTRANGDH" />
+          <AssociationSet Name="FK_PHIEUGIAOHANG_PDH" Association="Self.FK_PHIEUGIAOHANG_PDH">
             <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANG" />
+            <End Role="PHIEUGIAOHANG" EntitySet="PHIEUGIAOHANG" />
           </AssociationSet>
           <AssociationSet Name="FK_PHIEUNHAPHANG_NHACUNGCAP" Association="Self.FK_PHIEUNHAPHANG_NHACUNGCAP">
             <End Role="NHACUNGCAP" EntitySet="NHACUNGCAP" />
@@ -336,8 +314,7 @@
             <End Role="THONGTINSANPHAM" EntitySet="THONGTINSANPHAM" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QL_THIETBISTEAMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -376,7 +353,7 @@
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="3" />
           <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="TenDN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -452,6 +429,7 @@
           <NavigationProperty Name="CT_PHIEUDATHANG" Relationship="Self.FK_CT_PHIEUDH_PDT" FromRole="PHIEUDATHANG" ToRole="CT_PHIEUDATHANG" />
           <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_PHIEUDATHANG_KH" FromRole="PHIEUDATHANG" ToRole="KHACHHANG" />
           <NavigationProperty Name="TINHTRANGDH" Relationship="Self.FK_PHIEUDATHANG_TINHTRANGDH" FromRole="PHIEUDATHANG" ToRole="TINHTRANGDH" />
+          <NavigationProperty Name="PHIEUGIAOHANGs" Relationship="QL_THIETBISTEAMModel.FK_PHIEUGIAOHANG_PDH" FromRole="PHIEUDATHANG" ToRole="PHIEUGIAOHANG" />
         </EntityType>
         <EntityType Name="PHIEUNHAPHANG">
           <Key>
@@ -683,17 +661,46 @@
             <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANGs" />
           </AssociationSet>
           <FunctionImport Name="Update_SL_Ton">
-            <Parameter Name="MaCTPhieuNhapHang" Mode="In" Type="Int32" />
             <Parameter Name="MaSP" Mode="In" Type="Int32" />
-            <Parameter Name="MaPhieuNhapHang" Mode="In" Type="Int32" />
+            <Parameter Name="MaPhieuNhapHang" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Update_TongSL_PN">
-            <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
+          <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Update_TongTien_PN">
-            <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
+          <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="PHIEUGIAOHANGs" EntityType="QL_THIETBISTEAMModel.PHIEUGIAOHANG" />
+          <AssociationSet Name="FK_PHIEUGIAOHANG_PDH" Association="QL_THIETBISTEAMModel.FK_PHIEUGIAOHANG_PDH">
+            <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANGs" />
+            <End Role="PHIEUGIAOHANG" EntitySet="PHIEUGIAOHANGs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="PHIEUGIAOHANG">
+          <Key>
+            <PropertyRef Name="MaGH" />
+          </Key>
+          <Property Name="MaGH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaPhieuDH" Type="Int32" Nullable="false" />
+          <Property Name="TenKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PHIEUDATHANG" Relationship="QL_THIETBISTEAMModel.FK_PHIEUGIAOHANG_PDH" FromRole="PHIEUGIAOHANG" ToRole="PHIEUDATHANG" />
+        </EntityType>
+        <Association Name="FK_PHIEUGIAOHANG_PDH">
+          <End Type="QL_THIETBISTEAMModel.PHIEUDATHANG" Role="PHIEUDATHANG" Multiplicity="1" />
+          <End Type="QL_THIETBISTEAMModel.PHIEUGIAOHANG" Role="PHIEUGIAOHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUDATHANG">
+              <PropertyRef Name="MaPhieuDH" />
+            </Principal>
+            <Dependent Role="PHIEUGIAOHANG">
+              <PropertyRef Name="MaPhieuDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -713,7 +720,6 @@
           <EntitySetMapping Name="CT_PHIEUNHAPHANG">
             <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.CT_PHIEUNHAPHANG">
               <MappingFragment StoreEntitySet="CT_PHIEUNHAPHANG">
-                <ScalarProperty Name="MaCTPhieuNhapHang" ColumnName="MaCTPhieuNhapHang" />
                 <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
                 <ScalarProperty Name="MaPhieuNhapHang" ColumnName="MaPhieuNhapHang" />
                 <ScalarProperty Name="Sluong" ColumnName="Sluong" />
@@ -781,15 +787,6 @@
                 <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="TenDN" ColumnName="TenDN" />
                 <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-                <ScalarProperty Name="ID_PhanQuyen" ColumnName="ID_PhanQuyen" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PHANQUYENs">
-            <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHANQUYEN">
-              <MappingFragment StoreEntitySet="PHANQUYEN">
-                <ScalarProperty Name="ID_PhanQuyen" ColumnName="ID_PhanQuyen" />
-                <ScalarProperty Name="TenPQ" ColumnName="TenPQ" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -832,17 +829,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TINHTRANGDHs">
-            <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.TINHTRANGDH">
-              <MappingFragment StoreEntitySet="TINHTRANGDH">
-                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
-                <ScalarProperty Name="TenTinhTrang" ColumnName="TenTinhTrang" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Update_SL_Ton" FunctionName="QL_THIETBISTEAMModel.Store.Update_SL_Ton" />
           <FunctionImportMapping FunctionImportName="Update_TongSL_PN" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongSL_PN" />
           <FunctionImportMapping FunctionImportName="Update_TongTien_PN" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongTien_PN" />
+          <EntitySetMapping Name="PHIEUGIAOHANGs">
+            <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHIEUGIAOHANG">
+              <MappingFragment StoreEntitySet="PHIEUGIAOHANG">
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+                <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
+                <ScalarProperty Name="MaGH" ColumnName="MaGH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
