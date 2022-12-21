@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4a48b106ba574bc7a806c57f9985b96d" Name="Diagram1">
+      <Diagram DiagramId="e7670347a63d41f4a71933b6bdd86351" Name="Diagram1">
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.CT_PHIEUDATHANG" Width="1.5" PointX="11.25" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.CT_PHIEUNHAPHANG" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.KHACHHANG" Width="1.5" PointX="6.75" PointY="9.625" IsExpanded="true" />
@@ -14,6 +14,7 @@
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHANQUYEN" Width="1.5" PointX="1.5" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUDATHANG" Width="1.5" PointX="9" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUGIAOHANG" Width="1.5" PointX="11.25" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUNHAPHANG" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.THONGTINSANPHAM" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.TINHTRANGDH" Width="1.5" PointX="6.75" PointY="13.5" IsExpanded="true" />
@@ -28,8 +29,7 @@
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_NHANVIEN_PHANQUYEN" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUNHAPHANG_NHANVIEN" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUDATHANG_TINHTRANGDH" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUGIAOHANG" Width="1.5" PointX="11.25" PointY="11.25" />
-        <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUGIAOHANG_PDH" />
+        <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUGIAOHANG_PDH" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
