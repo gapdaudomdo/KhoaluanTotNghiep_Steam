@@ -4,33 +4,99 @@
 }
 @model List<DoAn_MonHoc.ViewModels.ChiTietDDHViewModel>
 <h2 style="width: 100%;    padding-left: 23px;    padding-top: 13px;">Chi Tiết Đơn Hàng</h2>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/Css/StepBar.css" type="text/css" />
 
+<section class="step-wizard">
+    @if (ViewBag.TinhTrang == "Xử lý")
+    {
+        <ul class="step-wizard-list">
+            <li class="step-wizard-item step-wizard-item">
+                <span class="progress-count">1</span>
+                <span class="progress-label">Xử lý</span>
+            </li>
+            <li class="step-wizard-item">
+                <span class="progress-count">2</span>
+                <span class="progress-label">Đã đóng gói</span>
+            </li>
+            <li class="step-wizard-item">
+                <span class="progress-count">3</span>
+                <span class="progress-label">Đang giao hàng</span>
+            </li>
+            <li class="step-wizard-item">
+                <span class="progress-count">4</span>
+                <span class="progress-label">Giao hàng hoàn tất</span>
+            </li>
+        </ul>
+    }
+    else if (ViewBag.TinhTrang == "Đã đóng gói")
+    {
+        <ul class="step-wizard-list">
+            <li class="step-wizard-item">
+                <span class="progress-count">1</span>
+                <span class="progress-label">Xử lý</span>
+            </li>
+            <li class="step-wizard-item step-wizard-item">
+                <span class="progress-count">2</span>
+                <span class="progress-label">Đã đóng gói</span>
+            </li>
+            <li class="step-wizard-item">
+                <span class="progress-count">3</span>
+                <span class="progress-label">Đang giao hàng</span>
+            </li>
+            <li class="step-wizard-item">
+                <span class="progress-count">4</span>
+                <span class="progress-label">Giao hàng hoàn tất</span>
+            </li>
+        </ul>
+    }
+    else if (ViewBag.TinhTrang == "Đang giao hàng")
+    {
+        <ul class="step-wizard-list">
+            <li class="step-wizard-item">
+                <span class="progress-count">1</span>
+                <span class="progress-label">Xử lý</span>
+            </li>
+            <li class="step-wizard-item ">
+                <span class="progress-count">2</span>
+                <span class="progress-label">Đã đóng gói</span>
+            </li>
+            <li class="step-wizard-item step-wizard-item">
+                <span class="progress-count">3</span>
+                <span class="progress-label">Đang giao hàng</span>
+            </li>
+            <li class="step-wizard-item">
+                <span class="progress-count">4</span>
+                <span class="progress-label">Giao hàng hoàn tất</span>
+            </li>
+        </ul>
+    }
+    else
+    {
+        <ul class="step-wizard-list">
+            <li class="step-wizard-item">
+                <span class="progress-count ">1</span>
+                <span class="progress-label">Xử lý</span>
+            </li>
+            <li class="step-wizard-item ">
+                <span class="progress-count">2</span>
+                <span class="progress-label">Đã đóng gói</span>
+            </li>
+            <li class="step-wizard-item">
+                <span class="progress-count">3</span>
+                <span class="progress-label">Đang giao hàng</span>
+            </li>
+            <li class="step-wizard-item step-wizard-item">
+                <span class="progress-count">4</span>
+                <span class="progress-label">Giao hàng hoàn tất</span>
+            </li>
+        </ul>
+    }
+
+</section>
 <h5 style="width: 100%;    padding-left: 40px;    padding-top: 13px;">Lên Đơn Hàng Thành Công !!! Cảm Ơn Quí Khách</h5>
 
-@*@if (ViewBag.TinhTrang == "Doi xu ly")
-{
-    <div>
-        <div style="color: green"></div>
-        <div></div>
-        <div></div>
-    </div>
-}
-else if (ViewBag.TinhTrang == "Dong goi")
-{
-    <div>
-        <div style="color: green"></div>
-        <div style="color: green"></div>
-        <div></div>
-    </div>
-}
-else /// Giao hang thanh cong
-{
-    <div>
-        <div style="color: green"></div>
-        <div style="color: green"></div>
-        <div style="color: green"></div>
-    </div>
-}*@
+
 
 <h2 style="width: 100%;    padding-left: 23px;    padding-top: 13px;">Trạng thái đơn hàng của bạn là : @ViewBag.TinhTrang</h2>
 
