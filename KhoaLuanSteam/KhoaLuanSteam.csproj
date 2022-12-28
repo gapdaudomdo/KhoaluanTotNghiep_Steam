@@ -2582,6 +2582,7 @@
     <Content Include="Css\font-awesome-4.6.3\css\font-awesome.css" />
     <Content Include="Css\font-awesome-4.6.3\css\font-awesome.min.css" />
     <Content Include="Css\font-awesome-4.6.3\fonts\fontawesome-webfont.svg" />
+    <Content Include="Css\StepBar.css" />
     <Content Include="Css\login.css" />
     <Content Include="Css\style.min.css" />
     <Content Include="Css\StyleSheet1.css" />
