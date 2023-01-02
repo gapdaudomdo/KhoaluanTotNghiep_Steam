@@ -92,8 +92,8 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-
-                        @Html.Action("SPLienQuan", "Product", new { @LoaiSanPham = @Model.MaLoai })
+                        @Html.Action("SPLienQuan", "Product", new { @LoaiSanPham = @Model.MaLoai})
+                        @*@Html.Action("SPLienQuan", "Product", new { @LoaiSanPham = @Model.MaLoai, @masanpham = @Model.MaSanPham })*@
                     </div>
                 </div>
 

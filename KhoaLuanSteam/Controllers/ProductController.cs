@@ -156,7 +156,7 @@ namespace KhoaLuanSteam.Controllers
             var LSanPham = new ProductProcess().SanPhamLienQuan(LoaiSanPham);
             if (LSanPham.Count == 0)
             {
-                ViewBag.Sach = "khong co sach nao thuoc chu de nay !";
+                ViewBag.Sach = "không có sản phẩm nào liên quan loại này !";
             }
             return View(LSanPham);
         }

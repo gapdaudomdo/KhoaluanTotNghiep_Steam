@@ -52,7 +52,7 @@ namespace KhoaLuanSteam.Models.Process
         /// <returns>List</returns>
         public List<THONGTINSANPHAM> SanPhamLienQuan(int LoaiSanPham)
         {
-            return db.THONGTINSANPHAMs.Where(x => x.MaLoai == LoaiSanPham).ToList();
+            return db.THONGTINSANPHAMs.Where(x => x.MaLoai == LoaiSanPham).Take(2).ToList();
         }
         /// <summary>
         /// hàm xuất danh sách loại sp
