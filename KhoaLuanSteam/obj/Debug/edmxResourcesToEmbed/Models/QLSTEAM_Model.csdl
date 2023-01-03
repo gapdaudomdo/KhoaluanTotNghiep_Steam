@@ -149,7 +149,7 @@
     <Property Name="MaNCC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="TenSanPham" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="GiaSanPham" Type="Double" />
-    <Property Name="MoTa" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="MoTa" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
     <Property Name="HinhAnh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="GiamGia" Type="Double" />
     <Property Name="SLTon" Type="Int32" />
