@@ -63,7 +63,7 @@
     <Property Name="MaNCC" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="TenNCC" Type="nvarchar" MaxLength="100" />
     <Property Name="DiaChi" Type="nvarchar" MaxLength="250" />
-    <Property Name="DienThoai" Type="int" />
+    <Property Name="DienThoai" Type="char" MaxLength="20" />
   </EntityType>
   <EntityType Name="NHANVIEN">
     <Key>
@@ -120,6 +120,16 @@
     <Property Name="NgayLap_PN" Type="date" />
     <Property Name="TongSL" Type="int" />
     <Property Name="TongTien_NH" Type="float" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="THONGTINSANPHAM">
     <Key>
@@ -286,6 +296,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="Update_SL_Ton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaCTPhieuNhapHang" Type="int" Mode="In" />
+    <Parameter Name="MaSP" Type="int" Mode="In" />
+    <Parameter Name="MaPhieuNhapHang" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Update_TongSL_PN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaPhieuNH" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="Update_TongTien_PN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaPhieuNH" Type="nchar" Mode="In" />
+  </Function>
   <EntityContainer Name="QL_THIETBISTEAMModelStoreContainer">
     <EntitySet Name="CT_PHIEUDATHANG" EntityType="Self.CT_PHIEUDATHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_PHIEUNHAPHANG" EntityType="Self.CT_PHIEUNHAPHANG" Schema="dbo" store:Type="Tables" />
@@ -298,6 +319,7 @@
     <EntitySet Name="PHIEUDATHANG" EntityType="Self.PHIEUDATHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PHIEUGIAOHANG" EntityType="Self.PHIEUGIAOHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PHIEUNHAPHANG" EntityType="Self.PHIEUNHAPHANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="THONGTINSANPHAM" EntityType="Self.THONGTINSANPHAM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TINHTRANGDH" EntityType="Self.TINHTRANGDH" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CT_PHIEUDH_PDT" Association="Self.FK_CT_PHIEUDH_PDT">

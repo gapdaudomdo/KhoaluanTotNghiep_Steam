@@ -5,9 +5,9 @@
 
 @model IEnumerable<KhoaLuanSteam.Models.PHIEUNHAPHANG>
 
-<h2 style="text-align: center;">Quản lý Đơn Nhập Hàng</h2>
+<h2 style="text-align: center;">Quản lý đơn nhập hàng</h2>
 <p>
-    @Html.ActionLink("Nhập hàng từ NCC", "InsertDonNhapHang")
+    @Html.ActionLink("Nhập hàng từ nhà cung cấp", "InsertDonNhapHang")
     @*@Html.ActionLink("Nhập hàng từ NCC", "InsertCT_PhieuNhapHang")*@
 </p>
 <div class="card-body" style="padding: 0;">
@@ -16,22 +16,24 @@
             <thead>
                 <tr>
                     <th>
-                        MaPNH
+                        Mã phiếu nhập hàng
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.NHACUNGCAP.MaNCC)
+                        @* @Html.DisplayNameFor(model => model.NHACUNGCAP.MaNCC) *@
+                        Mã nhà cung cấp
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.NHANVIEN.MaNV)
+                        @* @Html.DisplayNameFor(model => model.NHANVIEN.MaNV) *@
+                        Mã nhân viên
                     </th>
                     <th>
-                        Ngày Lập HD
+                        Ngày Lập hóa đơn
                     </th>
                     <th>
-                        Tổng SL
+                        Tổng số lượng
                     </th>
                     <th>
-                        Tổng Tiền
+                        Tổng tiền
                     </th>
                     <th></th>
                 </tr>

@@ -18,7 +18,8 @@
         }
         @Html.HiddenFor(model => model.MaLoai)
         <div class="form-group">
-            @Html.LabelFor(model => model.TenLoai, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Tên loại</label>
+            @* @Html.LabelFor(model => model.TenLoai, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.TenLoai, new { @class = "form-control", placeHolder = "" })
                 @Html.ValidationMessageFor(model => model.TenLoai, "", new { @class = "text-danger" })

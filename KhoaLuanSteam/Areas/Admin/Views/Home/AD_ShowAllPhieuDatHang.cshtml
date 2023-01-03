@@ -15,23 +15,26 @@
     };
 }
 
-<h2>Quản lý đơn hàng</h2>
+<h2 style="text-align: center;">Quản lý đơn hàng</h2>
 <table class="table" id="example">
     <thead>
         <tr>
             <th>
-                MaDDH
+                Mã đơn đặt hàng
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.KHACHHANG.TenKH)
+                @* @Html.DisplayNameFor(model => model.KHACHHANG.TenKH) *@
+                Tên khách hàng
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayDat)
+                @* @Html.DisplayNameFor(model => model.NgayDat) *@
+                Ngày đặt
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TinhTrang)
+                @* @Html.DisplayNameFor(model => model.TinhTrang) *@
+                Tình trạng
             </th>
-            <th>Xử Lý Đơn Hàng</th>
+            <th>Xử lý đơn hàng</th>
             <th></th>
         </tr>
     </thead>

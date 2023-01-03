@@ -23,7 +23,7 @@ namespace KhoaLuanSteam.Models
         public string MaNCC { get; set; }
         public string TenNCC { get; set; }
         public string DiaChi { get; set; }
-        public Nullable<int> DienThoai { get; set; }
+        public string DienThoai { get; set; }
     
         public virtual ICollection<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
         public virtual ICollection<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }

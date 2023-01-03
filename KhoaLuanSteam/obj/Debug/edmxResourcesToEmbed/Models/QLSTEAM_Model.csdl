@@ -69,7 +69,7 @@
     <Property Name="MaNCC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="TenNCC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="DiaChi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="DienThoai" Type="Int32" />
+    <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
     <NavigationProperty Name="PHIEUNHAPHANGs" Relationship="Self.FK_PHIEUNHAPHANG_NHACUNGCAP" FromRole="NHACUNGCAP" ToRole="PHIEUNHAPHANG" />
     <NavigationProperty Name="THONGTINSANPHAMs" Relationship="Self.FK_THONGTINSACH_NHACUNGCAP" FromRole="NHACUNGCAP" ToRole="THONGTINSANPHAM" />
   </EntityType>
@@ -139,6 +139,16 @@
     <NavigationProperty Name="CT_PHIEUNHAPHANG" Relationship="Self.FK_CT_PHIEUNHAPHANG_PNH" FromRole="PHIEUNHAPHANG" ToRole="CT_PHIEUNHAPHANG" />
     <NavigationProperty Name="NHACUNGCAP" Relationship="Self.FK_PHIEUNHAPHANG_NHACUNGCAP" FromRole="PHIEUNHAPHANG" ToRole="NHACUNGCAP" />
     <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_PHIEUNHAPHANG_NHANVIEN" FromRole="PHIEUNHAPHANG" ToRole="NHANVIEN" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="THONGTINSANPHAM">
     <Key>
@@ -322,6 +332,7 @@
     <EntitySet Name="PHIEUDATHANGs" EntityType="Self.PHIEUDATHANG" />
     <EntitySet Name="PHIEUGIAOHANGs" EntityType="Self.PHIEUGIAOHANG" />
     <EntitySet Name="PHIEUNHAPHANGs" EntityType="Self.PHIEUNHAPHANG" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="THONGTINSANPHAMs" EntityType="Self.THONGTINSANPHAM" />
     <EntitySet Name="TINHTRANGDHs" EntityType="Self.TINHTRANGDH" />
     <AssociationSet Name="FK_CT_PHIEUDH_PDT" Association="Self.FK_CT_PHIEUDH_PDT">
@@ -372,5 +383,16 @@
       <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANGs" />
       <End Role="PHIEUGIAOHANG" EntitySet="PHIEUGIAOHANGs" />
     </AssociationSet>
+    <FunctionImport Name="Update_SL_Ton">
+      <Parameter Name="MaCTPhieuNhapHang" Mode="In" Type="Int32" />
+      <Parameter Name="MaSP" Mode="In" Type="Int32" />
+      <Parameter Name="MaPhieuNhapHang" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_TongSL_PN">
+      <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Update_TongTien_PN">
+      <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

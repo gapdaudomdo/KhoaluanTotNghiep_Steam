@@ -147,7 +147,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             //lấy mã mà hiển thị tên
             ViewBag.MaLoai = new SelectList(db.LOAISANPHAMs.ToList().OrderBy(x => x.TenLoai), "MaLoai", "TenLoai", sanpham.MaLoai);
             ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.TenNCC), "MaNCC", "TenNCC", sanpham.MaNCC);
-
+            sanpham.SLTon = 0;
             //kiểm tra việc upload ảnh
             if (fileUpload == null)
             {

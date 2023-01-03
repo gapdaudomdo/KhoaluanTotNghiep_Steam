@@ -66,15 +66,14 @@ CREATE TABLE LOAISANPHAM
 )
 
 
-CREATE TABLE NHACUNGCAP(
+CREATE TABLE NHACUNGCAP
+(
 	MaNCC nchar(10) not null,
 	TenNCC NVARCHAR(100),
 	DiaChi NVARCHAR(250),
-	DienThoai INT,
+	DienThoai Char(20),
 	constraint PK_NHACUNGCAP primary key (MaNCC) 
 )
-	
-
 
 CREATE TABLE THONGTINSANPHAM
 (
@@ -92,9 +91,9 @@ CREATE TABLE THONGTINSANPHAM
 	CONSTRAINT FK_THONGTINSACH_NHACUNGCAP FOREIGN KEY (MaNCC) REFERENCES NHACUNGCAP(MaNCC)
 )
 
-select ISNULL(COUNT(MaLoai), 0 )
-from THONGTINSANPHAM
-where MaLoai =3
+--select ISNULL(COUNT(MaLoai), 0 )
+--from THONGTINSANPHAM
+--where MaLoai =3
 
 CREATE TABLE PHIEUNHAPHANG
 (
@@ -138,7 +137,6 @@ CREATE TABLE PHIEUDATHANG
 	NgayDat datetime,
 	Tong_SL_Dat INT,
 	ThanhTien FLOAT,
-	--TinhTrang BIT,
 	TinhTrang INT,
 	CONSTRAINT PK_PHIEUDATHANG PRIMARY KEY CLUSTERED  (MaPhieuDH  ASC),
     constraint FK_PHIEUDATHANG_KH foreign key(MaKH) references KHACHHANG(MaKH),
@@ -222,19 +220,19 @@ select * from LOAISANPHAM
 
 --------------------them du lieu bang NHACUNGCAP
 INSERT INTO NhaCungCap
-VALUES('NCC01', N'Nhà cung cấp NEW BRAIN QUẬN 3', N'034 Trường Sa, phường 12, TP.HCM',0123684273);
+VALUES('NCC01', N'Nhà cung cấp NEW BRAIN QUẬN 3', N'034 Trường Sa, phường 12, TP.HCM','0123684273');
 INSERT INTO NhaCungCap
-VALUES	('NCC02',N'Nhà cung cấp NEW BRAIN Quận Tân Bình ',N'Số 13, Bàu Cát 6, Phường 14, TP.HCM',0283810958);
+VALUES	('NCC02',N'Nhà cung cấp NEW BRAIN Quận Tân Bình ',N'Số 13, Bàu Cát 6, Phường 14, TP.HCM','0283810958');
 INSERT INTO NhaCungCap
-VALUES	('NCC03',N'Nhà cung cấp NEW BRAIN Quận 7 ',N'Vietopia, 02-04 Đường số 9, Tân Hưng, TP.HCM',0924419885);
+VALUES	('NCC03',N'Nhà cung cấp NEW BRAIN Quận 7 ',N'Vietopia, 02-04 Đường số 9, Tân Hưng, TP.HCM','0924419885');
 INSERT INTO NhaCungCap
-VALUES	('NCC04',N'Nhà cung cấp NEW BRAIN Quận Nam Từ Liêm',N'Số 8, B9, KĐT Mỹ Đình 1, Mỹ Đình, Hà Nội',0823481910);
+VALUES	('NCC04',N'Nhà cung cấp NEW BRAIN Quận Nam Từ Liêm',N'Số 8, B9, KĐT Mỹ Đình 1, Mỹ Đình, Hà Nội','0823481910');
 INSERT INTO NhaCungCap
-VALUES	('NCC05',N'Nhà cung cấp NEW BRAIN Quận Hà Đông',N'Số nhà 1162, đường Quang Trung, Phường Yên Nghĩa, Hà Nội.',0232391209);
+VALUES	('NCC05',N'Nhà cung cấp NEW BRAIN Quận Hà Đông',N'Số nhà 1162, đường Quang Trung, Phường Yên Nghĩa, Hà Nội.','0232391209');
 INSERT INTO NhaCungCap
-VALUES	('NCC06',N'Nhà cung cấp NEW BRAIN Quận Nam Từ Liêm',N'Số 8, B9, KĐT Mỹ Đình 1, Mỹ Đình, Hà Nội',0983931001);
+VALUES	('NCC06',N'Nhà cung cấp NEW BRAIN Quận Nam Từ Liêm',N'Số 8, B9, KĐT Mỹ Đình 1, Mỹ Đình, Hà Nội','0983931001');
 INSERT INTO NhaCungCap
-VALUES('NCC07',N'Nhà cung cấp NEW BRAIN Đà Nẵng',N'Số 73, Phó Đức Chính, Mân Thái, Sơn Trà, Đà Nẵng',0899633869);
+VALUES('NCC07',N'Nhà cung cấp NEW BRAIN Đà Nẵng',N'Số 73, Phó Đức Chính, Mân Thái, Sơn Trà, Đà Nẵng','0899633869');
 
 select*from NHACUNGCAP
 
