@@ -135,7 +135,7 @@
           <Property Name="MaNCC" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="TenSanPham" Type="nvarchar" MaxLength="100" />
           <Property Name="GiaSanPham" Type="float" />
-          <Property Name="MoTa" Type="nvarchar" MaxLength="800" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="1000" />
           <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
           <Property Name="GiamGia" Type="float" />
           <Property Name="SLTon" Type="int" />
@@ -508,7 +508,7 @@
           <Property Name="MaNCC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="TenSanPham" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="GiaSanPham" Type="Double" />
-          <Property Name="MoTa" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="GiamGia" Type="Double" />
           <Property Name="SLTon" Type="Int32" />
