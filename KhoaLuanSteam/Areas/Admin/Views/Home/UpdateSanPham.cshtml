@@ -50,7 +50,7 @@
         </div>
         <div class="form-group">
             @* @Html.LabelFor(model => model.GiamGia, htmlAttributes: new { @class = "control-label col-md-2" }) *@
-            <label class="control-label col-md-2">Giảm giá</label>
+            <label class="control-label col-md-2">Giảm giá %</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.GiamGia, new { @class = "form-control", placeHolder = "" })
                 @Html.ValidationMessageFor(model => model.GiamGia, "", new { @class = "text-danger" })

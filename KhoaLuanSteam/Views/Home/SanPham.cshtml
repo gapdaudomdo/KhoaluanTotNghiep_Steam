@@ -54,6 +54,33 @@
             ul.pagination li a:hover:not(.active) {
                 background-color: #0099ae;
             }
+        
+        @* css discount *@
+        .discount_product {
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1;
+        }
+        .discount_content{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            font-weight: 400;
+            line-height: .8125rem;
+            color: #ee4d2d;
+            text-transform: uppercase;
+            font-size: .75rem;
+            width: 36px;
+            height: 32px;
+            box-sizing: border-box;
+            padding: 4px 2px 3px;
+            background-color: rgba(255,212,36,.9);
+        }
+        .title_discount{
+            color: #fff;
+        }
 </style>
 
 <link href="~/Css/StyleSheet4.css" rel="stylesheet" />
@@ -95,7 +122,7 @@
             <div class="col-xs-6 col-sm-4 col-sm-4 col-md-4 col-lg-4" style="">
                 <div class="item_product_main margin-bottom-20 item_product_main_relative">
                     <div class="product-box product-item-main product-item-compare">
-                        <div class="product-thumbnail">
+                        @* <div class="product-thumbnail" >
                             <div class="content_hover">
                                 <a class="image_thumb p_img" title="@item.TenSanPham" href="/Product/ChiTietSP/@item.MaSanPham">
                                     <div class="content-overlay"></div>
@@ -105,7 +132,37 @@
                                     </a>
                                 </a>
                             </div>
+                        </div> *@
+
+                        <div class="product-thumbnail" >
+                            <span>
+
+                            </span>
+                            <div class="content_hover">
+                                <a class="image_thumb p_img" title="@item.TenSanPham" href="/Product/ChiTietSP/@item.MaSanPham">
+                                
+                                @if (@item.GiamGia > 0)
+                                        {
+                                            <div class="discount_product">
+                                                <div class="discount_content">
+                                                    <span class="ratio_discount">@item.GiamGia%</span>
+                                                    <span class="title_discount">giảm</span>
+                                                </div>
+                                            </div>
+                                        }
+                                
+
+                                    <div class="content-overlay"></div>
+                                    <img class="content-image" src="~/HinhAnhSach/@item.HinhAnh" alt="@item.HinhAnh" width="180px" height="242px" />
+                                    <a title="Xem nhanh" href="~/Product/ChiTietSP/@item.MaSanPham" data-handle="tren-duong-bang" class="xem_nhanh btn-circle btn_view btn right-to quick-view hidden-xs hidden-sm">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </a>
+                            </div>
                         </div>
+
+                        
+
                         <div class="product-info product-bottom mh" style="width:100%; float: left; padding: 0; position: relative; text-align: center; min-height: 99px;">
                             <h3 class="product-name" style="font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; font-size: 14px; font-weight: 600; margin:0 0 5px; overflow: hidden; text-transform: uppercase; word-wrap: break-word; line-height: 22px; padding: 10px 15px 0; text-overflow: ellipsis; white-space: nowrap;">
                                 <a href="/chung-ta-roi-se-on-thoi" title="@item.TenSanPham" style="color: #636363;">

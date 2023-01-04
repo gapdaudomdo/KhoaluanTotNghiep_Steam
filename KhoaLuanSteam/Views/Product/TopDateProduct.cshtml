@@ -9,6 +9,32 @@
             background-color: #0099ae;
             color: white;
         }
+    @* css discount *@
+    .discount_product {
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1;
+        }
+        .discount_content{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            font-weight: 400;
+            line-height: .8125rem;
+            color: #ee4d2d;
+            text-transform: uppercase;
+            font-size: .75rem;
+            width: 36px;
+            height: 32px;
+            box-sizing: border-box;
+            padding: 4px 2px 3px;
+            background-color: rgba(255,212,36,.9);
+        }
+        .title_discount{
+            color: #fff;
+        }
 </style>
 <link href="~/Css/StyleSheet5.css" rel="stylesheet" />
 <div class="row">
@@ -21,6 +47,17 @@
                 <div class="product-thumbnail">
                     <div class="content_hover">
                         <a class="image_thumb p_img" title="@item.TenSanPham" href="/Product/ChiTietSP/@item.MaSanPham">
+
+                            @if (@item.GiamGia > 0)
+                                        {
+                                            <div class="discount_product">
+                                                <div class="discount_content">
+                                                    <span class="ratio_discount">@item.GiamGia%</span>
+                                                    <span class="title_discount">giảm</span>
+                                                </div>
+                                            </div>
+                                        }
+
                             <div class="content-overlay"></div>
                             <img class="content-image" src="~/HinhAnhSach/@item.HinhAnh" alt="@item.HinhAnh" width="180px" height="242px" />
                             <a title="Xem nhanh" href="~/Product/ChiTietSP/@item.MaSanPham" data-handle="tren-duong-bang" class="xem_nhanh btn-circle btn_view btn right-to quick-view hidden-xs hidden-sm">

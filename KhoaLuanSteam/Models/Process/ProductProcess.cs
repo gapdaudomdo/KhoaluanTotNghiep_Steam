@@ -32,7 +32,7 @@ namespace KhoaLuanSteam.Models.Process
                 return sanpham.GiaSanPham;
             else
             {
-                return sanpham.GiaSanPham - (sanpham.GiamGia * sanpham.GiaSanPham);
+                return sanpham.GiaSanPham * (1 - (sanpham.GiamGia / 100));
             }
 
         }

@@ -23,7 +23,8 @@ namespace KhoaLuanSteam.Models
                 }
                 else
                 {
-                    return iSoLuong * (sanpham.GiaSanPham - (sanpham.GiaSanPham * sanpham.GiamGia));
+                    //return iSoLuong * (sanpham.GiaSanPham - (sanpham.GiaSanPham * sanpham.GiamGia));
+                    return iSoLuong * (sanpham.GiaSanPham * (1 - (sanpham.GiamGia / 100)));
                 }
             }
         }

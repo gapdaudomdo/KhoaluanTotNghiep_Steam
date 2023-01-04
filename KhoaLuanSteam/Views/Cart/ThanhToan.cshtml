@@ -43,7 +43,7 @@
                         else
                         {
                             <span>
-                                @Html.Action("giasachgiam", "Product", new { @masach = @item.sanpham.MaSanPham })
+                                @Html.Action("giasachgiam", "Product", new { @masanpham = @item.sanpham.MaSanPham })
                             </span>
 
                         }
@@ -62,7 +62,8 @@
                         {
                             <span>
 
-                                @(((item.sanpham.GiaSanPham.GetValueOrDefault(0) - (item.sanpham.GiaSanPham.GetValueOrDefault(0) * item.sanpham.GiamGia.GetValueOrDefault(0))) * item.iSoLuong).ToString("N0")) VND
+                                @* @(((item.sanpham.GiaSanPham.GetValueOrDefault(0) - (item.sanpham.GiaSanPham.GetValueOrDefault(0) * item.sanpham.GiamGia.GetValueOrDefault(0))) * item.iSoLuong).ToString("N0")) VND *@
+                                @(((item.sanpham.GiaSanPham.GetValueOrDefault(0) * (1 - (item.sanpham.GiamGia.GetValueOrDefault(0) / 100))) * item.iSoLuong).ToString("N0")) VND
                             </span>
 
                         }
