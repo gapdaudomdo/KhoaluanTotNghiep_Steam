@@ -246,7 +246,19 @@ INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,S
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (1,'NCC05', N'Đồng Hồ Tập Xem Giờ Phút cho bé mầm non', 150000, N'Đồng hồ tập xem giờ phút cung cấp cho trẻ những hiểu biết về đặc điểm của đồng hồ và biết được các chức năng của chúng:Số ;   Kim ngắn – kim giờ;   Kim dài – kim phút. Đồng hồ bằng nhựa có kiểu dáng đơn giản và hình tròn dễ thương, thu hút sự chú ý của bé, là sản phẩm trang trí trong ngôi nhà.', N'product9.png',0,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (2,'NCC06', N'Bộ Que Tính Học Toán Cộng Trừ phạm vi 1 đến 100', 240000, N'Từ 3 tuổi, trí não bé đang trong giai đoạn bắt đầu phát triển mạnh mẽ, cũng là độ tuổi bé được làm quen với chữ cái và các con số vì vậy đây là thời điểm thích hợp để ba mẹ giúp bé làm quen và học tập. Bộ Que Tính Học Toán Cộng Trừ 100 Số giúp học sinh thực hành cộng, trừ trong phạm vi 10, cộng trừ (không nhớ) trong phạm vi 100. Đây là bộ thiết bị dạy phép cộng, phép trừ tiểu học lớp 1 lớp 2', N'product-cap1-5.png',0,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (2,'NCC07', N'Đồng Hồ Tập Xem Thời Gian hình cú cho bé', 230000, N'Đồng Hồ Tập Xem Thời Gian hình cú giáo dục trẻ biết quý trọng thời gian. Biết thời gian rất cần thiết đối với con người và ý thức học tập. Giáo viên mầm non sử dụng Đồng Hồ Dạy Học Hình Cú để phát triển kỹ năng quan sát, chú ý, ghi nhớ có chủ định và chơi trò chơi của bé.', N'product1.png',0,10)
-
+INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (1,'NCC07', N'Gói Bổ Sung 76 Quả Cân Bằng Nhựa', 490000, N'Sản phẩm bổ sung 76 quả cân nhựa:
+																																							16 quả cân nhựa 20g;
+																																							20 quả cân nhựa 10g;
+																																							20 quả cân nhựa 5g;
+																																							20 quả cân nhựa 1g.
+																																							Tất cả các cân nhựa được đóng trong hộp nhựa trong suốt có khóa.
+																																							Gói Quả Cân Nhựa Bổ Sung 1054P phù hợp cho trẻ 5+ tuổi trở lên.', N'product3.png',0,10)
+INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (1,'NCC07', N'Bộ Đo Thể Tích và Dung Tích cho trẻ mầm non', 480000, N'Thông tin:Bậc: STEAM mầm non ----- Độ tuổi: 3+------- Dạy:Đo dung tích:
+																																							Thiết bị Bộ Đo Thể Tích 1044 có 6 mô hình khối thể tích khác nhau (khối vuông, khối nón tròn, khối chóp tứ giác đều, khối chữ nhật, khối lăng trụ và khối cầu).
+																																							Các hình khối có thiết kế kín và có một miệng lỗ dưới đáy mỗi khối mô hình, cho phép sử dụng các vật liệu như cát, hạt cườm hoặc chất lỏng (nước) đổ vào, khiến cho lớp thêm sinh động.
+																																							Làm quen với các hình khối khác nhau, sâu hơn có thể dạy tới so sánh tỷ lệ thể tích giữa các hình khối.
+																																							Bộ Đo Thể Tích Mầm Non #1044 Gigo phù hợp cho trẻ mầm non & mẫu giáo trên 3 tuổi. Chất liệu bằng nhựa cao cấp.
+																																							Trẻ biết cách đo thể tích của nhiều đối tượng khác nhau bằng 1 đơn vị đo, biết đếm và đọc kết quả đếm.', N'product4.png',0,10)
 
 select*from THONGTINSANPHAM
 

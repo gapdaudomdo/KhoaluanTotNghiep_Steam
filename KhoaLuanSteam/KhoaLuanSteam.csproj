@@ -202,9 +202,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QLSTEAM_Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\THONGTINSANPHAM.cs">
       <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
     </Compile>
