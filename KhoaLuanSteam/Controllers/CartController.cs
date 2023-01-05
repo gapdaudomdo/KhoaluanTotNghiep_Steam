@@ -473,7 +473,7 @@ namespace KhoaLuanSteam.Controllers
             ViewBag.Total = thanhtien;
             if (tinhtrang.TinhTrang == 0)
             {
-                ViewBag.TinhTrang = "Xử lý";
+                ViewBag.TinhTrang = "Xử Lý";
             }
             else if (tinhtrang.TinhTrang == 1)
             {
@@ -481,11 +481,11 @@ namespace KhoaLuanSteam.Controllers
             }
             else if (tinhtrang.TinhTrang == 2)
             {
-                ViewBag.TinhTrang = "Đang giao";
+                ViewBag.TinhTrang = "Đang giao hàng ";
             }
             else
             {
-                ViewBag.TinhTrang = "Giao thành công";
+                ViewBag.TinhTrang = "Giao hàng hoàn tất";
             }
 
             return View(lst);
