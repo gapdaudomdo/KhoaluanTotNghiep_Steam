@@ -147,10 +147,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CT_DonDatHangNCC.cs">
+      <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CT_PHIEUDATHANG.cs">
       <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CT_PHIEUNHAPHANG.cs">
+      <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DonDatHangNCC.cs">
       <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GioHang.cs" />
@@ -201,6 +207,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QLSTEAM_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\THONGTINSANPHAM.cs">
       <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
@@ -3573,6 +3582,10 @@
     <Content Include="malefashion-master.zip" />
     <Content Include="Areas\Admin\Views\Home\UpdateNhanVien.cshtml" />
     <Content Include="Areas\Admin\Views\Home\ThongKe.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\AD_ShowAllDonDatHangNCC.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\DetailsCT_DonDatHangNCC.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\GuiDsSanPhamDenNCC.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\TaoDonDatHangNCC.cshtml" />
     <EntityDeploy Include="Models\QLSTEAM_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QLSTEAM_Model.Designer.cs</LastGenOutput>

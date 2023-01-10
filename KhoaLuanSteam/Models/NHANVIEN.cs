@@ -16,6 +16,7 @@ namespace KhoaLuanSteam.Models
     {
         public NHANVIEN()
         {
+            this.DonDatHangNCCs = new HashSet<DonDatHangNCC>();
             this.PHIEUNHAPHANGs = new HashSet<PHIEUNHAPHANG>();
         }
     
@@ -30,6 +31,7 @@ namespace KhoaLuanSteam.Models
         public string MatKhau { get; set; }
         public Nullable<int> ID_PhanQuyen { get; set; }
     
+        public virtual ICollection<DonDatHangNCC> DonDatHangNCCs { get; set; }
         public virtual PHANQUYEN PHANQUYEN { get; set; }
         public virtual ICollection<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
     }

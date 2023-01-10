@@ -596,6 +596,11 @@ namespace KhoaLuanSteam.Models.Process
         #endregion
 
 
+        public List<DonDatHangNCC> AD_ShowAlldondathangNCC()
+        {
+            return db.DonDatHangNCCs.OrderBy(x => x.MaDonDatHangNCC).ToList();
+        }
+
 
         //Xu ly Thong Tin Phieu Nhập hàng
         #region Xu ly Thong Tin PhieuNhapHang
@@ -662,5 +667,30 @@ namespace KhoaLuanSteam.Models.Process
         }
 
         #endregion
+
+
+        public int Insertdondathangncc(DonDatHangNCC entity)
+        {
+            db.DonDatHangNCCs.Add(entity);
+            db.SaveChanges();
+            return 1;
+        }
+
+        public int InsertCT_DonDatHangNCC(CT_DonDatHangNCC entity)
+        {
+            db.CT_DonDatHangNCC.Add(entity);
+            db.SaveChanges();
+            return 1;
+        }
+
+        public List<CT_DonDatHangNCC> detailsCT_DatHangTuNCCid(int id)
+        {
+            return db.CT_DonDatHangNCC.Where(x => x.MaDonDatHangNCC == id).OrderBy(x => x.MaCT_DonDatHangNCC).ToList();
+        }
+
+        public List<CT_DonDatHangNCC> detailsCT_DonDatHangNCC(int id)
+        {
+            return db.CT_DonDatHangNCC.Where(x => x.MaDonDatHangNCC == id).OrderBy(x => x.MaDonDatHangNCC).ToList();
+        }
     }
 }

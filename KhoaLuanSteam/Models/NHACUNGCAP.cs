@@ -16,6 +16,7 @@ namespace KhoaLuanSteam.Models
     {
         public NHACUNGCAP()
         {
+            this.DonDatHangNCCs = new HashSet<DonDatHangNCC>();
             this.PHIEUNHAPHANGs = new HashSet<PHIEUNHAPHANG>();
             this.THONGTINSANPHAMs = new HashSet<THONGTINSANPHAM>();
         }
@@ -25,6 +26,7 @@ namespace KhoaLuanSteam.Models
         public string DiaChi { get; set; }
         public string DienThoai { get; set; }
     
+        public virtual ICollection<DonDatHangNCC> DonDatHangNCCs { get; set; }
         public virtual ICollection<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
         public virtual ICollection<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }
     }

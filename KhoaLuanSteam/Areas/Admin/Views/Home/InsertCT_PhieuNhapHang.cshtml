@@ -15,13 +15,7 @@
         {
             <div id="thongBaoThanhCong" class="alert alert-success">@ViewBag.Success</div>
         }
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.MaSanPham, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.MaSanPham, new { @class = "form-control", placeHolder = "" })
-                    @Html.ValidationMessageFor(model => model.MaSanPham, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+
         <div class="form-group">
             <label class="control-label col-md-2">Sản phẩm</label>
             <div class="col-md-10">
@@ -30,38 +24,23 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                <label class="control-label col-md-2">Mã phiếu nhập hàng</label>
-                <div class="col-md-10">
-                    @Html.DropDownList("MaPhieuNhapHang", null, "Chọn phiếu nhập hàng", new { @class = "form-control", style = "height: 35px" })
-                    @Html.ValidationMessageFor(model => model.MaPhieuNhapHang, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
 
         <div class="form-group">
-            @*@Html.LabelFor(model => model.Sluong, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Số lượng</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Sluong, new { @class = "form-control", placeHolder = "" })
                 @Html.ValidationMessageFor(model => model.Sluong, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
-            @*@Html.LabelFor(model => model.DonGiaNhap, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Đơn giá</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.DonGiaNhap, new { @class = "form-control", placeHolder = "" })
                 @Html.ValidationMessageFor(model => model.DonGiaNhap, "", new { @class = "text-danger" })
             </div>
         </div>
-        @* <div class="form-group">
-                @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.TongTien, new { @class = "form-control", placeHolder = "" })
-                    @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
-                </div>
-            </div> *@
+
         <div class="form-group" style="margin-left: 13px;">
             <span class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Thêm" class="btn btn-primary" />

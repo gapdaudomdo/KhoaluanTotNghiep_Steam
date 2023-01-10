@@ -122,6 +122,42 @@ CREATE TABLE CT_PHIEUNHAPHANG
 	constraint FK_CT_PHIEUNHAPHANG_TTSP foreign key (MaSanPham) references THONGTINSANPHAM(MaSanPham)
 )
 
+
+
+CREATE TABLE DonDatHangNCC
+(
+	MaDonDatHangNCC INT IDENTITY(1,1) NOT NULL,
+	MaNCC nchar(10),
+	MaNV INT ,
+	NgayLap date,
+	TongSL int,
+	TongTien FLOAT,
+	constraint PK_DonDatHangNCC primary key (MaDonDatHangNCC),
+    constraint FK_DonDatHangNCC_NHANVIEN foreign key(MaNV) references NHANVIEN(MaNV),
+    constraint FK_DonDatHangNCC_NHACUNGCAP foreign key(MaNCC) references NHACUNGCAP(MaNCC)
+)
+
+
+CREATE TABLE CT_DonDatHangNCC
+(
+	MaCT_DonDatHangNCC INT IDENTITY(1,1) NOT NULL,
+	MaDonDatHangNCC int not null,
+	MaSanPham INT not null,
+	Soluong INT,
+	DonGiaDat FLOAT,
+	TongTien FLOAT,
+	constraint PK_CT_DonDatHangNCC  primary key (MaCT_DonDatHangNCC, MaDonDatHangNCC),
+    constraint FK_CT_DonDatHangNCC_DDHNCC foreign key (MaDonDatHangNCC) references DonDatHangNCC(MaDonDatHangNCC),
+	constraint FK_CT_DonDatHangNCC_TTSP foreign key (MaSanPham) references THONGTINSANPHAM(MaSanPham)
+)
+
+ALTER TABLE PHIEUNHAPHANG
+ADD constraint FK_PHIEUNHAPHANG_DonDatHangNCC foreign key(MaPhieuNhapHang) references DonDatHangNCC(MaDonDatHangNCC)
+
+
+
+
+
 CREATE TABLE TINHTRANGDH
 (
 	TinhTrang INT NOT NULL,
@@ -310,12 +346,23 @@ AS
 				where CT_PHIEUNHAPHANG.MaPhieuNhapHang=@MaPhieuNH)
 	where PHIEUNHAPHANG.MaPhieuNhapHang=@MaPhieuNH
 GO
---select ISNULL(SUM(ThanhTien), 0 ) 
---from PHIEUDATHANG
---where MONTH(NgayDat)=1 and YEAR(NgayDat)=YEAR(GETDATE()) and TinhTrang=3
---select ISNULL(SUM(CT_PHIEUDATHANG.SoLuong), 0 )
---from CT_PHIEUDATHANG, THONGTINSANPHAM, LOAISANPHAM
---where CT_PHIEUDATHANG.MaSanPham=THONGTINSANPHAM.MaSanPham and THONGTINSANPHAM.MaLoai=LOAISANPHAM.MaLoai and LOAISANPHAM.MaLoai=4
 
-select * from PHIEUDATHANG
-select * from CT_PHIEUDATHANG
+CREATE PROC Update_TongSL_DatHangNCC
+		@MaDonDHNCC nchar(10)
+AS
+update DonDatHangNCC
+	set TongSL=(select COUNT(MaDonDatHangNCC) 
+				from CT_DonDatHangNCC 
+				where CT_DonDatHangNCC.MaDonDatHangNCC=@MaDonDHNCC
+				group by MaDonDatHangNCC )
+	where DonDatHangNCC.MaDonDatHangNCC=@MaDonDHNCC
+GO
+
+CREATE PROC Update_TongTien_DatHangNCC
+		@MaDonDHNCC nchar(10)
+AS
+update DonDatHangNCC
+	set TongTien=(select SUM(CT_DonDatHangNCC.TongTien)
+				from CT_DonDatHangNCC 
+				where CT_DonDatHangNCC.MaDonDatHangNCC=@MaDonDHNCC)
+	where DonDatHangNCC.MaDonDatHangNCC=@MaDonDHNCC

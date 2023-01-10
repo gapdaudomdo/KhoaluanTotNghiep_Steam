@@ -663,13 +663,168 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             return View(result);
         }
 
-        //GET : /Admin/Home/DetailsCT_PhieuNhapHang : trang xem chi tiết phiếu nhập hàng
-        //public ActionResult DetailsCT_PhieuNhapHang(string id)
-        //{
-        //    var result = new AdminProcess().detailsCT_PNhaphang(id.Trim());
 
-        //    return View(result);
-        //}
+        /// <summary>
+        /// dat hang tu nha cung cap
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AD_ShowAllDonDatHangNCC()
+        {
+            Session["check"] = null;
+            if (Session["Countne"] != null)
+            {
+                object myObject = new Object();
+                string myObjectString = Session["Countne"].ToString();
+                int count = Int32.Parse(myObjectString);
+                for (var i = 1; i <= count; i++)
+                {
+                    Session["STenSanPham" + i] = null;
+                    Session["SSoLuong" + i] = null;
+                    Session["SDonGia" + i] = null;
+                }
+                Session["Countne"] = null;
+            }
+            var result = new AdminProcess().AD_ShowAlldondathangNCC();
+
+            return View(result);
+        }
+
+        public ActionResult TaoDonDatHangNCC()
+        {
+            //lấy mã mà hiển thị tên
+            ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult TaoDonDatHangNCC(DonDatHangNCC dondathangncc)
+        {
+            //var list = new CT_PHIEUNHAPHANG();
+            //lấy mã mà hiển thị tên
+            ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC", dondathangncc.MaNCC);
+
+            dondathangncc.MaNV = (int)Session["GetMaNV"];
+            dondathangncc.NgayLap = DateTime.Now;
+            dondathangncc.TongSL = 0;
+            dondathangncc.TongTien = 0;
+            //kiểm tra dữ liệu db có hợp lệ?
+            if (ModelState.IsValid)
+            {
+                //thực hiện lưu vào db
+                var result = new AdminProcess().Insertdondathangncc(dondathangncc);
+                if (result > 0)
+                {
+                    ViewBag.Success = "Thêm mới thành công";
+                    //xóa trạng thái để thêm mới
+                    ModelState.Clear();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "thêm không thành công.");
+                }
+            }
+            var MaxMaDonDatHangNCC = db.DonDatHangNCCs.Where(p => p.MaDonDatHangNCC > 0).Max(p => p.MaDonDatHangNCC);
+            Session["getMaDDHNCC"] = MaxMaDonDatHangNCC;
+            //return View();
+            return RedirectToAction("GuiDsSanPhamDenNCC", "Home");
+        }
+
+
+        [HttpGet]
+        public ActionResult GuiDsSanPhamDenNCC()
+        {
+            ViewBag.MaSanPham = new SelectList(db.THONGTINSANPHAMs.ToList().OrderBy(x => x.TenSanPham), "MaSanPham", "TenSanPham");
+            ViewBag.MaDonDatHangNCC = new SelectList(db.DonDatHangNCCs.ToList().OrderBy(x => x.MaDonDatHangNCC), "MaDonDatHangNCC", "MaDonDatHangNCC");
+            return View();
+        }
+
+        //POST : Admin/Home/InsertCT_PhieuNhapHang/:model : thực hiện việc thêm InsertCT_PhieuNhapHang vào db
+        int count;
+
+        [HttpPost]
+        public ActionResult GuiDsSanPhamDenNCC(CT_DonDatHangNCC model)
+        {
+            //lấy mã mà hiển thị tên
+            //ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC", pnhaphang.MaNCC);
+            ViewBag.MaSanPham = new SelectList(db.THONGTINSANPHAMs.ToList().OrderBy(x => x.TenSanPham), "MaSanPham", "TenSanPham", model.MaSanPham);
+            ViewBag.MaDonDatHangNCC = new SelectList(db.DonDatHangNCCs.ToList().OrderBy(x => x.MaDonDatHangNCC), "MaDonDatHangNCC", "MaDonDatHangNCC", model.MaDonDatHangNCC);
+            //kiểm tra dữ liệu hợp lệ
+            var t = new CT_DonDatHangNCC();
+            if (ModelState.IsValid)
+            {
+                var admin = new AdminProcess();
+
+
+                t.MaSanPham = model.MaSanPham;
+                t.MaDonDatHangNCC = (int)Session["getMaDDHNCC"];
+                t.Soluong = model.Soluong;
+                t.DonGiaDat = model.DonGiaDat;
+                t.TongTien = t.Soluong * t.DonGiaDat;
+
+
+                if (Session["check"] == null)
+                {
+                    count = 1;
+                    Session["check"] = 1;
+                    Session["Countne"] = count;
+                }
+                else
+                {
+                    object myObject = new Object();
+                    string myObjectString = Session["Countne"].ToString();
+                    int a = Int32.Parse(myObjectString);
+                    Session["Countne"] = a + 1;
+                }
+
+                //string tam = string.Concat("",count);
+                string tam = string.Concat("", Session["Countne"].ToString());
+                string tenSanPham;
+                using (var ctx = new QL_THIETBISTEAMEntities1())
+                {
+                    string NoiChuoi = string.Concat("select TenSanPham from THONGTINSANPHAM Where MaSanPham=", model.MaSanPham);
+                    tenSanPham = ctx.Database.SqlQuery<string>(NoiChuoi).FirstOrDefault();
+                }
+                //Session["SMaSanPham" + tam] = model.MaSanPham;
+                Session["STenSanPham" + tam] = tenSanPham;
+                Session["SSoLuong" + tam] = model.Soluong;
+                Session["SDonGia" + tam] = model.DonGiaDat;
+
+
+                var result = admin.InsertCT_DonDatHangNCC(t);
+
+                //kiểm tra hàm
+                if (result > 0)
+                {
+                    object[] Update_TongSL_DonDatHangNCC =
+                    {
+                        new SqlParameter("@MaDonDHNCC",t.MaDonDatHangNCC)
+                    };
+                    db.Database.ExecuteSqlCommand("Update_TongSL_DatHangNCC @MaDonDHNCC", Update_TongSL_DonDatHangNCC);
+
+                    object[] Update_TongTien_DonDatHangNCC =
+                    {
+                        new SqlParameter("@MaDonDHNCC",t.MaDonDatHangNCC)
+                    };
+                    db.Database.ExecuteSqlCommand("Update_TongTien_DatHangNCC @MaDonDHNCC", Update_TongTien_DonDatHangNCC);
+                    ViewBag.Success = "Thêm mới thành công";
+                    //xóa trạng thái
+                    ModelState.Clear();
+                    return View();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm không thành công.");
+                }
+            }
+            return View(model);
+        }
+
+        public ActionResult DetailsCT_DonDatHangNCC(int id)
+        {
+            var result = new AdminProcess().detailsCT_DonDatHangNCC(id);
+
+            return View(result);
+        }
 
         public ActionResult DetailsCT_PhieuNhapHang(int id)
         {
@@ -694,12 +849,6 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             var list = new CT_PHIEUNHAPHANG();
             //lấy mã mà hiển thị tên
             ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC", pnhaphang.MaNCC);
-            //ViewBag.MaNV = new SelectList(db.NHANVIENs.ToList().OrderBy(x => x.MaNV), "MaNV", "TenNV", pnhaphang.MaNV);
-
-            //var getMaNhapHang = db.PHIEUNHAPHANGs.Where(x => x.MaPhieuNhapHang == pnhaphang.MaPhieuNhapHang).FirstOrDefault();
-            //Session["getMaPNH"] = getMaNhapHang.MaPhieuNhapHang;
-
-
 
             pnhaphang.MaNV = (int)Session["GetMaNV"];
             pnhaphang.NgayLap_PN = DateTime.Now;

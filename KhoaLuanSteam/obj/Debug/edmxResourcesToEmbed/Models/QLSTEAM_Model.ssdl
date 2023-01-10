@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="QL_THIETBISTEAMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CT_DonDatHangNCC">
+    <Key>
+      <PropertyRef Name="MaCT_DonDatHangNCC" />
+      <PropertyRef Name="MaDonDatHangNCC" />
+    </Key>
+    <Property Name="MaCT_DonDatHangNCC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaDonDatHangNCC" Type="int" Nullable="false" />
+    <Property Name="MaSanPham" Type="int" Nullable="false" />
+    <Property Name="Soluong" Type="int" />
+    <Property Name="DonGiaDat" Type="float" />
+    <Property Name="TongTien" Type="float" />
+  </EntityType>
   <EntityType Name="CT_PHIEUDATHANG">
     <Key>
       <PropertyRef Name="MaPhieuDH" />
@@ -20,6 +32,17 @@
     <Property Name="MaPhieuNhapHang" Type="int" Nullable="false" />
     <Property Name="Sluong" Type="int" />
     <Property Name="DonGiaNhap" Type="float" />
+    <Property Name="TongTien" Type="float" />
+  </EntityType>
+  <EntityType Name="DonDatHangNCC">
+    <Key>
+      <PropertyRef Name="MaDonDatHangNCC" />
+    </Key>
+    <Property Name="MaDonDatHangNCC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaNCC" Type="nchar" MaxLength="10" />
+    <Property Name="MaNV" Type="int" />
+    <Property Name="NgayLap" Type="date" />
+    <Property Name="TongSL" Type="int" />
     <Property Name="TongTien" Type="float" />
   </EntityType>
   <EntityType Name="KHACHHANG">
@@ -121,6 +144,16 @@
     <Property Name="TongSL" Type="int" />
     <Property Name="TongTien_NH" Type="float" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="THONGTINSANPHAM">
     <Key>
       <PropertyRef Name="MaSanPham" />
@@ -130,7 +163,7 @@
     <Property Name="MaNCC" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="TenSanPham" Type="nvarchar" MaxLength="100" />
     <Property Name="GiaSanPham" Type="float" />
-    <Property Name="MoTa" Type="nvarchar" MaxLength="1000" />
+    <Property Name="MoTa" Type="nvarchar" MaxLength="800" />
     <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
     <Property Name="GiamGia" Type="float" />
     <Property Name="SLTon" Type="int" />
@@ -142,6 +175,30 @@
     <Property Name="TinhTrang" Type="int" Nullable="false" />
     <Property Name="TenTinhTrang" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK_CT_DonDatHangNCC_DDHNCC">
+    <End Role="DonDatHangNCC" Type="Self.DonDatHangNCC" Multiplicity="1" />
+    <End Role="CT_DonDatHangNCC" Type="Self.CT_DonDatHangNCC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonDatHangNCC">
+        <PropertyRef Name="MaDonDatHangNCC" />
+      </Principal>
+      <Dependent Role="CT_DonDatHangNCC">
+        <PropertyRef Name="MaDonDatHangNCC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CT_DonDatHangNCC_TTSP">
+    <End Role="THONGTINSANPHAM" Type="Self.THONGTINSANPHAM" Multiplicity="1" />
+    <End Role="CT_DonDatHangNCC" Type="Self.CT_DonDatHangNCC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="THONGTINSANPHAM">
+        <PropertyRef Name="MaSanPham" />
+      </Principal>
+      <Dependent Role="CT_DonDatHangNCC">
+        <PropertyRef Name="MaSanPham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CT_PHIEUDH_PDT">
     <End Role="PHIEUDATHANG" Type="Self.PHIEUDATHANG" Multiplicity="1" />
     <End Role="CT_PHIEUDATHANG" Type="Self.CT_PHIEUDATHANG" Multiplicity="*" />
@@ -187,6 +244,30 @@
       </Principal>
       <Dependent Role="CT_PHIEUNHAPHANG">
         <PropertyRef Name="MaSanPham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DonDatHangNCC_NHACUNGCAP">
+    <End Role="NHACUNGCAP" Type="Self.NHACUNGCAP" Multiplicity="0..1" />
+    <End Role="DonDatHangNCC" Type="Self.DonDatHangNCC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHACUNGCAP">
+        <PropertyRef Name="MaNCC" />
+      </Principal>
+      <Dependent Role="DonDatHangNCC">
+        <PropertyRef Name="MaNCC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DonDatHangNCC_NHANVIEN">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+    <End Role="DonDatHangNCC" Type="Self.DonDatHangNCC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="MaNV" />
+      </Principal>
+      <Dependent Role="DonDatHangNCC">
+        <PropertyRef Name="MaNV" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -238,6 +319,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PHIEUNHAPHANG_DonDatHangNCC">
+    <End Role="DonDatHangNCC" Type="Self.DonDatHangNCC" Multiplicity="1" />
+    <End Role="PHIEUNHAPHANG" Type="Self.PHIEUNHAPHANG" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="DonDatHangNCC">
+        <PropertyRef Name="MaDonDatHangNCC" />
+      </Principal>
+      <Dependent Role="PHIEUNHAPHANG">
+        <PropertyRef Name="MaPhieuNhapHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PHIEUNHAPHANG_NHACUNGCAP">
     <End Role="NHACUNGCAP" Type="Self.NHACUNGCAP" Multiplicity="0..1" />
     <End Role="PHIEUNHAPHANG" Type="Self.PHIEUNHAPHANG" Multiplicity="*" />
@@ -286,9 +379,28 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="Update_SL_Ton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaCTPhieuNhapHang" Type="int" Mode="In" />
+    <Parameter Name="MaSP" Type="int" Mode="In" />
+    <Parameter Name="MaPhieuNhapHang" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Update_TongSL_DatHangNCC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaDonDHNCC" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="Update_TongSL_PN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaPhieuNH" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="Update_TongTien_DatHangNCC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaDonDHNCC" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="Update_TongTien_PN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaPhieuNH" Type="nchar" Mode="In" />
+  </Function>
   <EntityContainer Name="QL_THIETBISTEAMModelStoreContainer">
+    <EntitySet Name="CT_DonDatHangNCC" EntityType="Self.CT_DonDatHangNCC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_PHIEUDATHANG" EntityType="Self.CT_PHIEUDATHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_PHIEUNHAPHANG" EntityType="Self.CT_PHIEUNHAPHANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonDatHangNCC" EntityType="Self.DonDatHangNCC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LIENHE" EntityType="Self.LIENHE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LOAISANPHAM" EntityType="Self.LOAISANPHAM" Schema="dbo" store:Type="Tables" />
@@ -298,8 +410,17 @@
     <EntitySet Name="PHIEUDATHANG" EntityType="Self.PHIEUDATHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PHIEUGIAOHANG" EntityType="Self.PHIEUGIAOHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PHIEUNHAPHANG" EntityType="Self.PHIEUNHAPHANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="THONGTINSANPHAM" EntityType="Self.THONGTINSANPHAM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TINHTRANGDH" EntityType="Self.TINHTRANGDH" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CT_DonDatHangNCC_DDHNCC" Association="Self.FK_CT_DonDatHangNCC_DDHNCC">
+      <End Role="DonDatHangNCC" EntitySet="DonDatHangNCC" />
+      <End Role="CT_DonDatHangNCC" EntitySet="CT_DonDatHangNCC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CT_DonDatHangNCC_TTSP" Association="Self.FK_CT_DonDatHangNCC_TTSP">
+      <End Role="THONGTINSANPHAM" EntitySet="THONGTINSANPHAM" />
+      <End Role="CT_DonDatHangNCC" EntitySet="CT_DonDatHangNCC" />
+    </AssociationSet>
     <AssociationSet Name="FK_CT_PHIEUDH_PDT" Association="Self.FK_CT_PHIEUDH_PDT">
       <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANG" />
       <End Role="CT_PHIEUDATHANG" EntitySet="CT_PHIEUDATHANG" />
@@ -316,6 +437,14 @@
       <End Role="THONGTINSANPHAM" EntitySet="THONGTINSANPHAM" />
       <End Role="CT_PHIEUNHAPHANG" EntitySet="CT_PHIEUNHAPHANG" />
     </AssociationSet>
+    <AssociationSet Name="FK_DonDatHangNCC_NHACUNGCAP" Association="Self.FK_DonDatHangNCC_NHACUNGCAP">
+      <End Role="NHACUNGCAP" EntitySet="NHACUNGCAP" />
+      <End Role="DonDatHangNCC" EntitySet="DonDatHangNCC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DonDatHangNCC_NHANVIEN" Association="Self.FK_DonDatHangNCC_NHANVIEN">
+      <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+      <End Role="DonDatHangNCC" EntitySet="DonDatHangNCC" />
+    </AssociationSet>
     <AssociationSet Name="FK_NHANVIEN_PHANQUYEN" Association="Self.FK_NHANVIEN_PHANQUYEN">
       <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />
       <End Role="NHANVIEN" EntitySet="NHANVIEN" />
@@ -331,6 +460,10 @@
     <AssociationSet Name="FK_PHIEUGIAOHANG_PDH" Association="Self.FK_PHIEUGIAOHANG_PDH">
       <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANG" />
       <End Role="PHIEUGIAOHANG" EntitySet="PHIEUGIAOHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PHIEUNHAPHANG_DonDatHangNCC" Association="Self.FK_PHIEUNHAPHANG_DonDatHangNCC">
+      <End Role="DonDatHangNCC" EntitySet="DonDatHangNCC" />
+      <End Role="PHIEUNHAPHANG" EntitySet="PHIEUNHAPHANG" />
     </AssociationSet>
     <AssociationSet Name="FK_PHIEUNHAPHANG_NHACUNGCAP" Association="Self.FK_PHIEUNHAPHANG_NHACUNGCAP">
       <End Role="NHACUNGCAP" EntitySet="NHACUNGCAP" />

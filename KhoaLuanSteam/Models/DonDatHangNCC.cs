@@ -12,23 +12,23 @@ namespace KhoaLuanSteam.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PHIEUNHAPHANG
+    public partial class DonDatHangNCC
     {
-        public PHIEUNHAPHANG()
+        public DonDatHangNCC()
         {
-            this.CT_PHIEUNHAPHANG = new HashSet<CT_PHIEUNHAPHANG>();
+            this.CT_DonDatHangNCC = new HashSet<CT_DonDatHangNCC>();
         }
     
-        public int MaPhieuNhapHang { get; set; }
+        public int MaDonDatHangNCC { get; set; }
         public string MaNCC { get; set; }
         public Nullable<int> MaNV { get; set; }
-        public Nullable<System.DateTime> NgayLap_PN { get; set; }
+        public Nullable<System.DateTime> NgayLap { get; set; }
         public Nullable<int> TongSL { get; set; }
-        public Nullable<double> TongTien_NH { get; set; }
+        public Nullable<double> TongTien { get; set; }
     
-        public virtual ICollection<CT_PHIEUNHAPHANG> CT_PHIEUNHAPHANG { get; set; }
-        public virtual DonDatHangNCC DonDatHangNCC { get; set; }
+        public virtual ICollection<CT_DonDatHangNCC> CT_DonDatHangNCC { get; set; }
         public virtual NHACUNGCAP NHACUNGCAP { get; set; }
         public virtual NHANVIEN NHANVIEN { get; set; }
+        public virtual PHIEUNHAPHANG PHIEUNHAPHANG { get; set; }
     }
 }
