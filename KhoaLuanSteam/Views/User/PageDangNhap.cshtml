@@ -72,7 +72,7 @@
                                 <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                                 <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                             </div>
-                            <label for='user' style="float:left">Tên Đăng Nhập</label>
+                            <label for='user' style="float:left; margin-left: 10px">Tên Đăng Nhập</label>
                             <div class="input-group">
                                 @Html.TextBoxFor(model => model.TenDN, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Tên đăng nhập" })
                             </div>
@@ -81,7 +81,7 @@
                                 @Html.ValidationMessageFor(model => model.TenDN, "", new { @class = "text-danger" })
                             </div>
                             
-                            <label for='pass' style="float:left">Mật Khẩu</label>
+                            <label for='pass' style="float:left ; margin-left: 10px">Mật Khẩu</label>
                             <div class="input-group">
                                
                                 @Html.PasswordFor(model => model.MatKhau, new { @class = "form-control", @placeholder = "Mật khẩu" })
@@ -95,7 +95,7 @@
                             <a href="#" style="margin-right:200px">Forgot your password?</a>
                             <div class="form-group">
                                 <div class="col-sm-12 controls">
-                                    <button type="submit" class="btn btn-primary">Đăng nhập </button>
+                                    <button type="submit" class="btn btn-primary" style=" margin-top: 30px; color:#00ffff">Đăng nhập </button>
                                 </div>
                             </div>
                         </form>
@@ -109,7 +109,7 @@
                                 <div>
                                     <h1>HELLO</h1>
                                     <p>Bạn không có tài khoản</p>
-                                    <button class="ghost" id="signUp"> <a href="/User/DangKy">Đăng Ký</a></button>
+                                    <button class="ghost" id="signUp" style="color:#0094ff"> <a href="/User/DangKy">Đăng Ký</a></button>
                                 </div>
                             </div>
                         </div>
