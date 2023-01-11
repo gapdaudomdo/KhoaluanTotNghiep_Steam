@@ -49,6 +49,7 @@
           <Property Name="NgayLap" Type="date" />
           <Property Name="TongSL" Type="int" />
           <Property Name="TongTien" Type="float" />
+          <Property Name="TrangThai" Type="int" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -142,7 +143,7 @@
           <Key>
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
-          <Property Name="MaPhieuNhapHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaPhieuNhapHang" Type="int" Nullable="false" />
           <Property Name="MaNCC" Type="nchar" MaxLength="10" />
           <Property Name="MaNV" Type="int" />
           <Property Name="NgayLap_PN" Type="date" />
@@ -168,7 +169,7 @@
           <Property Name="MaNCC" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="TenSanPham" Type="nvarchar" MaxLength="100" />
           <Property Name="GiaSanPham" Type="float" />
-          <Property Name="MoTa" Type="nvarchar" MaxLength="800" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="1000" />
           <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
           <Property Name="GiamGia" Type="float" />
           <Property Name="SLTon" Type="int" />
@@ -542,6 +543,7 @@
           <Property Name="NgayLap" Type="DateTime" Precision="0" />
           <Property Name="TongSL" Type="Int32" />
           <Property Name="TongTien" Type="Double" />
+          <Property Name="TrangThai" Type="Int32" />
           <NavigationProperty Name="CT_DonDatHangNCC" Relationship="Self.FK_CT_DonDatHangNCC_DDHNCC" FromRole="DonDatHangNCC" ToRole="CT_DonDatHangNCC" />
           <NavigationProperty Name="NHACUNGCAP" Relationship="Self.FK_DonDatHangNCC_NHACUNGCAP" FromRole="DonDatHangNCC" ToRole="NHACUNGCAP" />
           <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_DonDatHangNCC_NHANVIEN" FromRole="DonDatHangNCC" ToRole="NHANVIEN" />
@@ -653,7 +655,7 @@
           <Key>
             <PropertyRef Name="MaPhieuNhapHang" />
           </Key>
-          <Property Name="MaPhieuNhapHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaPhieuNhapHang" Type="Int32" Nullable="false" />
           <Property Name="MaNCC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="MaNV" Type="Int32" />
           <Property Name="NgayLap_PN" Type="DateTime" Precision="0" />
@@ -683,7 +685,7 @@
           <Property Name="MaNCC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="TenSanPham" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="GiaSanPham" Type="Double" />
-          <Property Name="MoTa" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="GiamGia" Type="Double" />
           <Property Name="SLTon" Type="Int32" />
@@ -1057,6 +1059,7 @@
                 <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
                 <ScalarProperty Name="TongSL" ColumnName="TongSL" />
                 <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

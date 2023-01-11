@@ -44,6 +44,7 @@
     <Property Name="NgayLap" Type="date" />
     <Property Name="TongSL" Type="int" />
     <Property Name="TongTien" Type="float" />
+    <Property Name="TrangThai" Type="int" />
   </EntityType>
   <EntityType Name="KHACHHANG">
     <Key>
@@ -137,7 +138,7 @@
     <Key>
       <PropertyRef Name="MaPhieuNhapHang" />
     </Key>
-    <Property Name="MaPhieuNhapHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaPhieuNhapHang" Type="int" Nullable="false" />
     <Property Name="MaNCC" Type="nchar" MaxLength="10" />
     <Property Name="MaNV" Type="int" />
     <Property Name="NgayLap_PN" Type="date" />
@@ -163,7 +164,7 @@
     <Property Name="MaNCC" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="TenSanPham" Type="nvarchar" MaxLength="100" />
     <Property Name="GiaSanPham" Type="float" />
-    <Property Name="MoTa" Type="nvarchar" MaxLength="800" />
+    <Property Name="MoTa" Type="nvarchar" MaxLength="1000" />
     <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
     <Property Name="GiamGia" Type="float" />
     <Property Name="SLTon" Type="int" />

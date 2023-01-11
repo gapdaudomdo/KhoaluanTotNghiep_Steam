@@ -59,7 +59,8 @@
                             @Html.DisplayFor(modelItem => item.TongSL)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TongTien_NH)
+                            @*@Html.DisplayFor(modelItem => item.TongTien_NH)*@
+                            @String.Format("{0:0,0}", item.TongTien_NH) VND
                         </td>
                         <td>
                             @*@Html.ActionLink("Xem", "DetailsCT_PhieuNhapHang", new { id = item.MaPhieuNhapHang.Trim() }, new { @class = "btn btn-primary" })*@

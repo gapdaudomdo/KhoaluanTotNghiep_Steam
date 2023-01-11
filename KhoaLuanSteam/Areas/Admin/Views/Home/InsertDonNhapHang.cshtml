@@ -3,7 +3,41 @@
     Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
 }
 
-@model KhoaLuanSteam.Models.PHIEUNHAPHANG
+@*@model KhoaLuanSteam.Models.PHIEUNHAPHANG
+
+
+    <h2 style="text-align: center;">Chọn nhà cung cấp</h2>
+    @using (Html.BeginForm("InsertDonNhapHang", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @if (ViewBag.Success != null)
+            {
+                <div id="thongBaoThanhCong" class="alert alert-success">@ViewBag.Success</div>
+            }
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Loại</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("MaNCC", null, "Chọn Nhà Cung Cấp", new { @class = "form-control", style = "height: 35px" })
+                    @Html.ValidationMessageFor(model => model.MaNCC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-left: 13px;">
+                <span>
+                    @Html.ActionLink("Trở về", "AD_ShowAllPhieuNhapHang", new { id = "" }, new { @class = "btn btn-primary" })
+                </span>
+                <span class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Tiếp tục" class="btn btn-primary" />
+                </span>
+            </div>
+        </div>
+    }*@
+
+@model KhoaLuanSteam.Models.DonDatHangNCC
 
 
 <h2 style="text-align: center;">Chọn nhà cung cấp</h2>
@@ -17,66 +51,21 @@
         {
             <div id="thongBaoThanhCong" class="alert alert-success">@ViewBag.Success</div>
         }
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.MaPhieuNhapHang, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.MaPhieuNhapHang, new { @class = "form-control", placeHolder = "" })
-                    @Html.ValidationMessageFor(model => model.MaPhieuNhapHang, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+
         <div class="form-group">
-            <label class="control-label col-md-2">Loại</label>
+            <label class="control-label col-md-3">Nhập hàng từ nhà cung cấp</label>
             <div class="col-md-10">
-                @Html.DropDownList("MaNCC", null, "Chọn Nhà Cung Cấp", new { @class = "form-control", style = "height: 35px" })
-                @Html.ValidationMessageFor(model => model.MaNCC, "", new { @class = "text-danger" })
+                @Html.DropDownList("MaDonDatHangNCC", null, "Chọn đơn để nhập hàng", new { @class = "form-control", style = "height: 35px" })
+                @Html.ValidationMessageFor(model => model.MaDonDatHangNCC, "", new { @class = "text-danger" })
             </div>
         </div>
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.MaNV, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.MaNV, new { @class = "form-control", placeHolder = "" })
-                    @Html.ValidationMessageFor(model => model.MaNV, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-        @*<div class="form-group">
-                   <label class="control-label col-md-2">Nhân Viên</label>
-                   <div class="col-md-10">
-                       @Html.DropDownList("MaNV", null, "Chọn Nhân Viên", new { @class = "form-control", style = "height: 35px" })
-                       @Html.ValidationMessageFor(model => model.MaNV, "", new { @class = "text-danger" })
-                   </div>
-            </div>*@
 
-        @* <div class="form-group">
-                @Html.LabelFor(model => model.TongSL, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.TongSL, new { @class = "form-control", placeHolder = "" })
-                    @Html.ValidationMessageFor(model => model.TongSL, "", new { @class = "text-danger" })
-                </div>
-            </div> *@
-
-
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.TongSL, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.TongSL, new { @class = "form-control", placeHolder = "", @Value = "0", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(model => model.TongSL, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.TongTien_NH, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.TongTien_NH, new { @class = "form-control", placeHolder = "", @Value = "0", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(model => model.TongTien_NH, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
         <div class="form-group" style="margin-left: 13px;">
             <span>
                 @Html.ActionLink("Trở về", "AD_ShowAllPhieuNhapHang", new { id = "" }, new { @class = "btn btn-primary" })
             </span>
             <span class="col-md-offset-2 col-md-10">
-                @*<input type="submit" value="Thêm" class="btn btn-primary" />*@
-                <input type="submit" value="Tiếp tục" class="btn btn-primary" />
+                <input type="submit" value="Nhập" class="btn btn-primary" />
             </span>
         </div>
     </div>

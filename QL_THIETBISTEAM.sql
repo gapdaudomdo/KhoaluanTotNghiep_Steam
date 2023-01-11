@@ -42,11 +42,6 @@ CREATE TABLE KHACHHANG
 	CONSTRAINT PK_KhachHang PRIMARY KEY CLUSTERED  (MaKH  ASC )
 )
 
---ALTER TABLE KHACHHANG
---ALTER COLUMN NgaySinh DATE
-
-
-
 CREATE TABLE LIENHE(
 	MaLH int IDENTITY(1,1) NOT NULL,
 	Ho nvarchar(50) NULL,
@@ -91,39 +86,6 @@ CREATE TABLE THONGTINSANPHAM
 	CONSTRAINT FK_THONGTINSACH_NHACUNGCAP FOREIGN KEY (MaNCC) REFERENCES NHACUNGCAP(MaNCC)
 )
 
---select ISNULL(COUNT(MaLoai), 0 )
---from THONGTINSANPHAM
---where MaLoai =3
-
-CREATE TABLE PHIEUNHAPHANG
-(
-	MaPhieuNhapHang INT IDENTITY(1,1) NOT NULL,
-	MaNCC nchar(10),
-	MaNV INT ,
-	NgayLap_PN date,
-	TongSL int,
-	TongTien_NH FLOAT,
-	constraint PK_PHIEUNHAPHANG primary key (MaPhieuNhapHang),
-    constraint FK_PHIEUNHAPHANG_NHANVIEN foreign key(MaNV) references NHANVIEN(MaNV),
-    constraint FK_PHIEUNHAPHANG_NHACUNGCAP foreign key(MaNCC) references NHACUNGCAP(MaNCC)
-)
-
-
-CREATE TABLE CT_PHIEUNHAPHANG
-(
-	MaCTPhieuNhapHang INT IDENTITY(1,1) NOT NULL,
-	MaSanPham INT not null,
-	MaPhieuNhapHang int not null,
-	Sluong INT,
-	DonGiaNhap FLOAT,
-	TongTien FLOAT,
-	constraint PK_CT_PHIEUNHAPHANG  primary key (MaCTPhieuNhapHang, MaPhieuNhapHang),
-    constraint FK_CT_PHIEUNHAPHANG_PNH foreign key (MaPhieuNhapHang) references PHIEUNHAPHANG(MaPhieuNhapHang),
-	constraint FK_CT_PHIEUNHAPHANG_TTSP foreign key (MaSanPham) references THONGTINSANPHAM(MaSanPham)
-)
-
-
-
 CREATE TABLE DonDatHangNCC
 (
 	MaDonDatHangNCC INT IDENTITY(1,1) NOT NULL,
@@ -132,11 +94,11 @@ CREATE TABLE DonDatHangNCC
 	NgayLap date,
 	TongSL int,
 	TongTien FLOAT,
+	TrangThai int,
 	constraint PK_DonDatHangNCC primary key (MaDonDatHangNCC),
     constraint FK_DonDatHangNCC_NHANVIEN foreign key(MaNV) references NHANVIEN(MaNV),
     constraint FK_DonDatHangNCC_NHACUNGCAP foreign key(MaNCC) references NHACUNGCAP(MaNCC)
 )
-
 
 CREATE TABLE CT_DonDatHangNCC
 (
@@ -151,12 +113,32 @@ CREATE TABLE CT_DonDatHangNCC
 	constraint FK_CT_DonDatHangNCC_TTSP foreign key (MaSanPham) references THONGTINSANPHAM(MaSanPham)
 )
 
-ALTER TABLE PHIEUNHAPHANG
-ADD constraint FK_PHIEUNHAPHANG_DonDatHangNCC foreign key(MaPhieuNhapHang) references DonDatHangNCC(MaDonDatHangNCC)
+CREATE TABLE PHIEUNHAPHANG
+(
+	MaPhieuNhapHang INT NOT NULL,
+	MaNCC nchar(10),
+	MaNV INT ,
+	NgayLap_PN date,
+	TongSL int,
+	TongTien_NH FLOAT,
+	constraint PK_PHIEUNHAPHANG primary key (MaPhieuNhapHang),
+    constraint FK_PHIEUNHAPHANG_NHANVIEN foreign key(MaNV) references NHANVIEN(MaNV),
+    constraint FK_PHIEUNHAPHANG_NHACUNGCAP foreign key(MaNCC) references NHACUNGCAP(MaNCC),
+	constraint FK_PHIEUNHAPHANG_DonDatHangNCC foreign key(MaPhieuNhapHang) references DonDatHangNCC(MaDonDatHangNCC)
+)
 
-
-
-
+CREATE TABLE CT_PHIEUNHAPHANG
+(
+	MaCTPhieuNhapHang INT IDENTITY(1,1) NOT NULL,
+	MaSanPham INT not null,
+	MaPhieuNhapHang int not null,
+	Sluong INT,
+	DonGiaNhap FLOAT,
+	TongTien FLOAT,
+	constraint PK_CT_PHIEUNHAPHANG  primary key (MaCTPhieuNhapHang, MaPhieuNhapHang),
+    constraint FK_CT_PHIEUNHAPHANG_PNH foreign key (MaPhieuNhapHang) references PHIEUNHAPHANG(MaPhieuNhapHang),
+	constraint FK_CT_PHIEUNHAPHANG_TTSP foreign key (MaSanPham) references THONGTINSANPHAM(MaSanPham)
+)
 
 CREATE TABLE TINHTRANGDH
 (
@@ -218,21 +200,22 @@ INSERT INTO TINHTRANGDH VALUES(3,N'Đang Thàng Công')
 
 --************BẢNG NHÂN VIÊN 
 SET DATEFORMAT DMY
-INSERT INTO NhanVien VALUES(N'Do Gia Huy','23/7/2001',N'Nam',N'giahuydo@gmail.com','0356322754',N'NV1.JPG','GIABO','12345',2)
+INSERT INTO NhanVien VALUES(N'Do Gia Huy','23/7/2001',N'Nam',N'giahuydo@gmail.com','0356322754',N'NV1.JPG','GIABO','12345',3)
 INSERT INTO NhanVien VALUES(N'Nguyen Thanh Loc','01/5/2001',N'Nam',N'locdaubuoi@gmail.com','0355467282',N'NV2.JPG','THANHLOC','12345',2)
 INSERT INTO NhanVien VALUES(N'Le Xuan Huy','12/8/2001',N'Nam',N'huyle@gmail.com','0355467282',N'NV2.JPG','XUANHUY','12345',1)
 INSERT INTO NhanVien VALUES(N'Admin','01/01/2001',N'Nam',N'admin@gmail.com',0355467282,N'NV2.JPG','admin','12345',1)
 INSERT INTO NhanVien VALUES(N'Bùi Văn Khoa','02/08/2001',N'Nam',N'buivankhoa@gmail.com','0355923282',N'NV2.JPG','khoabui','12345',2)
 
 
+
 --************BẢNG KHÁCH HÀNG
 SET DATEFORMAT DMY
-INSERT INTO KHACHHANG VALUES(N'Đỗ Gia Huy',N'TP.HCM','0763512628',N'giahuydo01@gmail.com',N'25/1/2001',N'Nam',N'13/10/2020','giahuydo','12345')
-INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM','0987654321',N'locdaubuoi@gmail.com',N'25/12/2001',N'Nam',N'12/10/2020','loc','12345')
-INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM','0987654321',N'gapdaudomdo01@gmail.com',N'25/12/2001',N'Nam',N'12/10/2020','locu','12345')
-
-
+INSERT INTO KHACHHANG VALUES(N'Đỗ Gia Huy',N'TP.HCM','0763512628',N'giahuydo01@gmail.com',N'25/1/2001',N'Nam',N'13/10/2022','giahuydo','12345')
+INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM','0987654321',N'locdaubuoi@gmail.com',N'25/12/2001',N'Nam',N'12/10/2022','loc','12345')
+INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM','0987654321',N'gapdaudomdo01@gmail.com',N'25/12/2001',N'Nam',N'12/10/2022','locu','12345')
 INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM','0987654321',N'conca8048@gmail.com',N'25/12/2001',N'Nam',N'12/10/2020','locumap','12345')
+INSERT INTO KHACHHANG VALUES(N'Lê Xuân Huy',N'TP.HCM','0987387321',N'lexuanhuytvd@gmail.com',N'01/01/2001',N'Nam',N'01/01/2023','xuanhuy','12345')
+
 select * from KHACHHANG
 
 
@@ -296,25 +279,6 @@ INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,S
 																																							Bộ Đo Thể Tích Mầm Non #1044 Gigo phù hợp cho trẻ mầm non & mẫu giáo trên 3 tuổi. Chất liệu bằng nhựa cao cấp.
 																																							Trẻ biết cách đo thể tích của nhiều đối tượng khác nhau bằng 1 đơn vị đo, biết đếm và đọc kết quả đếm.', N'product4.png',0,10)
 
-select*from THONGTINSANPHAM
-
-
----------------------them du lieu b?ng HOA DON NHAP SACH VAO CUA HANG
-SET DATEFORMAT DMY
-INSERT INTO PHIEUNHAPHANG
-VALUES ('NCC01',1,N'21/9/2022',4,430000);
-SET DATEFORMAT DMY
-INSERT INTO PHIEUNHAPHANG
-VALUES('NCC02',2,N'21/4/2022',10,300000);
-
-
---******************************PHIEU DAT HANG
-GO
-SET DATEFORMAT DMY
-INSERT PHIEUDATHANG(MaKH,NgayDat,Tong_SL_Dat,ThanhTien,TinhTrang) VALUES (1,N'12/3/2022', 1,250000, 3)
-INSERT PHIEUDATHANG(MaKH,NgayDat,Tong_SL_Dat,ThanhTien,TinhTrang) VALUES (2,N'10/9/2022', 2,300000,3)
-
-
 CREATE PROC Update_SL_Ton
 	@MaCTPhieuNhapHang int,
     @MaSP int,
@@ -366,3 +330,10 @@ update DonDatHangNCC
 				from CT_DonDatHangNCC 
 				where CT_DonDatHangNCC.MaDonDatHangNCC=@MaDonDHNCC)
 	where DonDatHangNCC.MaDonDatHangNCC=@MaDonDHNCC
+
+CREATE PROC Update_TrangThai_DatHangNCC
+		@MaDonDHNCC int
+AS
+	update DonDatHangNCC
+	set TrangThai = 0
+	where MaDonDatHangNCC = @MaDonDHNCC

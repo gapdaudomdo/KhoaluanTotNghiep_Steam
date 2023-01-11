@@ -44,6 +44,7 @@
           <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
           <ScalarProperty Name="TongSL" ColumnName="TongSL" />
           <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
