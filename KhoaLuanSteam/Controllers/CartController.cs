@@ -28,6 +28,7 @@ namespace KhoaLuanSteam.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            
             var cart = Session[GioHang];
             var list = new List<GioHang>();
             var sluong = 0;
@@ -233,6 +234,7 @@ namespace KhoaLuanSteam.Controllers
                 var list = new List<GioHang>();
                 var sl = 0;
                 double? total = 0;
+                string diachi = Convert.ToString(f["DiaChi"]);
                 if (cart != null)
                 {
                     list = (List<GioHang>)cart;
@@ -250,7 +252,7 @@ namespace KhoaLuanSteam.Controllers
                 //thêm dữ liệu vào đơn đặt hàng
 
                 var result = new GioHangProcess().InsertDDH(order);
-                string diachi = Convert.ToString(f["DiaChi"]);
+                
                 string SDT = Convert.ToString(f["DienThoai"]);
                 giaohang.MaPhieuDH = result;
                 giaohang.TenKH = kh.TenKH;
@@ -258,6 +260,7 @@ namespace KhoaLuanSteam.Controllers
                 giaohang.DiaChi = diachi;
                 giaohang.SDT = SDT;
                 giaohang.NgayTao = DateTime.Now;
+                Session["DiaChi"] = diachi;
                 var kq = new GioHangProcess().InsertPGH(giaohang);
                 ViewBag.MaPhieuDDH = result;
                 //var idUser = db.PHIEUDATHANGs.Where(n=>n.MaKH==order.MaKH).Last();
@@ -349,8 +352,7 @@ namespace KhoaLuanSteam.Controllers
                 System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplate/") + "Text" + ".cshtml");
             var inforKH = db.PHIEUDATHANGs.Include("KHACHHANG").Where(x => x.MaPhieuDH == MaDH).First();
             //var inforDH = db.PHIEUDATHANGs.Include("PHIEUDATHANG").Where(x => x.MaPhieuDH == MaDH).First();
-            //var inforCTPDH = db.CT_PHIEUDATHANG.Include("PHIEUDATHANG").Where(x => x.MaPhieuDH == MaDH).ToList();
-
+            var diachi = Session["DiaChi"];
             var cart = Session[GioHang];
             var list = new List<GioHang>();
             if (cart != null)
@@ -368,6 +370,7 @@ namespace KhoaLuanSteam.Controllers
             THONGTINSANPHAM tt = new THONGTINSANPHAM();
 
 
+
             //var tensp = from b in db.CT_PHIEUDATHANG 
             //            join c in db.THONGTINSANPHAMs on b.MaSanPham equals c.MaSanPham
             //            select new { c.TenSanPham };
@@ -379,7 +382,9 @@ namespace KhoaLuanSteam.Controllers
             body = body.Replace("@ViewBag.TenUser", inforKH.KHACHHANG.TenKH);
             body = body.Replace("@ViewBag.NgayDat", inforKH.NgayDat.ToString());
             body = body.Replace("@ViewBag.TongSL", inforKH.Tong_SL_Dat.ToString());
+            body = body.Replace("@ViewBag.DiaChi", diachi.ToString());
             body = body.Replace("@ViewBag.ThanhTien", inforKH.ThanhTien.ToString());
+    
 
 
             body = body.ToString();
