@@ -26,11 +26,36 @@
                                     Mô tả đang cập nhật
                                 </span>
                             </div>
-                            <div class="product-item-price price-box">
+                            @* <div class="product-item-price price-box">
                                 <span class="special-price">
                                     <span class="price product-price">@item.GiaSanPham.Value.ToString("N0") VND</span>
                                 </span>
-                            </div>
+                            </div> *@
+                            <div class="section">
+                    <div class="blockprice" style="min-height: 30px; width: 100%; float: left;">
+                        <div class="product-item-price price-box" style="float:left; width: 100%; text-align:center; color:#F26522;font-weight:600; font-size:15px; line-height:20px;">
+                            @if (@item.GiamGia <= 0)
+                            {
+                                <span class="product-item-price-sale old-price">
+                                    <span class="compare-price price product-price-old" style="font-size: 15px; font-weight: 700; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; color: #f26522; font-weight: 600; line-height: 20px; ">
+                                        @item.GiaSanPham.Value.ToString("N0") VND
+                                    </span>
+                                </span>
+                            }
+                            else
+                            {
+
+                                @Html.Action("giasachgiam", "Product", new { @MaSanPham = @item.MaSanPham })
+                                <span class="product-item-price-sale old-price">
+                                    <span class="compare-price price product-price-old" style="color: #636363; text-decoration: line-through;font-weight:300; font-size:14px">
+                                        @item.GiaSanPham.Value.ToString("N0") VND
+                                    </span>
+                                </span>
+                            }
+
+                        </div>
+                    </div>
+                </div>
 
                         </div>
                     </div>

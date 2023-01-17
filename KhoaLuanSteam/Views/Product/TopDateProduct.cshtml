@@ -41,9 +41,7 @@
     @foreach (var item in Model)
     {
         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-            <div class="product-box product-item-main product-item-compare" style="width: 100%; float: left;  margin-bottom: 30px;
-    text-align: center;
-    position: relative;">
+            <div class="product-box product-item-main product-item-compare" style="width: 100%; float: left;  margin-bottom: 30px;text-align: center; position: relative;">
                 <div class="product-thumbnail">
                     <div class="content_hover">
                         <a class="image_thumb p_img" title="@item.TenSanPham" href="/Product/ChiTietSP/@item.MaSanPham">
@@ -68,7 +66,8 @@
                 </div>
                 <div class="product-info product-bottom mh">
                     <h3 class="product-name" style="font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif;font-size: 14px;font-weight: 600; margin: 0 0 5px; overflow: hidden; text-transform: uppercase;   word-wrap: break-word;  line-height: 22px;padding: 10px 30px 0; text-overflow: ellipsis; white-space: nowrap;">
-                        <a title="@item.TenSanPham" href="/Product/Details/@item.MaSanPham" style=" color: #636363; text-decoration: none;">@(item.TenSanPham.Length > 26 ? item.TenSanPham.Substring(0, 22) + "..." : item.TenSanPham)</a>
+                        <a title="@item.TenSanPham" href="/Product/Details/@item.MaSanPham" style=" color: #636363; text-decoration: none;">@(item.TenSanPham.Length > 26 ? item.TenSanPham.Substring(0, 22) + "..." : item.TenSanPham)
+                        </a>
                     </h3>
                 </div>
                 <div class="section">

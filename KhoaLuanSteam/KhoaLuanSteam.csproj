@@ -3579,7 +3579,6 @@
     <Content Include="Areas\Admin\Views\Home\AD_ShowAllNV.cshtml" />
     <Content Include="Areas\Admin\Views\Home\DetailsUserNV.cshtml" />
     <Content Include="Areas\Admin\Views\Home\InsertNhanVien.cshtml" />
-    <Content Include="malefashion-master.zip" />
     <Content Include="Areas\Admin\Views\Home\UpdateNhanVien.cshtml" />
     <Content Include="Areas\Admin\Views\Home\ThongKe.cshtml" />
     <Content Include="Areas\Admin\Views\Home\AD_ShowAllDonDatHangNCC.cshtml" />

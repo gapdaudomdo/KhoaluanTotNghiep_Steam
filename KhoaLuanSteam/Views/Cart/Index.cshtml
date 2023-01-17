@@ -4,7 +4,12 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-
+<style>
+    .vertical-align{
+        display: table-cell;
+        vertical-align: middle !important;
+    }
+</style>
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 @section jsFooter{
     <script type="text/javascript">
@@ -110,7 +115,7 @@
                             </div>
                         </div>
                     </td>
-                    <td data-th="Price">
+                    <td data-th="Price" class="vertical-align">
                         @if (@item.sanpham.GiamGia <= 0)
                         {
                             <span>
@@ -125,10 +130,10 @@
 
                         }
                     </td>
-                    <td data-th="Quantity">
+                    <td data-th="Quantity" class="vertical-align">
                         <input type="number" class="txtQuantity" data-id="@item.sanpham.MaSanPham" value="@item.iSoLuong">
                     </td>
-                    <td data-th="Subtotal" class="text-center">
+                    <td data-th="Subtotal" class="text-center vertical-align">
                         @if (@item.sanpham.GiamGia <= 0)
                         {
                             <span>
@@ -145,7 +150,7 @@
                         }
 
                     </td>
-                    <td class="actions" data-th="">
+                    <td class="actions vertical-align text-center" data-th="">
                         @*nút xóa*@
                         <button id="btnDelete" type="submit" value="@item.sanpham.MaSanPham" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
                         @*kết thúc nút xóa*@
@@ -166,7 +171,11 @@
                     @*kết thúc nút xóa*@
                 </td>
                 <td colspan="2" class="hidden-xs"></td>
-                <td class="hidden-xs text-center"><strong>Tổng cộng: @String.Format("{0:0,0}", ViewBag.Total) VND</strong></td>
+                <td class="hidden-xs text-center vertical-align">  
+                    <strong>
+                        @String.Format("{0:0,0}", ViewBag.Total) VND
+                    </strong>
+                </td>
                 <td><a href="/Cart/ThanhToan" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a></td>
             </tr>
         </tfoot>

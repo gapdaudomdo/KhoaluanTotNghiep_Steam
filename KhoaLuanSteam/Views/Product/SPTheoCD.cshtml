@@ -53,6 +53,33 @@
             ul.pagination li a:hover:not(.active) {
                 background-color: #0099ae;
             }
+
+            @* css discount *@
+    .discount_product {
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1;
+        }
+        .discount_content{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            font-weight: 400;
+            line-height: .8125rem;
+            color: #ee4d2d;
+            text-transform: uppercase;
+            font-size: .75rem;
+            width: 36px;
+            height: 32px;
+            box-sizing: border-box;
+            padding: 4px 2px 3px;
+            background-color: rgba(255,212,36,.9);
+        }
+        .title_discount{
+            color: #fff;
+        }
 </style>
 <link href="~/Css/StyleSheet5.css" rel="stylesheet" />
 <link href="~/Css/StyleSheet4.css" rel="stylesheet" />
@@ -96,6 +123,16 @@
                         <div class="product-thumbnail">
                             <div class="content_hover">
                                 <a class="image_thumb p_img" title="@item.TenSanPham" href="/Product/ChiTietSP/@item.MaSanPham">
+                                    @if (@item.GiamGia > 0)
+                                        {
+                                            <div class="discount_product">
+                                                <div class="discount_content">
+                                                    <span class="ratio_discount">@item.GiamGia%</span>
+                                                    <span class="title_discount">giảm</span>
+                                                </div>
+                                            </div>
+                                        }
+
                                     <div class="content-overlay"></div>
                                     <img class="content-image" src="~/HinhAnhSach/@item.HinhAnh" alt="@item.HinhAnh" width="180px" height="242px" />
                                     <a title="Xem nhanh" href="~/Product/ChiTietSP/@item.MaSanPham" data-handle="tren-duong-bang" class="xem_nhanh btn-circle btn_view btn right-to quick-view hidden-xs hidden-sm">
@@ -110,19 +147,34 @@
                                     @item.TenSanPham
                                 </a>
                             </h3>
+
                             <div class="section">
-                                <div class="blockprice" style="min-height: 30px; width: 100%;">
-                                    <div class="product-item-price price-box">
-                                        <span class="special-price">
-                                            <span class="price product-price" style="font-size: 20px; font-weight: 700; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; color: #f26522; font-weight: 600; line-height: 20px; margin-right: 10px;">
-                                                @item.GiaSanPham.Value.ToString("N0") VND
+                                <div class="blockprice" style="min-height: 30px; width: 100%; float: left;">
+                                    <div class="product-item-price price-box" style="float:left; width: 100%; text-align:center; color:#F26522;font-weight:600; font-size:20px; line-height:20px;">
+                                        @if (@item.GiamGia <= 0)
+                                        {
+                                            <span class="product-item-price-sale old-price">
+                                                <span class="compare-price price product-price-old" style="font-size: 20px; font-weight: 700; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; color: #f26522; font-weight: 600; line-height: 20px; ">
+                                                    @item.GiaSanPham.Value.ToString("N0") VND
+                                                </span>
                                             </span>
-                                        </span>
+                                        }
+                                        else
+                                        {
+
+                                            @Html.Action("giasachgiam", "Product", new { @MaSanPham = @item.MaSanPham })
+                                            <span class="product-item-price-sale old-price">
+                                                <span class="compare-price price product-price-old" style="color: #636363; text-decoration: line-through;font-weight:300; font-size:15px">
+                                                    @item.GiaSanPham.Value.ToString("N0") VND
+                                                </span>
+                                            </span>
+                                        }
+
                                     </div>
-
-
                                 </div>
                             </div>
+
+
                             <div class="product-action clearfix" style="text-align: center; height: 40px; width: 100%; float: left; z-index: 10;">
                                 <form action="/cart/add" method="post" class="variants form-nut-grid" data-id="product-actions-1272032" enctype="multipart/form-data">
                                     <div class="group_action" style="text-align: center; width: 100%; display: flex;  justify-content:center">
