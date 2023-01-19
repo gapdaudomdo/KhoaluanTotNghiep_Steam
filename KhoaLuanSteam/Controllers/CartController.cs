@@ -258,7 +258,7 @@ namespace KhoaLuanSteam.Controllers
             // Lý do cần làm như này do có khả năng người dùng reload lại trang này (?) dẫn đến bug tại dòng 291
             if (Session["SS_DatHang"] == null || Session["SS_GiaoHang"] == null)
             {
-                return RedirectToAction("Cart", "ThanhToan");
+                return RedirectToAction("ThanhToan", "Cart");
             }
 
             if (Request.QueryString.Count > 0)
