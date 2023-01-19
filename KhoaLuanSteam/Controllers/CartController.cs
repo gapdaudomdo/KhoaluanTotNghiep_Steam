@@ -13,6 +13,8 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Web.Hosting;
 using DoAn_MonHoc.ViewModels;
+using System.Configuration;
+using KhoaLuanSteam.Controllers.VNPay;
 
 namespace KhoaLuanSteam.Controllers
 {
@@ -28,7 +30,7 @@ namespace KhoaLuanSteam.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            
+
             var cart = Session[GioHang];
             var list = new List<GioHang>();
             var sluong = 0;
@@ -221,66 +223,175 @@ namespace KhoaLuanSteam.Controllers
             }
         }
 
-
-        [HttpPost]
-        public ActionResult ThanhToan(int MaKH, FormCollection f)
+        public ActionResult ThanhToanVNPay(double? thanhTien)
         {
-            if (ModelState.IsValid) 
+            // VNPay keys, thay đổi trong Web.config
+            string url = ConfigurationManager.AppSettings["Url"];
+            string returnUrl = ConfigurationManager.AppSettings["ReturnUrl"];
+            string tmnCode = ConfigurationManager.AppSettings["TmnCode"];
+            string hashSecret = ConfigurationManager.AppSettings["HashSecret"];
+
+            PayLib pay = new PayLib();
+
+            pay.AddRequestData("vnp_Version", "2.1.0");
+            pay.AddRequestData("vnp_Command", "pay");
+            pay.AddRequestData("vnp_TmnCode", tmnCode);
+            pay.AddRequestData("vnp_Amount", (thanhTien * 100).ToString());
+            pay.AddRequestData("vnp_BankCode", "");
+            pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            pay.AddRequestData("vnp_CurrCode", "VND");
+            pay.AddRequestData("vnp_IpAddr", Util.GetIpAddress());
+            pay.AddRequestData("vnp_Locale", "vn");
+            pay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang");
+            pay.AddRequestData("vnp_OrderType", "other");
+            pay.AddRequestData("vnp_ReturnUrl", returnUrl);
+            pay.AddRequestData("vnp_TxnRef", DateTime.Now.Ticks.ToString());
+
+            string paymentUrl = pay.CreateRequestUrl(url, hashSecret);
+
+            return Redirect(paymentUrl);
+        }
+
+        public ActionResult TinhTrangThanhToanVNPay()
+        {
+            // Kiểm tra session datHang và giaoHang, nếu null trỏ về thằng ThanhToan
+            // Lý do cần làm như này do có khả năng người dùng reload lại trang này (?) dẫn đến bug tại dòng 291
+            if (Session["SS_DatHang"] == null || Session["SS_GiaoHang"] == null)
             {
-                var order = new PHIEUDATHANG();
-                var giaohang = new PHIEUGIAOHANG();
-                var kh = db.KHACHHANGs.Where(x => x.MaKH == MaKH).FirstOrDefault();
-                var cart = Session[GioHang];
-                var list = new List<GioHang>();
-                var sl = 0;
-                double? total = 0;
-                string diachi = Convert.ToString(f["DiaChi"]);
-                if (cart != null)
+                return RedirectToAction("Cart", "ThanhToan");
+            }
+
+            if (Request.QueryString.Count > 0)
+            {
+                string hashSecret = ConfigurationManager.AppSettings["HashSecret"];
+                var vnpayData = Request.QueryString;
+                PayLib pay = new PayLib();
+
+                foreach (string s in vnpayData)
                 {
-                    list = (List<GioHang>)cart;
-                    sl = list.Sum(x => x.iSoLuong);
-                    total = list.Sum(x => x.iThanhTien);
+                    if (!string.IsNullOrEmpty(s) && s.StartsWith("vnp_"))
+                    {
+                        pay.AddResponseData(s, vnpayData[s]);
+                    }
                 }
-                ViewBag.Quantity = sl;
-                ViewBag.Total = total;
-                order.NgayDat = DateTime.Now;
-                order.TinhTrang = -1; //chưa xac nhan
-                order.MaKH = MaKH;
-                order.Tong_SL_Dat = ViewBag.Quantity;
-                order.ThanhTien = ViewBag.Total;
 
-                //thêm dữ liệu vào đơn đặt hàng
+                long orderId = Convert.ToInt64(pay.GetResponseData("vnp_TxnRef"));
+                long vnpayTranId = Convert.ToInt64(pay.GetResponseData("vnp_TransactionNo"));
+                string vnp_ResponseCode = pay.GetResponseData("vnp_ResponseCode");
+                string vnp_SecureHash = Request.QueryString["vnp_SecureHash"];
 
-                var result = new GioHangProcess().InsertDDH(order);
-                
-                string SDT = Convert.ToString(f["DienThoai"]);
-                giaohang.MaPhieuDH = result;
-                giaohang.TenKH = kh.TenKH;
-                giaohang.Email = kh.Email;
-                giaohang.DiaChi = diachi;
-                giaohang.SDT = SDT;
-                giaohang.NgayTao = DateTime.Now;
-                Session["DiaChi"] = diachi;
-                var kq = new GioHangProcess().InsertPGH(giaohang);
-                ViewBag.MaPhieuDDH = result;
-                //var idUser = db.PHIEUDATHANGs.Where(n=>n.MaKH==order.MaKH).Last();
+                bool checkSignature = pay.ValidateSignature(vnp_SecureHash, hashSecret);
+
+                if (checkSignature)
+                {
+                    if (vnp_ResponseCode == "00")
+                    {
+                        PHIEUDATHANG pdh = (PHIEUDATHANG)Session["SS_DatHang"];
+                        PHIEUGIAOHANG pgh = (PHIEUGIAOHANG)Session["SS_GiaoHang"];
+
+                        var rsDDH = new GioHangProcess().InsertDDH(pdh);
+                        pgh.MaPhieuDH = rsDDH;
+                        var rsPGH = new GioHangProcess().InsertPGH(pgh);
+                        XacNhanEmail(rsDDH);
+                        ViewBag.IsSuccess = "Yes";
+
+                        // Message có thể thay đổi tùy ý theo tình huống, đây đang đặt mặc định trả về kết quả thực hiện giao dịch
+                        ViewBag.Message = "Thanh toán thành công hóa đơn " + orderId + " Mã giao dịch: " + vnpayTranId;
+                    }
+                    else if (vnp_ResponseCode == "24")
+                    {
+                        ViewBag.IsSuccess = "Cancel";
+                        ViewBag.Message = "Đã hủy thanh toán hóa đơn";
+                    }
+                    else
+                    {
+                        ViewBag.IsSuccess = "No";
+                        ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý hóa đơn " + orderId + " Mã giao dịch: " + vnpayTranId;
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý";
+                }
+
+                // Thực hiện được hay không giao dịch thì cũng phải remove cái session của datHang và giaoHang kia đi
+                // Để các lần thực hiện sau không bị đè, lỗi hay trùng lặp dữ liệu. Tuyệt đối phải lưu ý tại điểm này
+                Session.Remove("SS_DatHang");
+                Session.Remove("SS_GiaoHang");
+            }
+
+            return View();
+        }
+
+        // type: 1. Thanh toán khi nhận hàng, 2. Thanh toán bằng phương thức VNPay
+        [HttpPost]
+        public ActionResult ThanhToan(int MaKH, FormCollection f, int type)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var datHang = new PHIEUDATHANG();
+            var giaoHang = new PHIEUGIAOHANG();
+
+            var khachHang = db.KHACHHANGs.Where(x => x.MaKH == MaKH).FirstOrDefault();
+            var gioHang = Session[GioHang];
+            var lstGioHang = new List<GioHang>();
+
+            int soLuong = 0;
+            double? thanhTien = 0;
+            string diaChi = Convert.ToString(f["DiaChi"]);
+            string SDT = Convert.ToString(f["DienThoai"]);
+
+            if (gioHang != null)
+            {
+                lstGioHang = (List<GioHang>)gioHang;
+                soLuong = lstGioHang.Sum(x => x.iSoLuong);
+                thanhTien = lstGioHang.Sum(x => x.iThanhTien);
+            }
+
+            ViewBag.Quantity = soLuong;
+            ViewBag.Total = thanhTien;
+
+            datHang.NgayDat = DateTime.Now;
+            datHang.TinhTrang = -1; // Chua xac nhan
+            datHang.MaKH = MaKH;
+            datHang.Tong_SL_Dat = soLuong;
+            datHang.ThanhTien = thanhTien;
+
+            giaoHang.TenKH = khachHang.TenKH;
+            giaoHang.Email = khachHang.Email;
+            giaoHang.DiaChi = diaChi;
+            giaoHang.SDT = SDT;
+            giaoHang.NgayTao = DateTime.Now;
+            Session["DiaChi"] = diaChi;
+
+            if (type == 1)
+            {
+                var rsDDH = new GioHangProcess().InsertDDH(datHang);
+                giaoHang.MaPhieuDH = rsDDH;
+                var rsPGH = new GioHangProcess().InsertPGH(giaoHang);
+                ViewBag.MaPhieuDDH = rsDDH;
+
                 BuildUserTemplate(ViewBag.MaPhieuDDH);
-                if (result > 0)
+                if (rsDDH > 0)
                 {
                     ModelState.Clear();
-                    //return Redirect("/Home/");
-                    //ModelState.AddModelError("", "Vui Lòng Check Email Kích Hoạt Tài Khoản !");
                     return RedirectToAction("KiemTraThongBaoKichHoat", "Cart");
-
                 }
                 else
                 {
                     ModelState.AddModelError("", "Đăng ký không thành công.");
+                    return View();
                 }
-
             }
-
-            return View();
+            else
+            {
+                // Lưu session của 2 đối tượng datHang và giaoHang để xử lý sau khi thanh toán VNPay
+                // Chỉ khi có kết quả giao dịch trả về tại TinhTrangThanhToanVNPay mới thực hiện CRUD
+                Session["SS_DatHang"] = datHang;
+                Session["SS_GiaoHang"] = giaoHang;
+                return RedirectToAction("ThanhToanVNPay", "Cart", new { thanhTien = thanhTien });
+            }
         }
 
 
@@ -291,7 +402,7 @@ namespace KhoaLuanSteam.Controllers
             var list_sl = new List<CT_PHIEUDATHANG>();
             ViewBag.Madh = MaDH;
             var cart = Session[GioHang];
-            var list = new List<GioHang>(); 
+            var list = new List<GioHang>();
             var sl = 0;
             double? total = 0;
             if (cart != null)
@@ -300,7 +411,7 @@ namespace KhoaLuanSteam.Controllers
                 sl = list.Sum(x => x.iSoLuong);
                 total = list.Sum(x => x.iThanhTien);
             }
-          
+
             ViewBag.Quantity = sl;
             ViewBag.Total = total;
 
@@ -384,7 +495,7 @@ namespace KhoaLuanSteam.Controllers
             body = body.Replace("@ViewBag.TongSL", inforKH.Tong_SL_Dat.ToString());
             body = body.Replace("@ViewBag.DiaChi", diachi.ToString());
             body = body.Replace("@ViewBag.ThanhTien", inforKH.ThanhTien.ToString());
-    
+
 
 
             body = body.ToString();
@@ -462,7 +573,7 @@ namespace KhoaLuanSteam.Controllers
         [HttpGet]
         public ActionResult DetailsDonDatHang(int id)
         {
-           var tinhtrang = new GioHangProcess().GetDDHLoadCT_DDH(id);
+            var tinhtrang = new GioHangProcess().GetDDHLoadCT_DDH(id);
             List<ChiTietDDHViewModel> lst = new List<ChiTietDDHViewModel>();
             List<CT_PHIEUDATHANG> lstCT = new GioHangProcess().DanhSachCT_DDH(id);
 
@@ -472,7 +583,7 @@ namespace KhoaLuanSteam.Controllers
                 lst.Add(new ChiTietDDHViewModel() { HinhAnh = sanphams.HinhAnh, TenSanPham = sanphams.TenSanPham, Gia = sanphams.GiaSanPham, SoLuong = item.SoLuong });
             }
 
-            double? thanhtien = 0;   
+            double? thanhtien = 0;
             thanhtien = tinhtrang.ThanhTien;
 
             ViewBag.Total = thanhtien;
@@ -494,7 +605,7 @@ namespace KhoaLuanSteam.Controllers
             }
 
             return View(lst);
-        
+
         }
     }
 }
