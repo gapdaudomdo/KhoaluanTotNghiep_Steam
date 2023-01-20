@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 
-namespace KhoaLuanSteam.Controllers.VNPay
+namespace KhoaLuanSteam.VNPay
 {
     public class PayCompare : IComparer<string>
     {

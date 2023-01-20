@@ -14,7 +14,7 @@ using System.Net.Mime;
 using System.Web.Hosting;
 using DoAn_MonHoc.ViewModels;
 using System.Configuration;
-using KhoaLuanSteam.Controllers.VNPay;
+using KhoaLuanSteam.VNPay;
 
 namespace KhoaLuanSteam.Controllers
 {
