@@ -1,5 +1,7 @@
 ﻿@model KhoaLuanSteam.Models.KHACHHANG
-
+@{ 
+    int paymentType = 1;
+}
 
 <style>
     .checkout-button {
@@ -41,10 +43,12 @@
         cursor: pointer;
     }
 </style>
+
 <div class="section group" style="width:100%;padding-bottom: 20px">
     <div style="width: 70%; margin: 0 auto;">
-        @using (Html.BeginForm("ThanhToan", "Cart", FormMethod.Post))
+        @using (Html.BeginForm("ThanhToan", "Cart", @*new { type = paymentType },*@ FormMethod.Post))
         {
+            @Html.Hidden("type", 1)
             <div class="form-group">
                 <h4>Thông tin giao hàng</h4>
                 <input name="MaKH" class="form-control" value="@Model.MaKH" type="hidden" />
@@ -67,7 +71,7 @@
             </div>
             <div class="checkout-button">
                 <div class="checkout-selector">
-                    <input type="radio" name="PaymentMethod" value="1" checked="checked" class="btn btn-m2 btn-checkout">
+                    <input type="radio" name="PaymentMethod" value="1" onclick="handleClick(this)" checked="checked" class="btn btn-m2 btn-checkout">
                 </div>
                 <div class="content" style="display: flex;align-items: center;">
                     <span class="checkout-title">
@@ -78,11 +82,11 @@
             <br />
             <div class="checkout-button">
                 <div class="checkout-selector">
-                    <input type="radio" name="PaymentMethod" value="2" class="btn btn-m2 btn-checkout">
+                    <input type="radio" name="PaymentMethod" value="2" onclick="handleClick(this)" class="btn btn-m2 btn-checkout">
                 </div>
                 <div class="content" style="display: flex;align-items: center;">
                     <span class="checkout-title">
-                        Thanh toán bằng MoMo
+                        Thanh toán bằng VNPay
                     </span>
                 </div>
             </div>
@@ -90,7 +94,22 @@
             <div class="col-md-offset-2 col-md-10">
                 <input style="background-color:#0094ff" type="submit" value="Gửi đơn hàng" class="btn btn-success" />
             </div>
+
+            <script>
+                function handleClick(radioBtn) {
+                    if (radioBtn.value == 2) { // VNPay
+                        $("#type").val(2);
+                    }
+
+                    if (radioBtn.value == 1)  { // Thanh toan khi nhan hang
+                        $("#type").val(1);
+                    }
+                }
+            </script>
         }
     </div>
 </div>
+
+
+
 
