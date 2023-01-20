@@ -219,6 +219,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ChiTietDDHViewModel.cs" />
+    <Compile Include="VNPay\PayCompare.cs" />
+    <Compile Include="VNPay\PayLib.cs" />
+    <Compile Include="VNPay\Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\assets_admin\css\sb-admin-2.css" />
