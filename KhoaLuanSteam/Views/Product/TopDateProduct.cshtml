@@ -1,117 +1,183 @@
 ﻿@model IEnumerable<KhoaLuanSteam.Models.THONGTINSANPHAM>
 
-<style>
-    .btn-light {
-        color: #898989;
-    }
-
-        .btn-light:hover {
-            background-color: #0099ae;
-            color: white;
-        }
-    @* css discount *@
-    .discount_product {
-            position: absolute;
-            right: 0;
-            top: 0;
-            z-index: 1;
-        }
-        .discount_content{
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            position: relative;
-            font-weight: 400;
-            line-height: .8125rem;
-            color: #ee4d2d;
-            text-transform: uppercase;
-            font-size: .75rem;
-            width: 36px;
-            height: 32px;
-            box-sizing: border-box;
-            padding: 4px 2px 3px;
-            background-color: rgba(255,212,36,.9);
-        }
-        .title_discount{
-            color: #fff;
-        }
-</style>
-<link href="~/Css/StyleSheet5.css" rel="stylesheet" />
-<div class="row">
+<div class="row featured__filter">
     @foreach (var item in Model)
     {
-        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-            <div class="product-box product-item-main product-item-compare" style="width: 100%; float: left;  margin-bottom: 30px;text-align: center; position: relative;">
-                <div class="product-thumbnail">
-                    <div class="content_hover">
-                        <a class="image_thumb p_img" title="@item.TenSanPham" href="/Product/ChiTietSP/@item.MaSanPham">
 
-                            @if (@item.GiamGia > 0)
-                                        {
-                                            <div class="discount_product">
-                                                <div class="discount_content">
-                                                    <span class="ratio_discount">@item.GiamGia%</span>
-                                                    <span class="title_discount">giảm</span>
-                                                </div>
-                                            </div>
-                                        }
 
-                            <div class="content-overlay"></div>
-                            <img class="content-image" src="~/HinhAnhSach/@item.HinhAnh" alt="@item.HinhAnh" width="180px" height="242px" />
-                            <a title="Xem nhanh" href="~/Product/ChiTietSP/@item.MaSanPham" data-handle="tren-duong-bang" class="xem_nhanh btn-circle btn_view btn right-to quick-view hidden-xs hidden-sm">
-                                <i class="fa fa-eye"></i>
-                            </a>
+        if (@item.MaLoai == 1)
+        {
+        
+            <div class="col-lg-3 col-md-4 col-sm-6 mix steammn">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg product__discount__item__pic">
+                        <a href="/Product/ChiTietSP/@item.MaSanPham">
+                            <img src="/HinhAnhSach/@item.HinhAnh" alt="@item.TenSanPham" title="@item.TenSanPham">
                         </a>
+                        @if (@item.GiamGia > 0){
+                            <div class="product__discount__percent">-@item.GiamGia%</div>
+                        }
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="/Cart/ThemGioHang/?id=@item.MaSanPham&soluong=1"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
                     </div>
-                </div>
-                <div class="product-info product-bottom mh">
-                    <h3 class="product-name" style="font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif;font-size: 14px;font-weight: 600; margin: 0 0 5px; overflow: hidden; text-transform: uppercase;   word-wrap: break-word;  line-height: 22px;padding: 10px 30px 0; text-overflow: ellipsis; white-space: nowrap;">
-                        <a title="@item.TenSanPham" href="/Product/Details/@item.MaSanPham" style=" color: #636363; text-decoration: none;">@(item.TenSanPham.Length > 26 ? item.TenSanPham.Substring(0, 22) + "..." : item.TenSanPham)
-                        </a>
-                    </h3>
-                </div>
-                <div class="section">
-                    <div class="blockprice" style="min-height: 30px; width: 100%; float: left; }">
-                        <div class="product-item-price price-box" style="float:left; width: 100%; text-align:center; color:#F26522;font-weight:600; font-size:20px; line-height:20px;">
-                            @if (@item.GiamGia <= 0)
-                            {
-                                <span class="product-item-price-sale old-price">
-                                    <span class="compare-price price product-price-old" style="font-size: 20px; font-weight: 700; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; color: #f26522; font-weight: 600; line-height: 20px; ">
-                                        @item.GiaSanPham.Value.ToString("N0") VND
-                                    </span>
-                                </span>
-                            }
-                            else
-                            {
-
+                    <div class="featured__item__text">
+                        <h6><a href="/Product/ChiTietSP/@item.MaSanPham">@(item.TenSanPham.Length > 26 ? item.TenSanPham.Substring(0, 22) + "..." : item.TenSanPham)</a></h6>
+                        <span style="display: flex;justify-content: center;">
+                            @* <h5>@item.GiaSanPham.Value.ToString("N0") đ</h5>
+                            @if (@item.GiamGia > 0){
                                 @Html.Action("giasachgiam", "Product", new { @MaSanPham = @item.MaSanPham })
-                                <span class="product-item-price-sale old-price">
-                                    <span class="compare-price price product-price-old" style="color: #636363; text-decoration: line-through;font-weight:300; font-size:15px">
-                                        @item.GiaSanPham.Value.ToString("N0") VND
-                                    </span>
-                                </span>
-                            }
+                                } *@
 
-                        </div>
+                            @if (@item.GiamGia <= 0)
+                                        {
+                                            <h5>
+                                                @item.GiaSanPham.Value.ToString("N0") đ
+                                            </h5>
+                                        }else{
+                                            <h5>
+                                                @Html.Action("giasachgiam", "Product", new { @MaSanPham = @item.MaSanPham })
+                                            </h5>
+                                            <span style="text-decoration: line-through; color:#b2b2b2; font-size: 15px; margin-left: 10px;">
+                                                @item.GiaSanPham.Value.ToString("N0") đ
+                                            </span>
+                                        }   
+                        </span>
                     </div>
-                </div>
-                <div class="product-action clearfix" style="text-align: center; height: 40px; width: 100%; float: left; z-index: 10;">
-                    <form action="/cart/add" method="post" class="variants form-nut-grid" data-id="product-actions-1272032" enctype="multipart/form-data">
-                        <div class="group_action" style="text-align: center; width: 100%; display: flex;  justify-content:center">
-
-                            <input type="hidden" name="variantId" value="1953228">
-
-                            <a class="btn btn-light" href="/Cart/ThemGioHang/?id=@item.MaSanPham&soluong=1" style="border: 2px solid #e1e1e1; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif;  font-size: 13px; font-weight: 400; text-decoration: none;  display: inline-block; padding: 8px 20px 8px 20px;">
-
-                                <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
-                            </a>
-
-
-                        </div>
-                    </form>
 
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+        if (@item.MaLoai == 2)
+        {
+        
+            <div class="col-lg-3 col-md-4 col-sm-6 mix steam1">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg product__discount__item__pic">
+                        <a href="/Product/ChiTietSP/@item.MaSanPham">
+                            <img src="/HinhAnhSach/@item.HinhAnh" alt="@item.TenSanPham" title="@item.TenSanPham">
+                        </a>
+                        @if (@item.GiamGia > 0){
+                            <div class="product__discount__percent">-@item.GiamGia%</div>
+                        }
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="/Cart/ThemGioHang/?id=@item.MaSanPham&soluong=1"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="featured__item__text">
+                        <h6><a href="/Product/ChiTietSP/@item.MaSanPham">@(item.TenSanPham.Length > 26 ? item.TenSanPham.Substring(0, 22) + "..." : item.TenSanPham)</a></h6>
+                        <span style="display: flex;justify-content: center;">
+                            @if (@item.GiamGia <= 0)
+                                        {
+                                            <h5>
+                                                @item.GiaSanPham.Value.ToString("N0") đ
+                                            </h5>
+                                        }else{
+                                            <h5>
+                                                @Html.Action("giasachgiam", "Product", new { @MaSanPham = @item.MaSanPham })
+                                            </h5>
+                                            <span style="text-decoration: line-through; color:#b2b2b2; font-size: 15px; margin-left: 10px;">
+                                                @item.GiaSanPham.Value.ToString("N0") đ
+                                            </span>
+                                        } 
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        }
+        if (@item.MaLoai == 3)
+        {
+        
+            <div class="col-lg-3 col-md-4 col-sm-6 mix steam2">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg product__discount__item__pic">
+                        <a href="/Product/ChiTietSP/@item.MaSanPham">
+                            <img src="/HinhAnhSach/@item.HinhAnh" alt="@item.TenSanPham" title="@item.TenSanPham">
+                        </a>
+                        @if (@item.GiamGia > 0){
+                            <div class="product__discount__percent">-@item.GiamGia%</div>
+                        }
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="/Cart/ThemGioHang/?id=@item.MaSanPham&soluong=1"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="featured__item__text">
+                        <h6><a href="/Product/ChiTietSP/@item.MaSanPham">@(item.TenSanPham.Length > 26 ? item.TenSanPham.Substring(0, 22) + "..." : item.TenSanPham)</a></h6>
+                        <span style="display: flex;justify-content: center;">
+                            @if (@item.GiamGia <= 0)
+                                        {
+                                            <h5>
+                                                @item.GiaSanPham.Value.ToString("N0") đ
+                                            </h5>
+                                        }else{
+                                            <h5>
+                                                @Html.Action("giasachgiam", "Product", new { @MaSanPham = @item.MaSanPham })
+                                            </h5>
+                                            <span style="text-decoration: line-through; color:#b2b2b2; font-size: 15px; margin-left: 10px;">
+                                                @item.GiaSanPham.Value.ToString("N0") đ
+                                            </span>
+                                        } 
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        }
+        if (@item.MaLoai == 4)
+        {
+        
+            <div class="col-lg-3 col-md-4 col-sm-6 mix steam3">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg product__discount__item__pic">
+                        <a href="/Product/ChiTietSP/@item.MaSanPham">
+                            <img src="/HinhAnhSach/@item.HinhAnh" alt="@item.TenSanPham" title="@item.TenSanPham">
+                        </a>
+                        @if (@item.GiamGia > 0){
+                            <div class="product__discount__percent">-@item.GiamGia%</div>
+                        }
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="/Cart/ThemGioHang/?id=@item.MaSanPham&soluong=1"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="featured__item__text">
+                        <h6><a href="/Product/ChiTietSP/@item.MaSanPham">@(item.TenSanPham.Length > 26 ? item.TenSanPham.Substring(0, 22) + "..." : item.TenSanPham)</a></h6>
+                        <span style="display: flex;justify-content: center;">
+                            @if (@item.GiamGia <= 0)
+                                        {
+                                            <h5>
+                                                @item.GiaSanPham.Value.ToString("N0") đ
+                                            </h5>
+                                        }else{
+                                            <h5>
+                                                @Html.Action("giasachgiam", "Product", new { @MaSanPham = @item.MaSanPham })
+                                            </h5>
+                                            <span style="text-decoration: line-through; color:#b2b2b2; font-size: 15px; margin-left: 10px;">
+                                                @item.GiaSanPham.Value.ToString("N0") đ
+                                            </span>
+                                        } 
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        }
+        }
+    </div>
+
+@* <div class="featured__item__pic set-bg" data-setbg="/HinhAnhSach/@item.HinhAnh">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="/Cart/ThemGioHang/?id=@item.MaSanPham&soluong=1"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                            <a href="/Product/ChiTietSP/@item.MaSanPham"></a>
+                        </div> *@

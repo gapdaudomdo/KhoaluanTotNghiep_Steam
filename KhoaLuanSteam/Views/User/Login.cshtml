@@ -1,6 +1,6 @@
 ﻿@model KhoaLuanSteam.Models.KHACHHANG
 
-<ul>
+@* <ul>
     @if (Session["User"] == null)
     {
         <li><a href="/User/DangKy">Đăng ký</a></li>
@@ -55,6 +55,27 @@
         <li><a href="~/User/ThongTinUser">Hồ sơ</a></li>
     }
 
-</ul>
+</ul> *@
+@if (Session["User"] == null)
+    {
+        <div class="header__top__right__auth pr-3">
+            <a href="~/User/DangKy"><i class="fa fa-user"></i>Đăng Ký</a>
+        </div>
+        <div class="header__top__right__auth">
+            <a href="~/User/PageDangNhap"><i class="fa fa-user"></i>Đăng Nhập</a>
+        </div>
+    }
+    else
+    {
+        <div class="header__top__right__auth pr-3">
+            <a href="~/User/DangXuat"><i class="fa fa-user"></i>Đăng Xuất</a>
+        </div>
+        <div class="header__top__right__auth pr-3">
+            <a href="~/User/ThongTinUser"><i class="fa fa-user"></i>Tài khoản: <span style="color: red;">@Session["User"]</span></a>
+        </div>
+        <div class="header__top__right__auth">
+            <a href="~/User/ThongTinUser"><i class="fa fa-user"></i>Hồ sơ</a>
+        </div>
+    }
 
 

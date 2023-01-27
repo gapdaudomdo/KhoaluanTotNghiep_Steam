@@ -97,5 +97,14 @@ namespace KhoaLuanSteam.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_TongTien_PN", maPhieuNHParameter);
         }
+    
+        public virtual int Update_TrangThai_DatHangNCC(Nullable<int> maDonDHNCC)
+        {
+            var maDonDHNCCParameter = maDonDHNCC.HasValue ?
+                new ObjectParameter("MaDonDHNCC", maDonDHNCC) :
+                new ObjectParameter("MaDonDHNCC", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_TrangThai_DatHangNCC", maDonDHNCCParameter);
+        }
     }
 }

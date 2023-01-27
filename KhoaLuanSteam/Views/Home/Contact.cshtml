@@ -4,8 +4,25 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
+<!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/assets/ecommerce/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Liên Hệ Với Chúng Tôi</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Trang Chủ</a>
+                            <span>Liên Hệ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
 
-@if (@ViewBag.Success != null)
+    @if (@ViewBag.Success != null)
 {
     <div class="col-md-12" style="margin-top:10px">
         <div class="form-group">
@@ -15,32 +32,86 @@
         </div>
     </div>
 }
-<div class="col-md-12">
-    <h3 style="text-align:center; text-transform:uppercase;margin-top:20px;">Chúng tôi rất hân hạnh lắng nghe ý kiến từ quý khách!</h3>
-    <div class="well well-sm" style="padding: 9px; border-radius: 3px; margin-bottom: 20px;background-color: #f5f5f5;border: 1px solid #e3e3e3;">
-        @using (Html.BeginForm())
+
+    <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_phone"></span>
+                        <h4>Phone</h4>
+                        <p>(028) 3810 9058</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_pin_alt"></span>
+                        <h4>Địa chỉ</h4>
+                        <p>140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP.HCM</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_clock_alt"></span>
+                        <h4>Mở cửa</h4>
+                        <p>08:00 am đến 22:00 pm</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_mail_alt"></span>
+                        <h4>Email</h4>
+                        <p>lienhe@newbrain.vn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->
+
+    <!-- Map Begin -->
+    <div class="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49116.39176087041!2d-86.41867791216099!3d39.69977417971648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886ca48c841038a1%3A0x70cfba96bf847f0!2sPlainfield%2C%20IN%2C%20USA!5e0!3m2!1sen!2sbd!4v1586106673811!5m2!1sen!2sbd"
+            height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <div class="map-inside">
+            <i class="icon_pin"></i>
+            <div class="inside-widget">
+                <h4>Thành phố Hồ Chí Minh</h4>
+                <ul>
+                    <li>Điện thoại: (028) 3810 9058</li>
+                    <li>Địa chỉ: 140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP.HCM</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Map End -->
+
+    <!-- Contact Form Begin -->
+     @using (Html.BeginForm())
         {
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <fieldset>
-                <legend class="text-center header">Bạn có thể giúp chúng tôi như thế nào?</legend>
-                <div class="form-group">
-                    <span class="col-md-1 offset-md-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                    <div class="col-md-8">
-                        @Html.TextBoxFor(model => model.Ten, new { @class = "form-control", placeHolder = "Ten" })
-
-                        @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+    <div class="contact-form spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="contact__form__title">
+                        <h2>Ý KIẾN TỪ QUÝ KHÁCH</h2>
                     </div>
                 </div>
-                <div class="form-group">
-                    <span class="col-md-1 offset-md-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                    <div class="col-md-8">
-                        @Html.TextBoxFor(model => model.Ho, new { @class = "form-control", placeHolder = "Ho" })
+            </div>
+            <form action="#">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 pb-3">
+                        @Html.TextBoxFor(model => model.Ho, new { @class = "form-control", placeHolder = "Họ" })
                         @Html.ValidationMessageFor(model => model.Ho, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                <div class="form-group">
-                    <span class="col-md-1 offset-md-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
-                    <div class="col-md-8">
+                    <div class="col-lg-6 col-md-6 pb-3">
+                        @Html.TextBoxFor(model => model.Ten, new { @class = "form-control", placeHolder = "Tên" })
+                        @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-6 col-md-6">
                         @Html.TextBoxFor(model => model.Email, new
                                         {
                                             @class = "form-control",
@@ -48,29 +119,19 @@
                                         })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                <div class="form-group">
-                    <span class="col-md-1 offset-md-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-                    <div class="col-md-8">
-                        @Html.TextBoxFor(model => model.DienThoai, new { @class = "form-control", placeHolder = "Dien Thoai" })
+                    <div class="col-lg-6 col-md-6 pb-3">
+                        @Html.TextBoxFor(model => model.DienThoai, new { @class = "form-control", placeHolder = "Điện thoại" })
                         @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                <div class="form-group">
-                    <span class="col-md-1 offset-md-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
-                    <div class="col-md-8">
-                        @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control", @rows = "7", @placeholder = "Nhập tin nhắn bạn ở đây. Chúng tôi sẽ cố gắng phản hồi trong thời gian sớm nhất!" })
+                    <div class="col-lg-12 text-center pb-3">
+                        @* <textarea placeholder="Ý kiến của bạn"></textarea> *@
+                        @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control mb-3", @rows = "7", @placeholder = "Nhập tin nhắn bạn ở đây. Chúng tôi sẽ cố gắng phản hồi trong thời gian sớm nhất!" })
                         @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
+                        <button type="submit" class="site-btn">Gửi</button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-12 text-center">
-                        <center><button type="submit" class="btn btn-outline-primary">Gửi</button></center>
-
-                    </div>
-                </div>
-
-            </fieldset>
-        }
+            </form>
+        </div>
     </div>
-</div>
+        }
+    <!-- Contact Form End -->

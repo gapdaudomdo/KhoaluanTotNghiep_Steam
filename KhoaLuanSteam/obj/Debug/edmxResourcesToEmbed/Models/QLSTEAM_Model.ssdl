@@ -41,7 +41,7 @@
     <Property Name="MaDonDatHangNCC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaNCC" Type="nchar" MaxLength="10" />
     <Property Name="MaNV" Type="int" />
-    <Property Name="NgayLap" Type="date" />
+    <Property Name="NgayLap" Type="datetime" />
     <Property Name="TongSL" Type="int" />
     <Property Name="TongTien" Type="float" />
     <Property Name="TrangThai" Type="int" />
@@ -95,7 +95,7 @@
     </Key>
     <Property Name="MaNV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenNV" Type="nvarchar" MaxLength="50" />
-    <Property Name="NgaySinh" Type="date" />
+    <Property Name="NgaySinh" Type="datetime" />
     <Property Name="GioiTinh" Type="nvarchar" MaxLength="5" />
     <Property Name="Email" Type="nvarchar" MaxLength="100" />
     <Property Name="SoDT" Type="char" MaxLength="12" />
@@ -141,7 +141,7 @@
     <Property Name="MaPhieuNhapHang" Type="int" Nullable="false" />
     <Property Name="MaNCC" Type="nchar" MaxLength="10" />
     <Property Name="MaNV" Type="int" />
-    <Property Name="NgayLap_PN" Type="date" />
+    <Property Name="NgayLap_PN" Type="datetime" />
     <Property Name="TongSL" Type="int" />
     <Property Name="TongTien_NH" Type="float" />
   </EntityType>
@@ -396,6 +396,9 @@
   </Function>
   <Function Name="Update_TongTien_PN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MaPhieuNH" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="Update_TrangThai_DatHangNCC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaDonDHNCC" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="QL_THIETBISTEAMModelStoreContainer">
     <EntitySet Name="CT_DonDatHangNCC" EntityType="Self.CT_DonDatHangNCC" Schema="dbo" store:Type="Tables" />

@@ -1,742 +1,765 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@*<!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <!--Bootstrap 4-->
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        Bootstrap 4
 
-    <link href="/Content/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="/Content/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
-    <link rel="stylesheet" href="~/fontawesome/css/all.css" type="text/css" />
-    <link rel="stylesheet" href="~/Css/StyleSheet1.css" type="text/css" />
-    <link href="~/Css/style.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/Css/style.min.css" type="text/css" />
-    <link rel="stylesheet" href="~/Css/StyleSheet10.css" type="text/css" />
-    <link rel="stylesheet" href="~/Css/tintuc.css" type="text/css" />
-    @*<link href="/Content/Client/css/font-awesome.min.css" rel="stylesheet" />*@
-    <link href="~/Css/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
-
-
-        <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
-		<!-- animate css -->
-        <link rel="stylesheet" href="~/assets/css/animate.css">
-		<!-- jquery-ui.min css -->
-        <link rel="stylesheet" href="~/assets/css/jquery-ui.min.css">
-		<!-- meanmenu css -->
-        <link rel="stylesheet" href="~/assets/css/meanmenu.min.css">
-		<!-- nivo-slider css -->
-        <link rel="stylesheet" href="~/assets/css/nivo-slider.css">	
-		<!-- magnific-popup css -->
-        <link rel="stylesheet" href="~/assets/css/magnific-popup.css">		
-		<!-- owl.carousel css -->
-        <link rel="stylesheet" href="~/assets/css/owl.carousel.css">
-		<!--linearicons css -->
-        <link rel="stylesheet" href="~/assets/css/linearicons-icon-font.min.css">
-		<!-- font-awesome css -->
-        <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
-		<!-- style css -->
-		<link rel="stylesheet" href="~/assets/style.css">
-		<!-- responsive css -->
-        <link rel="stylesheet" href="~/assets/css/responsive.css" />
-		<!-- modernizr css -->
-        <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+        <link rel="stylesheet" href="~/fontawesome/css/all.css" type="text/css" />
+        <link rel="stylesheet" href="~/Css/StyleSheet1.css" type="text/css" />
+        <link href="~/Css/style.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/Css/style.min.css" type="text/css" />
+        <link rel="stylesheet" href="~/Css/StyleSheet10.css" type="text/css" />
+        <link rel="stylesheet" href="~/Css/tintuc.css" type="text/css" />
+        <link href="/Content/Client/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="~/Css/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
 
 
+            <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+             animate css
+            <link rel="stylesheet" href="~/assets/css/animate.css">
+             jquery-ui.min css
+            <link rel="stylesheet" href="~/assets/css/jquery-ui.min.css">
+             meanmenu css
+            <link rel="stylesheet" href="~/assets/css/meanmenu.min.css">
+             nivo-slider css
+            <link rel="stylesheet" href="~/assets/css/nivo-slider.css">
+             magnific-popup css
+            <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
+             owl.carousel css
+            <link rel="stylesheet" href="~/assets/css/owl.carousel.css">
+            linearicons css
+            <link rel="stylesheet" href="~/assets/css/linearicons-icon-font.min.css">
+             font-awesome css
+            <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+             style css
+            <link rel="stylesheet" href="~/assets/style.css">
+             responsive css
+            <link rel="stylesheet" href="~/assets/css/responsive.css" />
+             modernizr css
+            <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 
-</head>
-<body>
-    <div class="page">
-        @*phần đầu*@
-        @* <div class="content" style="padding-left: 0; position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
-            <header id="header" class="">
-                <div class="header-top" style="background-color: #007f85;">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <nav class="header-top-nav">
-                                    @Html.Action("Login", "User")
-                                </nav>
 
+
+    </head>
+    <body>
+        <div class="page">
+             start phần header
+        <header>
+            <div class="header-top-area ptb-10 home-page-2 d-none d-md-block">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-9 col-md-8">
+                            <div class="header-top-left">
+                                @Html.Action("Login", "User")
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <div class="header-bottom" style="padding-top: 15px; padding-bottom: 15px; background-color: #0099ae;">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-3 col-xs-5 header-logo">
-
-                                <a href="/" class="logo-wrapper ">
-                                    <img src="~/img/logosteam.png" alt="logo Bookstore" style="height:45px" />
-                                </a>
+            </div>
+            <div class="header-bottom-area home-page-2 ptb-50">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="menu-search-box scnd-fix">
+                                @using (Html.BeginForm("SearchResult", "Product", FormMethod.Post, new { @class = "navbar-form", @role = "search" }))
+                                        {
+                                            <input type="text" name="txtSearch" placeholder="Tìm kiếm sản phẩm...">
+                                            <button type="submit"><span class="lnr lnr-magnifier"></span></button>
+                                        }
                             </div>
-                            <div class="col-md-6 d-sm-none d-md-block d-none d-sm-block header-services ">
-                                <ul class="row">
-                                    <li class="col-md-4 col-sm-4">
-                                        <a href="#" class="title" style="color: #fff; text-transform: uppercase; text-decoration:none; }"><i class="fa fa-cube"></i>COD toàn quốc</a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="logo logo2">
+                                <a href="/" class="logo-wrapper"><img src="~/img/logosteam.png" style="height:75px;box-shadow: none;" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="header-bottom-right header-bottom-right-2">
+                                <div class="shop-cart">
+                                    @Html.Action("CartIcon", "Cart")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mainmenu-area home-page-2" id="main_h">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mainmenu d-none d-md-block">
+                            <nav>
+                                <ul>
+                                    <li class="active"><a href="/">Trang chủ</a>
                                     </li>
-                                    <li class="col-md-4 col-sm-4">
-                                        <a href="#" class="title" style="color: #fff; text-transform: uppercase; text-decoration: none; }"><i class="fas fa-exchange-alt"></i>Đổi trả 24h</a>
+                                    <li><a href="~/Home/About">Giới thiệu</a>
                                     </li>
-                                    <li class="col-md-4 col-sm-4">
-                                        <a href="#" class="title" style="color: #fff; text-transform: uppercase; text-decoration: none;}"><i class="fa fa-life-ring"></i>Hỗ trợ 24/7</a>
+                                    <li><a href="~/Home/SanPham">Sản phẩm</a>
+                                    </li>
+                                    <li><a href="~/Home/Contact">Liên hệ</a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Home/TinTuc">Tin Tức</a>
                                     </li>
                                 </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-menu-area d-flex d-md-none">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mobile-menu">
+                                <nav id="mobile-menu">
+                                    <ul>
+                                        <li class="active"><a href="/">Trang Chủ</a>
+                                        </li>
+                                        <li><a href="~/Home/About">Giới thiệu</a>
+                                        </li>
+                                        <li><a href="~/Home/SanPham">Sản phẩm</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Home/Contact">Liên hệ</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Home/TinTuc">Tin Tức</a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
-                            <div class="col-md-3 col-sm-8 header-cart">
-                                <div class="header-right" style="float:right">
-                                    <div class="header-right">
-                                        <div class="top-cart-contain f-right">
-                                            <div class="mini-cart text-xs-center">
-                                                <div class="heading-cart cart_header">
-                                                    @Html.Action("CartIcon", "Cart")
-                                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                            </div>
+              end phần header
 
+            phần thân
+            <div class="container" style="margin-top:-10px">
+                <div class="row">
+                    @RenderBody()
+                </div>
+            </div>
+
+             phần cuôi
+
+            <footer id="footer">
+                <div id='nz-div-5'><h3 class="tde"><span>ĐẶC TRƯNG CỦA GIGO TOYS</span></h3></div>
+                ĐẶC TRƯNG
+                <section class="cards">
+
+                    <article class="card card--1">
+                        <div class="card__info-hover">
+                            <svg class="card__like" viewBox="0 0 24 24">
+                                <path fill="#000000" d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
+                            </svg>
+                            <div class="card__clock-info">
+                                <svg class="card__clock" viewBox="0 0 24 24">
+                                    <path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
+                                </svg><span class="card__time">15 min</span>
+                            </div>
+
+                        </div>
+                        <div class="card__img"></div>
+                        <a href="#" class="card_link">
+                            <div class="card__img--hover"></div>
+                        </a>
+                        <div class="card__info">
+                            <span class="card__category"> BỀ DÀY LỊCH SỬ PHÁT TRIỂN</span>
+                            <h5 class="card__title">Gigo thành lập từ năm 1976, sau 43 năm không ngừng đổi mới, Gigo đã có hơn 664 loại miếng ghép và sở hữu 100 bằng sáng chế khác nhau.</h5>
+                            <span class="card__by">by <a href="#" class="card__author" title="author">Celeste Mills</a></span>
+                        </div>
+                    </article>
+
+
+                    <article class="card card--2">
+                        <div class="card__info-hover">
+                            <svg class="card__like" viewBox="0 0 24 24">
+                                <path fill="#000000" d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
+                            </svg>
+                            <div class="card__clock-info">
+                                <svg class="card__clock" viewBox="0 0 24 24">
+                                    <path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
+                                </svg><span class="card__time">5 min</span>
+                            </div>
+
+                        </div>
+                        <div class="card__img"></div>
+                        <a href="#" class="card_link">
+                            <div class="card__img--hover"></div>
+                        </a>
+                        <div class="card__info">
+                            <span class="card__category"> PHÙ HỢP GIÁO DỤC ĐỔI MỚI</span>
+                            <h5 class="card__title">Trong thị trường sản phẩm giáo dục, Gigo luôn đi đầu với các giải pháp đổi mới giáo dục toàn diện, phù hợp với các đơn vị giáo dục ở nhiều quốc gia.</h5>
+                            <span class="card__by">by <a href="#" class="card__author" title="author">John Doe</a></span>
+                        </div>
+                    </article>
+
+                    <article class="card card--3">
+                        <div class="card__info-hover">
+                            <svg class="card__like" viewBox="0 0 24 24">
+                                <path fill="#000000" d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
+                            </svg>
+                            <div class="card__clock-info">
+                                <svg class="card__clock" viewBox="0 0 24 24">
+                                    <path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
+                                </svg><span class="card__time">5 min</span>
+                            </div>
+
+                        </div>
+                        <div class="card__img"></div>
+                        <a href="#" class="card_link">
+                            <div class="card__img--hover"></div>
+                        </a>
+                        <div class="card__info">
+                            <span class="card__category"> CHẤT LƯỢNG AN TOÀN CAO CẤP</span>
+                            <h5 class="card__title">Sản phẩm của Gigo đạt tiêu chuẩn Châu Âu và được kiểm định chất lượng hợp quy tại Tổng cục tiêu chuẩn đo lường chất lượng VN.</h5>
+                            <span class="card__by">by <a href="#" class="card__author" title="author">STEAM</a></span>
+                        </div>
+                    </article>
+
+                    <article class="card card--4">
+                        <div class="card__info-hover">
+                            <svg class="card__like" viewBox="0 0 24 24">
+                                <path fill="#000000" d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
+                            </svg>
+                            <div class="card__clock-info">
+                                <svg class="card__clock" viewBox="0 0 24 24">
+                                    <path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
+                                </svg><span class="card__time">5 min</span>
+                            </div>
+
+                        </div>
+                        <div class="card__img"></div>
+                        <a href="#" class="card_link">
+                            <div class="card__img--hover"></div>
+                        </a>
+                        <div class="card__info">
+                            <span class="card__category"> ĐỒNG HÀNH CÙNG CON KHÔN LỚN</span>
+                            <h5 class="card__title">Gigo đi tiên phong trong ý tưởng sáng tạo với các sản phẩm thông minh nhất. &#8220;Làm đồ chơi mang tính giáo dục và làm cho giáo dục trở nên thú vị</h5>
+                            <span class="card__by">by <a href="#" class="card__author" title="author">STEAM</a></span>
+                        </div>
+                    </article>
+
+                    <article class="card card--5">
+                        <div class="card__info-hover">
+                            <svg class="card__like" viewBox="0 0 24 24">
+                                <path fill="#000000" d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
+                            </svg>
+                            <div class="card__clock-info">
+                                <svg class="card__clock" viewBox="0 0 24 24">
+                                    <path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
+                                </svg><span class="card__time">5 min</span>
+                            </div>
+
+                        </div>
+                        <div class="card__img"></div>
+                        <a href="#" class="card_link">
+                            <div class="card__img--hover"></div>
+                        </a>
+                        <div class="card__info">
+                            <span class="card__category"> SẢN PHẨM ĐA DẠNG PHONG PHÚ</span>
+                            <h5 class="card__title">Gigo phát triển các dòng sản phẩm có tính giáo dục cao: Đồ chơi thông minh, chương trình STEAM, trang thiết bị phòng học, thiết bị giáo dục.</h5>
+                            <span class="card__by">by <a href="#" class="card__author" title="author">STEAM</a></span>
+                        </div>
+                    </article>
+                </section>
+
+
+                TIN TỨC
+                 Messenger Plugin chat Code
+                <div id="fb-root"></div>
+
+                 Your Plugin chat code
+                <div id="fb-customer-chat" class="fb-customerchat">
+                </div>
+
+                <script>
+                    var chatbox = document.getElementById('fb-customer-chat');
+                    chatbox.setAttribute("page_id", "117328627892066");
+                    chatbox.setAttribute("attribution", "biz_inbox");
+                </script>
+
+                 Your SDK code
+                <script>
+                    window.fbAsyncInit = function () {
+                        FB.init({
+                            xfbml: true,
+                            version: 'v15.0'
+                        });
+                    };
+
+                    (function (d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+                </script>
+                FOOTER
+
+                <div class="cf-title-01">
+                    <h3>About</h3>
+                </div>
+                <section class="footer-bottom" style="background-color:#000000 ; padding-top:20px;">
+                    <div class="container">
+                        <div class="footer-cta pt-5 pb-5">
+                            <div class="row">
+                                <div class="col-xl-4 col-md-4 mb-30">
+                                    <div class="single-cta">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <div class="cta-text">
+                                            <h4>Địa Chỉ</h4>
+                                            <span>
+                                                Miền Nam :Số 13, Bàu Cát 6, Phường 14, Quận Tân Bình, TP.HCM.
+
+                                                Miền Bắc: Số 55 Thủy Nguyên, Khu đô thị Ecopark, Hưng Yên.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 mb-30">
+                                    <div class="single-cta">
+                                        <i class="fas fa-phone"></i>
+                                        <div class="cta-text">
+                                            <h4>Liên Hệ</h4>
+                                            <span>028) 3810 9058 (8h - 17h)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 mb-30">
+                                    <div class="single-cta">
+                                        <i class="far fa-envelope-open"></i>
+                                        <div class="cta-text">
+                                            <h4>Email</h4>
+                                            <span>lienhe@newbrain.vn</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-content pt-5 pb-5">
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 mb-50">
+                                    <div class="footer-widget">
+                                        <div class="footer-logo">
+                                            <a href="#"><img src="https://gigotoys.vn/wp-content/uploads/2019/01/logofooter.png" class="img-fluid" alt="logo"></a>
+                                        </div>
+                                        <div class="footer-text">
+                                            <p>
+                                                New Brain là đại lý ủy quyền duy nhất tại Việt Nam của thương hiệu đồ chơi thông minh nổi tiếng thế giới:
+                                                ❤️Gigo Toys❤️. Bên cạnh đồ chơi thông minh, Gigo còn sở hữu các chương trình STEAM và thiết bị giáo dục
+                                                phù hợp cho các đơn vị trường học.  Giá trị cốt lõi của sản phẩm giáo dục Gigo Toys là khả năng sáng tạo
+                                                và năng lực giải quyết vấn đề trong quá trình chơi: "Đồ chơi Gigo, hơn cả chơi!".
+                                            </p>
+                                        </div>
+                                        <div class="footer-social-icon">
+                                            <span>Theo Dõi</span>
+                                            <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
+                                            <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
+                                            <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                                    <div class="footer-widget">
+                                        <div class="footer-widget-heading">
+                                            <h3>Về Chúng Tôi</h3>
+                                        </div>
+                                        <ul>
+                                            <li><a href="~/Home/TrangChu">Trang Chủ</a></li>
+                                            <li><a href="~/Home/Contact">Liên Hệ</a></li>
+                                            <li><a href="~/Home/VanChuyen">Phương Thức Vận Chuyển</a></li>
+                                            <li><a href="~/Home/DoiTra">Hình Thức Đổi Trả</a></li>
+                                            <li><a href="~/Home/TinTuc">Tin Tức</a></li>
+                                            <li><a href="#">Thiết Bị Steam</a></li>
+                                            <li><a href="#">Chính Sách</a></li>
+    </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                                    <div class="footer-widget">
+                                        <div class="footer-widget-heading">
+                                            <h3>Đăng Ký</h3>
+                                        </div>
+                                        <div class="footer-text mb-25">
+                                            <p>Đăng ký liên hệ nhận khuyến mãi</p>
+                                        </div>
+                                        <div class="subscribe-form">
+                                            <form action="#">
+                                                <input type="text" placeholder="Nhập Địa Chỉ Email">
+                                                <button><i class="fab fa-telegram-plane"></i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="header-nav-search" style="background-color:#00b7d0">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-9 hidden-sm hidden-xs">
-                                <nav class="navbar navbar-expand-lg">
-                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="">
-                                        <span class="navbar-toggler-icon">
-                                            <i class="fas fa-bars" style="color:white ;font-size:28px"></i>
-                                        </span>
-                                    </button>
-                                    <div class="collapse navbar-collapse" id="navbarNav">
-                                        <ul class="nav navbar-nav">
-                                            <li class="nav-item active">
-                                                <a class="nav-link" href="~/Home/TrangChu" style="color: #fff; text-transform: uppercase; padding-right: 20px;">Trang Chủ<span class="sr-only">(current)</span></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="~/Home/About" style="color: #fff; text-transform: uppercase; padding-right: 20px;">Giới Thiệu</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="~/Home/SanPham" style="color: #fff; text-transform: uppercase; padding-right: 20px">Sản Phẩm</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="~/Home/Contact" style="color: #fff; text-transform: uppercase; padding-right: 20px">Liên Hệ</a>
-                                            </li>
+                    <div class="copyright-area">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                                    <div class="copyright-text">
+                                        <p>Copyright &copy; 2022, All Right Reserved <a href="giahuydo">STEAM</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                                    <div class="footer-menu">
+                                        <ul>
+                                            <li><a href="#">Home</a></li>
+                                            <li><a href="#">Terms</a></li>
+                                            <li><a href="#">Privacy</a></li>
+                                            <li><a href="#">Policy</a></li>
+                                            <li><a href="#">Contact</a></li>
                                         </ul>
                                     </div>
-                                </nav>
-
-
-                            </div>
-
-
-                            <div class="col-md-3 col-sm-12 col-xs-12">
-                                <div class="header-search" style=" position: relative; margin: 10px 0;}">
-                                    @using (Html.BeginForm("SearchResult", "Product", FormMethod.Post, new { @class = "navbar-form", @role = "search" }))
-                                    {
-                                        <input type="text" name="txtSearch" class="hs-text" placeholder="Tìm kiếm sản phẩm..." value="" style=" width: 100%; padding: 0 10px; line-height: 26px; border: none; outline: none;">
-                                        <button type="submit" class="hs-submit" style="position: absolute; top: 4px;right: 3px;color: #6b6b6b;background-color: transparent;border: none;"><i class="fa fa-search"></i></button>
-                                    }
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </header>
-        </div> *@
+
+                </section>
+
+            </footer>
 
 
+        </div>
 
+        @RenderSection("jsFooter", required: false)
+        @RenderSection("QuantityScript", required: false)
+        <script src="~/assets/js/vendor/jquery-1.12.4.min.js"></script>
+             popper js
+            <script src="~/assets/js/popper.min.js"></script>
+             bootstrap js
+            <script src="~/assets/js/bootstrap.min.js"></script>
+             owl.carousel js
+            <script src="~/assets/js/owl.carousel.min.js"></script>
+             meanmenu js
+            <script src="~/assets/js/jquery.meanmenu.js"></script>
+             jquery-ui js
+            <script src="~/assets/js/jquery-ui.min.js"></script>
+             wow js
+            <script src="~/assets/js/wow.min.js"></script>
+             scrolly js
+            <script src="~/assets/js/jquery.scrolly.js"></script>
+             nivo.slider js
+            <script src="~/assets/js/jquery.nivo.slider.js"></script>
+             magnific-popup js
+            <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+             plugins js
+            <script src="~/assets/js/plugins.js"></script>
+             main js
+            <script src="~/assets/js/main.js"></script>
 
-        @* start phần header*@
-    <header>
-        <div class="header-top-area ptb-10 home-page-2 d-none d-md-block">
+    </body>
+
+    </html>*@
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Title</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+        @* ~/assets/ecommerce/ *@
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/assets/ecommerce/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/assets/ecommerce/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/assets/ecommerce/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/assets/ecommerce/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/assets/ecommerce/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/assets/ecommerce/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/assets/ecommerce/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/assets/ecommerce/css/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+            <a style="width: 119px; height: 60px" href="/"><img src="~/img/logo.png" alt=""></a>
+        </div>
+        <div class="humberger__menu__cart">
+            <ul>
+                @Html.Action("CartIcon", "Cart")
+            </ul>
+        </div>
+        <div class="humberger__menu__widget">
+            @Html.Action("Login", "User")
+        </div>
+        <nav class="humberger__menu__nav mobile-menu">
+            <ul>
+                <li class="active"><a href="/">Trang Chủ</a></li>
+                <li><a href="~/Home/About">Giới thiệu</a></li>
+                <li><a href="~/Home/SanPham">Sản phẩm</a></li>
+                <li><a href="~/Home/Contact">Liên hệ</a></li>
+                <li><a href="~/Home/TinTuc">Tin tức</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="header__top__right__social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+        </div>
+        <div class="humberger__menu__contact">
+            <ul>
+                <li><i class="fa fa-envelope"></i> lienhe@newbrain.vn</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Humberger End -->
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-9 col-md-8">
-                        <div class="header-top-left">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i>lienhe@newbrain.vn</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div> 
                             @Html.Action("Login", "User")
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="header-bottom-area home-page-2 ptb-50">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="menu-search-box scnd-fix">
-                            @using (Html.BeginForm("SearchResult", "Product", FormMethod.Post, new { @class = "navbar-form", @role = "search" }))
-                                    {
-                                        <input type="text" name="txtSearch" placeholder="Tìm kiếm sản phẩm...">
-                                        <button type="submit"><span class="lnr lnr-magnifier"></span></button>
-                                    }
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="logo logo2">
-                            <a href="/" class="logo-wrapper"><img src="~/img/logosteam.png" style="height:75px;box-shadow: none;" alt=""></a>
-                        </div>					
-                    </div>
-                    <div class="col-md-3">
-                        <div class="header-bottom-right header-bottom-right-2">
-                            <div class="shop-cart">
-                                @Html.Action("CartIcon", "Cart")
-                            </div>
-                        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a style="width: 119px; height: 60px" href="/"><img src="~/img/logo.png" alt=""></a>
                     </div>
                 </div>
+                <div class="col-lg-8">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active"><a href="/">Trang chủ</a></li>
+                            <li><a href="~/Home/About">Giới thiệu</a></li>
+                            <li><a href="~/Home/SanPham">Sản phẩm</a></li>
+                            <li><a href="~/Home/Contact">Liên hệ</a></li>
+                            <li><a href="~/Home/TinTuc">Tin tức</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-1">
+                    <div class="header__cart">
+                        <ul>
+                            @* <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li> *@
+                            @Html.Action("CartIcon", "Cart")
+                            @* <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li> *@
+                        </ul>
+                        @* <div class="header__cart__price">item: <span>$150.00</span></div> *@
+                    </div>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
             </div>
         </div>
     </header>
-    <div class="mainmenu-area home-page-2" id="main_h">
+    <!-- Header Section End -->
+    <!-- Hero Section Begin -->
+    <section class="hero">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="mainmenu d-none d-md-block">
-                        <nav>
-                            <ul>
-                                <li class="active"><a href="/">Trang chủ</a>
-                                </li>
-                                <li><a href="~/Home/About">Giới thiệu</a>
-                                </li>
-                                <li><a href="~/Home/SanPham">Sản phẩm</a>								
-                                </li>
-                                <li><a href="~/Home/Contact">Liên hệ</a>								
-                                </li>
-                                <li>
-                                    <a href="~/Home/TinTuc">Tin Tức</a>
-                                </li>
-                            </ul>
-                        </nav>
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>Danh Mục</span>
+                        </div>
+                        @* <ul>
+                            <li><a href="#">Steam Mầm Non</a></li>
+                            <li><a href="#">Steam Cấp Một</a></li>
+                            <li><a href="#">Steam Cấp Hai</a></li>
+                            <li><a href="#">Steam Cấp Ba</a></li>
+                        </ul> *@
+                        @Html.Action("ShowTheLoai", "Product")
                     </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <div class="hero__search__categories">
+                                    Tất cả danh mục
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                @using (Html.BeginForm("SearchResult", "Product", FormMethod.Post, new { @class = "navbar-form", @role = "search" }))
+                                {
+                                            <input type="text" name="txtSearch" placeholder="Tìm kiếm sản phẩm...">
+                                            <button type="submit" class="site-btn">TÌM KIẾM</button>
+                                }
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>(028) 3810 9058</h5>
+                                <span>Hỗ trợ 24/7</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero__item set-bg" data-setbg="/img/banner1.jpg">
+
+                    @* <div class="section section-slider" style="margin: 30px 0 50px">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="hero__item set-bg" data-setbg="/img/banner1.jpg"></div>
+                </div>
+                <div class="carousel-item active">
+                    <div class="hero__item set-bg" data-setbg="/img/banner2.jpg"></div>
+                </div>
+                <div class="carousel-item active">
+                    <div class="hero__item set-bg" data-setbg="/img/banner3.jpg"></div>
+                </div>
+                
+
+            </div>
+            <div class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </div>
+            <div class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </div>
+        </div>
+        </div> *@
+
+
                 </div>
             </div>
         </div>
-    </div>
-    <div class="mobile-menu-area d-flex d-md-none">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="mobile-menu">
-							<nav id="mobile-menu">
-								<ul>
-									<li class="active"><a href="/">Trang Chủ</a>
-									</li>
-									<li><a href="~/Home/About">Giới thiệu</a>
-									</li>
-									<li><a href="~/Home/SanPham">Sản phẩm</a>
-									</li>
-                                    <li>
-                                        <a href="~/Home/Contact">Liên hệ</a>
-                                    </li>
-                                    <li>
-                                        <a href="~/Home/TinTuc">Tin Tức</a>
-                                    </li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-         @* end phần header*@
-
-        @*phần thân*@
-        <div class="container" style="margin-top:-10px">
+    </section>
+    <!-- Hero Section End -->
+    @RenderBody()
+    <!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div class="container">
             <div class="row">
-                @RenderBody()
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="/"><img src="~/img/logo.png" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Địa Chỉ: 140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, Thành phố Hồ Chí Minh</li>
+                            <li>Điện Thoại: (028) 3810 9058</li>
+                            <li>Email: lienhe@newbrain.vn</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Về Chúng Tôi</h6>
+                        <ul>
+                            <li><a href="/">Trang Chủ</a></li>
+                            <li><a href="~/Home/About">Giới Thiệu </a></li>
+                            <li><a href="~/Home/Contact">Liên Hệ</a></li>
+                            <li><a href="~/Home/TinTuc">Tin Tức</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="~/Home/SanPham">Thiết Bị Steam</a></li>
+                            <li><a href="~/Home/DoiTra">Đỗi Trả</a></li>
+                            <li><a href="~/Home/QuyDinh">Quy Định</a></li>
+                            <li><a href="~/Home/VanChuyen">Vận Chuyển</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Tham gia với chúng tôi ngay bây giờ</h6>
+                        <p>Nhận thông báo qua email để nhận ưu đãi đặc biệt</p>
+                        <form action="#">
+                            <input type="text" placeholder="Email của bạn">
+                            <button type="submit" class="site-btn">Gửi</button>
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text">
+                            <p>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="/">Xuân Huy</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                        <div class="footer__copyright__payment"><img src="~/assets/ecommerce/img/payment-item.png" alt=""></div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        @* phần cuôi*@
-
-        <footer id="footer">
-            @*<div class="site-footer" style="width: 100%; float:left; padding: 30px 0; background: #f5f5f5;">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <div class="brand-logos owl-carousel owl-theme owl-loaded owl-drag" data-lg-items="6" data-md-items="4" data-sm-items="3" data-xs-items="2" data-xxs-items="1" data-loop="true" data-nav="true" data-auto-play="true" data-margin="10">
-                                    <div class="owl-stage-outer">
-                                        <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0.25s ease 0s; width: 1181px;">
-                                            <div class="owl-item active" style="width: 186.667px; margin-right: 10px;float: left;">
-                                                <div class="item"  style="display: flex; justify-content:center; justify-items:center;">
-                                                    <img style="width: auto;}" src="https://gigotoys.vn/wp-content/uploads/2019/01/d1.png" alt="STEAM">
-                                                    <span>
-                                                        <h6>BỀ DÀY LỊCH SỬ PHÁT TRIỂN</h6>
-                                                        Gigo thành lập từ năm 1976, sau 43 năm không ngừng đổi mới,
-                                                        Gigo đã có hơn 664 loại miếng ghép và sở hữu 100 bằng sáng chế khác nhau.
-                                                    </span>
-
-                                                </div>
-                                            </div>
-                                            <div class="owl-item active" style="width: 186.667px; margin-right: 10px;float: left;">
-                                                      <div class="item" style="display: flex; justify-content:center; justify-items:center;">
-                                                          <img src="//bizweb.dktcdn.net/100/047/782/themes/833677/assets/brand_image_2.png?1630459265498" alt="STEAM">
-                                                      </div>
-                                            </div>
-                                            <div class="owl-item active" style="width: 186.667px; margin-right: 10px;float: left;">
-                                                <div class="item" style="display: flex; justify-content:center; justify-items:center;">
-                                                    <img src="//bizweb.dktcdn.net/100/047/782/themes/833677/assets/brand_image_3.png?1630459265498" alt="STEAM">
-                                                </div>
-                                            </div>
-                                            <div class="owl-item active" style="width: 186.667px; margin-right: 10px;float: left;">
-                                                <div class="item" style="display: flex; justify-content:center; justify-items:center;">
-                                                    <img src="//bizweb.dktcdn.net/100/047/782/themes/833677/assets/brand_image_4.png?1630459265498" alt="STEAM">
-                                                </div>
-                                            </div>
-                                            <div class="owl-item active" style="width: 186.667px; margin-right: 10px;float: left;">
-                                                <div class="item" style="display: flex; justify-content:center; justify-items:center;">
-                                                    <img src="//bizweb.dktcdn.net/100/047/782/themes/833677/assets/brand_image_5.png?1630459265498" alt="STEAM">
-                                                </div>
-                                            </div>
-                                            <div class="owl-item active" style="width: 186.667px; margin-right: 10px;float: left;">
-                                                <div class="item" style="display: flex; justify-content:center; justify-items:center;">
-                                                    <img src="//bizweb.dktcdn.net/100/047/782/themes/833677/assets/brand_image_3.png?1630459265498" alt="STEAM">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
-            @*<section class="section dac-trung" id="section_1519737990" style="background-color:#64ffbd ; width:1519.2px ; height:328px; min-width:inherit; ">
-                    <div class="bg section-bg fill bg-fill  bg-loaded"></div>
-                    <div class="section-content relative">
-                        <h2 class="uppercase" style="text-align: center;">Đặt Trưng của GIGO TOYS</h2>
-                        <div class="row row-dac-trung" id="row-1825895144">
-                            <div class="col medium-4 small-12 large-4">
-                                <div class="col-inner">
-                                    <div class="box has-hover has-hover box-vertical box-text-bottom">
-                                        <div class="box-image" style="width:23%;">
-                                            <div class=""> <img width="76" height="81" src="https://gigotoys.vn/wp-content/uploads/2019/01/d1.png" class="attachment-original size-original" alt="" /></div>
-                                        </div>
-                                        <div class="box-text text-left">
-                                            <div class="box-text-inner">
-                                                <h3 class="uppercase">bề dày LỊCH SỬ PHÁT TRIỂN</h3>
-                                                <p>Gigo thành lập từ năm 1976, sau 43 năm không ngừng đổi mới, Gigo đã có hơn 664 loại miếng ghép và sở hữu 100 bằng sáng chế khác nhau.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col medium-4 small-12 large-4">
-                                <div class="col-inner">
-                                    <div class="box has-hover has-hover box-vertical box-text-bottom">
-                                        <div class="box-image" style="width:23%;">
-                                            <div class=""> <img width="76" height="81" src="https://gigotoys.vn/wp-content/uploads/2019/01/d2.png" class="attachment-original size-original" alt="" /></div>
-                                        </div>
-                                        <div class="box-text text-left">
-                                            <div class="box-text-inner">
-                                                <h3 class="uppercase">PHÙ HỢP GIÁO DỤC ĐỔI MỚI</h3>
-                                                <p>Trong thị trường sản phẩm giáo dục, Gigo luôn đi đầu với các giải pháp đổi mới giáo dục toàn diện, phù hợp với các đơn vị giáo dục ở nhiều quốc gia.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col medium-4 small-12 large-4">
-                                <div class="col-inner">
-                                    <div class="box has-hover has-hover box-vertical box-text-bottom">
-                                        <div class="box-image" style="width:23%;">
-                                            <div class=""> <img width="76" height="81" src="https://gigotoys.vn/wp-content/uploads/2019/01/d3.png" class="attachment-original size-original" alt="" /></div>
-                                        </div>
-                                        <div class="box-text text-left">
-                                            <div class="box-text-inner">
-                                                <h3 class="uppercase">CHẤT LƯỢNG AN TOÀN CAO CẤP</h3>
-                                                <p>Sản phẩm của Gigo đạt tiêu chuẩn Châu Âu và được kiểm định chất lượng hợp quy tại Tổng cục tiêu chuẩn đo lường chất lượng VN.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col medium-4 small-12 large-4">
-                                <div class="col-inner">
-                                    <div class="box has-hover has-hover box-vertical box-text-bottom">
-                                        <div class="box-image" style="width:23%;">
-                                            <div class=""> <img width="76" height="81" src="https://gigotoys.vn/wp-content/uploads/2019/01/d4.png" class="attachment-original size-original" alt="" /></div>
-                                        </div>
-                                        <div class="box-text text-left">
-                                            <div class="box-text-inner">
-                                                <h3 class="uppercase">CƠ HỘI HỢP TÁC KINH DOANH</h3>
-                                                <p>Hoan nghênh các đơn vị hợp tác với Gigo Việt Nam để mang đến trẻ em Việt Nam các chương trình trải nghiệm sáng tạo STEAM phong phú.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col medium-4 small-12 large-4">
-                                <div class="col-inner">
-                                    <div class="box has-hover has-hover box-vertical box-text-bottom">
-                                        <div class="box-image" style="width:23%;">
-                                            <div class=""> <img width="76" height="81" src="https://gigotoys.vn/wp-content/uploads/2019/01/d5.png" class="attachment-original size-original" alt="" /></div>
-                                        </div>
-                                        <div class="box-text text-left">
-                                            <div class="box-text-inner">
-                                                <h3 class="uppercase">SẢN PHẨM ĐA DẠNG PHONG PHÚ</h3>
-                                                <p>Gigo phát triển các dòng sản phẩm có tính giáo dục cao: Đồ chơi thông minh, chương trình STEAM, trang thiết bị phòng học, thiết bị giáo dục.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col medium-4 small-12 large-4">
-                                <div class="col-inner">
-                                    <div class="box has-hover has-hover box-vertical box-text-bottom">
-                                        <div class="box-image" style="width:23%;">
-                                            <div class=""> <img width="76" height="81" src="https://gigotoys.vn/wp-content/uploads/2019/01/d6.png" class="attachment-original size-original" alt="" /></div>
-                                        </div>
-                                        <div class="box-text text-left">
-                                            <div class="box-text-inner">
-                                                <h3 class="uppercase">ĐỒNG HÀNH CÙNG CON KHÔN LỚN</h3>
-                                                <p>Gigo đi tiên phong trong ý tưởng sáng tạo với các sản phẩm thông minh nhất. &#8220;Làm đồ chơi mang tính giáo dục và làm cho giáo dục trở nên thú vị&#8221;.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <style scope="scope"></style>
-                        </div>
-                    </div>
-                    <style scope="scope">
-                        #section_1519737990 {
-                            padding-top: 0;
-                            padding-bottom: 0;
-                        }
-                    </style>
-                </section>*@
-
-
-
-            <div id='nz-div-5'><h3 class="tde"><span>ĐẶC TRƯNG CỦA GIGO TOYS</span></h3></div>
-            @*ĐẶC TRƯNG*@
-            <section class="cards">
-
-                <article class="card card--1">
-                    <div class="card__info-hover">
-                        <svg class="card__like" viewBox="0 0 24 24">
-                            <path fill="#000000" d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
-                        </svg>
-                        <div class="card__clock-info">
-                            <svg class="card__clock" viewBox="0 0 24 24">
-                                <path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
-                            </svg><span class="card__time">15 min</span>
-                        </div>
-
-                    </div>
-                    <div class="card__img"></div>
-                    <a href="#" class="card_link">
-                        <div class="card__img--hover"></div>
-                    </a>
-                    <div class="card__info">
-                        <span class="card__category"> BỀ DÀY LỊCH SỬ PHÁT TRIỂN</span>
-                        <h5 class="card__title">Gigo thành lập từ năm 1976, sau 43 năm không ngừng đổi mới, Gigo đã có hơn 664 loại miếng ghép và sở hữu 100 bằng sáng chế khác nhau.</h5>
-                        <span class="card__by">by <a href="#" class="card__author" title="author">Celeste Mills</a></span>
-                    </div>
-                </article>
-
-
-                <article class="card card--2">
-                    <div class="card__info-hover">
-                        <svg class="card__like" viewBox="0 0 24 24">
-                            <path fill="#000000" d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
-                        </svg>
-                        <div class="card__clock-info">
-                            <svg class="card__clock" viewBox="0 0 24 24">
-                                <path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
-                            </svg><span class="card__time">5 min</span>
-                        </div>
-
-                    </div>
-                    <div class="card__img"></div>
-                    <a href="#" class="card_link">
-                        <div class="card__img--hover"></div>
-                    </a>
-                    <div class="card__info">
-                        <span class="card__category"> PHÙ HỢP GIÁO DỤC ĐỔI MỚI</span>
-                        <h5 class="card__title">Trong thị trường sản phẩm giáo dục, Gigo luôn đi đầu với các giải pháp đổi mới giáo dục toàn diện, phù hợp với các đơn vị giáo dục ở nhiều quốc gia.</h5>
-                        <span class="card__by">by <a href="#" class="card__author" title="author">John Doe</a></span>
-                    </div>
-                </article>
-
-                <article class="card card--3">
-                    <div class="card__info-hover">
-                        <svg class="card__like" viewBox="0 0 24 24">
-                            <path fill="#000000" d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
-                        </svg>
-                        <div class="card__clock-info">
-                            <svg class="card__clock" viewBox="0 0 24 24">
-                                <path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
-                            </svg><span class="card__time">5 min</span>
-                        </div>
-
-                    </div>
-                    <div class="card__img"></div>
-                    <a href="#" class="card_link">
-                        <div class="card__img--hover"></div>
-                    </a>
-                    <div class="card__info">
-                        <span class="card__category"> CHẤT LƯỢNG AN TOÀN CAO CẤP</span>
-                        <h5 class="card__title">Sản phẩm của Gigo đạt tiêu chuẩn Châu Âu và được kiểm định chất lượng hợp quy tại Tổng cục tiêu chuẩn đo lường chất lượng VN.</h5>
-                        <span class="card__by">by <a href="#" class="card__author" title="author">STEAM</a></span>
-                    </div>
-                </article>
-
-                <article class="card card--4">
-                    <div class="card__info-hover">
-                        <svg class="card__like" viewBox="0 0 24 24">
-                            <path fill="#000000" d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
-                        </svg>
-                        <div class="card__clock-info">
-                            <svg class="card__clock" viewBox="0 0 24 24">
-                                <path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
-                            </svg><span class="card__time">5 min</span>
-                        </div>
-
-                    </div>
-                    <div class="card__img"></div>
-                    <a href="#" class="card_link">
-                        <div class="card__img--hover"></div>
-                    </a>
-                    <div class="card__info">
-                        <span class="card__category"> ĐỒNG HÀNH CÙNG CON KHÔN LỚN</span>
-                        <h5 class="card__title">Gigo đi tiên phong trong ý tưởng sáng tạo với các sản phẩm thông minh nhất. &#8220;Làm đồ chơi mang tính giáo dục và làm cho giáo dục trở nên thú vị</h5>
-                        <span class="card__by">by <a href="#" class="card__author" title="author">STEAM</a></span>
-                    </div>
-                </article>
-
-                <article class="card card--5">
-                    <div class="card__info-hover">
-                        <svg class="card__like" viewBox="0 0 24 24">
-                            <path fill="#000000" d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
-                        </svg>
-                        <div class="card__clock-info">
-                            <svg class="card__clock" viewBox="0 0 24 24">
-                                <path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
-                            </svg><span class="card__time">5 min</span>
-                        </div>
-
-                    </div>
-                    <div class="card__img"></div>
-                    <a href="#" class="card_link">
-                        <div class="card__img--hover"></div>
-                    </a>
-                    <div class="card__info">
-                        <span class="card__category"> SẢN PHẨM ĐA DẠNG PHONG PHÚ</span>
-                        <h5 class="card__title">Gigo phát triển các dòng sản phẩm có tính giáo dục cao: Đồ chơi thông minh, chương trình STEAM, trang thiết bị phòng học, thiết bị giáo dục.</h5>
-                        <span class="card__by">by <a href="#" class="card__author" title="author">STEAM</a></span>
-                    </div>
-                </article>
-            </section>
-
-
-            @*TIN TỨC*@
-            <!-- Messenger Plugin chat Code -->
-            <div id="fb-root"></div>
-
-            <!-- Your Plugin chat code -->
-            <div id="fb-customer-chat" class="fb-customerchat">
-            </div>
-
-            <script>
-                var chatbox = document.getElementById('fb-customer-chat');
-                chatbox.setAttribute("page_id", "117328627892066");
-                chatbox.setAttribute("attribution", "biz_inbox");
-            </script>
-
-            <!-- Your SDK code -->
-            <script>
-                window.fbAsyncInit = function () {
-                    FB.init({
-                        xfbml: true,
-                        version: 'v15.0'
-                    });
-                };
-
-                (function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s); js.id = id;
-                    js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-            </script>
-            @*FOOTER*@
-
-            <div class="cf-title-01">
-                <h3>About</h3>
-            </div>
-            <section class="footer-bottom" style="background-color:#000000 ; padding-top:20px;">
-                <div class="container">
-                    <div class="footer-cta pt-5 pb-5">
-                        <div class="row">
-                            <div class="col-xl-4 col-md-4 mb-30">
-                                <div class="single-cta">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <div class="cta-text">
-                                        <h4>Địa Chỉ</h4>
-                                        <span>
-                                            Miền Nam :Số 13, Bàu Cát 6, Phường 14, Quận Tân Bình, TP.HCM.
-
-                                            Miền Bắc: Số 55 Thủy Nguyên, Khu đô thị Ecopark, Hưng Yên.
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-4 mb-30">
-                                <div class="single-cta">
-                                    <i class="fas fa-phone"></i>
-                                    <div class="cta-text">
-                                        <h4>Liên Hệ</h4>
-                                        <span>028) 3810 9058 (8h - 17h)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-4 mb-30">
-                                <div class="single-cta">
-                                    <i class="far fa-envelope-open"></i>
-                                    <div class="cta-text">
-                                        <h4>Email</h4>
-                                        <span>lienhe@newbrain.vn</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer-content pt-5 pb-5">
-                        <div class="row">
-                            <div class="col-xl-4 col-lg-4 mb-50">
-                                <div class="footer-widget">
-                                    <div class="footer-logo">
-                                        <a href="#"><img src="https://gigotoys.vn/wp-content/uploads/2019/01/logofooter.png" class="img-fluid" alt="logo"></a>
-                                    </div>
-                                    <div class="footer-text">
-                                        <p>
-                                            New Brain là đại lý ủy quyền duy nhất tại Việt Nam của thương hiệu đồ chơi thông minh nổi tiếng thế giới:
-                                            ❤️Gigo Toys❤️. Bên cạnh đồ chơi thông minh, Gigo còn sở hữu các chương trình STEAM và thiết bị giáo dục
-                                            phù hợp cho các đơn vị trường học.  Giá trị cốt lõi của sản phẩm giáo dục Gigo Toys là khả năng sáng tạo
-                                            và năng lực giải quyết vấn đề trong quá trình chơi: "Đồ chơi Gigo, hơn cả chơi!".
-                                        </p>
-                                    </div>
-                                    <div class="footer-social-icon">
-                                        <span>Theo Dõi</span>
-                                        <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
-                                        <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
-                                        <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
-                                <div class="footer-widget">
-                                    <div class="footer-widget-heading">
-                                        <h3>Về Chúng Tôi</h3>
-                                    </div>
-                                    <ul>
-                                        <li><a href="~/Home/TrangChu">Trang Chủ</a></li>
-                                        <li><a href="~/Home/Contact">Liên Hệ</a></li>
-                                        <li><a href="~/Home/VanChuyen">Phương Thức Vận Chuyển</a></li>
-                                        <li><a href="~/Home/DoiTra">Hình Thức Đổi Trả</a></li>
-                                        <li><a href="~/Home/TinTuc">Tin Tức</a></li>
-                                        <li><a href="#">Thiết Bị Steam</a></li>
-                                        <li><a href="#">Chính Sách</a></li>
-</ul>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
-                                <div class="footer-widget">
-                                    <div class="footer-widget-heading">
-                                        <h3>Đăng Ký</h3>
-                                    </div>
-                                    <div class="footer-text mb-25">
-                                        <p>Đăng ký liên hệ nhận khuyến mãi</p>
-                                    </div>
-                                    <div class="subscribe-form">
-                                        <form action="#">
-                                            <input type="text" placeholder="Nhập Địa Chỉ Email">
-                                            <button><i class="fab fa-telegram-plane"></i></button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="copyright-area">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 text-center text-lg-left">
-                                <div class="copyright-text">
-                                    <p>Copyright &copy; 2022, All Right Reserved <a href="giahuydo">STEAM</a></p>
-                                </div>
-                            </div>
-                            @*<div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
-                                <div class="footer-menu">
-                                    <ul>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">Terms</a></li>
-                                        <li><a href="#">Privacy</a></li>
-                                        <li><a href="#">Policy</a></li>
-                                        <li><a href="#">Contact</a></li>
-                                    </ul>
-                                </div>
-                            </div>*@
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-
-        </footer>
-
-
-    </div>
-    @* <script type="text/javascript">
-    $("a").click(function () {
-        $("a").css("background-color", "");
-        $(this).css("background-color", "#007f85");
-    });
-    </script> *@
-
+    </footer>
+    <!-- Footer Section End -->
+    <!-- Js Plugins -->
+    <script src="~/assets/ecommerce/js/jquery-3.3.1.min.js"></script>
+    <script src="~/assets/ecommerce/js/bootstrap.min.js"></script>
+    <script src="~/assets/ecommerce/js/jquery.nice-select.min.js"></script>
+    <script src="~/assets/ecommerce/js/jquery-ui.min.js"></script>
+    <script src="~/assets/ecommerce/js/jquery.slicknav.js"></script>
+    <script src="~/assets/ecommerce/js/mixitup.min.js"></script>
+    <script src="~/assets/ecommerce/js/owl.carousel.min.js"></script>
+    <script src="~/assets/ecommerce/js/main.js"></script>
 
     @RenderSection("jsFooter", required: false)
     @RenderSection("QuantityScript", required: false)
-    <script src="~/assets/js/vendor/jquery-1.12.4.min.js"></script>
-		<!-- popper js -->
-        <script src="~/assets/js/popper.min.js"></script>
-		<!-- bootstrap js -->
-        <script src="~/assets/js/bootstrap.min.js"></script>
-		<!-- owl.carousel js -->
-        <script src="~/assets/js/owl.carousel.min.js"></script>
-		<!-- meanmenu js -->
-        <script src="~/assets/js/jquery.meanmenu.js"></script>
-		<!-- jquery-ui js -->
-        <script src="~/assets/js/jquery-ui.min.js"></script>
-		<!-- wow js -->
-        <script src="~/assets/js/wow.min.js"></script>
-		<!-- scrolly js -->
-        <script src="~/assets/js/jquery.scrolly.js"></script>
-		<!-- nivo.slider js -->
-        <script src="~/assets/js/jquery.nivo.slider.js"></script>				
-		<!-- magnific-popup js -->
-        <script src="~/assets/js/jquery.magnific-popup.min.js"></script>		
-		<!-- plugins js -->
-        <script src="~/assets/js/plugins.js"></script>
-		<!-- main js -->
-        <script src="~/assets/js/main.js"></script>
+
+
 
 </body>
 

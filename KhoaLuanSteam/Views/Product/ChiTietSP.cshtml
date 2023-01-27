@@ -4,156 +4,135 @@
 }
 
 @model KhoaLuanSteam.Models.THONGTINSANPHAM
-<link href="~/Css/StyleSheet9.css" rel="stylesheet" />
-<section class="product margin-top-10 f-left w_100" style=" margin-top: 20px; ">
-    <div class="container">
-        <div class="row">
-            <div class="section">
-                <div class="details-product section" style="padding-top:15px">
-                    <div class="product-detail-left product-images col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                        <div class="col_large_default large-image">
-                            <a>
-                                <div style="height:350px;width:270px;" class="zoomWrapper">
-                                    <div style="height:350px;width:270px;" class="zoomWrapper">
-                                        <img src="/HinhAnhSach/@Model.HinhAnh" alt="@Model.HinhAnh" title="@Model.TenSanPham" width="250" height="360" />
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 details-pro">
-                        <h1 class="title-product" style="text-transform:uppercase">@Model.TenSanPham</h1>
-                        <div class="fw w_100">
-                            <div class="group-status">
-                                <span class="first_status margin-bottom-10">
-                                    Loại Sản Phẩm:
-                                    <span class="status_name availabel">
-                                        @Model.LOAISANPHAM.TenLoai
-                                    </span>
-
-
-                                </span>
-                                <span>&nbsp;|&nbsp;</span>
-                            </div>
-
-                            @* <div class="price-box">
-                                @if (@Model.GiamGia <= 0)
-                                {
-                                    <span class="product-item-price-sale old-price">
-                                        <span class="compare-price price product-price-old" style="font-size: 20px; font-weight: 700; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; color: #f26522; font-weight: 600; line-height: 20px; ">
-                                            @Model.GiaSanPham.Value.ToString("N0") VND
-                                        </span>
-                                    </span>
-                                }
-                                else
-                                {
-
-                                    @Html.Action("giasachgiam", "Product", new { @masanpham = @Model.MaSanPham })
-                                    <span class="product-item-price-sale old-price">
-                                        <span class="compare-price price product-price-old" style="color: #636363; text-decoration: line-through;">
-                                            @Model.GiaSanPham.Value.ToString("N0") VND
-                                        </span>
-                                    </span>
-                                }
-                            </div> *@
-
-                            <div class="section">
-                    <div class="blockprice" style="min-height: 30px; width: 100%; float: left;">
-                        <div class="product-item-price price-box" style="float:left; width: 100%;color:#F26522;font-weight:600; font-size:20px; line-height:20px;">
-                            @if (@Model.GiamGia <= 0)
-                            {
-                                <span class="product-item-price-sale old-price">
-                                    <span class="compare-price price product-price-old" style="font-size: 20px; font-weight: 700; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; color: #f26522; font-weight: 600; line-height: 20px; ">
-                                         @Model.GiaSanPham.Value.ToString("N0") VND
-                                    </span>
-                                </span>
-                            }
-                            else
-                            {
-
-                                @Html.Action("giasachgiam", "Product", new { @masanpham = @Model.MaSanPham })
-                                <span class="product-item-price-sale old-price">
-                                    <span class="compare-price price product-price-old" style="color: #636363; text-decoration: line-through;font-weight:300; font-size:15px">
-                                        @Model.GiaSanPham.Value.ToString("N0") VND
-                                    </span>
-                                </span>
-                            }
-
+<!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/assets/ecommerce/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Xem Chi Tiết Sản Phẩm</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Trang Chủ</a>
+                            <span>Chi Tiết Sản Phẩm</span>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
 
-                            <div class="product-summary">
-                                <div class="rte text3line">
-                                    @if (@Model.SLTon > 0)
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large"
+                                src="/HinhAnhSach/@Model.HinhAnh" alt="@Model.HinhAnh" title="@Model.TenSanPham">
+                        </div>
+                        @* <div class="product__details__pic__slider owl-carousel">
+                            <img data-imgbigurl="~/assets/ecommerce/img/product/details/product-details-2.jpg"
+                                src="~/assets/ecommerce/img/product/details/thumb-1.jpg" alt="">
+                            <img data-imgbigurl="img/product/details/product-details-3.jpg"
+                                src="~/assets/ecommerce/img/product/details/thumb-2.jpg" alt="">
+                            <img data-imgbigurl="img/product/details/product-details-5.jpg"
+                                src="~/assets/ecommerce/img/product/details/thumb-3.jpg" alt="">
+                            <img data-imgbigurl="img/product/details/product-details-4.jpg"
+                                src="~/assets/ecommerce/img/product/details/thumb-4.jpg" alt="">
+                        </div> *@
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                        <h3>@Model.TenSanPham</h3>
+                        <div class="product__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                        </div>
+                        <div class="product__details__price">
+                            
+                            @if (@Model.GiamGia <= 0)
+                            {
+                                <span>
+                                    @Model.GiaSanPham.Value.ToString("N0") đ
+                                </span>
+                            }else{
+                                <span>
+                                    @Html.Action("giasachgiam", "Product", new { @masanpham = @Model.MaSanPham })
+                                </span>
+                                <span style="text-decoration: line-through; color:#b2b2b2;font-size: 20px;">
+                                    @Model.GiaSanPham.Value.ToString("N0") đ
+                                </span>
+                            }
+                        </div>
+                        <p>@Model.MoTa</p>
+                        @* <div class="product__details__quantity">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="text" value="1">
+                                </div>
+                            </div>
+                        </div> *@
+                        <a href="/Cart/ThemGioHang/?id=@Model.MaSanPham&soluong=1" class="primary-btn">THÊM VÀO GIỎ</a>
+                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <ul>
+                            <li><b>Loại sản phẩm</b> <span>@Model.LOAISANPHAM.TenLoai</span></li>
+                            <li><b>Tình trạng: </b>
+                            @if (@Model.SLTon > 0)
                                     {
-                                        <p>Tình trạng: Còn hàng</p>
+                                        <samp>Còn hàng</samp>
                                     }
                                     else
                                     {
-                                        <p>Tình trạng: Liên hệ</p>
-                                    }
-
+                                        <samp>Liên hệ</samp>
+                                    } 
+                            </li>
+                            <li><b>Chia sẻ</b>
+                                <div class="share">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-product">
-                            <form enctype="multipart/form-data" id="add-to-cart-form" action="/cart/add" method="post" class="form-inline" style=" margin-top: 10px;">
-                                <div class="form-group form_button_details">
-                                    <div class="form_product_content ">
-                                        <div class="button_actions  clearfix">
-                                            <a class="btn btn-light" href="/Cart/ThemGioHang/?id=@Model.MaSanPham&soluong=1" style="border: 2px solid #e1e1e1; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; font-size: 13px; font-weight: 400; text-decoration: none;  display: inline-block; padding: 8px 20px 8px 20px;">
-
-                                                <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
-                                            </a>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <div class="sp_details">Gọi ngay <a href="tel:02838109058 ">(028) 3810 9058 </a> Để được tư vấn miễn phí</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        @Html.Action("SPLienQuan", "Product", new { @LoaiSanPham = @Model.MaLoai})
-                        @*@Html.Action("SPLienQuan", "Product", new { @LoaiSanPham = @Model.MaLoai, @masanpham = @Model.MaSanPham })*@
+                            </li>
+                        </ul>
                     </div>
                 </div>
-
-
-
-                <div class="tab_hh section" style=" float: left; width: 100%;  padding-top: 30px;   padding-bottom: 25px;">
-                    <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12">
-                        <!-- Nav tabs -->
-                        <div class="product-tab e-tabs not-dqtab">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-bottom: 0px">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="mota-tab" data-toggle="tab" href="#mota" role="tab" aria-controls="mota" aria-selected="true">
-                                        Mô tả sản phẩm
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="doitra-tab" data-toggle="tab" href="#doitra" role="tab" aria-controls="doitra" aria-selected="false">
-                                        Chính Sách đổi trả
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="vanchuyen-tab" data-toggle="tab" href="#vanchuyen" role="tab" aria-controls="vanchuyen" aria-selected="false">
-                                        Chính Sách vận chuyển
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="mota" role="tabpanel" aria-labelledby="mota-tab" style=" color: #000000; font-size:20px">
-                                    @Model.MoTa
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                    aria-selected="true">Mô tả sản phẩm</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                                    aria-selected="false">Đỗi trả</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                    aria-selected="false">Vận chuyển</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Mô tả sản phẩm</h6>
+                                    <p>@Model.MoTa</p>
                                     <p style="text-align: center;">
                                         <img src="/HinhAnhSach/@Model.HinhAnh" style="width: 310px;">
                                     </p>
                                 </div>
-                                <div class="tab-pane fade" id="doitra" role="tabpanel" aria-labelledby="doitra-tab">
+                            </div>
+                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Chính sách đỗi trả</h6>
                                     <p style="text-align: justify;"><strong>1. Đổi trả theo nhu cầu khách hàng (đổi trả hàng vì không ưng ý)</strong></p>
 
                                     <p style="text-align: justify;">Tất cả mặt hàng đã mua đều có thể hoàn trả trong vòng 30 ngày kể từ ngày nhận hàng (trừ khi có quy định gì khác). Chúng tôi chỉ chấp nhận đổi trả cho các sản phẩm còn nguyên điều kiện ban đầu, còn hóa đơn mua hàng &amp; sản phẩm chưa qua sử dụng, bao gồm:</p>
@@ -203,10 +182,11 @@
                                     <p style="text-align: justify;">- Hoàn tiền mặt trực tiếp tại văn phòng</p>
 
                                     <p style="text-align: justify;">Mọi chi tiết hoặc thắc mắc quý khách vui lòng liên hệ với chúng tôi qua số điện thoại hỗ trợ hoặc để lại lời nhắn tại website. Xin chân thành cảm ơn.</p>
-
                                 </div>
-                                <div class="tab-pane fade" id="vanchuyen" role="tabpanel" aria-labelledby="vanchuyen-tab">
-
+                            </div>
+                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Chính sách vận chuyển</h6>
                                     <p style="text-align: justify;">Với mong muốn mang lại sự hài lòng cho quý khách khi mua hàng, chúng tôi có những quy định trong vận chuyển, nhằm đảm bảo rằng những sản phẩm quý khách mua là sản phẩm mà vừa ý nhất.</p>
 
                                     <p style="text-align: justify;"><strong>1. Chúng tôi sẽ được thực hiện và chuyển phát dựa trên mẫu khách hàng đã chọn.</strong> Trường hợp không có đúng sản phẩm Quý khách yêu cầu chúng tôi sẽ gọi điện xác nhận gửi sản phẩm tương tự thay thế.</p>
@@ -234,35 +214,27 @@
                                     <p style="text-align: justify;"><strong>7. Trường hợp không tồn tại người nhận tại địa chỉ yêu cầu:</strong> đơn hàng sẽ được hủy và không được hoàn lại thanh toán.</p>
 
                                     <p style="text-align: justify;"><strong>8. Chúng tôi không vận chuyển sản phẩm đến các địa chỉ trên tàu hỏa, máy bay, tàu thủy, khu vực nguy hiểm, các khu vực cấm…</strong></p>
-
                                 </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-
-                <div class=" section_product_deal_hot">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="aside-mini-list-product">
-                            <div class="heading">
-                                <h2 class="title-head"><a href="san-pham-noi-bat" title="Sản phẩm nổi bật">Sản phẩm nổi bật</a></h2>
-                            </div>
-                            <div class="product-mini-lists">
-
-
-                                @Html.Action("FavoriteProduct", "Product")
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+    <!-- Product Details Section End -->
 
-</section>
+    <!-- Related Product Section Begin -->
+    <section class="related-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title related__product__title">
+                        <h2>Sản Phẩm Liên Quan</h2>
+                    </div>
+                </div>
+            </div>
+            @Html.Action("SPLienQuan", "Product", new { @LoaiSanPham = @Model.MaLoai, @MaSanPham = @Model.MaSanPham })
+        </div>
+    </section>
+    <!-- Related Product Section End -->

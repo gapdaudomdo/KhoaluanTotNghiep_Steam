@@ -1,34 +1,10 @@
 ﻿
 @model List<KhoaLuanSteam.Models.GioHang>
 
-<style>
-    .cart_number{
-        color: rgb(36, 36, 36);
-        background: rgb(253, 216, 53);
-        height: 20px;
-        left: 10px;
-        top: -14px;
-        border-radius: 40px;
-        display: inline-block;
-        text-align: center;
-        line-height: 20px;
-        font-size: 13px;
-        font-weight: 500;
-        position: absolute;
-        padding: 0px 7px;
-}
-</style>
 
 @if (@Model.Count > 0)
 {
-    <a style="position: relative;" href="/Cart/Index"><span style="font-size: 30px;" class="lnr lnr-cart"></span>Giỏ Hàng
-    <div class="cart_number">@Model.Count</div>
-    </a>
-
-}
-else
-{
-    <a style="position: relative;" href="/Cart/Index"><span style="font-size: 30px;" class="lnr lnr-cart"></span>Giỏ Hàng
-    <div class="cart_number">@Model.Count</div>
-    </a>
+    <li><a href="/Cart/Index"><i class="fa fa-shopping-bag"></i> <span>@Model.Count</span></a></li>
+}else{
+    <li><a href="/Cart/Index"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
 }

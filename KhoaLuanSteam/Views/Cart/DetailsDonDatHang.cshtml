@@ -3,10 +3,27 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 @model List<DoAn_MonHoc.ViewModels.ChiTietDDHViewModel>
-<h2 style="width: 100%;    padding-left: 23px;    padding-top: 13px;">Chi Tiết Đơn Hàng</h2>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+@* <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> *@
 <link rel="stylesheet" href="~/Css/StepBar.css" type="text/css" />
 
+<!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/assets/ecommerce/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Chi Tiết Đơn Hàng</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Trang Chủ</a>
+                            <span>Chi Tiết Đơn Hàng</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+<div class="container">
 <section class="step-wizard">
     @if (ViewBag.TinhTrang == "Xử lý")
     {
@@ -94,13 +111,8 @@
     }
 
 </section>
-<h5 style="width: 100%;    padding-left: 40px;    padding-top: 13px;">Lên Đơn Hàng Thành Công !!! Cảm Ơn Quí Khách</h5>
-
-
-
-<h2 style="width: 100%;    padding-left: 23px;    padding-top: 13px;">Trạng thái đơn hàng của bạn là : @ViewBag.TinhTrang</h2>
-
-<table id="cart" class="table table-hover table-condensed">
+<h3 class="pt-5">Trạng thái đơn hàng của bạn là : @ViewBag.TinhTrang</h3>
+@* <table id="cart" class="table table-hover table-condensed">
     <thead>
         <tr>
             <th style="width:50%;font-size: 16px; font-weight: 700;" class="text-center">Sản phẩm</th>
@@ -145,8 +157,71 @@
 
         </tr>
     </tfoot>
-</table>
+</table> *@
 
+<section class="shoping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="shoping__cart__item">
+                                            <img style="width: 101px;" src="~/HinhAnhSach/@item.HinhAnh" alt="@item.HinhAnh">
+                                            <h5>@item.TenSanPham</h5>
+                                        </td>
+                                        <td class="shoping__cart__price">
+                                            @*@item.Gia đ*@
+                                            @item.Gia.GetValueOrDefault(0).ToString("N0") đ
+                                        </td>
+                                        <td class="shoping__cart__quantity">
+                                            <input type="number" style="border: none; text-align: center;" class="txtQuantity" readonly="readonly" value="@item.SoLuong">
+                                        </td>
+                                        <td class="shoping__cart__total">
+                                            @((item.Gia * item.SoLuong).GetValueOrDefault(0).ToString("N0")) đ
+                                        </td>
+                                    </tr>
+                                    
+                                }
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="text-align: end;">Tổng cộng: </td>
+                                    <td><strong>@String.Format("{0:0,0}", ViewBag.Total) đ</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @* <div class="col-12" style="text-align: end;">
+                            <strong>Tổng cộng: @String.Format("{0:0,0}", ViewBag.Total) VND</strong>
+                        </div> *@
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns">
+                        <a href="~/Cart/DonHang_KH" class="primary-btn cart-btn"><i class="fa fa-angle-left"></i> Trở về</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+
+</div>
 
 <style>
     .product-price {

@@ -4,198 +4,300 @@
 }
 
 @model IEnumerable<KhoaLuanSteam.Models.THONGTINSANPHAM>
-<style>
-    .aside-content ul li a {
-        color: #636363;
-    }
 
-        .aside-content ul li a:hover {
-            color: #0099ae;
-        }
-
-    .btn-light {
-        color: #898989;
-    }
-
-        .btn-light:hover {
-            background-color: #0099ae;
-            color: white;
-        }
-
-    .ul.pagination {
-        display: inline-block;
-        padding: 0;
-        margin: 0;
-    }
-
-    ul.pagination li {
-        display: inline;
-    }
-
-        ul.pagination li a {
-            padding: 8px 16px;
-            text-decoration: none;
-            transition: background-color .3s;
-            float: left;
-            margin: 0 2.5px;
-            border-radius: 0;
-            background: #fff;
-            text-align: center;
-            font-size: 14px;
-            color: #0c0c0c;
-            border: solid 1px #e1e1e1;
-        }
-
-            ul.pagination li a.active {
-                background-color: #0099ae;
-                color: white;
-            }
-
-            ul.pagination li a:hover:not(.active) {
-                background-color: #0099ae;
-            }
-
-            @* css discount *@
-    .discount_product {
-            position: absolute;
-            right: 0;
-            top: 0;
-            z-index: 1;
-        }
-        .discount_content{
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            position: relative;
-            font-weight: 400;
-            line-height: .8125rem;
-            color: #ee4d2d;
-            text-transform: uppercase;
-            font-size: .75rem;
-            width: 36px;
-            height: 32px;
-            box-sizing: border-box;
-            padding: 4px 2px 3px;
-            background-color: rgba(255,212,36,.9);
-        }
-        .title_discount{
-            color: #fff;
-        }
-</style>
-<link href="~/Css/StyleSheet5.css" rel="stylesheet" />
-<link href="~/Css/StyleSheet4.css" rel="stylesheet" />
-<aside class="sidebar left-content col-lg-3 col-lg-3-fix col-md-3 col-lg-pull-9 col-md-pull-9" style="margin-top:20px">
-    <div class="wrap_background_aside asidecollection" style=" padding: 0px; width: 100%; float: left; }">
-        <aside class="aside-item sidebar-category collection-category" style="margin-bottom: 25px;width: 100%; float: left;">
-            <div class="aside-title">
-                <h2 class="title-head" style="width: 100%; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; margin: 0; text-transform: none; font-weight: 600; color: #707070; padding-bottom: 10px; display: inline-block; position: relative; font-size: 18px; line-height: 22px; border-bottom:2px solid #707070; text-transform: uppercase; margin-bottom: 15px;">
-                    <span>Danh mục Sẩn Phẩm</span>
-                </h2>
-            </div>
-            <div class="aside-content">
-                @Html.Action("ShowTheLoai", "Product")
-            </div>
-        </aside>
-        <aside class="aside-item sidebar-category collection-category" style="margin-bottom: 25px;width: 100%; float: left;">
-            <div class="aside-title">
-                <h2 class="title-head" style="width: 100%; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; margin: 0; text-transform: none; font-weight: 600; color: #707070; padding-bottom: 10px; display: inline-block; position: relative; font-size: 18px; line-height: 22px; border-bottom:2px solid #707070; text-transform: uppercase; margin-bottom: 15px;">
-                    <span>Danh mục NHÀ CUNG CẤP</span>
-                </h2>
-            </div>
-            <div class="aside-content">
-                @Html.Action("ShowNCC", "Product")
-            </div>
-        </aside>
-    </div>
-</aside>
-<div class="main_container collection  col-lg-9 col-md-9 col-lg-9-fix padding-col-left-0 col-lg-push-3 col-md-push-3" style="margin-top:20px">
-    <h2 class="title-head" style="width: 100%; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; margin: 0; text-transform: none; font-weight: 600; color: #707070; padding-bottom: 10px; display: inline-block; position: relative; font-size: 18px; line-height: 22px; border-bottom:2px solid #707070; text-transform: uppercase; margin-bottom: 20px;">
-        <span>
-            @ViewBag.TenNCC
-        </span>
-    </h2>
-    <div class="row">
-        <div style="font-size:14px;text-align:center;text-transform:uppercase;padding-left: 15px;">@ViewBag.ThongBaoNXB</div>
-        @foreach (var item in Model)
-        {
-            <div class="col-xs-6 col-sm-4 col-sm-4 col-md-4 col-lg-4" style="">
-                <div class="item_product_main margin-bottom-20 item_product_main_relative">
-                    <div class="product-box product-item-main product-item-compare">
-                        <div class="product-thumbnail">
-                            <div class="content_hover">
-                                <a class="image_thumb p_img" title="@item.TenSanPham" href="/Product/ChiTietSP/@item.MaSanPham">
-                                        @if (@item.GiamGia > 0)
-                                        {
-                                            <div class="discount_product">
-                                                <div class="discount_content">
-                                                    <span class="ratio_discount">@item.GiamGia%</span>
-                                                    <span class="title_discount">giảm</span>
-                                                </div>
-                                            </div>
-                                        }
-                                    <div class="content-overlay"></div>
-                                    <img class="content-image" src="~/HinhAnhSach/@item.HinhAnh" alt="@item.HinhAnh" width="180px" height="242px" />
-                                    <a title="Xem nhanh" href="~/Product/ChiTietSP/@item.MaSanPham" data-handle="tren-duong-bang" class="xem_nhanh btn-circle btn_view btn right-to quick-view hidden-xs hidden-sm">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-info product-bottom mh" style="width:100%; float: left; padding: 0; position: relative; text-align: center; min-height: 99px;">
-                            <h3 class="product-name" style="font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; font-size: 14px; font-weight: 600; margin:0 0 5px; overflow: hidden; text-transform: uppercase; word-wrap: break-word; line-height: 22px; padding: 10px 15px 0; text-overflow: ellipsis; white-space: nowrap;">
-                                <a href="/chung-ta-roi-se-on-thoi" title="@item.TenSanPham" style="color: #636363;">
-                                    @item.TenSanPham
-                                </a>
-                            </h3>
-                            <div class="section">
-                                <div class="blockprice" style="min-height: 30px; width: 100%; float: left;">
-                                    <div class="product-item-price price-box" style="float:left; width: 100%; text-align:center; color:#F26522;font-weight:600; font-size:20px; line-height:20px;">
-                                        @if (@item.GiamGia <= 0)
-                                        {
-                                            <span class="product-item-price-sale old-price">
-                                                <span class="compare-price price product-price-old" style="font-size: 20px; font-weight: 700; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; color: #f26522; font-weight: 600; line-height: 20px; ">
-                                                    @item.GiaSanPham.Value.ToString("N0") VND
-                                                </span>
-                                            </span>
-                                        }
-                                        else
-                                        {
-
-                                            @Html.Action("giasachgiam", "Product", new { @MaSanPham = @item.MaSanPham })
-                                            <span class="product-item-price-sale old-price">
-                                                <span class="compare-price price product-price-old" style="color: #636363; text-decoration: line-through;font-weight:300; font-size:15px">
-                                                    @item.GiaSanPham.Value.ToString("N0") VND
-                                                </span>
-                                            </span>
-                                        }
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-action clearfix" style="text-align: center; height: 40px; width: 100%; float: left; z-index: 10;">
-                                <form action="/cart/add" method="post" class="variants form-nut-grid" data-id="product-actions-1272032" enctype="multipart/form-data">
-                                    <div class="group_action" style="text-align: center; width: 100%; display: flex;  justify-content:center">
-
-                                        <input type="hidden" name="variantId" value="1953228">
-
-                                        <a class="btn btn-light" href="/Cart/ThemGioHang/?id=@item.MaSanPham&soluong=1" style="border: 2px solid #e1e1e1; font-family:Roboto,HelveticaNeue,Helvetica Neue,sans-serif; font-size: 13px; font-weight: 400; text-decoration: none;  display: inline-block; padding: 8px 20px 8px 20px;">
-
-                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
-                                        </a>
-
-
-                                    </div>
-                                </form>
-
-                            </div>
+<!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/assets/ecommerce/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Tất Cả Sản Phẩm</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Trang Chủ</a>
+                            <span>Sản Phẩm Theo Nhà Cung Cấp</span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
 
-        }
-    </div>
-</div>
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <div class="sidebar">
+                        <div class="sidebar__item">
+                            <h4>Danh Mục Sản Phẩm</h4>
+                            @Html.Action("ShowTheLoai", "Product")
+                        </div>
+                        <div class="sidebar__item">
+                            <h4>Danh Mục Nhà Cung Cấp</h4>
+                            @Html.Action("ShowNCC", "Product")
+                            
+                        </div>
+                        @* <div class="sidebar__item sidebar__item__color--option">
+                            <h4>Colors</h4>
+                            <div class="sidebar__item__color sidebar__item__color--white">
+                                <label for="white">
+                                    White
+                                    <input type="radio" id="white">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--gray">
+                                <label for="gray">
+                                    Gray
+                                    <input type="radio" id="gray">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--red">
+                                <label for="red">
+                                    Red
+                                    <input type="radio" id="red">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--black">
+                                <label for="black">
+                                    Black
+                                    <input type="radio" id="black">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--blue">
+                                <label for="blue">
+                                    Blue
+                                    <input type="radio" id="blue">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--green">
+                                <label for="green">
+                                    Green
+                                    <input type="radio" id="green">
+                                </label>
+                            </div>
+                        </div> *@
+                        @* <div class="sidebar__item">
+                            <h4>Popular Size</h4>
+                            <div class="sidebar__item__size">
+                                <label for="large">
+                                    Large
+                                    <input type="radio" id="large">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="medium">
+                                    Medium
+                                    <input type="radio" id="medium">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="small">
+                                    Small
+                                    <input type="radio" id="small">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="tiny">
+                                    Tiny
+                                    <input type="radio" id="tiny">
+                                </label>
+                            </div>
+                        </div> *@
+                        <div class="sidebar__item">
+                            <div class="latest-product__text">
+                                <h4>Sản Phẩm Mới</h4>
+                                <div class="latest-product__slider owl-carousel">
+                                    <div class="latest-prdouct__slider__item">
+                                        @* <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src="~/assets/ecommerce/img/latest-product/lp-1.jpg" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>Crab Pool Security</h6>
+                                                <span>$30.00</span>
+                                            </div>
+                                        </a> *@
+                                        @Html.Action("LatestProducts", "Product")
+                                    </div>
+                                    <div class="latest-prdouct__slider__item">
+                                        @Html.Action("LatestProducts", "Product")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-7">
+                    @* <div class="product__discount">
+                        <div class="section-title product__discount__title">
+                            <h2>Sale Off</h2>
+                        </div>
+                        <div class="row">
+                            <div class="product__discount__slider owl-carousel">
+                                <div class="col-lg-4">
+                                    <div class="product__discount__item">
+                                        <div class="product__discount__item__pic set-bg"
+                                            data-setbg="/assets/ecommerce/img/product/discount/pd-1.jpg">
+                                            <div class="product__discount__percent">-20%</div>
+                                            <ul class="product__item__pic__hover">
+                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product__discount__item__text">
+                                            <span>Dried Fruit</span>
+                                            <h5><a href="#">Raisin’n’nuts</a></h5>
+                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4">
+                                    <div class="product__discount__item">
+                                        <div class="product__discount__item__pic set-bg"
+                                            data-setbg="/assets/ecommerce/img/product/discount/pd-6.jpg">
+                                            <div class="product__discount__percent">-20%</div>
+                                            <ul class="product__item__pic__hover">
+                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product__discount__item__text">
+                                            <span>Dried Fruit</span>
+                                            <h5><a href="#">Raisin’n’nuts</a></h5>
+                                            <div class="product__item__price">$4000.00 <span>$36.00</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> *@
+                    <div class="filter__item">
+                        <div class="row">
+                            <h2>@ViewBag.TenNCC</h2>
+                            @* <div class="col-lg-4 col-md-5">
+                                <div class="filter__sort">
+                                    <span>Sort By</span>
+                                    <select>
+                                        <option value="0">Default</option>
+                                        <option value="0">Default</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="filter__found">
+                                    <h6><span>16</span> Products found</h6>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-3">
+                                <div class="filter__option">
+                                    <span class="icon_grid-2x2"></span>
+                                    <span class="icon_ul"></span>
+                                </div>
+                            </div> *@
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg product__discount__item__pic">
+                                    <a href="~/Product/ChiTietSP/@item.MaSanPham">
+                                        <img src="/HinhAnhSach/@item.HinhAnh" alt="@item.TenSanPham" title="@item.TenSanPham">
+                                    </a>
+                                    @if (@item.GiamGia > 0){
+                                        <div class="product__discount__percent">-@item.GiamGia%</div>
+                                    }
+                                    <ul class="product__item__pic__hover ">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="/Cart/ThemGioHang/?id=@item.MaSanPham&soluong=1"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="~/Product/ChiTietSP/@item.MaSanPham">@item.TenSanPham</a></h6>
+                                    <span style="display: flex;justify-content: center;">
+                                        @* <h5>@item.GiaSanPham.Value.ToString("N0") đ</h5>
+                                        @if (@item.GiamGia > 0){
+                                            @Html.Action("giasachgiam", "Product", new { @MaSanPham = @item.MaSanPham })
+                                        } *@
+
+                                        @if (@item.GiamGia <= 0)
+                                        {
+                                            <h5>
+                                                @item.GiaSanPham.Value.ToString("N0") đ
+                                            </h5>
+                                        }else{
+                                            <h5>
+                                                @Html.Action("giasachgiam", "Product", new { @MaSanPham = @item.MaSanPham })
+                                            </h5>
+                                            <span style="text-decoration: line-through; color:#b2b2b2; font-size: 15px; margin-left: 10px;">
+                                                @item.GiaSanPham.Value.ToString("N0") đ
+                                            </span>
+                                        } 
+
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+
+                    @* <div class="product__discount">
+                        <div class="section-title product__discount__title">
+                            <h2>Sale Off</h2>
+                        </div>
+                        <div class="row">
+                            <div class="product__discount__slider owl-carousel">
+                                <div class="col-lg-4">
+                                    <div class="product__discount__item">
+                                        <div class="product__discount__item__pic set-bg"
+                                            data-setbg="/assets/ecommerce/img/product/discount/pd-1.jpg">
+                                            <div class="product__discount__percent">-20%</div>
+                                            <ul class="product__item__pic__hover">
+                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product__discount__item__text">
+                                            <span>Dried Fruit</span>
+                                            <h5><a href="#">Raisin’n’nuts</a></h5>
+                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4">
+                                    <div class="product__discount__item">
+                                        <div class="product__discount__item__pic set-bg"
+                                            data-setbg="/assets/ecommerce/img/product/discount/pd-6.jpg">
+                                            <div class="product__discount__percent">-20%</div>
+                                            <ul class="product__item__pic__hover">
+                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product__discount__item__text">
+                                            <span>Dried Fruit</span>
+                                            <h5><a href="#">Raisin’n’nuts</a></h5>
+                                            <div class="product__item__price">$4000.00 <span>$36.00</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> *@
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
 
 
 

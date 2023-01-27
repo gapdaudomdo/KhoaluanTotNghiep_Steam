@@ -17,14 +17,35 @@ namespace KhoaLuanSteam.Models.Process
         }
 
         /// <summary>
-        /// lay 7 san pham moi
+        /// lay 8 san pham moi
         /// </summary>
         /// <param name="count">int</param>
         /// <returns>List</returns>
         public List<THONGTINSANPHAM> NewDateProduct()
         {
-            return db.THONGTINSANPHAMs.Take(7).OrderBy(x => x.MaLoai).ToList();
+            return db.THONGTINSANPHAMs.Take(8).OrderByDescending(x => x.MaSanPham).ToList();
         }
+
+        public List<THONGTINSANPHAM> LatestProduct()
+        {
+            //return db.THONGTINSANPHAMs.Take(3).OrderByDescending(x => x.MaSanPham).ToList();
+            return db.THONGTINSANPHAMs.Where(x => x.GiamGia == 0).OrderByDescending(x => x.MaSanPham).Take(3).ToList();
+        }
+
+        public List<THONGTINSANPHAM> SanPhamGiamGia()
+        {
+            return db.THONGTINSANPHAMs.Where(x => x.GiamGia > 0).OrderByDescending(x => x.GiamGia).Take(3).ToList();
+        }
+
+        //public object SanPhamGiamGia()
+        //{
+        //    var ketqua = (from product in db.THONGTINSANPHAMs
+        //                 where product.GiamGia > 0
+        //                 select product).OrderByDescending(x => x.GiamGia).Take(8);
+
+        //    return ketqua;
+        //}
+
         public double? GiaSanPham(int masanpham)
         {
             THONGTINSANPHAM sanpham = db.THONGTINSANPHAMs.Single(s => s.MaSanPham == masanpham);
@@ -37,23 +58,35 @@ namespace KhoaLuanSteam.Models.Process
 
         }
         /// <summary>
-        /// lay 4  sản phẩm ban chay
+        /// lay 3  sản phẩm ban chay
         /// </summary>
         /// <param name="count">int</param>
         /// <returns>List</returns>
-        public List<THONGTINSANPHAM> TakeProduct()
+        //public List<THONGTINSANPHAM> TakeProduct()
+        //{
+        //    return db.THONGTINSANPHAMs.Take(3).OrderBy(x => x.MaSanPham).ToList();
+        //}
+
+        public object TakeProduct(int MaSP1, int MaSP2, int MaSP3)
         {
-            return db.THONGTINSANPHAMs.Take(4).OrderByDescending(x => x.MaSanPham).ToList();
+            var ketqua = (from product in db.THONGTINSANPHAMs
+                          where (product.MaSanPham == MaSP1 || product.MaSanPham == MaSP2 || product.MaSanPham == MaSP3)
+                          select product).Take(3);
+
+            return ketqua;
         }
+
+
         /// <summary>
-        /// lay 2  csp lien quan toi ma loai duoc truyen vao
+        /// lay 4  csp lien quan toi ma loai duoc truyen vao
         /// </summary>
         /// <param name="count">int</param>
         /// <returns>List</returns>
-        public List<THONGTINSANPHAM> SanPhamLienQuan(int LoaiSanPham)
+        public List<THONGTINSANPHAM> SanPhamLienQuan(int LoaiSanPham, int MaSanPham)
         {
-            return db.THONGTINSANPHAMs.Where(x => x.MaLoai == LoaiSanPham).Take(2).ToList();
+            return db.THONGTINSANPHAMs.Where(x => x.MaLoai == LoaiSanPham).Where(x => x.MaSanPham != MaSanPham).Take(4).ToList();
         }
+
         /// <summary>
         /// hàm xuất danh sách loại sp
         /// </summary>

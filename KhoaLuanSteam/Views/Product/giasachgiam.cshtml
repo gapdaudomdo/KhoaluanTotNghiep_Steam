@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<KhoaLuanSteam.Models.THONGTINSANPHAM>
 
+@String.Format("{0:0,0}", ViewBag.giagiam) đ
 @* <style>
     .product-price {
         font-size: 20px;
@@ -15,6 +16,4 @@
         @String.Format("{0:0,0}", ViewBag.giagiam) VND
     </span>
 </span> *@
-<span>
-        @String.Format("{0:0,0}", ViewBag.giagiam) VND
-</span>
+

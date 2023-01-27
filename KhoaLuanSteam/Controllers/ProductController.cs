@@ -5,26 +5,40 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using KhoaLuanSteam.Models;
 
 namespace KhoaLuanSteam.Controllers
 {
     public class ProductController : Controller
     {
         //
-        // GET: /Book/
-
+        // GET: /Product/
+        QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1();
         public ActionResult Index()
         {
             return View();
         }
 
 
-        //GET : /Book/TopDateBook : hiển thị ra 8 cuốn sách mới 
-        //Parital View : TopDateBook
+        //GET : /Product/TopDateProduct : hiển thị ra 8 sản phẩm
+        //Parital View : TopDateProduct
         public ActionResult TopDateProduct()
         {
             var result = new ProductProcess().NewDateProduct();
 
+            return PartialView(result);
+        }
+
+        public ActionResult LatestProducts()
+        {
+            var result = new ProductProcess().LatestProduct();
+
+            return PartialView(result);
+        }
+
+        public ActionResult Productdiscounts()
+        {
+            var result = new ProductProcess().SanPhamGiamGia();
             return PartialView(result);
         }
         public ActionResult giasachgiam(int masanpham)
@@ -37,14 +51,22 @@ namespace KhoaLuanSteam.Controllers
         //GET : /Book/Favorite : hiển thị ra 4 sp bán chạy
         //Parital View : FavoriteBook
         //GET : /Book/Favorite : hiển thị ra 3 sp bán chạy theo ngày cập nhật (silde trên cùng)
-        //Parital View : FavoriteBook
+        //Parital View : FavoriteProduct
         public ActionResult FavoriteProduct()
         {
-            var result = new ProductProcess().TakeProduct();
+            List<int> ListTopMaSP;
+            using (var ctx = new QL_THIETBISTEAMEntities1())
+            {
+                ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) MaSanPham from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
+            }
+            int MaSP1 = ListTopMaSP[0];
+            int MaSP2 = ListTopMaSP[1];
+            int MaSP3 = ListTopMaSP[2];
+            var result = new ProductProcess().TakeProduct(MaSP1, MaSP2, MaSP3);
             return PartialView(result);
         }
 
-        //GET : /Book/ShowTheLoai: hiển thị chu đề sp danh mục phía bên trái trang chủ
+        //GET : /Product/ShowTheLoai: hiển thị chu đề sp danh mục phía bên trái trang chủ
         //Parital View : ShowTheLoai
         public ActionResult ShowTheLoai()
         {
@@ -151,9 +173,9 @@ namespace KhoaLuanSteam.Controllers
         }
         //GET : /Book/SachLienQuan :hien thi sach theo ma loai sach
         //Parital View : SachLienQuan
-        public ActionResult SPLienQuan(int LoaiSanPham)
+        public ActionResult SPLienQuan(int LoaiSanPham, int MaSanPham)
         {
-            var LSanPham = new ProductProcess().SanPhamLienQuan(LoaiSanPham);
+            var LSanPham = new ProductProcess().SanPhamLienQuan(LoaiSanPham, MaSanPham);
             if (LSanPham.Count == 0)
             {
                 ViewBag.Sach = "không có sản phẩm nào liên quan loại này !";
