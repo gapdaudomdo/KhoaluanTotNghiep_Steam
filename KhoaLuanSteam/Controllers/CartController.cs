@@ -676,7 +676,7 @@ namespace KhoaLuanSteam.Controllers
             ViewBag.Total = thanhtien;
             if (tinhtrang.TinhTrang == 0)
             {
-                ViewBag.TinhTrang = "Xử Lý";
+                ViewBag.TinhTrang = "Xử lý";
             }
             else if (tinhtrang.TinhTrang == 1)
             {

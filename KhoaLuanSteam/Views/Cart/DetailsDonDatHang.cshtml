@@ -22,10 +22,12 @@
         </div>
     </section>
     <!-- Breadcrumb Section End -->
-<div class="container">
+
 <section class="step-wizard">
+
     @if (ViewBag.TinhTrang == "Xử lý")
     {
+        
         <ul class="step-wizard-list">
             <li class="step-wizard-item current-item">
                 <span class="progress-count">1</span>
@@ -111,8 +113,8 @@
 
 </section>
 <h3 class="pt-5">Trạng thái đơn hàng của bạn là : @ViewBag.TinhTrang</h3>
-
-<section class="shoping-cart spad">
+<div class="container">
+    <section class="shoping-cart spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -167,7 +169,7 @@
                                             else
                                             {
                                                 <span>
-                                                    @(String.Format("{0:0,0} đ", ((item.Gia.GetValueOrDefault(0) * ( 1- (item.GiaGiam.GetValueOrDefault(0) / 100 ))) * item.SoLuong)))
+                                                    @(String.Format("{0:0,0} đ", ((item.Gia.GetValueOrDefault(0) * (1 - (item.GiaGiam.GetValueOrDefault(0) / 100))) * item.SoLuong)))
                                                 </span>
                                             }
                                         </td>
@@ -203,8 +205,8 @@
                             </tbody>
                         </table>
                         @* <div class="col-12" style="text-align: end;">
-                            <strong>Tổng cộng: @String.Format("{0:0,0}", ViewBag.Total) VND</strong>
-                        </div> *@
+                                <strong>Tổng cộng: @String.Format("{0:0,0}", ViewBag.Total) VND</strong>
+                            </div> *@
                     </div>
                 </div>
             </div>
@@ -214,13 +216,14 @@
                         <a href="~/Cart/DonHang_KH" class="primary-btn cart-btn"><i class="fa fa-angle-left"></i> Trở về</a>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </section>
 
 
 </div>
+
 
 <style>
     .product-price {

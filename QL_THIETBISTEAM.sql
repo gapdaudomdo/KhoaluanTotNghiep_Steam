@@ -147,7 +147,7 @@ CREATE TABLE TINHTRANGDH
     CONSTRAINT PK_TINHTRANGDH PRIMARY KEY (TinhTrang)
 )
 
-
+select * from PHIEUDATHANG
 CREATE TABLE PHIEUDATHANG
 (
 	MaPhieuDH INT IDENTITY(1,1) NOT NULL,
@@ -331,6 +331,9 @@ update DonDatHangNCC
 				from CT_DonDatHangNCC 
 				where CT_DonDatHangNCC.MaDonDatHangNCC=@MaDonDHNCC)
 	where DonDatHangNCC.MaDonDatHangNCC=@MaDonDHNCC
+
+
+
 
 CREATE PROC Update_TrangThai_DatHangNCC
 		@MaDonDHNCC int

@@ -52,6 +52,9 @@ namespace KhoaLuanSteam.Controllers
         //Parital View : FavoriteBook
         //GET : /Book/Favorite : hiển thị ra 3 sp bán chạy theo ngày cập nhật (silde trên cùng)
         //Parital View : FavoriteProduct
+
+
+
         public ActionResult FavoriteProduct()
         {
             List<int> ListTopMaSP;
@@ -66,6 +69,8 @@ namespace KhoaLuanSteam.Controllers
             var result = new ProductProcess().TakeProduct(MaSP1, MaSP2, MaSP3);
             return PartialView(result);
         }
+
+
 
         //GET : /Product/ShowTheLoai: hiển thị chu đề sp danh mục phía bên trái trang chủ
         //Parital View : ShowTheLoai
