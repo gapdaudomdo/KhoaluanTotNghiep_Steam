@@ -112,124 +112,126 @@
     }
 
 </section>
-<h3 class="pt-5">Trạng thái đơn hàng của bạn là : @ViewBag.TinhTrang</h3>
 <div class="container">
-    <section class="shoping-cart spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="shoping__product">Sản phẩm</th>
-                                    <th>Giá</th>
-                                    <th>Số lượng</th>
-                                    <th>Thành tiền</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
+    <h3 class="pt-5">Trạng thái đơn hàng của bạn là : @ViewBag.TinhTrang</h3>
+</div>
+    <div class="container">
+        <section class="shoping-cart spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shoping__cart__table">
+                            <table>
+                                <thead>
                                     <tr>
-                                        <td class="shoping__cart__item">
-                                            <img style="width: 101px;" src="~/HinhAnhSach/@item.HinhAnh" alt="@item.HinhAnh">
-                                            <h5>@item.TenSanPham</h5>
-                                        </td>
-                                        <td class="shoping__cart__price">
-                                            @*@item.Gia đ*@
-                                            @*@item.Gia.GetValueOrDefault(0).ToString("N0") đ*@
-                                            @if (@item.GiaGiam <= 0)
+                                        <th class="shoping__product">Sản phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Số lượng</th>
+                                        <th>Thành tiền</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="shoping__cart__item">
+                                                <img style="width: 101px;" src="~/HinhAnhSach/@item.HinhAnh" alt="@item.HinhAnh">
+                                                <h5>@item.TenSanPham</h5>
+                                            </td>
+                                            <td class="shoping__cart__price">
+                                                @*@item.Gia đ*@
+                                                @*@item.Gia.GetValueOrDefault(0).ToString("N0") đ*@
+                                                @if (@item.GiaGiam <= 0)
+                                                {
+                                                    <span>
+                                                        @item.Gia.GetValueOrDefault(0).ToString("N0") đ
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span>
+                                                        @Html.Action("giasachgiam", "Product", new { @masanpham = @item.MaSanPham })
+                                                    </span>
+
+                                                }
+                                            </td>
+                                            <td class="shoping__cart__quantity">
+                                                <input type="number" style="border: none; text-align: center;" class="txtQuantity" readonly="readonly" value="@item.SoLuong">
+                                            </td>
+                                            <td class="shoping__cart__total">
+                                                @*@((item.Gia * item.SoLuong).GetValueOrDefault(0).ToString("N0")) đ*@
+
+                                                @if (@item.GiaGiam <= 0)
+                                                {
+                                                    <span>
+                                                        @((item.Gia * item.SoLuong).GetValueOrDefault(0).ToString("N0")) đ
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span>
+                                                        @(String.Format("{0:0,0} đ", ((item.Gia.GetValueOrDefault(0) * (1 - (item.GiaGiam.GetValueOrDefault(0) / 100))) * item.SoLuong)))
+                                                    </span>
+                                                }
+                                            </td>
+                                        </tr>
+
+                                    }
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: end;">Phí Ship: </td>
+                                        <td>
+                                            @if (ViewBag.PhiShip != null)
                                             {
-                                                <span>
-                                                    @item.Gia.GetValueOrDefault(0).ToString("N0") đ
-                                                </span>
+                                                <strong>
+                                                    @String.Format("{0:0,0}", ViewBag.PhiShip) đ
+                                                </strong>
                                             }
                                             else
                                             {
-                                                <span>
-                                                    @Html.Action("giasachgiam", "Product", new { @masanpham = @item.MaSanPham })
-                                                </span>
+                                                <strong>
+                                                    0 đ
+                                                </strong>
+                                            }
 
-                                            }
-                                        </td>
-                                        <td class="shoping__cart__quantity">
-                                            <input type="number" style="border: none; text-align: center;" class="txtQuantity" readonly="readonly" value="@item.SoLuong">
-                                        </td>
-                                        <td class="shoping__cart__total">
-                                            @*@((item.Gia * item.SoLuong).GetValueOrDefault(0).ToString("N0")) đ*@
-
-                                            @if (@item.GiaGiam <= 0)
-                                            {
-                                                <span>
-                                                    @((item.Gia * item.SoLuong).GetValueOrDefault(0).ToString("N0")) đ
-                                                </span>
-                                            }
-                                            else
-                                            {
-                                                <span>
-                                                    @(String.Format("{0:0,0} đ", ((item.Gia.GetValueOrDefault(0) * (1 - (item.GiaGiam.GetValueOrDefault(0) / 100))) * item.SoLuong)))
-                                                </span>
-                                            }
                                         </td>
                                     </tr>
-
-                                }
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: end;">Phí Ship: </td>
-                                    <td>
-                                        @if (ViewBag.PhiShip != null)
-                                        {
-                                            <strong>
-                                                @String.Format("{0:0,0}", ViewBag.PhiShip) đ
-                                            </strong>
-                                        }
-                                        else
-                                        {
-                                            <strong>
-                                                0 đ
-                                            </strong>
-                                        }
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: end;">Tổng cộng: </td>
-                                    <td><strong>@String.Format("{0:0,0}", ViewBag.Total) đ</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        @* <div class="col-12" style="text-align: end;">
-                                <strong>Tổng cộng: @String.Format("{0:0,0}", ViewBag.Total) VND</strong>
-                            </div> *@
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: end;">Tổng cộng: </td>
+                                        <td><strong>@String.Format("{0:0,0}", ViewBag.Total) đ</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            @* <div class="col-12" style="text-align: end;">
+                                    <strong>Tổng cộng: @String.Format("{0:0,0}", ViewBag.Total) VND</strong>
+                                </div> *@
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__btns">
-                        <a href="~/Cart/DonHang_KH" class="primary-btn cart-btn"><i class="fa fa-angle-left"></i> Trở về</a>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shoping__cart__btns">
+                            <a href="~/Cart/DonHang_KH" class="primary-btn cart-btn"><i class="fa fa-angle-left"></i> Trở về</a>
+                        </div>
                     </div>
+
                 </div>
-
             </div>
-        </div>
-    </section>
+        </section>
 
 
-</div>
+    </div>
 
 
-<style>
-    .product-price {
-        font-size: 13px;
-        line-height: 1.5;
-        color: #212529;
-        font-weight: 100;
-    }
-</style>
+    <style>
+        .product-price {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #212529;
+            font-weight: 100;
+        }
+    </style>

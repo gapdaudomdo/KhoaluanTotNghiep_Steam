@@ -490,9 +490,10 @@ namespace KhoaLuanSteam.Controllers
                 ViewBag.Total = total;
             }
             //ViewBag.Total = total;
-            Session["Kilomet"] = null;
-            Session["DiaChiNhan"] = null;
-            Session["checkDC"] = null;
+
+            //Session["Kilomet"] = null;
+            //Session["DiaChiNhan"] = null;
+            //Session["checkDC"] = null;
             return View(list);
 
         }
@@ -523,9 +524,9 @@ namespace KhoaLuanSteam.Controllers
             }
             Session[GioHang] = null;
 
-            //Session["Kilomet"] = null;
-            //Session["DiaChiNhan"] = null;
-            //Session["checkDC"] = null;
+            Session["Kilomet"] = null;
+            Session["DiaChiNhan"] = null;
+            Session["checkDC"] = null;
             return Json(msg, JsonRequestBehavior.AllowGet);
         }
         public JsonResult DeleteDonDatHang(int MaDH)
