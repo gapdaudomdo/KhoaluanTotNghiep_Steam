@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
 namespace KhoaLuanSteam.Models.Process
 {
     public class GioHangProcess
@@ -104,5 +108,27 @@ namespace KhoaLuanSteam.Models.Process
             db.SaveChanges();
             return delivery.MaGH;
         }
+
+        //public async Task<double> GetDistance(string destination)
+        //{
+        //    string apiKey = "AIzaSyAWOyX-d6CV4Z-58dGw1ujwVvMTctBykho";
+        //    string origin = "140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP.HCM";
+
+        //    var url = $"https://maps.googleapis.com/maps/api/distancematrix/json?key={apiKey}&origins={origin}&destinations={destination}";
+
+        //    using (var client = new HttpClient())
+        //    {
+        //        var response = await client.GetAsync(url);
+
+        //        response.EnsureSuccessStatusCode();
+
+        //        var result = await response.Content.ReadAsStringAsync();
+
+        //        dynamic data = JsonConvert.DeserializeObject(result);
+
+        //        return data.rows[0].elements[0].distance.value;
+        //    }
+        //}
+
     }
 }

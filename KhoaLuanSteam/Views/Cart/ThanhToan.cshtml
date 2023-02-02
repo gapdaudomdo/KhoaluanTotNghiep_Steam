@@ -17,7 +17,7 @@
                     <div class="breadcrumb__text">
                         <h2>Checkout</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
+                            <a href="/">Home</a>
                             <span>Checkout</span>
                         </div>
                     </div>
@@ -89,6 +89,29 @@
                                 <tr>
                                     <td></td>
                                     <td></td>
+                                    <td style="text-align: end;">Phí ship: </td>
+                                    <td>
+                                        @if (@Session["Kilomet"] != null)
+                                        {
+                                            <strong>
+                                                @{
+                                                    object myObject = new Object();
+                                                    string myObjectString = Session["Kilomet"].ToString();
+                                                    double phiship = double.Parse(myObjectString);
+                                                    @String.Format("{0:0,0} đ", phiship);
+                                                }
+                                            </strong>
+                                        }
+                                        else
+                                        {
+                                            <strong>0 đ</strong>
+                                        }
+
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
                                     <td style="text-align: end;">Tổng cộng: </td>
                                     <td><strong>@String.Format("{0:0,0}", ViewBag.Total) đ</strong></td>
                                 </tr>
@@ -107,6 +130,9 @@
             </div>
         </div>
     </section>
+
+    @*@Html.Action("CalculateDistance", "Cart")*@
+
     @Html.Action("ThongTinKhachHang", "Cart")
     }else{
         <div class="wrap_background_aside padding-top-15 margin-bottom-40" style="padding-left:22px">

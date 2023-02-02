@@ -121,6 +121,7 @@
     <Property Name="Tong_SL_Dat" Type="int" />
     <Property Name="ThanhTien" Type="float" />
     <Property Name="TinhTrang" Type="int" />
+    <Property Name="PhiShip" Type="float" />
   </EntityType>
   <EntityType Name="PHIEUGIAOHANG">
     <Key>

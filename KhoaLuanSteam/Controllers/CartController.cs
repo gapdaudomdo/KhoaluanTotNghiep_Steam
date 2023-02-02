@@ -12,9 +12,14 @@ using System.Text;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Web.Hosting;
-using DoAn_MonHoc.ViewModels;
+using KhoaLuanSteam.ViewModel;
 using System.Configuration;
 using KhoaLuanSteam.VNPay;
+
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace KhoaLuanSteam.Controllers
 {
@@ -28,8 +33,36 @@ namespace KhoaLuanSteam.Controllers
 
         // GET: Cart/ : trang giỏ hàng
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            var model = Session["User"];
+
+            if (Session["User"] != null && Session["checkDC"] == null)
+            {
+                //tìm tên tài khoản
+                var Ketqua = db.KHACHHANGs.SingleOrDefault(x => x.TenDN == model);
+
+                //trả về dữ liệu tương ứng
+                Session["DiaChiNhan"] = Ketqua.DiaChi;
+
+                string endLocation = Ketqua.DiaChi;
+                using (var client = new HttpClient())
+                {
+                    //string startLocation = distanceCalculation.StartLocation;
+                    string startLocation = "140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP.HCM";
+
+                    string url = string.Format(API_URL, startLocation, endLocation);
+
+                    HttpResponseMessage response = await client.GetAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        var json = JsonConvert.DeserializeObject<dynamic>(result);
+                        Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 100;
+                    }
+                };
+            }
 
             var cart = Session[GioHang];
             var list = new List<GioHang>();
@@ -46,7 +79,18 @@ namespace KhoaLuanSteam.Controllers
                 ViewBag.Success = TempData["message"];
             }
             ViewBag.Quantity = sluong;
-            ViewBag.Total = thanhtien;
+            if (Session["Kilomet"] != null)
+            {
+                object myObject = new Object();
+                string myObjectString = Session["Kilomet"].ToString();
+                double phiship = double.Parse(myObjectString);
+                ViewBag.Total = thanhtien + phiship;
+            }
+            else
+            {
+                ViewBag.Total = thanhtien;
+            }
+                //ViewBag.Total = thanhtien;
             return View(list);
         }
         //GET : /Cart/CartIcon: đếm sổ sản phẩm trong giỏ hàng
@@ -218,7 +262,18 @@ namespace KhoaLuanSteam.Controllers
                     total = list.Sum(x => x.iThanhTien);
                 }
                 ViewBag.Quantity = sl;
-                ViewBag.Total = total;
+                if (Session["Kilomet"] != null)
+                {
+                    object myObject = new Object();
+                    string myObjectString = Session["Kilomet"].ToString();
+                    double phiship = double.Parse(myObjectString);
+                    ViewBag.Total = total + phiship;
+                }
+                else
+                {
+                    ViewBag.Total = total;
+                }
+                //ViewBag.Total = total;
                 return View(list);
             }
         }
@@ -348,6 +403,14 @@ namespace KhoaLuanSteam.Controllers
                 soLuong = lstGioHang.Sum(x => x.iSoLuong);
                 thanhTien = lstGioHang.Sum(x => x.iThanhTien);
             }
+            double phiship = 0;
+            if (Session["Kilomet"] != null)
+            {
+                object myObject = new Object();
+                string myObjectString = Session["Kilomet"].ToString();
+                phiship = double.Parse(myObjectString);
+                thanhTien = thanhTien + phiship;
+            }
 
             ViewBag.Quantity = soLuong;
             ViewBag.Total = thanhTien;
@@ -356,6 +419,7 @@ namespace KhoaLuanSteam.Controllers
             datHang.TinhTrang = -1; // Chua xac nhan
             datHang.MaKH = MaKH;
             datHang.Tong_SL_Dat = soLuong;
+            datHang.PhiShip = phiship;
             datHang.ThanhTien = thanhTien;
 
             giaoHang.TenKH = khachHang.TenKH;
@@ -413,9 +477,22 @@ namespace KhoaLuanSteam.Controllers
             }
 
             ViewBag.Quantity = sl;
-            ViewBag.Total = total;
 
-
+            if (Session["Kilomet"] != null)
+            {
+                object myObject = new Object();
+                string myObjectString = Session["Kilomet"].ToString();
+                double phiship = double.Parse(myObjectString);
+                ViewBag.Total = total + phiship;
+            }
+            else
+            {
+                ViewBag.Total = total;
+            }
+            //ViewBag.Total = total;
+            Session["Kilomet"] = null;
+            Session["DiaChiNhan"] = null;
+            Session["checkDC"] = null;
             return View(list);
 
         }
@@ -437,10 +514,18 @@ namespace KhoaLuanSteam.Controllers
                 orderDetail.MaPhieuDH = MaDH;
                 orderDetail.MaSanPham = item.sanpham.MaSanPham;
                 orderDetail.SoLuong = item.iSoLuong;
-                orderDetail.DonGia = item.sanpham.GiaSanPham;
+
+                int MaSP = item.sanpham.MaSanPham;  
+                double? giaSanPham = new ProductProcess().GiaSanPham(MaSP);
+                orderDetail.DonGia = giaSanPham;
+                //orderDetail.DonGia = item.sanpham.GiaSanPham;
                 result2.InsertCT_DDH(orderDetail);
             }
             Session[GioHang] = null;
+
+            //Session["Kilomet"] = null;
+            //Session["DiaChiNhan"] = null;
+            //Session["checkDC"] = null;
             return Json(msg, JsonRequestBehavior.AllowGet);
         }
         public JsonResult DeleteDonDatHang(int MaDH)
@@ -580,11 +665,13 @@ namespace KhoaLuanSteam.Controllers
             foreach (var item in lstCT)
             {
                 THONGTINSANPHAM sanphams = db.THONGTINSANPHAMs.Where(x => x.MaSanPham == item.MaSanPham).FirstOrDefault();
-                lst.Add(new ChiTietDDHViewModel() { HinhAnh = sanphams.HinhAnh, TenSanPham = sanphams.TenSanPham, Gia = sanphams.GiaSanPham, SoLuong = item.SoLuong });
+                lst.Add(new ChiTietDDHViewModel() {MaSanPham = sanphams.MaSanPham, HinhAnh = sanphams.HinhAnh, TenSanPham = sanphams.TenSanPham, Gia = sanphams.GiaSanPham, SoLuong = item.SoLuong, GiaGiam= sanphams.GiamGia });
             }
 
             double? thanhtien = 0;
             thanhtien = tinhtrang.ThanhTien;
+
+            ViewBag.PhiShip = tinhtrang.PhiShip;
 
             ViewBag.Total = thanhtien;
             if (tinhtrang.TinhTrang == 0)
@@ -606,6 +693,54 @@ namespace KhoaLuanSteam.Controllers
 
             return View(lst);
 
+        }
+
+        //api chinh
+        //private const string API_KEY = "AIzaSyAWOyX-d6CV4Z-58dGw1ujwVvMTctBykho";
+        //private const string API_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={0}&destinations={1}&key=" + API_KEY;
+
+        //api thuê đến 02/07/2023.
+        private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=kI1M3A89bD1v1SLwSmpzZEnt1yfjf";
+        [HttpGet]
+        public ActionResult CalculateDistance()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> CalculateDistance(DistanceCalculation distanceCalculation)
+        {
+            using (var client = new HttpClient())
+            {
+                var model = Session["User"];
+                string endLocation = distanceCalculation.EndLocation;
+                if (endLocation == null)
+                {
+                    var Ketqua = db.KHACHHANGs.SingleOrDefault(x => x.TenDN == model);
+                    endLocation = Ketqua.DiaChi;
+                }
+                string startLocation = "140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP.HCM";
+                //string endLocation = distanceCalculation.EndLocation;
+                Session["DiaChiNhan"] = endLocation;
+                Session["checkDC"] = 1;
+
+                string url = string.Format(API_URL, startLocation, endLocation);
+
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    var json = JsonConvert.DeserializeObject<dynamic>(result);
+                    
+                    //Thành tiền phí Ship
+                    Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 100;
+                }
+            }
+            return RedirectToAction("Index", "Cart");
+            //return View();
+            //return View(distanceCalculation);
         }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4e75900967974dea9e49503e57d2a319" Name="Diagram1">
+      <Diagram DiagramId="e3ce2ac197ab40bb85f26deff94fc352" Name="Diagram1">
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.CT_DonDatHangNCC" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.CT_PHIEUDATHANG" Width="1.5" PointX="11.25" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.CT_PHIEUNHAPHANG" Width="1.5" PointX="10.5" PointY="1.625" IsExpanded="true" />
@@ -15,7 +15,7 @@
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.NHACUNGCAP" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHANQUYEN" Width="1.5" PointX="1.5" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUDATHANG" Width="1.5" PointX="9" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUDATHANG" Width="1.5" PointX="9" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUGIAOHANG" Width="1.5" PointX="11.25" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUNHAPHANG" Width="1.5" PointX="8.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.sysdiagram" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />

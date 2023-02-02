@@ -156,6 +156,7 @@
     <Compile Include="Models\CT_PHIEUNHAPHANG.cs">
       <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DistanceCalculation.cs" />
     <Compile Include="Models\DonDatHangNCC.cs">
       <DependentUpon>QLSTEAM_Model.tt</DependentUpon>
     </Compile>
@@ -219,6 +220,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ChiTietDDHViewModel.cs" />
+    <Compile Include="ViewModel\MyViewModel.cs" />
     <Compile Include="VNPay\PayCompare.cs" />
     <Compile Include="VNPay\PayLib.cs" />
     <Compile Include="VNPay\Util.cs" />
@@ -3819,6 +3821,7 @@
     <Content Include="Views\Home\TinTuc.cshtml" />
     <Content Include="Views\Product\Productdiscounts.cshtml" />
     <Content Include="Views\Product\LatestProducts.cshtml" />
+    <Content Include="Views\Cart\CalculateDistance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

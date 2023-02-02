@@ -140,6 +140,7 @@
     <Property Name="Tong_SL_Dat" Type="Int32" />
     <Property Name="ThanhTien" Type="Double" />
     <Property Name="TinhTrang" Type="Int32" />
+    <Property Name="PhiShip" Type="Double" />
     <NavigationProperty Name="CT_PHIEUDATHANG" Relationship="Self.FK_CT_PHIEUDH_PDT" FromRole="PHIEUDATHANG" ToRole="CT_PHIEUDATHANG" />
     <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_PHIEUDATHANG_KH" FromRole="PHIEUDATHANG" ToRole="KHACHHANG" />
     <NavigationProperty Name="TINHTRANGDH" Relationship="Self.FK_PHIEUDATHANG_TINHTRANGDH" FromRole="PHIEUDATHANG" ToRole="TINHTRANGDH" />

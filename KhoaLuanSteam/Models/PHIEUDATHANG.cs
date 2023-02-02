@@ -26,6 +26,7 @@ namespace KhoaLuanSteam.Models
         public Nullable<int> Tong_SL_Dat { get; set; }
         public Nullable<double> ThanhTien { get; set; }
         public Nullable<int> TinhTrang { get; set; }
+        public Nullable<double> PhiShip { get; set; }
     
         public virtual ICollection<CT_PHIEUDATHANG> CT_PHIEUDATHANG { get; set; }
         public virtual KHACHHANG KHACHHANG { get; set; }

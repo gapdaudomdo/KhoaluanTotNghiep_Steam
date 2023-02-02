@@ -57,7 +57,8 @@ namespace KhoaLuanSteam.Controllers
             List<int> ListTopMaSP;
             using (var ctx = new QL_THIETBISTEAMEntities1())
             {
-                ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) MaSanPham from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
+                //ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) MaSanPham from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
+                ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) ISNULL(MaSanPham, 1) from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
             }
             int MaSP1 = ListTopMaSP[0];
             int MaSP2 = ListTopMaSP[1];

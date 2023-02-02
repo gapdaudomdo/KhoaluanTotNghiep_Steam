@@ -160,6 +160,8 @@ namespace KhoaLuanSteam.Controllers
         {
             Session["User"] = null;
             khachhangstatic = null;
+            //hủy bỏ toàn bộ session
+            Session.Abandon();
             return RedirectToAction("TrangChu", "Home");
         }
 
