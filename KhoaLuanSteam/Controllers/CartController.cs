@@ -684,7 +684,7 @@ namespace KhoaLuanSteam.Controllers
             }
             else if (tinhtrang.TinhTrang == 2)
             {
-                ViewBag.TinhTrang = "Đang giao hàng ";
+                ViewBag.TinhTrang = "Đang giao hàng";
             }
             else
             {
