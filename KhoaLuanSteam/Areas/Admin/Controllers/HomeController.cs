@@ -9,6 +9,15 @@ using KhoaLuanSteam.Models.Process;
 using System.IO;
 using System.Data.SqlClient;
 
+using System.Data;
+//thư viện Excel
+using NPOI.SS.UserModel;
+using NPOI.HSSF.UserModel;
+using NPOI.HSSF.Util;
+//Thư viện PDF
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
 namespace KhoaLuanSteam.Areas.Admin.Controllers
 {
     public class HomeController : Controller
@@ -871,7 +880,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                 string sqlTongTien = string.Concat("select TongTien from DonDatHangNCC where MaDonDatHangNCC =", d.MaDonDatHangNCC.ToString());
                 pnh.TongTien_NH = ctx.Database.SqlQuery<double>(sqlTongTien).FirstOrDefault();
             }
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 //thực hiện lưu vào db
                 var result = new AdminProcess().Insertphieunhaphang(pnh);
@@ -1131,6 +1140,144 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             }
             return View();
         }
+
+
+        //ExportExcel
+        //Install-Package NPOI -Version 2.5.1
+
+        //ExportPDF
+        //Install-Package iTextSharp
+        private ICellStyle GetTitleStyle(IWorkbook workbook)
+        {
+            ICellStyle style = workbook.CreateCellStyle();
+            style.FillForegroundColor = HSSFColor.Blue.Index;
+            style.FillPattern = FillPattern.SolidForeground;
+            IFont font = workbook.CreateFont();
+            font.Color = HSSFColor.White.Index;
+            font.Boldweight = (short)FontBoldWeight.Bold;
+            style.SetFont(font);
+            return style;
+        }
+
+        private ICellStyle GetDateStyle(IWorkbook workbook)
+        {
+            ICellStyle dateStyle = workbook.CreateCellStyle();
+            IDataFormat dateFormat = workbook.CreateDataFormat();
+            dateStyle.DataFormat = dateFormat.GetFormat("dd-MM-yyyy");
+            return dateStyle;
+        }
+
+
+        public ActionResult ExportExcel_PhieuDatHang(string fileName)
+        {
+            using (QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1())
+            {
+                //var phieuDatHangs = db.PHIEUDATHANGs.ToList();
+                var data = from phieudathang in db.PHIEUDATHANGs
+                           join khachhang in db.KHACHHANGs on phieudathang.MaKH equals khachhang.MaKH
+                           select new { phieudathang.MaPhieuDH, khachhang.TenKH, phieudathang.NgayDat, phieudathang.Tong_SL_Dat, phieudathang.PhiShip, phieudathang.ThanhTien };
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Mã phiếu đặt hàng");
+                dt.Columns.Add("Tên khách hàng");
+                dt.Columns.Add("Ngày Đặt");
+                dt.Columns.Add("Tổng số lượng đặt");
+                dt.Columns.Add("Phí Ship");
+                dt.Columns.Add("Thành Tiền");
+
+                foreach (var item in data)
+                {
+                    dt.Rows.Add(item.MaPhieuDH, item.TenKH, item.NgayDat, item.Tong_SL_Dat, item.PhiShip, item.ThanhTien);
+                }
+
+                IWorkbook workbook = new HSSFWorkbook();
+                ISheet sheet = workbook.CreateSheet("Data");
+
+                // Thêm tiêu đề vào file
+                IRow titleRow = sheet.CreateRow(0);
+                ICell titleCell = titleRow.CreateCell(0);
+                titleCell.SetCellValue("Phiếu đặt hàng");
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 0, dt.Columns.Count - 1));
+                titleCell.CellStyle = GetTitleStyle(workbook);
+
+
+                IRow headerRow = sheet.CreateRow(1);
+
+                // Thêm ngày xuất file vào file
+                //IRow dateRow = sheet.CreateRow(2);
+                //ICell dateCell = dateRow.CreateCell(0);
+                //dateCell.SetCellValue("Ngày xuất: " + DateTime.Now.ToString("dd/MM/yyyy"));
+                //sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(1, 1, 0, dt.Columns.Count - 1));
+                //dateCell.CellStyle = GetDateStyle(workbook);
+
+                foreach (DataColumn column in dt.Columns)
+                    headerRow.CreateCell(column.Ordinal).SetCellValue(column.Caption);
+                int rowIndex = 1;
+                foreach (DataRow row in dt.Rows)
+                {
+                    IRow dataRow = sheet.CreateRow(rowIndex);
+                    foreach (DataColumn column in dt.Columns)
+                        dataRow.CreateCell(column.Ordinal).SetCellValue(row[column].ToString());
+                    rowIndex++;
+                }
+
+
+                using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                {
+                    workbook.Write(ms);
+                    return File(ms.ToArray(), "application/vnd.ms-excel", "PhieuDatHang.xls");
+                }
+            }
+        }
+
+        public ActionResult ExportPDF_PhieuNhapHang(string fileName)
+        {
+            using (QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1())
+            {
+                var data = from phieunhaphang in db.PHIEUNHAPHANGs
+                           join nhanvien in db.NHANVIENs on phieunhaphang.MaNV equals nhanvien.MaNV
+                           join nhacungcap in db.NHACUNGCAPs on phieunhaphang.MaNCC equals nhacungcap.MaNCC
+                           select new { phieunhaphang.MaPhieuNhapHang, nhacungcap.TenNCC, nhanvien.TenNV, phieunhaphang.NgayLap_PN, phieunhaphang.TongSL, phieunhaphang.TongTien_NH };
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Mã Phiếu Nhập Hàng");
+                dt.Columns.Add("Tên Nhà Cung Cấp");
+                dt.Columns.Add("Tên Nhân Viên");
+                dt.Columns.Add("Ngày Lập Phiếu");
+                dt.Columns.Add("Tổng số lượng");
+                dt.Columns.Add("Tổng tiền");
+
+                foreach (var item in data)
+                {
+                    dt.Rows.Add(item.MaPhieuNhapHang, item.TenNCC, item.TenNV, item.NgayLap_PN, item.TongTien_NH);
+                }
+
+                using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                {
+                    Document document = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
+                    PdfWriter writer = PdfWriter.GetInstance(document, ms);
+                    document.Open();
+                    PdfPTable table = new PdfPTable(dt.Columns.Count);
+                    for (int i = 0; i < dt.Columns.Count; i++)
+                    {
+                        table.AddCell(dt.Columns[i].ColumnName);
+                    }
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        for (int j = 0; j < dt.Columns.Count; j++)
+                        {
+                            table.AddCell(dt.Rows[i][j].ToString());
+                        }
+                    }
+
+                    document.Add(table);
+                    document.Close();
+
+                    return File(ms.ToArray(), "application/pdf", "PhieuNhapHang.pdf");
+                }
+            }
+        }
+
+
 
 
     }

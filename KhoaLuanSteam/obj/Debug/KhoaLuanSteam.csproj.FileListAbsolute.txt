@@ -335,3 +335,13 @@ D:\Webtest\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\System.Web.WebPages.Deploym
 D:\Webtest\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\System.Web.WebPages.Razor.xml
 D:\Webtest\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.dll
 D:\Webtest\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.pdb
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\BouncyCastle.Crypto.dll
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\ICSharpCode.SharpZipLib.dll
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\itextsharp.dll
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\NPOI.dll
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\NPOI.OOXML.dll
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\NPOI.OpenXml4Net.dll
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\NPOI.OpenXmlFormats.dll
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\ICSharpCode.SharpZipLib.pdb
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\ICSharpCode.SharpZipLib.xml
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\itextsharp.xml
