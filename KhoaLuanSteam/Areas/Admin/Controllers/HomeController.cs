@@ -67,6 +67,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
 
             return View(sanpham);
         }
+
         public ActionResult UpdateSanPham(int id)
         {
             //gọi hàm lấy mã sản phẩm
@@ -79,8 +80,9 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             return View(sanpham);
         }
 
-        //POST : /Admin/Home/UpdateBook : thực hiện việc cập nhật sách
+        //POST : /Admin/Home/UpdateSanPham : thực hiện việc cập nhật sản phẩm
         //Tương tự như thêm sản phẩm
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult UpdateSanPham(THONGTINSANPHAM sanpham, HttpPostedFileBase fileUpload)
         {

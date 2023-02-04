@@ -155,7 +155,7 @@
     <Property Name="MaNCC" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="TenSanPham" Type="nvarchar" MaxLength="100" />
     <Property Name="GiaSanPham" Type="float" />
-    <Property Name="MoTa" Type="nvarchar" MaxLength="1000" />
+    <Property Name="MoTa" Type="nvarchar" MaxLength="4000" />
     <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
     <Property Name="GiamGia" Type="float" />
     <Property Name="SLTon" Type="int" />

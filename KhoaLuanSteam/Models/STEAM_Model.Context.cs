@@ -29,6 +29,7 @@ namespace KhoaLuanSteam.Models
         }
     
         public DbSet<CT_DonDatHangNCC> CT_DonDatHangNCC { get; set; }
+        public DbSet<CT_PHIEUDATHANG> CT_PHIEUDATHANG { get; set; }
         public DbSet<CT_PHIEUNHAPHANG> CT_PHIEUNHAPHANG { get; set; }
         public DbSet<DonDatHangNCC> DonDatHangNCCs { get; set; }
         public DbSet<KHACHHANG> KHACHHANGs { get; set; }
@@ -37,12 +38,11 @@ namespace KhoaLuanSteam.Models
         public DbSet<NHACUNGCAP> NHACUNGCAPs { get; set; }
         public DbSet<NHANVIEN> NHANVIENs { get; set; }
         public DbSet<PHANQUYEN> PHANQUYENs { get; set; }
+        public DbSet<PHIEUDATHANG> PHIEUDATHANGs { get; set; }
+        public DbSet<PHIEUGIAOHANG> PHIEUGIAOHANGs { get; set; }
         public DbSet<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
         public DbSet<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }
         public DbSet<TINHTRANGDH> TINHTRANGDHs { get; set; }
-        public DbSet<CT_PHIEUDATHANG> CT_PHIEUDATHANG { get; set; }
-        public DbSet<PHIEUDATHANG> PHIEUDATHANGs { get; set; }
-        public DbSet<PHIEUGIAOHANG> PHIEUGIAOHANGs { get; set; }
     
         public virtual int Update_SL_Ton(Nullable<int> maCTPhieuNhapHang, Nullable<int> maSP, Nullable<int> maPhieuNhapHang)
         {

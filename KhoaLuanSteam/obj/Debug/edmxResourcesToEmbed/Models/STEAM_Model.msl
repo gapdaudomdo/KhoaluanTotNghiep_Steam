@@ -13,6 +13,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CT_PHIEUDATHANG">
+      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.CT_PHIEUDATHANG">
+        <MappingFragment StoreEntitySet="CT_PHIEUDATHANG">
+          <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
+          <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CT_PHIEUNHAPHANG">
       <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.CT_PHIEUNHAPHANG">
         <MappingFragment StoreEntitySet="CT_PHIEUNHAPHANG">
@@ -109,6 +119,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PHIEUDATHANGs">
+      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHIEUDATHANG">
+        <MappingFragment StoreEntitySet="PHIEUDATHANG">
+          <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+          <ScalarProperty Name="Tong_SL_Dat" ColumnName="Tong_SL_Dat" />
+          <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+          <ScalarProperty Name="PhiShip" ColumnName="PhiShip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PHIEUGIAOHANGs">
+      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHIEUGIAOHANG">
+        <MappingFragment StoreEntitySet="PHIEUGIAOHANG">
+          <ScalarProperty Name="MaGH" ColumnName="MaGH" />
+          <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
+          <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="PHIEUNHAPHANGs">
       <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHIEUNHAPHANG">
         <MappingFragment StoreEntitySet="PHIEUNHAPHANG">
@@ -150,41 +186,5 @@
     <FunctionImportMapping FunctionImportName="Update_TongTien_DatHangNCC" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongTien_DatHangNCC" />
     <FunctionImportMapping FunctionImportName="Update_TongTien_PN" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongTien_PN" />
     <FunctionImportMapping FunctionImportName="Update_TrangThai_DatHangNCC" FunctionName="QL_THIETBISTEAMModel.Store.Update_TrangThai_DatHangNCC" />
-    <EntitySetMapping Name="CT_PHIEUDATHANG">
-      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.CT_PHIEUDATHANG">
-        <MappingFragment StoreEntitySet="CT_PHIEUDATHANG">
-          <ScalarProperty Name="DonGia" ColumnName="DonGia" />
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
-          <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PHIEUDATHANGs">
-      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHIEUDATHANG">
-        <MappingFragment StoreEntitySet="PHIEUDATHANG">
-          <ScalarProperty Name="PhiShip" ColumnName="PhiShip" />
-          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
-          <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
-          <ScalarProperty Name="Tong_SL_Dat" ColumnName="Tong_SL_Dat" />
-          <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
-          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-          <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PHIEUGIAOHANGs">
-      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.PHIEUGIAOHANG">
-        <MappingFragment StoreEntitySet="PHIEUGIAOHANG">
-          <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-          <ScalarProperty Name="SDT" ColumnName="SDT" />
-          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="TenKH" ColumnName="TenKH" />
-          <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
-          <ScalarProperty Name="MaGH" ColumnName="MaGH" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

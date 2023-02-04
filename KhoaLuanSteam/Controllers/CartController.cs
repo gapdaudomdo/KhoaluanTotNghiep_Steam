@@ -736,7 +736,7 @@ namespace KhoaLuanSteam.Controllers
                     var json = JsonConvert.DeserializeObject<dynamic>(result);
                     
                     //Thành tiền phí Ship
-                    Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 100;
+                    Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 1000;
                 }
             }
             return RedirectToAction("Index", "Cart");
