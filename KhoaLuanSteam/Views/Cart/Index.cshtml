@@ -207,9 +207,12 @@
                             </div>
                         </div>*@
                     @*@Html.Action("ThongTinKhachHang", "Cart")*@
+                    @if(@Session["User"] != null) 
+                    { 
                     <div class="shoping__checkout">
                         @Html.Action("CalculateDistance", "Cart")
                     </div>
+                    }
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping__checkout">

@@ -23,7 +23,7 @@ namespace KhoaLuanSteam.Models.Process
         /// <returns>List</returns>
         public List<THONGTINSANPHAM> NewDateProduct()
         {
-            return db.THONGTINSANPHAMs.Take(8).OrderByDescending(x => x.MaSanPham).ToList();
+            return db.THONGTINSANPHAMs.Take(8).OrderBy(x => x.MaSanPham).ToList();
         }
 
         public List<THONGTINSANPHAM> LatestProduct()

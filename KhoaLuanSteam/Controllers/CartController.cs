@@ -59,7 +59,7 @@ namespace KhoaLuanSteam.Controllers
                     {
                         string result = await response.Content.ReadAsStringAsync();
                         var json = JsonConvert.DeserializeObject<dynamic>(result);
-                        Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 100;
+                        Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 1000;
                     }
                 };
             }
@@ -700,8 +700,10 @@ namespace KhoaLuanSteam.Controllers
         //private const string API_KEY = "AIzaSyAWOyX-d6CV4Z-58dGw1ujwVvMTctBykho";
         //private const string API_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={0}&destinations={1}&key=" + API_KEY;
 
-        //api thuê đến 02/07/2023.
-        private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=kI1M3A89bD1v1SLwSmpzZEnt1yfjf";
+        //api thuê đến 07/02/2023.
+        ///private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=kI1M3A89bD1v1SLwSmpzZEnt1yfjf";
+        //api thuê đến 09/02/2023.
+        private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=kJDjGaADDxxphXWSRxiKDY9gQjbyq";
         [HttpGet]
         public ActionResult CalculateDistance()
         {
