@@ -31,7 +31,7 @@ CREATE TABLE KHACHHANG
 (
 	MaKH INT  IDENTITY(1,1) NOT NULL,
 	TenKH NVARCHAR(50),
-	DiaChi NVARCHAR(50),
+	DiaChi NVARCHAR(250),
 	SDT NVARCHAR(50),
 	Email NVARCHAR(50),
 	NgaySinh DATETIME,
@@ -179,13 +179,38 @@ CREATE TABLE PHIEUGIAOHANG
 	MaPhieuDH INT NOT NULL,
 	TenKH NVARCHAR(50),
 	Email NVARCHAR(50),
-	DiaChi NVARCHAR(50),
+	DiaChi NVARCHAR(250),
 	SDT NVARCHAR(50),
 	NgayTao datetime,
 	CONSTRAINT PK_PHIEUGIAOHANG PRIMARY KEY CLUSTERED  (MaGH  ASC),
     constraint FK_PHIEUGIAOHANG_PDH foreign key(MaPhieuDH) references PHIEUDATHANG(MaPhieuDH)
 )
+
+
+CREATE TABLE SALE
+(
+	MASL INT  IDENTITY(1,1) NOT NULL,
+	TENSL NVARCHAR(MAX),
+	NGAYBATDAU DATETIME,
+	NGAYKETTHUC DATETIME
+	constraint PK_SL primary key (MASL)
+)
+
+CREATE TABLE SPSALE
+(
+	MASPSALE INT IDENTITY(1,1) NOT NULL,
+	MASL INT NOT NULL,
+	MaSanPham INT NOT NULL,
+	GIAMGIA FLOAT,
+	constraint PK_SPSL primary key (MASPSALE),
+	constraint FK_SL_SPSL foreign key(MASL) references SALE(MASL),
+    constraint  FK_SANPHAM_SPSL foreign key(MaSanPham) references THONGTINSANPHAM(MaSanPham)
+)
 ---------------NHAP CƠ SỞ DỮ LIỆU
+--************SALE
+set dateformat dmy
+Insert into SALE
+values(N'tết','22/1/2023','23/2/2023')
 --************PHÂN QUYỀN
 INSERT INTO PHANQUYEN VALUES(1,'Admin')
 INSERT INTO PHANQUYEN VALUES(2,N'Nhân Viên Bán Hàng')
@@ -201,31 +226,27 @@ INSERT INTO TINHTRANGDH VALUES(3,N'Đang Thàng Công')
 
 --************BẢNG NHÂN VIÊN 
 SET DATEFORMAT DMY
-INSERT INTO NhanVien VALUES(N'Do Gia Huy','23/7/2001',N'Nam',N'giahuydo@gmail.com','0356322754',N'NV1.JPG','GIABO','12345',3)
-INSERT INTO NhanVien VALUES(N'Nguyen Thanh Loc','01/5/2001',N'Nam',N'locdaubuoi@gmail.com','0355467282',N'NV2.JPG','THANHLOC','12345',2)
-INSERT INTO NhanVien VALUES(N'Le Xuan Huy','12/8/2001',N'Nam',N'huyle@gmail.com','0355467282',N'NV2.JPG','XUANHUY','12345',1)
-INSERT INTO NhanVien VALUES(N'Admin','01/01/2001',N'Nam',N'admin@gmail.com',0355467282,N'NV2.JPG','admin','12345',1)
+INSERT INTO NhanVien VALUES(N'Đỗ Gia Huy','23/7/2001',N'Nam',N'giahuydo@gmail.com','0356322754',N'NV1.JPG','GIABO','12345',3)
+INSERT INTO NhanVien VALUES(N'Nguyễn Thành Lộc','01/5/2001',N'Nam',N'locdaubuoi@gmail.com','0355467282',N'NV2.JPG','THANHLOC','12345',2)
+INSERT INTO NhanVien VALUES(N'Lê Xuân Huy','12/8/2001',N'Nam',N'huyle@gmail.com','0355467282',N'NV2.JPG','XUANHUY','12345',1)
+INSERT INTO NhanVien VALUES(N'Admin','01/01/2001',N'Nam',N'admin@gmail.com','0355467282',N'NV2.JPG','admin','12345',1)
 INSERT INTO NhanVien VALUES(N'Bùi Văn Khoa','02/08/2001',N'Nam',N'buivankhoa@gmail.com','0355923282',N'NV2.JPG','khoabui','12345',2)
 
 
 
 --************BẢNG KHÁCH HÀNG
 SET DATEFORMAT DMY
-INSERT INTO KHACHHANG VALUES(N'Đỗ Gia Huy',N'TP.HCM','0763512628',N'giahuydo01@gmail.com',N'25/1/2001',N'Nam',N'13/10/2022','giahuydo','12345')
-INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM','0987654321',N'locdaubuoi@gmail.com',N'25/12/2001',N'Nam',N'12/10/2022','loc','12345')
-INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM','0987654321',N'gapdaudomdo01@gmail.com',N'25/12/2001',N'Nam',N'12/10/2022','locu','12345')
-INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Lộc',N'TP.HCM','0987654321',N'conca8048@gmail.com',N'25/12/2001',N'Nam',N'12/10/2020','locumap','12345')
-INSERT INTO KHACHHANG VALUES(N'Lê Xuân Huy',N'TP.HCM','0987387321',N'lexuanhuytvd@gmail.com',N'01/01/2001',N'Nam',N'01/01/2023','xuanhuy','12345')
-
-select * from KHACHHANG
-
+INSERT INTO KHACHHANG VALUES(N'Đỗ Gia Huy',N'Xã Thạnh Mỹ, Huyện Vĩnh Thạnh,Tỉnh Cần Thơ','0763512628',N'giahuydo01@gmail.com',N'25/1/2001',N'Nam',N'13/10/2022','giahuydo','12345')
+INSERT INTO KHACHHANG VALUES(N'Nguyễn Thành Long',N'Xã Tân Kim, Huyện Cần Giuộc,Tỉnh Long An','0987654321',N'locdaubuoi@gmail.com',N'25/12/2001',N'Nam',N'10/09/2022','thanhlong','12345')
+INSERT INTO KHACHHANG VALUES(N'Nguyễn Thanh Thảo',N'Xã Vĩnh Bình, Huyện Chợ Lách,Tỉnh Bến Tre','0987654321',N'nguyentahnhthao@gmail.com',N'25/12/2001',N'Nữ',N'07/09/2022','thanhthao','12345')
+INSERT INTO KHACHHANG VALUES(N'Nguyễn Hoàng Hùng',N'Xã Tân Ân Tây, Huyện Ngọc Hiển,Tỉnh Cà Mau','0987654321',N'nguyenhoanghung@gmail.com',N'25/12/2001',N'Nam',N'12/10/2022','hoanghung','12345')
+INSERT INTO KHACHHANG VALUES(N'Lê Xuân Huy',N'Xã Phước Hiệp, Huyện Mỏ Cày Nam,Tỉnh Bến Tre','0987387321',N'lexuanhuytvd@gmail.com',N'01/01/2001',N'Nam',N'01/01/2023','xuanhuy','12345')
 
 
 --*****************BANG LIEN HE
 SET DATEFORMAT DMY
-INSERT LIENHE VALUES (N'a', N'a', N'a@gmail.com', N'123456', N'đây là nội dung thứ 2', CAST(N'2016-07-01 00:00:00' AS SmallDateTime))
-INSERT LIENHE VALUES (N'b', N'b', N'test@gmail.com', N'1', N'đây là nội dung thứ 3', CAST(N'2016-07-01 00:00:00' AS SmallDateTime))
-select * from LIENHE
+INSERT LIENHE VALUES (N'Nguyễn', N'Anh', N'nguyenanh@gmail.com', N'0378527392', N'Tôi muốn đỗi lại hàng', CAST(N'2022-07-01 00:00:00' AS SmallDateTime))
+INSERT LIENHE VALUES (N'Nguyễn', N'Khoa', N'nguyenkhoa@gmail.com', N'0987352784', N'Tôi muốn trả lại hàng', CAST(N'2022-07-02 00:00:00' AS SmallDateTime))
 
 
 
@@ -235,10 +256,8 @@ INSERT LOAISANPHAM(TenLoai) VALUES ( N'Steam Cấp 1')
 INSERT LOAISANPHAM(TenLoai) VALUES ( N'Steam Cấp 2')
 INSERT LOAISANPHAM(TenLoai) VALUES ( N'Steam Cấp 3')
 
-select * from LOAISANPHAM
 
-
---------------------them du lieu bang NHACUNGCAP
+--------------------BANG NHACUNGCAP
 INSERT INTO NhaCungCap
 VALUES('NCC01', N'Nhà cung cấp NEW BRAIN QUẬN 3', N'034 Trường Sa, phường 12, TP.HCM','0123684273');
 INSERT INTO NhaCungCap
@@ -254,17 +273,15 @@ VALUES	('NCC06',N'Nhà cung cấp NEW BRAIN Quận Nam Từ Liêm',N'Số 8, B9,
 INSERT INTO NhaCungCap
 VALUES('NCC07',N'Nhà cung cấp NEW BRAIN Đà Nẵng',N'Số 73, Phó Đức Chính, Mân Thái, Sơn Trà, Đà Nẵng','0899633869');
 
-select*from NHACUNGCAP
 
 
 --*************BẢNG CHI TIẾT SẢN PHẨM---
-select* from THONGTINSANPHAM
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (1,'NCC01', N'Khay Tam Giác Xếp Hình mở rộng tư duy sáng tạo ở bé', 150000, N'Nhiệm vụ của người chơi là sắp xếp các miếng ghép sao cho vừa vào khay tam giác xếp hình.Khay Tam Giác Xếp Hình mở rộng tư duy sáng tạo có đính kèm sẵn 10 thẻ công việc khác nhau cho trẻ. Mỗi thẻ có hai mặt và khay làm việc có nắp.Tất cả chi tiết được mài dũa tỉ mỉ, không góc nhọn an toàn tuyệt đối cho trẻ. Chất lượng cao.Khay Tam Giác Xếp Hình phù hợp cho trẻ mầm non mở rộng tư duy sáng tạo, trẻ mẫu giáo có độ tuổi trên 3+.', N'product8.png',0,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (2,'NCC02', N'Bộ Kiếng Đo Hình Chiếu Không Gian dạy toán hình học', 250000, N'Bộ Kiếng Đo Hình Chiếu Không Gian gồm một tấm kiếng mica màu đỏ trong loại tốt và một miếng nhựa xanh hỗ trợ. Kiếng Đo có kèm hướng dẫn hỗ trợ sử dụng chi tiết. Khi gắn tấm nhựa xanh vào, miếng mica hoạt động như một tấm kiếng thật, có khả năng phản chiếu vật thể. Hỗ trợ trong việc học Toán hình học: Tìm hiểu & phân tích các dạng hình học và khái niệm đồng dạng, tương đồng và đối xứng của các hình đó. Trên kiếng có in các giá trị con số như cây thước để vẽ và đo đạc.', N'product-cap1-1.png',0,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (3,'NCC03', N'Chương trình STEAM tiểu học – THCS 80 tiết', 300000, N'Bộ chương trình STEAM tiểu học – THCS là một gói STEAM hoàn chỉnh bao gồm thiết bị, giáo án, sách hướng dẫn. Nội dung trọng tâm xoay quanh chủ đề lớn NĂNG LƯỢNG XANH:Năng lượng mặt trời (20 bài thực hành) ,Năng lượng gió (20 bài thực hành) ,Năng lượng nước (20 bài thực hành) , Ánh sáng và Thấu kính (20 bài thực hành), Chương trình STEAM tiểu học – THCS được xây dựng đầy đủ, hoàn chỉnh, thuộc một trong 4 gói STEAM các cấp được xây dựng có hệ thống từ mầm non đến cấp 3.', N'product-ct80.png',0,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (4,'NCC04', N'Chương trình STEAM Tiểu Học-THCS-THPT 100 tiết', 350000, N'Chương trình STEAM tiểu học – THCS được xây dựng đầy đủ, hoàn chỉnh, thuộc một trong 4 gói STEAM các cấp được xây dựng có hệ thống từ mầm non đến cấp 3. Với hệ thống miếng ghép đa dạng gồm 100 buổi phục vụ hoạt động giáo dục trẻ tiểu học và THCS. Chương trình thiết kế theo phương pháp giáo dục chủ đạo là STEAM – đây cũng là phương pháp giáo dục tiên tiến đang chiếm ưu thế tại nhiều nước phát triển trên thế giới, giúp trẻ phát triển theo hướng khoa họ', N'product-ct120.png',0,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (1,'NCC05', N'Đồng Hồ Tập Xem Giờ Phút cho bé mầm non', 150000, N'Đồng hồ tập xem giờ phút cung cấp cho trẻ những hiểu biết về đặc điểm của đồng hồ và biết được các chức năng của chúng:Số ;   Kim ngắn – kim giờ;   Kim dài – kim phút. Đồng hồ bằng nhựa có kiểu dáng đơn giản và hình tròn dễ thương, thu hút sự chú ý của bé, là sản phẩm trang trí trong ngôi nhà.', N'product9.png',0,10)
-INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (2,'NCC06', N'Bộ Que Tính Học Toán Cộng Trừ phạm vi 1 đến 100', 240000, N'Từ 3 tuổi, trí não bé đang trong giai đoạn bắt đầu phát triển mạnh mẽ, cũng là độ tuổi bé được làm quen với chữ cái và các con số vì vậy đây là thời điểm thích hợp để ba mẹ giúp bé làm quen và học tập. Bộ Que Tính Học Toán Cộng Trừ 100 Số giúp học sinh thực hành cộng, trừ trong phạm vi 10, cộng trừ (không nhớ) trong phạm vi 100. Đây là bộ thiết bị dạy phép cộng, phép trừ tiểu học lớp 1 lớp 2', N'product-cap1-5.png',0,10)
+INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (2,'NCC06', N'Bộ Que Tính Học Toán Cộng Trừ phạm vi 1 đến 100', 240000, N'Từ 3 tuổi, trí não bé đang trong giai đoạn bắt đầu phát triển mạnh mẽ, cũng là độ tuổi bé được làm quen với chữ cái và các con số vì vậy đây là thời điểm thích hợp để ba mẹ giúp bé làm quen và học tập. Bộ Que Tính Học Toán Cộng Trừ 100 Số giúp học sinh thực hành cộng, trừ trong phạm vi 10, cộng trừ (không nhớ) trong phạm vi 100. Đây là bộ thiết bị dạy phép cộng, phép trừ tiểu học lớp 1 lớp 2', N'product-cap1-5.png',20,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (2,'NCC07', N'Đồng Hồ Tập Xem Thời Gian hình cú cho bé', 230000, N'Đồng Hồ Tập Xem Thời Gian hình cú giáo dục trẻ biết quý trọng thời gian. Biết thời gian rất cần thiết đối với con người và ý thức học tập. Giáo viên mầm non sử dụng Đồng Hồ Dạy Học Hình Cú để phát triển kỹ năng quan sát, chú ý, ghi nhớ có chủ định và chơi trò chơi của bé.', N'product1.png',0,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (1,'NCC07', N'Gói Bổ Sung 76 Quả Cân Bằng Nhựa', 490000, N'Sản phẩm bổ sung 76 quả cân nhựa:
 																																							16 quả cân nhựa 20g;
@@ -278,7 +295,7 @@ INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,S
 																																							Các hình khối có thiết kế kín và có một miệng lỗ dưới đáy mỗi khối mô hình, cho phép sử dụng các vật liệu như cát, hạt cườm hoặc chất lỏng (nước) đổ vào, khiến cho lớp thêm sinh động.
 																																							Làm quen với các hình khối khác nhau, sâu hơn có thể dạy tới so sánh tỷ lệ thể tích giữa các hình khối.
 																																							Bộ Đo Thể Tích Mầm Non #1044 Gigo phù hợp cho trẻ mầm non & mẫu giáo trên 3 tuổi. Chất liệu bằng nhựa cao cấp.
-																																							Trẻ biết cách đo thể tích của nhiều đối tượng khác nhau bằng 1 đơn vị đo, biết đếm và đọc kết quả đếm.', N'product4.png',0,10)
+																																							Trẻ biết cách đo thể tích của nhiều đối tượng khác nhau bằng 1 đơn vị đo, biết đếm và đọc kết quả đếm.', N'product4.png',10,10)
 
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (2,'NCC07', N'Đồ chơi thông minh Kỹ Sư Cơ Khí STEAM', 960000, N'Với thiết kế sinh động đáng yêu, kích thích trí tư duy, sáng tạo, bộ Đồ chơi thông minh Kỹ Sư Cơ Khí STEAM #1406 thuộc dòng đồ chơi sáng tạo mang tính hướng nghiệp thông minh. Kỹ Sư Cơ Khí STEAM sẽ là món quà không thể bỏ lỡ dành cho các bé trong giai đoạn phát triển tư duy và nhận thức.
 																																								<br />
@@ -337,7 +354,7 @@ INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,S
 																																							<br />
 																																							TRỌNG LƯỢNG	             1.45 kg
 																																							<br />
-																																							KÍCH THƯỚC	             37 × 8 × 4 cm', N'product-cap1-4.png',0,10)
+																																							KÍCH THƯỚC	             37 × 8 × 4 cm', N'product-cap1-4.png',30,10)
 
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (1,'NCC06', N'Bảng Dạy Học Mầm Non 72×56 có giá di động', 4500000, N' Bảng Dạy Học Mầm Non di động có chân bánh xe và có khung bao viền cạnh bằng nhựa định hình có kết cấu nhỏ gọn, thanh, tạo cảm giác nhẹ nhàng, kiểu dáng đẹp, phù hợp cho văn phòng nhỏ ,cao cấp, ít người, thông tin vừa phải.
 																																								<br />
@@ -545,7 +562,7 @@ INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,S
 																																							    <br />
 																																								TRỌNG LƯỢNG	1.59 kg
 																																								<br />
-																																								KÍCH THƯỚC	46 × 17 × 17 cm', N'product15.png',0,10)
+																																								KÍCH THƯỚC	46 × 17 × 17 cm', N'product15.png',10,10)
 
 
 
@@ -589,7 +606,7 @@ INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,S
 																																								<br />
 																																								TRỌNG LƯỢNG	2.75 kg
 																																								<br />
-																																								KÍCH THƯỚC	23.3 × 20.2 × 33.6 cm', N'product16.png',0,10)
+																																								KÍCH THƯỚC	23.3 × 20.2 × 33.6 cm', N'product16.png',20,10)
 
 
 
@@ -673,9 +690,7 @@ update DonDatHangNCC
 				from CT_DonDatHangNCC 
 				where CT_DonDatHangNCC.MaDonDatHangNCC=@MaDonDHNCC)
 	where DonDatHangNCC.MaDonDatHangNCC=@MaDonDHNCC
-
-
-
+GO
 
 CREATE PROC Update_TrangThai_DatHangNCC
 		@MaDonDHNCC int
@@ -683,3 +698,17 @@ AS
 	update DonDatHangNCC
 	set TrangThai = 0
 	where MaDonDatHangNCC = @MaDonDHNCC
+<<<<<<< HEAD
+select * from CT_PHIEUDATHANG,SPSALE where CT_PHIEUDATHANG.MaSanPham = SPSALE.MaSanPham
+SELECT * FROM PHIEUDATHANG,THONGTINSANPHAM where CT_PHIEUDATHANG.MaSanPham = THONGTINSANPHAM.MaSanPham
+select * from SPSALE
+delete SPSALE where MaSanPham = 2
+ALTER TABLE THONGTINSANPHAM
+ALTER COLUMN GIAMGIA int
+
+
+
+
+=======
+GO
+>>>>>>> e9551886938feb1d3caa54bb8fdc57b7ddf2fe52

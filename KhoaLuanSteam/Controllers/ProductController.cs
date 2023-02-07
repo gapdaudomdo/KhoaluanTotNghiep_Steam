@@ -38,7 +38,7 @@ namespace KhoaLuanSteam.Controllers
 
         public ActionResult Productdiscounts()
         {
-            var result = new ProductProcess().SanPhamGiamGia();
+            var result = new ProductProcess().getSaleProduct();
             return PartialView(result);
         }
         public ActionResult giasachgiam(int masanpham)
@@ -57,16 +57,35 @@ namespace KhoaLuanSteam.Controllers
 
         public ActionResult FavoriteProduct()
         {
+<<<<<<< HEAD
+            //List<int> ListTopMaSP;
+            //using (var ctx = new QL_THIETBISTEAMEntities1())
+            //{
+            //    //ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) MaSanPham from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
+            //    ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) ISNULL(MaSanPham, 1) from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
+            //}
+            //int MaSP1 = ListTopMaSP[0];
+            //int MaSP2 = ListTopMaSP[1];
+            //int MaSP3 = ListTopMaSP[2];
+            //var result = new ProductProcess().TakeProduct(MaSP1, MaSP2, MaSP3);
+
+            var result = new ProductProcess().TakeProduct();
+=======
+            int MaSP1;
+            int MaSP2;
+            int MaSP3;
             List<int> ListTopMaSP;
             using (var ctx = new QL_THIETBISTEAMEntities1())
             {
                 //ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) MaSanPham from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
                 ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) ISNULL(MaSanPham, 1) from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
             }
-            int MaSP1 = ListTopMaSP[0];
-            int MaSP2 = ListTopMaSP[1];
-            int MaSP3 = ListTopMaSP[2];
+            MaSP1 = ListTopMaSP[0];
+            MaSP2 = ListTopMaSP[1];
+            MaSP3 = ListTopMaSP[2];
+
             var result = new ProductProcess().TakeProduct(MaSP1, MaSP2, MaSP3);
+>>>>>>> e9551886938feb1d3caa54bb8fdc57b7ddf2fe52
             return PartialView(result);
         }
 
@@ -174,12 +193,24 @@ namespace KhoaLuanSteam.Controllers
         public ActionResult ChiTietSP(int id)
         {
             var result = new ProductProcess().GetIdSanPham(id);
+            var x = (from s in db.SALEs
+                     join sps in db.SPSALEs on s.MASL equals sps.MASL
+                     where sps.MaSanPham == id && (DateTime.Now > s.NGAYBATDAU && DateTime.Now < s.NGAYKETTHUC)
+                     select sps.GIAMGIA).SingleOrDefault();
             ViewBag.maloaisach = result.MaLoai;
+            if (x == null)
+            {
+                result.GiamGia = 0;
+            }
+            else
+            {
+                result.GiamGia = x;
+            }
             return View(result);
         }
         //GET : /Book/SachLienQuan :hien thi sach theo ma loai sach
         //Parital View : SachLienQuan
-        public ActionResult SPLienQuan(int LoaiSanPham, int MaSanPham)
+        public ActionResult SPLienQuan(int LoaiSanPham,int MaSanPham)
         {
             var LSanPham = new ProductProcess().SanPhamLienQuan(LoaiSanPham, MaSanPham);
             if (LSanPham.Count == 0)

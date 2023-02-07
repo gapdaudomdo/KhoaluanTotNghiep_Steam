@@ -19,6 +19,7 @@ namespace KhoaLuanSteam.Models
             this.CT_DonDatHangNCC = new HashSet<CT_DonDatHangNCC>();
             this.CT_PHIEUDATHANG = new HashSet<CT_PHIEUDATHANG>();
             this.CT_PHIEUNHAPHANG = new HashSet<CT_PHIEUNHAPHANG>();
+            this.SPSALEs = new HashSet<SPSALE>();
         }
     
         public int MaSanPham { get; set; }
@@ -28,7 +29,7 @@ namespace KhoaLuanSteam.Models
         public Nullable<double> GiaSanPham { get; set; }
         public string MoTa { get; set; }
         public string HinhAnh { get; set; }
-        public Nullable<double> GiamGia { get; set; }
+        public Nullable<int> GiamGia { get; set; }
         public Nullable<int> SLTon { get; set; }
     
         public virtual ICollection<CT_DonDatHangNCC> CT_DonDatHangNCC { get; set; }
@@ -36,5 +37,6 @@ namespace KhoaLuanSteam.Models
         public virtual ICollection<CT_PHIEUNHAPHANG> CT_PHIEUNHAPHANG { get; set; }
         public virtual LOAISANPHAM LOAISANPHAM { get; set; }
         public virtual NHACUNGCAP NHACUNGCAP { get; set; }
+        public virtual ICollection<SPSALE> SPSALEs { get; set; }
     }
 }

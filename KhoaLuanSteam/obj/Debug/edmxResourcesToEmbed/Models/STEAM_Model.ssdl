@@ -52,7 +52,7 @@
     </Key>
     <Property Name="MaKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenKH" Type="nvarchar" MaxLength="50" />
-    <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="250" />
     <Property Name="SDT" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="NgaySinh" Type="datetime" />
@@ -131,7 +131,7 @@
     <Property Name="MaPhieuDH" Type="int" Nullable="false" />
     <Property Name="TenKH" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
-    <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="250" />
     <Property Name="SDT" Type="nvarchar" MaxLength="50" />
     <Property Name="NgayTao" Type="datetime" />
   </EntityType>
@@ -146,6 +146,24 @@
     <Property Name="TongSL" Type="int" />
     <Property Name="TongTien_NH" Type="float" />
   </EntityType>
+  <EntityType Name="SALE">
+    <Key>
+      <PropertyRef Name="MASL" />
+    </Key>
+    <Property Name="MASL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TENSL" Type="nvarchar(max)" />
+    <Property Name="NGAYBATDAU" Type="datetime" />
+    <Property Name="NGAYKETTHUC" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SPSALE">
+    <Key>
+      <PropertyRef Name="MASPSALE" />
+    </Key>
+    <Property Name="MASPSALE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MASL" Type="int" Nullable="false" />
+    <Property Name="MaSanPham" Type="int" Nullable="false" />
+    <Property Name="GIAMGIA" Type="int" />
+  </EntityType>
   <EntityType Name="THONGTINSANPHAM">
     <Key>
       <PropertyRef Name="MaSanPham" />
@@ -157,7 +175,7 @@
     <Property Name="GiaSanPham" Type="float" />
     <Property Name="MoTa" Type="nvarchar" MaxLength="4000" />
     <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
-    <Property Name="GiamGia" Type="float" />
+    <Property Name="GiamGia" Type="int" />
     <Property Name="SLTon" Type="int" />
   </EntityType>
   <EntityType Name="TINHTRANGDH">
@@ -347,6 +365,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SANPHAM_SPSL">
+    <End Role="THONGTINSANPHAM" Type="Self.THONGTINSANPHAM" Multiplicity="1" />
+    <End Role="SPSALE" Type="Self.SPSALE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="THONGTINSANPHAM">
+        <PropertyRef Name="MaSanPham" />
+      </Principal>
+      <Dependent Role="SPSALE">
+        <PropertyRef Name="MaSanPham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SL_SPSL">
+    <End Role="SALE" Type="Self.SALE" Multiplicity="1" />
+    <End Role="SPSALE" Type="Self.SPSALE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SALE">
+        <PropertyRef Name="MASL" />
+      </Principal>
+      <Dependent Role="SPSALE">
+        <PropertyRef Name="MASL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_THONGTINSACH_LOAISANPHAM">
     <End Role="LOAISANPHAM" Type="Self.LOAISANPHAM" Multiplicity="0..1" />
     <End Role="THONGTINSANPHAM" Type="Self.THONGTINSANPHAM" Multiplicity="*" />
@@ -371,26 +413,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="Update_SL_Ton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="MaCTPhieuNhapHang" Type="int" Mode="In" />
-    <Parameter Name="MaSP" Type="int" Mode="In" />
-    <Parameter Name="MaPhieuNhapHang" Type="int" Mode="In" />
-  </Function>
-  <Function Name="Update_TongSL_DatHangNCC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="MaDonDHNCC" Type="nchar" Mode="In" />
-  </Function>
-  <Function Name="Update_TongSL_PN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="MaPhieuNH" Type="nchar" Mode="In" />
-  </Function>
-  <Function Name="Update_TongTien_DatHangNCC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="MaDonDHNCC" Type="nchar" Mode="In" />
-  </Function>
-  <Function Name="Update_TongTien_PN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="MaPhieuNH" Type="nchar" Mode="In" />
-  </Function>
-  <Function Name="Update_TrangThai_DatHangNCC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="MaDonDHNCC" Type="int" Mode="In" />
-  </Function>
   <EntityContainer Name="QL_THIETBISTEAMModelStoreContainer">
     <EntitySet Name="CT_DonDatHangNCC" EntityType="Self.CT_DonDatHangNCC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_PHIEUDATHANG" EntityType="Self.CT_PHIEUDATHANG" Schema="dbo" store:Type="Tables" />
@@ -405,6 +427,8 @@
     <EntitySet Name="PHIEUDATHANG" EntityType="Self.PHIEUDATHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PHIEUGIAOHANG" EntityType="Self.PHIEUGIAOHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PHIEUNHAPHANG" EntityType="Self.PHIEUNHAPHANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SALE" EntityType="Self.SALE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SPSALE" EntityType="Self.SPSALE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="THONGTINSANPHAM" EntityType="Self.THONGTINSANPHAM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TINHTRANGDH" EntityType="Self.TINHTRANGDH" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CT_DonDatHangNCC_DDHNCC" Association="Self.FK_CT_DonDatHangNCC_DDHNCC">
@@ -466,6 +490,14 @@
     <AssociationSet Name="FK_PHIEUNHAPHANG_NHANVIEN" Association="Self.FK_PHIEUNHAPHANG_NHANVIEN">
       <End Role="NHANVIEN" EntitySet="NHANVIEN" />
       <End Role="PHIEUNHAPHANG" EntitySet="PHIEUNHAPHANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SANPHAM_SPSL" Association="Self.FK_SANPHAM_SPSL">
+      <End Role="THONGTINSANPHAM" EntitySet="THONGTINSANPHAM" />
+      <End Role="SPSALE" EntitySet="SPSALE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SL_SPSL" Association="Self.FK_SL_SPSL">
+      <End Role="SALE" EntitySet="SALE" />
+      <End Role="SPSALE" EntitySet="SPSALE" />
     </AssociationSet>
     <AssociationSet Name="FK_THONGTINSACH_LOAISANPHAM" Association="Self.FK_THONGTINSACH_LOAISANPHAM">
       <End Role="LOAISANPHAM" EntitySet="LOAISANPHAM" />

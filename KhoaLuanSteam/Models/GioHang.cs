@@ -13,18 +13,35 @@ namespace KhoaLuanSteam.Models
         public int iSoLuong { get; set; }
 
         public string tensp { get; set; }
+        public int iGiamGia
+        {
+            get
+            {
+                var x = (from s in db.SALEs
+                         join sps in db.SPSALEs on s.MASL equals sps.MASL
+                         where sps.MaSanPham == sanpham.MaSanPham && (DateTime.Now > s.NGAYBATDAU && DateTime.Now < s.NGAYKETTHUC)
+                         select sps.GIAMGIA).SingleOrDefault();
+                if (x == null || x <= 0)
+                {
+                    return 0;
+                }
+                return (int)x;
+            }
+        }
         public double? iThanhTien
         {
             get
             {
-                if (sanpham.GiamGia <= 0)
+                if (iGiamGia == null || iGiamGia <= 0)
                 {
                     return iSoLuong * sanpham.GiaSanPham;
                 }
                 else
                 {
-                    //return iSoLuong * (sanpham.GiaSanPham - (sanpham.GiaSanPham * sanpham.GiamGia));
-                    return iSoLuong * (sanpham.GiaSanPham * (1 - (sanpham.GiamGia / 100)));
+                    double sl = (double)iSoLuong;
+                    double discount = (double)(100 - iGiamGia) /(double)100;
+                    double? totalprice = sl * sanpham.GiaSanPham * discount;
+                    return totalprice;
                 }
             }
         }

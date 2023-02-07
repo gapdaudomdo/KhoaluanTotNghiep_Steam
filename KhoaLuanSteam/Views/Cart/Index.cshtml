@@ -134,7 +134,7 @@
                                             <h5>@item.sanpham.TenSanPham</h5>
                                         </td>
                                         <td class="shoping__cart__price">
-                                            @if (@item.sanpham.GiamGia <= 0)
+                                            @if (@item.iGiamGia <= 0)
                                             {
                                                 <span>
                                                     @item.sanpham.GiaSanPham.GetValueOrDefault(0).ToString("N0") đ
@@ -160,7 +160,7 @@
                                                 </td> *@
                                         </td>
                                         <td class="shoping__cart__total">
-                                            @if (@item.sanpham.GiamGia <= 0)
+                                            @if (@item.iGiamGia <= 0)
                                             {
                                                 <span>
                                                     @((item.sanpham.GiaSanPham.GetValueOrDefault(0) * item.iSoLuong).ToString("N0")) đ
@@ -169,7 +169,7 @@
                                             else
                                             {
                                                 <span>
-                                                    @(((item.sanpham.GiaSanPham.GetValueOrDefault(0) * ( 1- (item.sanpham.GiamGia.GetValueOrDefault(0) / 100 ))) * item.iSoLuong).ToString("N0")) đ
+                                                    @((item.sanpham.GiaSanPham.GetValueOrDefault(0) * ((double)(100 - item.iGiamGia) / (double)100 ) * item.iSoLuong).ToString("N0")) đ
                                                 </span>
                                             }
                                         </td>

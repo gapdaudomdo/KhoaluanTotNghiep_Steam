@@ -215,6 +215,12 @@
     <Compile Include="Models\Process\HomeProcess.cs" />
     <Compile Include="Models\Process\ProductProcess.cs" />
     <Compile Include="Models\Process\UserProcess.cs" />
+    <Compile Include="Models\SALE.cs">
+      <DependentUpon>STEAM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SPSALE.cs">
+      <DependentUpon>STEAM_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\STEAM_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -239,6 +245,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ChiTietDDHViewModel.cs" />
     <Compile Include="ViewModel\MyViewModel.cs" />
+    <Compile Include="ViewModel\SaleViewModel.cs" />
     <Compile Include="VNPay\PayCompare.cs" />
     <Compile Include="VNPay\PayLib.cs" />
     <Compile Include="VNPay\Util.cs" />
@@ -3732,6 +3739,11 @@
     <Content Include="assets\ecommerce\sass\_shoping-cart.scss" />
     <Content Include="assets\ecommerce\sass\_sidebar.scss" />
     <Content Include="assets\ecommerce\sass\_variable.scss" />
+    <Content Include="Css\fonts\.DS_Store" />
+    <Content Include="Css\fonts\icomoon\fonts\icomoon.eot" />
+    <Content Include="Css\fonts\icomoon\fonts\icomoon.ttf" />
+    <Content Include="Css\fonts\icomoon\fonts\icomoon.woff" />
+    <Content Include="Css\fonts\icomoon\selection.json" />
     <EntityDeploy Include="Models\STEAM_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>STEAM_Model.Designer.cs</LastGenOutput>
@@ -3739,11 +3751,12 @@
     <Content Include="Models\STEAM_Model.edmx.diagram">
       <DependentUpon>STEAM_Model.edmx</DependentUpon>
     </Content>
-    <Content Include="Css\fonts\.DS_Store" />
-    <Content Include="Css\fonts\icomoon\fonts\icomoon.eot" />
-    <Content Include="Css\fonts\icomoon\fonts\icomoon.ttf" />
-    <Content Include="Css\fonts\icomoon\fonts\icomoon.woff" />
-    <Content Include="Css\fonts\icomoon\selection.json" />
+<<<<<<< HEAD
+    <Content Include="Areas\Admin\Views\Home\AD_ShowAllSale.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\AD_ShowDetailSale.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\AD_ShowAllSPSale.cshtml" />
+=======
+>>>>>>> e9551886938feb1d3caa54bb8fdc57b7ddf2fe52
     <None Include="Scripts\jquery-1.8.2-vsdoc.js" />
     <Content Include="HinhAnhSach\Banhngon.jpg" />
     <Content Include="HinhAnhSach\bloc-sieu-dai.jpg" />

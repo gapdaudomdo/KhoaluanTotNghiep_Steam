@@ -17,6 +17,7 @@ using NPOI.HSSF.Util;
 //Thư viện PDF
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using KhoaLuanSteam.ViewModel;
 
 namespace KhoaLuanSteam.Areas.Admin.Controllers
 {
@@ -493,6 +494,172 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         }
         #endregion
 
+        #region Admin_ThemXoaSua_Sale
+        [HttpGet]
+        public ActionResult AD_ShowAllSale()
+        {
+            //gọi hàm xuất danh sách nhà xuất bản
+            var model = new AdminProcess().AD_ShowAllSale();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult AD_ShowDetailSale(int id)
+        {
+
+            List<SaleViewModel> lst = new List<SaleViewModel>();
+            List<SPSALE> lstspSale = new AdminProcess().DanhSachSP_Sale(id);
+            foreach (var item in lstspSale)
+            {
+                THONGTINSANPHAM sanpham = db.THONGTINSANPHAMs.Where(x => x.MaSanPham == item.MaSanPham).FirstOrDefault();
+                lst.Add(new SaleViewModel() { MaSanPham = sanpham.MaSanPham, TenSanPham = sanpham.TenSanPham, HinhAnh = sanpham.HinhAnh, Gia = sanpham.GiaSanPham, SoLuong = sanpham.SLTon, GiamGia = (int)item.GIAMGIA, maSL = id });
+            }
+            return View(lst);
+        }
+
+        public ActionResult InsertSale()
+        {
+            return View();
+        }
+
+        //POST : /Admin/Home/ InsertNXB/:model : thực hiện việc thêm nhà xuất bản
+        [HttpPost]
+        public ActionResult InsertSALE(SALE model)
+        {
+            //kiểm tra tính hợp lệ dữ liệu
+            if (ModelState.IsValid)
+            {
+                //khởi tạo biến admin
+                var admin = new AdminProcess();
+
+                //khởi tạo object(đối tượng) nhà xuất bản
+                var sale = new SALE();
+
+                //gán dữ liệu
+                sale.TENSL = model.TENSL;
+
+                sale.NGAYBATDAU = model.NGAYBATDAU;
+
+                sale.NGAYKETTHUC = model.NGAYKETTHUC;
+
+                //gọi hàm thêm nhà xuất bản
+                var result = admin.InsertSale(sale);
+                //kiểm tra hàm
+                if (result > 0)
+                {
+                    ViewBag.Success = "Thêm mới thành công";
+                    ModelState.Clear();
+                    return View();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm không thành công.");
+                }
+            }
+
+            return View(model);
+        }
+
+        #endregion        
+
+        #region Admin_ThemXoaSua_SPSale
+        [HttpGet]
+        public ActionResult AD_ShowAllSPSale(int id)
+        {
+
+            List<SaleViewModel> lst = new List<SaleViewModel>();
+            var spsale = db.SPSALEs.Where(x => x.MASL == id).Select(x => x.MaSanPham).ToList();
+            var sp = db.THONGTINSANPHAMs.Where(x => !spsale.Contains(x.MaSanPham)).ToList();
+            foreach (var item in sp)
+            {
+                lst.Add(new SaleViewModel() { MaSanPham = item.MaSanPham, TenSanPham = item.TenSanPham, HinhAnh = item.HinhAnh, Gia = item.GiaSanPham, SoLuong = item.SLTon, maSL = id });
+            }
+            return View(lst);
+        }
+
+
+        [HttpPost]
+        public ActionResult InsertSPSALE(SPSALE model, FormCollection f, int maSale, int MaSanPham)
+        {
+            //kiểm tra tính hợp lệ dữ liệu
+            if (ModelState.IsValid)
+            {
+                List<SaleViewModel> lst = new List<SaleViewModel>();
+                //khởi tạo biến admin
+                var admin = new AdminProcess();
+                //khởi tạo object(đối tượng) nhà xuất bản
+                model.MASL = maSale;
+                model.MaSanPham = MaSanPham;
+                string giamgia = Convert.ToString(f["GiamGia"]);
+                model.GIAMGIA = int.Parse(giamgia);
+
+                //gọi hàm thêm nhà xuất bản
+                var result = admin.InsertSPSale(model);
+                //kiểm tra hàm
+                if (result > 0)
+                {
+                    ViewBag.Success = "Thêm mới thành công";
+                    ModelState.Clear();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm không thành công.");
+                }
+
+                return RedirectToAction("AD_ShowAllSPSale", new { id = maSale });
+
+            }
+
+            return RedirectToAction("AD_ShowAllSPSale", new { id = maSale });
+        }
+
+        [HttpPost]
+        public ActionResult UpdateSPSALE(SPSALE model, FormCollection f, int maSale, int MaSanPham)
+        {
+            //kiểm tra tính hợp lệ dữ liệu
+            if (ModelState.IsValid)
+            {
+                List<SaleViewModel> lst = new List<SaleViewModel>();
+                //khởi tạo biến admin
+                var admin = new AdminProcess();
+                //khởi tạo object(đối tượng) nhà xuất bản
+                model.MASL = maSale;
+                model.MaSanPham = MaSanPham;
+                string giamgia = Convert.ToString(f["GiamGia"]);
+                model.GIAMGIA = int.Parse(giamgia);
+
+                //gọi hàm thêm nhà xuất bản
+                var result = admin.InsertSPSale(model);
+                //kiểm tra hàm
+                if (result > 0)
+                {
+                    ViewBag.Success = "Thêm mới thành công";
+                    ModelState.Clear();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm không thành công.");
+                }
+
+                return RedirectToAction("AD_ShowDetailSale", new { id = maSale });
+
+            }
+
+            return RedirectToAction("AD_ShowDetailSale", new { id = maSale });
+        }
+
+
+        [HttpDelete]
+        public ActionResult DeleteSPSale(int id)
+        {
+            // gọi hàm xóa thể loại
+            new AdminProcess().DeleteSPSale(id);
+
+            //trả về trang quản lý thể loại
+            return RedirectToAction("AD_ShowDetailSale");
+        }
+        #endregion
 
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KhoaLuanSteam.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,19 +24,49 @@ namespace KhoaLuanSteam.Models.Process
         /// <returns>List</returns>
         public List<THONGTINSANPHAM> NewDateProduct()
         {
-            return db.THONGTINSANPHAMs.Take(8).OrderBy(x => x.MaSanPham).ToList();
+            var a = db.THONGTINSANPHAMs.Take(8).OrderBy(x => x.MaSanPham).ToList();
+            foreach (var item in a)
+            {
+                var x = (from s in db.SPSALEs
+                         join sps in db.SALEs on s.MASL equals sps.MASL
+                         join tts in db.THONGTINSANPHAMs on s.MaSanPham equals tts.MaSanPham
+                         where DateTime.Now > sps.NGAYBATDAU && DateTime.Now < sps.NGAYKETTHUC && s.MaSanPham == item.MaSanPham
+                         select s.GIAMGIA).FirstOrDefault();
+                if (x == null || x <= 0)
+                {
+                    item.GiamGia = 0;
+                }
+                else
+                {
+                    item.GiamGia = x;
+                }
+            }
+            return a;
         }
 
         public List<THONGTINSANPHAM> LatestProduct()
         {
             //return db.THONGTINSANPHAMs.Take(3).OrderByDescending(x => x.MaSanPham).ToList();
-            return db.THONGTINSANPHAMs.Where(x => x.GiamGia == 0).OrderByDescending(x => x.MaSanPham).Take(3).ToList();
+            var a = db.THONGTINSANPHAMs.Where(x => x.GiamGia == 0).OrderByDescending(x => x.MaSanPham).Take(3).ToList();
+            foreach (var item in a)
+            {
+                var x = (from s in db.SPSALEs
+                         join sps in db.SALEs on s.MASL equals sps.MASL
+                         join tts in db.THONGTINSANPHAMs on s.MaSanPham equals tts.MaSanPham
+                         where DateTime.Now > sps.NGAYBATDAU && DateTime.Now < sps.NGAYKETTHUC && s.MaSanPham == item.MaSanPham
+                         select s.GIAMGIA).FirstOrDefault();
+                if (x == null || x <= 0)
+                {
+                    item.GiamGia = 0;
+                }
+                else
+                {
+                    item.GiamGia = x;
+                }
+            }
+            return a;
         }
-
-        public List<THONGTINSANPHAM> SanPhamGiamGia()
-        {
-            return db.THONGTINSANPHAMs.Where(x => x.GiamGia > 0).OrderByDescending(x => x.GiamGia).Take(3).ToList();
-        }
+     
 
         //public object SanPhamGiamGia()
         //{
@@ -45,15 +76,35 @@ namespace KhoaLuanSteam.Models.Process
 
         //    return ketqua;
         //}
-
-        public double? GiaSanPham(int masanpham)
+        public List<ProductInSale> getSaleProduct()
+        {
+            //var spsale = (from sach in db.THONGTINSACHes join sale in db.SPSALEs on sach.MaSach equals sale.MaSach where sach.MaSach == sale.MaSach select new { sach.MaSach, sach.MaLoai, sach.MaTG, sach.MaNXB, sach.TenSach, sach.GiaSach, sach.MoTa, sach.HinhAnh, sale.GIAMGIA, sach.SLTon }).ToList();
+            ////return db.THONGTINSACHes.OrderByDescending(x => x.MaSach).ToList();
+            var x = (from s in db.SPSALEs
+                     join sps in db.SALEs on s.MASL equals sps.MASL
+                     join tts in db.THONGTINSANPHAMs on s.MaSanPham equals tts.MaSanPham
+                     where DateTime.Now > sps.NGAYBATDAU && DateTime.Now < sps.NGAYKETTHUC
+                     select new ProductInSale
+                     {
+                         THONGTINSANPHAM = tts,
+                         GIAMGIA = (int)s.GIAMGIA
+                     }).ToList();
+            return x;
+        }
+        public double GiaSanPham(int masanpham)
         {
             THONGTINSANPHAM sanpham = db.THONGTINSANPHAMs.Single(s => s.MaSanPham == masanpham);
-            if (sanpham.GiamGia <= 0)
-                return sanpham.GiaSanPham;
+            var x = (from s in db.SALEs
+                     join sps in db.SPSALEs on s.MASL equals sps.MASL
+                     where sps.MaSanPham == masanpham && (DateTime.Now > s.NGAYBATDAU && DateTime.Now < s.NGAYKETTHUC)
+                     select sps.GIAMGIA).SingleOrDefault();
+            if (x == null || x <= 0)
+                return (double)sanpham.GiaSanPham;
             else
             {
-                return sanpham.GiaSanPham * (1 - (sanpham.GiamGia / 100));
+                double discount = (double)(100 - x) / (double)100;
+                double? totalprice =  sanpham.GiaSanPham * discount;
+                return (double)totalprice;
             }
 
         }
@@ -67,13 +118,24 @@ namespace KhoaLuanSteam.Models.Process
         //    return db.THONGTINSANPHAMs.Take(3).OrderBy(x => x.MaSanPham).ToList();
         //}
 
-        public object TakeProduct(int MaSP1, int MaSP2, int MaSP3)
+        public object TakeProduct()
         {
-            var ketqua = (from product in db.THONGTINSANPHAMs
-                          where (product.MaSanPham == MaSP1 || product.MaSanPham == MaSP2 || product.MaSanPham == MaSP3)
-                          select product).Take(3);
+            List<THONGTINSANPHAM> tHONGTINSANPHAMs = new List<THONGTINSANPHAM>();
+            List<int> ListTopMaSP;
 
-            return ketqua;
+            using (var ctx = new QL_THIETBISTEAMEntities1())
+            {
+                //ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) MaSanPham from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
+                ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) ISNULL(MaSanPham, 1) from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
+            }
+            foreach(var item in ListTopMaSP)
+            {
+                    
+                var sp = GetIdSanPham(item);
+                sp.GiaSanPham = GiaSanPham(item);
+                tHONGTINSANPHAMs.Add(sp);
+            }
+            return tHONGTINSANPHAMs;
         }
 
 
@@ -84,7 +146,24 @@ namespace KhoaLuanSteam.Models.Process
         /// <returns>List</returns>
         public List<THONGTINSANPHAM> SanPhamLienQuan(int LoaiSanPham, int MaSanPham)
         {
-            return db.THONGTINSANPHAMs.Where(x => x.MaLoai == LoaiSanPham).Where(x => x.MaSanPham != MaSanPham).Take(4).ToList();
+            var a = db.THONGTINSANPHAMs.Where(x => x.MaLoai == LoaiSanPham).Where(x => x.MaSanPham != MaSanPham).Take(4).ToList();
+            foreach (var item in a)
+            {
+                var x = (from s in db.SPSALEs
+                         join sps in db.SALEs on s.MASL equals sps.MASL
+                         join tts in db.THONGTINSANPHAMs on s.MaSanPham equals tts.MaSanPham
+                         where DateTime.Now > sps.NGAYBATDAU && DateTime.Now < sps.NGAYKETTHUC && s.MaSanPham == item.MaSanPham
+                         select s.GIAMGIA).FirstOrDefault();
+                if (x == null || x <= 0)
+                {
+                    item.GiamGia = 0;
+                }
+                else
+                {
+                    item.GiamGia = x;
+                }
+            }
+            return a;
         }
 
         /// <summary>
@@ -114,7 +193,26 @@ namespace KhoaLuanSteam.Models.Process
         /// <returns>List</returns>
         public List<THONGTINSANPHAM> ShowAllProduct()
         {
-            return db.THONGTINSANPHAMs.OrderByDescending(x => x.MaSanPham).ToList();
+          
+            var a = db.THONGTINSANPHAMs.OrderByDescending(x => x.MaSanPham).ToList();
+
+            foreach (var item in a)
+            {
+                var x = (from s in db.SPSALEs
+                         join sps in db.SALEs on s.MASL equals sps.MASL
+                         join tts in db.THONGTINSANPHAMs on s.MaSanPham equals tts.MaSanPham
+                         where DateTime.Now > sps.NGAYBATDAU && DateTime.Now < sps.NGAYKETTHUC && s.MaSanPham == item.MaSanPham
+                         select s.GIAMGIA).FirstOrDefault();
+                if (x == null || x <= 0)
+                {
+                    item.GiamGia = 0;
+                }
+                else
+                {
+                    item.GiamGia = x;
+                }
+            }
+            return a;
         }
         /// <summary>
         /// hàm lấy mã loại sp
@@ -133,7 +231,24 @@ namespace KhoaLuanSteam.Models.Process
         public List<THONGTINSANPHAM> SanPhamtheoCD(int maCD)
         {
 
-            return db.THONGTINSANPHAMs.Where(x => x.MaLoai == maCD).ToList();
+            var a = db.THONGTINSANPHAMs.Where(x => x.MaLoai == maCD).ToList();
+            foreach (var item in a)
+            {
+                var x = (from s in db.SPSALEs
+                         join sps in db.SALEs on s.MASL equals sps.MASL
+                         join tts in db.THONGTINSANPHAMs on s.MaSanPham equals tts.MaSanPham
+                         where DateTime.Now > sps.NGAYBATDAU && DateTime.Now < sps.NGAYKETTHUC && s.MaSanPham == item.MaSanPham
+                         select s.GIAMGIA).FirstOrDefault();
+                if (x == null || x <= 0)
+                {
+                    item.GiamGia = 0;
+                }
+                else
+                {
+                    item.GiamGia = x;
+                }
+            }
+            return a;
         }
 
 
@@ -154,7 +269,24 @@ namespace KhoaLuanSteam.Models.Process
         public List<THONGTINSANPHAM> SanPhamtheoNCC(string maNCC)
         {
 
-            return db.THONGTINSANPHAMs.Where(x => x.MaNCC == maNCC).ToList();
+            var a = db.THONGTINSANPHAMs.Where(x => x.MaNCC == maNCC).ToList();
+            foreach (var item in a)
+            {
+                var x = (from s in db.SPSALEs
+                         join sps in db.SALEs on s.MASL equals sps.MASL
+                         join tts in db.THONGTINSANPHAMs on s.MaSanPham equals tts.MaSanPham
+                         where DateTime.Now > sps.NGAYBATDAU && DateTime.Now < sps.NGAYKETTHUC && s.MaSanPham == item.MaSanPham
+                         select s.GIAMGIA).FirstOrDefault();
+                if (x == null || x <= 0)
+                {
+                    item.GiamGia = 0;
+                }
+                else
+                {
+                    item.GiamGia = x;
+                }
+            }
+            return a;
         }
         /// <summary>
         /// hàm tìm kiếm tên sp
@@ -163,7 +295,24 @@ namespace KhoaLuanSteam.Models.Process
         /// <returns>List</returns>
         public List<THONGTINSANPHAM> Search(string txt_Search)
         {
-            return db.THONGTINSANPHAMs.Where(x => x.TenSanPham.Contains(txt_Search)).OrderBy(x => x.TenSanPham).ToList();
+            var a = db.THONGTINSANPHAMs.Where(x => x.TenSanPham.Contains(txt_Search)).OrderBy(x => x.TenSanPham).ToList();
+            foreach (var item in a)
+            {
+                var x = (from s in db.SPSALEs
+                         join sps in db.SALEs on s.MASL equals sps.MASL
+                         join tts in db.THONGTINSANPHAMs on s.MaSanPham equals tts.MaSanPham
+                         where DateTime.Now > sps.NGAYBATDAU && DateTime.Now < sps.NGAYKETTHUC && s.MaSanPham == item.MaSanPham
+                         select s.GIAMGIA).FirstOrDefault();
+                if (x == null || x <= 0)
+                {
+                    item.GiamGia = 0;
+                }
+                else
+                {
+                    item.GiamGia = x;
+                }
+            }
+            return a;
         }
 
         /// <summary>

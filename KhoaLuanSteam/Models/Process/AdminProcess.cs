@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-using System.Data.SqlClient;
-using System.Data;
+//using System.Data.SqlClient;
+//using System.Data;
 
 namespace KhoaLuanSteam.Models.Process
 {
@@ -397,84 +397,176 @@ namespace KhoaLuanSteam.Models.Process
 
 
 
-        ////Xu ly Thong Tin nha Xuat Ban
+        //Xu ly thong tin Sale
+        #region Xu ly SALE
+        /// <summary>
+        /// hàm lấy mã Sale
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>TacGia</returns>
+        public SALE GetIdSale(int id)
+        {
+            return db.SALEs.Find(id);
+        }
 
-        // #region Xu ly thong tin nha xuat ban
+
+        /// <summary>
+        /// hàm xuất danh sách tác giả
+        /// </summary>
+        /// <returns>List</returns>
+        public List<SALE> AD_ShowAllSale()
+        {
+            return db.SALEs.OrderBy(x => x.MASL).ToList();
+        }
+
+        /// <summary>
+        /// hàm thêm tác giả
+        /// </summary>
+        /// <param name="entity">TacGia</param>
+        /// <returns></returns>
+        public int InsertSale(SALE entity)
+        {
+            db.SALEs.Add(entity);
+            db.SaveChanges();
+            return entity.MASL;
+        }
+
+        /// <summary>
+        /// hàm cập nhật tác giả
+        /// </summary>
+        /// <param name="entity">TacGia</param>
+        /// <returns>int</returns>
+        public int UpdateSale(SALE entity)
+        {
+            try
+            {
+                var sl = db.SALEs.Find(entity.MASL);
+                sl.TENSL = entity.TENSL;
+                sl.NGAYBATDAU = entity.NGAYBATDAU;
+                sl.NGAYKETTHUC = entity.NGAYKETTHUC;
+                db.SaveChanges();
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// hàm xóa tác giả
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>int</returns>
+        public bool DeleteSale(int id)
+        {
+            try
+            {
+                var sl = db.SALEs.Find(id);
+                db.SALEs.Remove(sl);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
+        //Xu ly san pham Sale
+        #region Xu ly SPSALE
+        public SPSALE GetIdSPSale(int id)
+        {
+            return db.SPSALEs.Find(id);
+        }
 
 
-        // /// <summary>
-        // /// hàm lấy mã nhà xuất bản
-        // /// </summary>
-        // /// <param name="id">int</param>
-        // /// <returns>NhaXuatBan</returns>
-        // public NHAXUATBAN GetIdNXB(int id)
-        // {
-        //     return db.NHAXUATBANs.Find(id);
-        // }
-        // /// <summary>
-        // /// hàm xuất danh sách nhà xuất bản
-        // /// </summary>
-        // /// <returns>List</returns>
-        // public List<NHAXUATBAN> AD_ShowAllNhaXuatban()
-        // {
-        //     return db.NHAXUATBANs.OrderBy(x => x.MaNXB).ToList();
-        // }
+        /// <summary>
+        /// hàm xuất danh sách tác giả
+        /// </summary>
+        /// <returns>List</returns>
+        public List<SPSALE> AD_ShowAllSPSale()
+        {
+            return db.SPSALEs.OrderBy(x => x.MASPSALE).ToList();
+        }
 
-        // /// <summary>
-        // /// hàm thêm nhà xuất bản
-        // /// </summary>
-        // /// <param name="entity">NhaXuatBan</param>
-        // /// <returns>int</returns>
-        // public int InsertNhaXuatban(NHAXUATBAN entity)
-        // {
-        //     db.NHAXUATBANs.Add(entity);
-        //     db.SaveChanges();
-        //     return entity.MaNXB;
-        // }
+        public List<SPSALE> DanhSachSP_Sale(int id)
+        {
+            return db.SPSALEs.Where(x => x.MASL == id).ToList();
+        }
 
-        // /// <summary>
-        // /// hàm cập nhật nhà xuất bản
-        // /// </summary>
-        // /// <param name="entity">NhaXuatBan</param>
-        // /// <returns>int</returns>
-        // public int UpdateNhaXuatban(NHAXUATBAN entity)
-        // {
-        //     try
-        //     {
-        //         var nxb = db.NHAXUATBANs.Find(entity.MaNXB);
-        //         nxb.TenNXB = entity.TenNXB;
-        //         nxb.DiaChi = entity.DiaChi;
-        //         nxb.DienThoai = entity.DienThoai;
-        //         db.SaveChanges();
-        //         return 1;
-        //     }
-        //     catch (Exception)
-        //     {
-        //         return 0;
-        //     }
-        // }
+        /// <summary>
+        /// hàm thêm tác giả
+        /// </summary>
+        /// <param name="entity">TacGia</param>
+        /// <returns></returns>
+        public int InsertSPSale(SPSALE entity)
+        {
+            SPSALE SP = db.SPSALEs.Where(x => (x.MaSanPham == entity.MaSanPham) && (x.MASL == entity.MASL)).FirstOrDefault();
 
-        // /// <summary>
-        // /// hàm xóa nhà xuất bản
-        // /// </summary>
-        // /// <param name="id">int</param>
-        // /// <returns>bool</returns>
-        // public bool DeleteNhaXuatban(int id)
-        // {
-        //     try
-        //     {
-        //         var nxb = db.NHAXUATBANs.Find(id);
-        //         db.NHAXUATBANs.Remove(nxb);
-        //         db.SaveChanges();
-        //         return true;
-        //     }
-        //     catch (Exception)
-        //     {
-        //         return false;
-        //     }
-        // }
+            if (SP != null)
+            {
+                SP.GIAMGIA = entity.GIAMGIA;
+                db.SPSALEs.Attach(SP);
+                db.Entry(SP).State = System.Data.EntityState.Modified;
+                db.SaveChanges();
 
-        // #endregion
+                return SP.MaSanPham;
+            }
+            else
+            {
+                db.SPSALEs.Add(entity);
+                db.SaveChanges();
+                return entity.MaSanPham;
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// hàm cập nhật tác giả
+        /// </summary>
+        /// <param name="entity">TacGia</param>
+        /// <returns>int</returns>
+        public int UpdateSPSale(SPSALE entity)
+        {
+            try
+            {
+                var sp = db.SPSALEs.Find(entity.MASL);
+                sp.MASL = entity.MASL;
+                sp.MaSanPham = entity.MaSanPham;
+                sp.GIAMGIA = entity.GIAMGIA;
+                db.SaveChanges();
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// hàm xóa tác giả
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>int</returns>
+        public bool DeleteSPSale(int id)
+        {
+            try
+            {
+                var sl = db.SPSALEs.Find(id);
+                db.SPSALEs.Remove(sl);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        #endregion
 
 
         //Xu ly Thong Tin Phieu Dat Hang
