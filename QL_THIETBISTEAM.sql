@@ -701,7 +701,11 @@ AS
 <<<<<<< HEAD
 select * from CT_PHIEUDATHANG,SPSALE where CT_PHIEUDATHANG.MaSanPham = SPSALE.MaSanPham
 SELECT * FROM PHIEUDATHANG,THONGTINSANPHAM where CT_PHIEUDATHANG.MaSanPham = THONGTINSANPHAM.MaSanPham
+<<<<<<< Updated upstream
 select * from SPSALE
+=======
+select * from CT_PHIEUDATHANG
+>>>>>>> Stashed changes
 delete SPSALE where MaSanPham = 2
 ALTER TABLE THONGTINSANPHAM
 ALTER COLUMN GIAMGIA int
@@ -710,5 +714,9 @@ ALTER COLUMN GIAMGIA int
 
 
 =======
+<<<<<<< Updated upstream
 GO
 >>>>>>> e9551886938feb1d3caa54bb8fdc57b7ddf2fe52
+=======
+
+>>>>>>> Stashed changes

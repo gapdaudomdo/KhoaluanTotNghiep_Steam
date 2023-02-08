@@ -57,7 +57,11 @@ namespace KhoaLuanSteam.Controllers
 
         public ActionResult FavoriteProduct()
         {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+
+>>>>>>> Stashed changes
             //List<int> ListTopMaSP;
             //using (var ctx = new QL_THIETBISTEAMEntities1())
             //{
@@ -70,6 +74,7 @@ namespace KhoaLuanSteam.Controllers
             //var result = new ProductProcess().TakeProduct(MaSP1, MaSP2, MaSP3);
 
             var result = new ProductProcess().TakeProduct();
+<<<<<<< Updated upstream
 =======
             int MaSP1;
             int MaSP2;
@@ -86,6 +91,8 @@ namespace KhoaLuanSteam.Controllers
 
             var result = new ProductProcess().TakeProduct(MaSP1, MaSP2, MaSP3);
 >>>>>>> e9551886938feb1d3caa54bb8fdc57b7ddf2fe52
+=======
+>>>>>>> Stashed changes
             return PartialView(result);
         }
 

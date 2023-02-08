@@ -129,10 +129,27 @@ namespace KhoaLuanSteam.Models.Process
                 ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) ISNULL(MaSanPham, 1) from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
             }
             foreach(var item in ListTopMaSP)
+<<<<<<< Updated upstream
             {
                     
                 var sp = GetIdSanPham(item);
                 sp.GiaSanPham = GiaSanPham(item);
+=======
+            {              
+                var sp = GetIdSanPham(item);
+                var x = (from s in db.SALEs
+                         join sps in db.SPSALEs on s.MASL equals sps.MASL
+                         where sps.MaSanPham == item && (DateTime.Now > s.NGAYBATDAU && DateTime.Now < s.NGAYKETTHUC)
+                         select sps.GIAMGIA).SingleOrDefault();
+                if (x == null || x <= 0)
+                {
+                  sp.GiamGia = 0 ;
+                }
+                else
+                {                   
+                    sp.GiamGia = x ;                    
+                }       
+>>>>>>> Stashed changes
                 tHONGTINSANPHAMs.Add(sp);
             }
             return tHONGTINSANPHAMs;

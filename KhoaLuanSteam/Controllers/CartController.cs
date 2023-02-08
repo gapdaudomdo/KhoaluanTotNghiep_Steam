@@ -666,7 +666,7 @@ namespace KhoaLuanSteam.Controllers
             foreach (var item in lstCT)
             {
                 THONGTINSANPHAM sanphams = db.THONGTINSANPHAMs.Where(x => x.MaSanPham == item.MaSanPham).FirstOrDefault();
-                lst.Add(new ChiTietDDHViewModel() {MaSanPham = sanphams.MaSanPham, HinhAnh = sanphams.HinhAnh, TenSanPham = sanphams.TenSanPham, Gia = sanphams.GiaSanPham, SoLuong = item.SoLuong, GiaGiam= sanphams.GiamGia });
+                lst.Add(new ChiTietDDHViewModel() {MaSanPham = sanphams.MaSanPham, HinhAnh = sanphams.HinhAnh, TenSanPham = sanphams.TenSanPham, Gia = item.DonGia, SoLuong = item.SoLuong, GiaGiam= sanphams.GiamGia });
             }
 
             double? thanhtien = 0;
