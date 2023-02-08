@@ -551,19 +551,11 @@ namespace KhoaLuanSteam.Models.Process
         /// </summary>
         /// <param name="id">int</param>
         /// <returns>int</returns>
-<<<<<<< Updated upstream
-        public bool DeleteSPSale(int id)
-        {
-            try
-            {
-                var sl = db.SPSALEs.Find(id);
-=======
         public bool DeleteSPSale(int masl, int id)
         {
             try
             {
                 var sl = db.SPSALEs.Where(x => x.MASL == masl && x.MaSanPham == id).FirstOrDefault();
->>>>>>> Stashed changes
                 db.SPSALEs.Remove(sl);
                 db.SaveChanges();
                 return true;

@@ -29,7 +29,7 @@ namespace KhoaLuanSteam.Models
         public Nullable<double> GiaSanPham { get; set; }
         public string MoTa { get; set; }
         public string HinhAnh { get; set; }
-        public Nullable<int> GiamGia { get; set; }
+        public Nullable<double> GiamGia { get; set; }
         public Nullable<int> SLTon { get; set; }
     
         public virtual ICollection<CT_DonDatHangNCC> CT_DonDatHangNCC { get; set; }

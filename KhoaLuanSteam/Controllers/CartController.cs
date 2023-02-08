@@ -59,7 +59,7 @@ namespace KhoaLuanSteam.Controllers
                     {
                         string result = await response.Content.ReadAsStringAsync();
                         var json = JsonConvert.DeserializeObject<dynamic>(result);
-                        Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 1000;
+                        Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 500;
                     }
                 };
             }
@@ -663,10 +663,17 @@ namespace KhoaLuanSteam.Controllers
             List<ChiTietDDHViewModel> lst = new List<ChiTietDDHViewModel>();
             List<CT_PHIEUDATHANG> lstCT = new GioHangProcess().DanhSachCT_DDH(id);
 
+            //foreach (var item in lstCT)
+            //{
+            //    THONGTINSANPHAM sanphams = db.THONGTINSANPHAMs.Where(x => x.MaSanPham == item.MaSanPham).FirstOrDefault();
+            //    lst.Add(new ChiTietDDHViewModel() {MaSanPham = sanphams.MaSanPham, HinhAnh = sanphams.HinhAnh, TenSanPham = sanphams.TenSanPham, Gia = sanphams.GiaSanPham, SoLuong = item.SoLuong, GiaGiam= sanphams.GiamGia });
+            //}
+
+
             foreach (var item in lstCT)
             {
                 THONGTINSANPHAM sanphams = db.THONGTINSANPHAMs.Where(x => x.MaSanPham == item.MaSanPham).FirstOrDefault();
-                lst.Add(new ChiTietDDHViewModel() {MaSanPham = sanphams.MaSanPham, HinhAnh = sanphams.HinhAnh, TenSanPham = sanphams.TenSanPham, Gia = item.DonGia, SoLuong = item.SoLuong, GiaGiam= sanphams.GiamGia });
+                lst.Add(new ChiTietDDHViewModel() { MaSanPham = sanphams.MaSanPham, HinhAnh = sanphams.HinhAnh, TenSanPham = sanphams.TenSanPham, Gia = item.DonGia, SoLuong = item.SoLuong, GiaGiam = sanphams.GiamGia });
             }
 
             double? thanhtien = 0;
@@ -703,7 +710,9 @@ namespace KhoaLuanSteam.Controllers
         //api thuê đến 07/02/2023.
         ///private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=kI1M3A89bD1v1SLwSmpzZEnt1yfjf";
         //api thuê đến 09/02/2023.
-        private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=kJDjGaADDxxphXWSRxiKDY9gQjbyq";
+        //private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=kJDjGaADDxxphXWSRxiKDY9gQjbyq";
+        //api thuê đến 15/02/2023.
+        private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=0oFcQssi87L9DRl5QUnq3F3mfRsxu";
         [HttpGet]
         public ActionResult CalculateDistance()
         {
@@ -738,7 +747,7 @@ namespace KhoaLuanSteam.Controllers
                     var json = JsonConvert.DeserializeObject<dynamic>(result);
                     
                     //Thành tiền phí Ship
-                    Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 1000;
+                    Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 500;
                 }
             }
             return RedirectToAction("Index", "Cart");

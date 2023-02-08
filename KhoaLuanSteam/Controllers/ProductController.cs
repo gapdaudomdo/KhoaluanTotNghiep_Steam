@@ -57,11 +57,7 @@ namespace KhoaLuanSteam.Controllers
 
         public ActionResult FavoriteProduct()
         {
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
 
->>>>>>> Stashed changes
             //List<int> ListTopMaSP;
             //using (var ctx = new QL_THIETBISTEAMEntities1())
             //{
@@ -74,25 +70,6 @@ namespace KhoaLuanSteam.Controllers
             //var result = new ProductProcess().TakeProduct(MaSP1, MaSP2, MaSP3);
 
             var result = new ProductProcess().TakeProduct();
-<<<<<<< Updated upstream
-=======
-            int MaSP1;
-            int MaSP2;
-            int MaSP3;
-            List<int> ListTopMaSP;
-            using (var ctx = new QL_THIETBISTEAMEntities1())
-            {
-                //ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) MaSanPham from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
-                ListTopMaSP = ctx.Database.SqlQuery<int>("select TOP(3) ISNULL(MaSanPham, 1) from CT_PHIEUDATHANG Group by MaSanPham ORDER BY SUM(CT_PHIEUDATHANG.SoLuong) DESC").ToList();
-            }
-            MaSP1 = ListTopMaSP[0];
-            MaSP2 = ListTopMaSP[1];
-            MaSP3 = ListTopMaSP[2];
-
-            var result = new ProductProcess().TakeProduct(MaSP1, MaSP2, MaSP3);
->>>>>>> e9551886938feb1d3caa54bb8fdc57b7ddf2fe52
-=======
->>>>>>> Stashed changes
             return PartialView(result);
         }
 

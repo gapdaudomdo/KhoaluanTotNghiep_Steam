@@ -12,14 +12,12 @@ namespace KhoaLuanSteam.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SPSALE
+    public partial class sysdiagram
     {
-        public int MASPSALE { get; set; }
-        public int MASL { get; set; }
-        public int MaSanPham { get; set; }
-        public Nullable<double> GIAMGIA { get; set; }
-    
-        public virtual SALE SALE { get; set; }
-        public virtual THONGTINSANPHAM THONGTINSANPHAM { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

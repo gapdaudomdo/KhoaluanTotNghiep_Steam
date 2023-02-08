@@ -1,16 +1,4 @@
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-﻿// T4 code generation is enabled for model 'D:\GitHub\KhoaluanTotNghiep_Steam\KhoaLuanSteam\Models\STEAM_Model.edmx'. 
-=======
-﻿// T4 code generation is enabled for model 'D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\Models\STEAM_Model.edmx'. 
->>>>>>> e9551886938feb1d3caa54bb8fdc57b7ddf2fe52
-=======
-
-﻿// T4 code generation is enabled for model 'D:\GitHub\KhoaluanTotNghiep_Steam\KhoaLuanSteam\Models\STEAM_Model.edmx'. 
-
-﻿// T4 code generation is enabled for model 'D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\Models\STEAM_Model.edmx'. 
-
->>>>>>> Stashed changes
+﻿// T4 code generation is enabled for model 'D:\testloc_8_2_2023\KhoaluanTotNghiep_Steam\KhoaluanTotNghiep_Steam\KhoaLuanSteam\Models\STEAM_Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

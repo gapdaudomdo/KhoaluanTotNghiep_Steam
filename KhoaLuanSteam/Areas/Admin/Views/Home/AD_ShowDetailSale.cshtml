@@ -34,11 +34,7 @@
                         <input type="text" name="GiamGia" value="@item.GiamGia" />
                         <input type="submit" value="Cập nhật" class="btn btn-primary" />
                     </form>
-<<<<<<< Updated upstream
-                    @Ajax.ActionLink("Xóa", "DeleteSPSale", new { id = item.MaSanPham }, new AjaxOptions
-=======
                     @Ajax.ActionLink("Xóa", "DeleteSPSale", new { masl = item.maSL, id = item.MaSanPham }, new AjaxOptions
->>>>>>> Stashed changes
                       {
                           Confirm = "Bạn có muốn xóa nhà sản phẩm trong đợt sale này không?",
                           OnComplete = "$('#row_" + @item.MaSanPham + "').remove()",
@@ -57,8 +53,5 @@
         }
     </tbody>
 </table>
-<<<<<<< Updated upstream
-=======
-@Html.ActionLink("Trở về", "AD_ShowAllSale", new { id = "" }, new { @class = "btn btn-primary" }) 
->>>>>>> Stashed changes
+@Html.ActionLink("Trở về", "AD_ShowAllSale", new { id = "" }, new { @class = "btn btn-primary" })
 

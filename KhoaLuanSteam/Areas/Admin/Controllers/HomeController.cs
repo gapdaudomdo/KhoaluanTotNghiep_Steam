@@ -651,17 +651,10 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
 
 
         [HttpDelete]
-<<<<<<< Updated upstream
-        public ActionResult DeleteSPSale(int id)
-        {
-            // gọi hàm xóa thể loại
-            new AdminProcess().DeleteSPSale(id);
-=======
         public ActionResult DeleteSPSale(int masl,int id)
         {
             // gọi hàm xóa thể loại
             new AdminProcess().DeleteSPSale(masl,id);
->>>>>>> Stashed changes
 
             //trả về trang quản lý thể loại
             return RedirectToAction("AD_ShowDetailSale");

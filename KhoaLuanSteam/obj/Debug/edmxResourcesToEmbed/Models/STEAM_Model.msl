@@ -167,6 +167,42 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SPSALEs">
+      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.SPSALE">
+        <MappingFragment StoreEntitySet="SPSALE">
+          <ScalarProperty Name="MASPSALE" ColumnName="MASPSALE" />
+          <ScalarProperty Name="MASL" ColumnName="MASL" />
+          <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
+          <ScalarProperty Name="GIAMGIA" ColumnName="GIAMGIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="THONGTINSANPHAMs">
+      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.THONGTINSANPHAM">
+        <MappingFragment StoreEntitySet="THONGTINSANPHAM">
+          <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
+          <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+          <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
+          <ScalarProperty Name="TenSanPham" ColumnName="TenSanPham" />
+          <ScalarProperty Name="GiaSanPham" ColumnName="GiaSanPham" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+          <ScalarProperty Name="GiamGia" ColumnName="GiamGia" />
+          <ScalarProperty Name="SLTon" ColumnName="SLTon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TINHTRANGDHs">
       <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.TINHTRANGDH">
         <MappingFragment StoreEntitySet="TINHTRANGDH">
@@ -175,30 +211,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SPSALEs">
-      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.SPSALE">
-        <MappingFragment StoreEntitySet="SPSALE">
-          <ScalarProperty Name="GIAMGIA" ColumnName="GIAMGIA" />
-          <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
-          <ScalarProperty Name="MASL" ColumnName="MASL" />
-          <ScalarProperty Name="MASPSALE" ColumnName="MASPSALE" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="THONGTINSANPHAMs">
-      <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.THONGTINSANPHAM">
-        <MappingFragment StoreEntitySet="THONGTINSANPHAM">
-          <ScalarProperty Name="SLTon" ColumnName="SLTon" />
-          <ScalarProperty Name="GiamGia" ColumnName="GiamGia" />
-          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
-          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
-          <ScalarProperty Name="GiaSanPham" ColumnName="GiaSanPham" />
-          <ScalarProperty Name="TenSanPham" ColumnName="TenSanPham" />
-          <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
-          <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
-          <ScalarProperty Name="MaSanPham" ColumnName="MaSanPham" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Update_SL_Ton" FunctionName="QL_THIETBISTEAMModel.Store.Update_SL_Ton" />
+    <FunctionImportMapping FunctionImportName="Update_TongSL_DatHangNCC" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongSL_DatHangNCC" />
+    <FunctionImportMapping FunctionImportName="Update_TongSL_PN" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongSL_PN" />
+    <FunctionImportMapping FunctionImportName="Update_TongTien_DatHangNCC" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongTien_DatHangNCC" />
+    <FunctionImportMapping FunctionImportName="Update_TongTien_PN" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongTien_PN" />
+    <FunctionImportMapping FunctionImportName="Update_TrangThai_DatHangNCC" FunctionName="QL_THIETBISTEAMModel.Store.Update_TrangThai_DatHangNCC" />
   </EntityContainerMapping>
 </Mapping>

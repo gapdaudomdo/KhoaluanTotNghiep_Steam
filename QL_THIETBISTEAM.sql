@@ -281,7 +281,7 @@ INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,S
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (3,'NCC03', N'Chương trình STEAM tiểu học – THCS 80 tiết', 300000, N'Bộ chương trình STEAM tiểu học – THCS là một gói STEAM hoàn chỉnh bao gồm thiết bị, giáo án, sách hướng dẫn. Nội dung trọng tâm xoay quanh chủ đề lớn NĂNG LƯỢNG XANH:Năng lượng mặt trời (20 bài thực hành) ,Năng lượng gió (20 bài thực hành) ,Năng lượng nước (20 bài thực hành) , Ánh sáng và Thấu kính (20 bài thực hành), Chương trình STEAM tiểu học – THCS được xây dựng đầy đủ, hoàn chỉnh, thuộc một trong 4 gói STEAM các cấp được xây dựng có hệ thống từ mầm non đến cấp 3.', N'product-ct80.png',0,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (4,'NCC04', N'Chương trình STEAM Tiểu Học-THCS-THPT 100 tiết', 350000, N'Chương trình STEAM tiểu học – THCS được xây dựng đầy đủ, hoàn chỉnh, thuộc một trong 4 gói STEAM các cấp được xây dựng có hệ thống từ mầm non đến cấp 3. Với hệ thống miếng ghép đa dạng gồm 100 buổi phục vụ hoạt động giáo dục trẻ tiểu học và THCS. Chương trình thiết kế theo phương pháp giáo dục chủ đạo là STEAM – đây cũng là phương pháp giáo dục tiên tiến đang chiếm ưu thế tại nhiều nước phát triển trên thế giới, giúp trẻ phát triển theo hướng khoa họ', N'product-ct120.png',0,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (1,'NCC05', N'Đồng Hồ Tập Xem Giờ Phút cho bé mầm non', 150000, N'Đồng hồ tập xem giờ phút cung cấp cho trẻ những hiểu biết về đặc điểm của đồng hồ và biết được các chức năng của chúng:Số ;   Kim ngắn – kim giờ;   Kim dài – kim phút. Đồng hồ bằng nhựa có kiểu dáng đơn giản và hình tròn dễ thương, thu hút sự chú ý của bé, là sản phẩm trang trí trong ngôi nhà.', N'product9.png',0,10)
-INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (2,'NCC06', N'Bộ Que Tính Học Toán Cộng Trừ phạm vi 1 đến 100', 240000, N'Từ 3 tuổi, trí não bé đang trong giai đoạn bắt đầu phát triển mạnh mẽ, cũng là độ tuổi bé được làm quen với chữ cái và các con số vì vậy đây là thời điểm thích hợp để ba mẹ giúp bé làm quen và học tập. Bộ Que Tính Học Toán Cộng Trừ 100 Số giúp học sinh thực hành cộng, trừ trong phạm vi 10, cộng trừ (không nhớ) trong phạm vi 100. Đây là bộ thiết bị dạy phép cộng, phép trừ tiểu học lớp 1 lớp 2', N'product-cap1-5.png',20,10)
+INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (2,'NCC06', N'Bộ Que Tính Học Toán Cộng Trừ phạm vi 1 đến 100', 240000, N'Từ 3 tuổi, trí não bé đang trong giai đoạn bắt đầu phát triển mạnh mẽ, cũng là độ tuổi bé được làm quen với chữ cái và các con số vì vậy đây là thời điểm thích hợp để ba mẹ giúp bé làm quen và học tập. Bộ Que Tính Học Toán Cộng Trừ 100 Số giúp học sinh thực hành cộng, trừ trong phạm vi 10, cộng trừ (không nhớ) trong phạm vi 100. Đây là bộ thiết bị dạy phép cộng, phép trừ tiểu học lớp 1 lớp 2', N'product-cap1-5.png',0,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (2,'NCC07', N'Đồng Hồ Tập Xem Thời Gian hình cú cho bé', 230000, N'Đồng Hồ Tập Xem Thời Gian hình cú giáo dục trẻ biết quý trọng thời gian. Biết thời gian rất cần thiết đối với con người và ý thức học tập. Giáo viên mầm non sử dụng Đồng Hồ Dạy Học Hình Cú để phát triển kỹ năng quan sát, chú ý, ghi nhớ có chủ định và chơi trò chơi của bé.', N'product1.png',0,10)
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (1,'NCC07', N'Gói Bổ Sung 76 Quả Cân Bằng Nhựa', 490000, N'Sản phẩm bổ sung 76 quả cân nhựa:
 																																							16 quả cân nhựa 20g;
@@ -295,7 +295,7 @@ INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,S
 																																							Các hình khối có thiết kế kín và có một miệng lỗ dưới đáy mỗi khối mô hình, cho phép sử dụng các vật liệu như cát, hạt cườm hoặc chất lỏng (nước) đổ vào, khiến cho lớp thêm sinh động.
 																																							Làm quen với các hình khối khác nhau, sâu hơn có thể dạy tới so sánh tỷ lệ thể tích giữa các hình khối.
 																																							Bộ Đo Thể Tích Mầm Non #1044 Gigo phù hợp cho trẻ mầm non & mẫu giáo trên 3 tuổi. Chất liệu bằng nhựa cao cấp.
-																																							Trẻ biết cách đo thể tích của nhiều đối tượng khác nhau bằng 1 đơn vị đo, biết đếm và đọc kết quả đếm.', N'product4.png',10,10)
+																																							Trẻ biết cách đo thể tích của nhiều đối tượng khác nhau bằng 1 đơn vị đo, biết đếm và đọc kết quả đếm.', N'product4.png',0,10)
 
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (2,'NCC07', N'Đồ chơi thông minh Kỹ Sư Cơ Khí STEAM', 960000, N'Với thiết kế sinh động đáng yêu, kích thích trí tư duy, sáng tạo, bộ Đồ chơi thông minh Kỹ Sư Cơ Khí STEAM #1406 thuộc dòng đồ chơi sáng tạo mang tính hướng nghiệp thông minh. Kỹ Sư Cơ Khí STEAM sẽ là món quà không thể bỏ lỡ dành cho các bé trong giai đoạn phát triển tư duy và nhận thức.
 																																								<br />
@@ -562,7 +562,7 @@ INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,S
 																																							    <br />
 																																								TRỌNG LƯỢNG	1.59 kg
 																																								<br />
-																																								KÍCH THƯỚC	46 × 17 × 17 cm', N'product15.png',10,10)
+																																								KÍCH THƯỚC	46 × 17 × 17 cm', N'product15.png',0,10)
 
 
 
@@ -606,7 +606,7 @@ INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,S
 																																								<br />
 																																								TRỌNG LƯỢNG	2.75 kg
 																																								<br />
-																																								KÍCH THƯỚC	23.3 × 20.2 × 33.6 cm', N'product16.png',20,10)
+																																								KÍCH THƯỚC	23.3 × 20.2 × 33.6 cm', N'product16.png',0,10)
 
 
 
@@ -698,25 +698,17 @@ AS
 	update DonDatHangNCC
 	set TrangThai = 0
 	where MaDonDatHangNCC = @MaDonDHNCC
-<<<<<<< HEAD
-select * from CT_PHIEUDATHANG,SPSALE where CT_PHIEUDATHANG.MaSanPham = SPSALE.MaSanPham
-SELECT * FROM PHIEUDATHANG,THONGTINSANPHAM where CT_PHIEUDATHANG.MaSanPham = THONGTINSANPHAM.MaSanPham
-<<<<<<< Updated upstream
-select * from SPSALE
-=======
-select * from CT_PHIEUDATHANG
->>>>>>> Stashed changes
-delete SPSALE where MaSanPham = 2
-ALTER TABLE THONGTINSANPHAM
-ALTER COLUMN GIAMGIA int
+--<<<<<<< HEAD
+--select * from CT_PHIEUDATHANG,SPSALE where CT_PHIEUDATHANG.MaSanPham = SPSALE.MaSanPham
+--SELECT * FROM PHIEUDATHANG,THONGTINSANPHAM where CT_PHIEUDATHANG.MaSanPham = THONGTINSANPHAM.MaSanPham
+--select * from SPSALE
+--delete SPSALE where MaSanPham = 2
+--ALTER TABLE THONGTINSANPHAM
+--ALTER COLUMN GIAMGIA int
 
 
 
 
-=======
-<<<<<<< Updated upstream
-GO
->>>>>>> e9551886938feb1d3caa54bb8fdc57b7ddf2fe52
-=======
-
->>>>>>> Stashed changes
+--=======
+--GO
+-->>>>>>> e9551886938feb1d3caa54bb8fdc57b7ddf2fe52
