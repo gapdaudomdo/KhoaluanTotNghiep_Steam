@@ -198,16 +198,6 @@
     <NavigationProperty Name="SALE" Relationship="Self.FK_SL_SPSL" FromRole="SPSALE" ToRole="SALE" />
     <NavigationProperty Name="THONGTINSANPHAM" Relationship="Self.FK_SANPHAM_SPSL" FromRole="SPSALE" ToRole="THONGTINSANPHAM" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="THONGTINSANPHAM">
     <Key>
       <PropertyRef Name="MaSanPham" />
@@ -492,7 +482,6 @@
     <EntitySet Name="PHIEUNHAPHANGs" EntityType="Self.PHIEUNHAPHANG" />
     <EntitySet Name="SALEs" EntityType="Self.SALE" />
     <EntitySet Name="SPSALEs" EntityType="Self.SPSALE" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="THONGTINSANPHAMs" EntityType="Self.THONGTINSANPHAM" />
     <EntitySet Name="TINHTRANGDHs" EntityType="Self.TINHTRANGDH" />
     <AssociationSet Name="FK_CT_DonDatHangNCC_DDHNCC" Association="Self.FK_CT_DonDatHangNCC_DDHNCC">

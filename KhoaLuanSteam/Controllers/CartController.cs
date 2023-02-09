@@ -20,6 +20,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net;
+using MoMo;
 
 namespace KhoaLuanSteam.Controllers
 {
@@ -378,6 +379,107 @@ namespace KhoaLuanSteam.Controllers
             return View();
         }
 
+
+        // thanh toán momo
+
+        public ActionResult TinhTrangThanhToanMoMo()
+        {
+            string orderId = Request.QueryString["orderId"].ToString();
+            string momoTranId = Request.QueryString["transId"].ToString();
+             // Kiểm tra session datHang và giaoHang, nếu null trỏ về thằng ThanhToan
+            // Lý do cần làm như này do có khả năng người dùng reload lại trang này (?) dẫn đến bug tại dòng 291
+            //if (Session["SS_DatHang"] == null || Session["SS_GiaoHang"] == null)
+            //{
+            //    return RedirectToAction("ThanhToan", "Cart");
+            //}
+            string errorCode = Request.QueryString["errorCode"].ToString();
+            if (int.Parse(errorCode) != 0)
+            {
+                ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý";
+                
+            }
+            else
+            {
+                PHIEUDATHANG pdh = (PHIEUDATHANG)Session["SS_DatHang1"];
+                PHIEUGIAOHANG pgh = (PHIEUGIAOHANG)Session["SS_GiaoHang1"];
+
+                var rsDDH = new GioHangProcess().InsertDDH(pdh);
+                pgh.MaPhieuDH = rsDDH;
+                var rsPGH = new GioHangProcess().InsertPGH(pgh);
+                XacNhanEmail(rsDDH);
+                ViewBag.IsSuccess = "Yes";
+
+                        // Message có thể thay đổi tùy ý theo tình huống, đây đang đặt mặc định trả về kết quả thực hiện giao dịch
+                ViewBag.Message = "Thanh toán thành công hóa đơn " + orderId + " Mã giao dịch: " + momoTranId;
+                
+                
+            }
+            return RedirectToAction("TrangChu", "Home");
+        }
+        
+           
+
+        // momo
+        public ActionResult ThanhToanMoMo(double? thanhTien)
+        {
+            //request params need to request to MoMo system
+           
+            string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+            string partnerCode = "MOMOOJOI20210710";
+            string accessKey = "iPXneGmrJH0G8FOP";
+            string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
+            string orderInfo = "test";
+            string returnUrl = ConfigurationManager.AppSettings["ReturnUrlMoMo"];
+            string notifyurl = "https://4c8d-2001-ee0-5045-50-58c1-b2ec-3123-740d.ap.ngrok.io/Home/SavePayment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+
+            string amount = thanhTien.ToString();
+            string orderid = DateTime.Now.Ticks.ToString(); //mã đơn hàng
+            string requestId = DateTime.Now.Ticks.ToString();
+            string extraData = "";
+
+            //Before sign HMAC SHA256 signature
+            string rawHash = "partnerCode=" +
+                partnerCode + "&accessKey=" +
+                accessKey + "&requestId=" +
+                requestId + "&amount=" +
+                amount + "&orderId=" +
+                orderid + "&orderInfo=" +
+                orderInfo + "&returnUrl=" +
+                returnUrl + "&notifyUrl=" +
+                notifyurl + "&extraData=" +
+                extraData;
+
+            MoMoSecurity crypto = new MoMoSecurity();
+            //sign signature SHA256
+            string signature = crypto.signSHA256(rawHash, serectkey);
+
+            //build body json request
+            JObject message = new JObject
+            {
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "notifyUrl", notifyurl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+
+            };
+
+            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+
+            JObject jmessage = JObject.Parse(responseFromMomo);
+
+            return Redirect(jmessage.GetValue("payUrl").ToString());
+        }
+
+
+
+
         // type: 1. Thanh toán khi nhận hàng, 2. Thanh toán bằng phương thức VNPay
         [HttpPost]
         public ActionResult ThanhToan(int MaKH, FormCollection f, int type)
@@ -448,13 +550,20 @@ namespace KhoaLuanSteam.Controllers
                     return View();
                 }
             }
-            else
+
+            else if (type == 2)
             {
                 // Lưu session của 2 đối tượng datHang và giaoHang để xử lý sau khi thanh toán VNPay
                 // Chỉ khi có kết quả giao dịch trả về tại TinhTrangThanhToanVNPay mới thực hiện CRUD
                 Session["SS_DatHang"] = datHang;
                 Session["SS_GiaoHang"] = giaoHang;
                 return RedirectToAction("ThanhToanVNPay", "Cart", new { thanhTien = thanhTien });
+            }
+            else
+            {
+                Session["SS_DatHang1"] = datHang;
+                Session["SS_GiaoHang1"] = giaoHang;
+                return RedirectToAction("ThanhToanMoMo", "Cart", new { thanhTien = thanhTien });
             }
         }
 

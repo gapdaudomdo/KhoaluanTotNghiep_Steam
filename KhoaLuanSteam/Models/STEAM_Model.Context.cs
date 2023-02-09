@@ -43,7 +43,6 @@ namespace KhoaLuanSteam.Models
         public DbSet<PHIEUNHAPHANG> PHIEUNHAPHANGs { get; set; }
         public DbSet<SALE> SALEs { get; set; }
         public DbSet<SPSALE> SPSALEs { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }
         public DbSet<TINHTRANGDH> TINHTRANGDHs { get; set; }
     

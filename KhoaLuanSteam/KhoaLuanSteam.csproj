@@ -236,9 +236,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>STEAM_Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>STEAM_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\THONGTINSANPHAM.cs">
       <DependentUpon>STEAM_Model.tt</DependentUpon>
     </Compile>
@@ -249,8 +246,10 @@
     <Compile Include="ViewModel\ChiTietDDHViewModel.cs" />
     <Compile Include="ViewModel\MyViewModel.cs" />
     <Compile Include="ViewModel\SaleViewModel.cs" />
+    <Compile Include="VNPay\MoMoSecurity.cs" />
     <Compile Include="VNPay\PayCompare.cs" />
     <Compile Include="VNPay\PayLib.cs" />
+    <Compile Include="VNPay\PaymentRequest.cs" />
     <Compile Include="VNPay\Util.cs" />
   </ItemGroup>
   <ItemGroup>
