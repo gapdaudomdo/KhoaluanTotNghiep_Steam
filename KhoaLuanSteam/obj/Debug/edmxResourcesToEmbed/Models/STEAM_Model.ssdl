@@ -66,11 +66,12 @@
       <PropertyRef Name="MaLH" />
     </Key>
     <Property Name="MaLH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Ho" Type="nvarchar" MaxLength="50" />
-    <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+    <Property Name="MaPhieuDH" Type="int" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="varchar" MaxLength="100" />
     <Property Name="DienThoai" Type="varchar" MaxLength="50" />
     <Property Name="NoiDung" Type="nvarchar" MaxLength="500" />
+    <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
     <Property Name="NgayCapNhat" Type="smalldatetime" />
   </EntityType>
   <EntityType Name="LOAISANPHAM">
@@ -291,6 +292,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_LIENHE_PHIEUDATHANG">
+    <End Role="PHIEUDATHANG" Type="Self.PHIEUDATHANG" Multiplicity="0..1" />
+    <End Role="LIENHE" Type="Self.LIENHE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PHIEUDATHANG">
+        <PropertyRef Name="MaPhieuDH" />
+      </Principal>
+      <Dependent Role="LIENHE">
+        <PropertyRef Name="MaPhieuDH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_NHANVIEN_PHANQUYEN">
     <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="0..1" />
     <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="*" />
@@ -493,6 +506,10 @@
     <AssociationSet Name="FK_DonDatHangNCC_NHANVIEN" Association="Self.FK_DonDatHangNCC_NHANVIEN">
       <End Role="NHANVIEN" EntitySet="NHANVIEN" />
       <End Role="DonDatHangNCC" EntitySet="DonDatHangNCC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LIENHE_PHIEUDATHANG" Association="Self.FK_LIENHE_PHIEUDATHANG">
+      <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANG" />
+      <End Role="LIENHE" EntitySet="LIENHE" />
     </AssociationSet>
     <AssociationSet Name="FK_NHANVIEN_PHANQUYEN" Association="Self.FK_NHANVIEN_PHANQUYEN">
       <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />

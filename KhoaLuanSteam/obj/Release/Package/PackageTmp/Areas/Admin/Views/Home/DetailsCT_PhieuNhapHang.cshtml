@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "DetailsCT_PhieuNhapHang";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@model IEnumerable<KhoaLuanSteam.Models.CT_PHIEUNHAPHANG>
+
+<h2 style="text-align: center;">Chi tiết đơn nhập hàng</h2>
+<div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+        <table class="table">
+    <tr>
+        <th>
+            Mã Sản Phẩm
+        </th>
+        <th>
+           Mã Phiếu Nhập Hàng
+        </th>
+        <th>
+           Số Lượng
+        </th>
+        <th>
+            Đơn Giá Nhập
+        </th>
+        <th>
+           Tổng Tiền
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHIEUNHAPHANG.MaPhieuNhapHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sluong)
+            </td>
+            <td>
+                <p>@String.Format("{0:0,0}", item.DonGiaNhap) VND</p>
+            </td>
+            <td>
+                <p>@String.Format("{0:0,0}", item.TongTien) VND</p>
+            </td>
+        </tr>
+    }
+</table>
+    </div>
+  </div>
+
+<div>
+    @Html.ActionLink("Trở về", "AD_ShowAllPhieuNhapHang",new {id=""},new { @class = "btn btn-primary"})
+</div>

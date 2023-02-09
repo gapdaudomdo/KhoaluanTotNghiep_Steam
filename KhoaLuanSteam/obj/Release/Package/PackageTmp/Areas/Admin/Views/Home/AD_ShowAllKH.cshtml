@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "AD_ShowAllKH";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+@model IEnumerable<KhoaLuanSteam.Models.KHACHHANG>
+<h2 style="text-align: center;">Danh sách khách hàng</h2>
+<div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+        <table class="table" id="example">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.TenKH) *@
+                Tên khách hàng
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.TenDN) *@
+                Tên đăng nhập
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Email) *@
+                Email
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.NgayTao) *@
+                Ngày tạo
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.MaKH">
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenKH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenDN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayTao)
+                </td>
+                <td>
+                    @Html.ActionLink("Xem", "DetailsUserKH", new { id = item.MaKH },new { @class = "btn btn-primary"}) |
+                    @Ajax.ActionLink("Xóa", "DeleteUserKH", new { id = item.MaKH }, new AjaxOptions
+               {
+                   Confirm = "Bạn có muốn xóa người dùng này không?",
+                   OnComplete = "$('#row_" + @item.MaKH + "').remove()",
+                   HttpMethod = "Delete"
+               },new { @class = "btn btn-primary"})
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+    </div>
+  </div>

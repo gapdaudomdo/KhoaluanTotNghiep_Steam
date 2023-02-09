@@ -68,11 +68,12 @@
       <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.LIENHE">
         <MappingFragment StoreEntitySet="LIENHE">
           <ScalarProperty Name="MaLH" ColumnName="MaLH" />
-          <ScalarProperty Name="Ho" ColumnName="Ho" />
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
           <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
           <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
         </MappingFragment>
       </EntityTypeMapping>

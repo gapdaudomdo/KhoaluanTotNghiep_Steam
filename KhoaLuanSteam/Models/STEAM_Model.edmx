@@ -71,11 +71,12 @@
             <PropertyRef Name="MaLH" />
           </Key>
           <Property Name="MaLH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Ho" Type="nvarchar" MaxLength="50" />
-          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaPhieuDH" Type="int" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="DienThoai" Type="varchar" MaxLength="50" />
           <Property Name="NoiDung" Type="nvarchar" MaxLength="500" />
+          <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
           <Property Name="NgayCapNhat" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="LOAISANPHAM">
@@ -296,6 +297,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LIENHE_PHIEUDATHANG">
+          <End Role="PHIEUDATHANG" Type="Self.PHIEUDATHANG" Multiplicity="0..1" />
+          <End Role="LIENHE" Type="Self.LIENHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUDATHANG">
+              <PropertyRef Name="MaPhieuDH" />
+            </Principal>
+            <Dependent Role="LIENHE">
+              <PropertyRef Name="MaPhieuDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NHANVIEN_PHANQUYEN">
           <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="0..1" />
           <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="*" />
@@ -499,6 +512,10 @@
             <End Role="NHANVIEN" EntitySet="NHANVIEN" />
             <End Role="DonDatHangNCC" EntitySet="DonDatHangNCC" />
           </AssociationSet>
+          <AssociationSet Name="FK_LIENHE_PHIEUDATHANG" Association="Self.FK_LIENHE_PHIEUDATHANG">
+            <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANG" />
+            <End Role="LIENHE" EntitySet="LIENHE" />
+          </AssociationSet>
           <AssociationSet Name="FK_NHANVIEN_PHANQUYEN" Association="Self.FK_NHANVIEN_PHANQUYEN">
             <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />
             <End Role="NHANVIEN" EntitySet="NHANVIEN" />
@@ -626,12 +643,14 @@
             <PropertyRef Name="MaLH" />
           </Key>
           <Property Name="MaLH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaPhieuDH" Type="Int32" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NoiDung" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="PHIEUDATHANG" Relationship="Self.FK_LIENHE_PHIEUDATHANG" FromRole="LIENHE" ToRole="PHIEUDATHANG" />
         </EntityType>
         <EntityType Name="LOAISANPHAM">
           <Key>
@@ -692,6 +711,7 @@
           <Property Name="PhiShip" Type="Double" />
           <NavigationProperty Name="CT_PHIEUDATHANG" Relationship="Self.FK_CT_PHIEUDH_PDT" FromRole="PHIEUDATHANG" ToRole="CT_PHIEUDATHANG" />
           <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_PHIEUDATHANG_KH" FromRole="PHIEUDATHANG" ToRole="KHACHHANG" />
+          <NavigationProperty Name="LIENHEs" Relationship="Self.FK_LIENHE_PHIEUDATHANG" FromRole="PHIEUDATHANG" ToRole="LIENHE" />
           <NavigationProperty Name="TINHTRANGDH" Relationship="Self.FK_PHIEUDATHANG_TINHTRANGDH" FromRole="PHIEUDATHANG" ToRole="TINHTRANGDH" />
           <NavigationProperty Name="PHIEUGIAOHANGs" Relationship="Self.FK_PHIEUGIAOHANG_PDH" FromRole="PHIEUDATHANG" ToRole="PHIEUGIAOHANG" />
         </EntityType>
@@ -902,6 +922,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LIENHE_PHIEUDATHANG">
+          <End Role="PHIEUDATHANG" Type="Self.PHIEUDATHANG" Multiplicity="0..1" />
+          <End Role="LIENHE" Type="Self.LIENHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUDATHANG">
+              <PropertyRef Name="MaPhieuDH" />
+            </Principal>
+            <Dependent Role="LIENHE">
+              <PropertyRef Name="MaPhieuDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_THONGTINSACH_LOAISANPHAM">
           <End Role="LOAISANPHAM" Type="Self.LOAISANPHAM" Multiplicity="0..1" />
           <End Role="THONGTINSANPHAM" Type="Self.THONGTINSANPHAM" Multiplicity="*" />
@@ -1069,6 +1101,10 @@
             <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
             <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANGs" />
           </AssociationSet>
+          <AssociationSet Name="FK_LIENHE_PHIEUDATHANG" Association="Self.FK_LIENHE_PHIEUDATHANG">
+            <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANGs" />
+            <End Role="LIENHE" EntitySet="LIENHEs" />
+          </AssociationSet>
           <AssociationSet Name="FK_THONGTINSACH_LOAISANPHAM" Association="Self.FK_THONGTINSACH_LOAISANPHAM">
             <End Role="LOAISANPHAM" EntitySet="LOAISANPHAMs" />
             <End Role="THONGTINSANPHAM" EntitySet="THONGTINSANPHAMs" />
@@ -1199,11 +1235,12 @@
             <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.LIENHE">
               <MappingFragment StoreEntitySet="LIENHE">
                 <ScalarProperty Name="MaLH" ColumnName="MaLH" />
-                <ScalarProperty Name="Ho" ColumnName="Ho" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MaPhieuDH" ColumnName="MaPhieuDH" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "AD_ShowAllNV";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+@model IEnumerable<KhoaLuanSteam.Models.NHANVIEN>
+<h2 style="text-align: center;">Danh sách nhân viên</h2>
+<p>
+    @Html.ActionLink("Thêm nhân viên", "InsertNhanVien")
+</p>
+<div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+        <table class="table" id="example">
+            <thead>
+                <tr>
+                    <th>
+                        @* @Html.DisplayNameFor(model => model.TenNV) *@
+                        Tên nhân viên
+                    </th>
+                    <th>
+                        @* @Html.DisplayNameFor(model => model.GioiTinh) *@
+                        Giới tính
+                    </th>
+                    <th>
+                        @* @Html.DisplayNameFor(model => model.Email) *@
+                        Email
+                    </th>
+                    <th>
+                        @* @Html.DisplayNameFor(model => model.SoDT) *@
+                        Số điện thoại
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.ID_PhanQuyen)
+                        </th>*@
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="row_@item.MaNV">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenNV)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GioiTinh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoDT)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.ID_PhanQuyen)
+                            </td>*@
+                        <td>
+                            @Html.ActionLink("Xem", "DetailsUserNV", new { id = item.MaNV }, new { @class = "btn btn-primary" }) |
+                            @Ajax.ActionLink("Xóa", "DeleteUserNV", new { id = item.MaNV }, new AjaxOptions
+                       {
+                           Confirm = "Bạn có muốn xóa nhân viên này không?",
+                           OnComplete = "$('#row_" + @item.MaNV + "').remove()",
+                           HttpMethod = "Delete"
+                       }, new { @class = "btn btn-primary" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>

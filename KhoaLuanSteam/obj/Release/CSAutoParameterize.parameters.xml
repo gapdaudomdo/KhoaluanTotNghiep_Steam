@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="QL_THIETBISTEAMEntities1-Web.config Connection String" description="QL_THIETBISTEAMEntities1 Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.STEAM_Model.csdl|res://*/Models.STEAM_Model.ssdl|res://*/Models.STEAM_Model.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-2AIRUVD\SQLEXPRESS;initial catalog=QL_THIETBISTEAM;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\GitHub_Desktop\\KhoaluanTotNghiep_Steam\\KhoaLuanSteam\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='QL_THIETBISTEAMEntities1']/@connectionString" />
+  </parameter>
+</parameters>

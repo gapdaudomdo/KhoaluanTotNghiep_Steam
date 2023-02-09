@@ -17,6 +17,7 @@ namespace KhoaLuanSteam.Models
         public PHIEUDATHANG()
         {
             this.CT_PHIEUDATHANG = new HashSet<CT_PHIEUDATHANG>();
+            this.LIENHEs = new HashSet<LIENHE>();
             this.PHIEUGIAOHANGs = new HashSet<PHIEUGIAOHANG>();
         }
     
@@ -30,6 +31,7 @@ namespace KhoaLuanSteam.Models
     
         public virtual ICollection<CT_PHIEUDATHANG> CT_PHIEUDATHANG { get; set; }
         public virtual KHACHHANG KHACHHANG { get; set; }
+        public virtual ICollection<LIENHE> LIENHEs { get; set; }
         public virtual TINHTRANGDH TINHTRANGDH { get; set; }
         public virtual ICollection<PHIEUGIAOHANG> PHIEUGIAOHANGs { get; set; }
     }

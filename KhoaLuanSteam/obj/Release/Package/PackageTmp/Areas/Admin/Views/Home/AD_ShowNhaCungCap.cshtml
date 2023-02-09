@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "AD_ShowNhaCungCap";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@model IEnumerable<KhoaLuanSteam.Models.NHACUNGCAP>
+
+<h2 style="text-align: center;">Quản lý nhà cung cấp</h2>
+<p>
+    @Html.ActionLink("Thêm Nhà Cung Cấp", "InsertNCC")
+</p>
+<div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+        <table class="table" id="example">
+    <thead>
+        <tr>
+            <th>
+                Mã nhà cung cấp
+            </th>
+            <th>
+                Tên nhà cung cấp
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.MaNCC.Trim()">
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaNCC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNCC)
+                </td>
+                <td>
+                    @Html.ActionLink("Xem", "UpdateNCC", new {id=item.MaNCC.Trim()},new { @class = "btn btn-primary"})|
+                    @Ajax.ActionLink("Xóa", "DeleteNhaCungCap", new { id = item.MaNCC.Trim() }, new AjaxOptions
+               {
+                   Confirm = "Bạn có muốn xóa nhà cung cấp này không?",
+                   OnComplete = "$('#row_"+@item.MaNCC.TrimEnd()+"').remove()",
+                   HttpMethod = "Delete"
+               },new { @class = "btn btn-primary"})
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+    </div>
+  </div>
+
+

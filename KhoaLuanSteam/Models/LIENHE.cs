@@ -15,11 +15,14 @@ namespace KhoaLuanSteam.Models
     public partial class LIENHE
     {
         public int MaLH { get; set; }
-        public string Ho { get; set; }
-        public string Ten { get; set; }
+        public Nullable<int> MaPhieuDH { get; set; }
+        public string HoTen { get; set; }
         public string Email { get; set; }
         public string DienThoai { get; set; }
         public string NoiDung { get; set; }
+        public string HinhAnh { get; set; }
         public Nullable<System.DateTime> NgayCapNhat { get; set; }
+    
+        public virtual PHIEUDATHANG PHIEUDATHANG { get; set; }
     }
 }

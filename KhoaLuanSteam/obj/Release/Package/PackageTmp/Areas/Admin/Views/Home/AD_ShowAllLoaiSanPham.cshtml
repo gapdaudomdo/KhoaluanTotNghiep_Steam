@@ -1,0 +1,50 @@
+﻿@model IEnumerable<KhoaLuanSteam.Models.LOAISANPHAM>
+
+@{
+    ViewBag.Title = "AD_ShowAllLoaiSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align: center;">Quản lý loại sản phẩm</h2>
+
+<p>
+    @Html.ActionLink("Thêm loại sản phẩm", "InsertLoaiSanPham")
+</p>
+<div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th>Mã loại sản phẩm</th>
+                    <th>Tên Loại</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="row_@item.MaLoai">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaLoai)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenLoai)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Xem", "UpdateLoaiSanPham", new { id = item.MaLoai },new { @class = "btn btn-primary"}) |
+                            @Ajax.ActionLink("Xóa", "DeleteLoaiSanPham", new { id = item.MaLoai }, new AjaxOptions
+                    {
+                        Confirm = "Bạn có muốn xóa thể loại này không?",
+                        OnComplete = "$('#row_" + @item.MaLoai + "').remove()",
+                        HttpMethod = "Delete"
+                    },new { @class = "btn btn-primary"})
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+  </div>
+
+
+

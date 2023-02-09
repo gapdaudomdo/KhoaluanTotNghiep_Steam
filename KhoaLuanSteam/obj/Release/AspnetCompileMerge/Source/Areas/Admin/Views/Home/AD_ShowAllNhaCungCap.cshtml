@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "AD_ShowAllNhaCungCap";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@model IEnumerable<KhoaLuanSteam.Models.NHACUNGCAP>
+
+<h2 style="text-align: center;">Quản lý nhà cung cấp</h2>
+<p>
+    @Html.ActionLink("Thêm nhà cung cấp", "InsertNhaCungCap")
+</p>
+<div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+        <table class="table" id="example">
+            <thead>
+                <tr>
+                    <th>
+                        Mã
+                    </th>
+                    <th>
+                        Nhà Cung Cấp
+                    </th>
+                    <th>
+                        Địa Chỉ
+                    </th>
+                    <th>
+                        Điện Thoại
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="row_@item.MaNCC">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaNCC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenNCC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiaChi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DienThoai)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Xem", "UpdateNCC", new { id = item.MaNCC },new { @class = "btn btn-primary"}) |
+                            @Ajax.ActionLink("Xóa", "DeleteNCC", new { id = item.MaNCC }, new AjaxOptions
+                    {
+                        Confirm = "Bạn có muốn xóa nhà cung cấp này không?",
+                        OnComplete = "$('#row_" + @item.MaNCC + "').remove()",
+                        HttpMethod = "Delete"
+                    },new { @class = "btn btn-primary"})
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+  </div>
+

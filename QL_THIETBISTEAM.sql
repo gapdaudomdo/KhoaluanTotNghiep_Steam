@@ -42,17 +42,6 @@ CREATE TABLE KHACHHANG
 	CONSTRAINT PK_KhachHang PRIMARY KEY CLUSTERED  (MaKH  ASC )
 )
 
-CREATE TABLE LIENHE(
-	MaLH int IDENTITY(1,1) NOT NULL,
-	Ho nvarchar(50) NULL,
-	Ten nvarchar(50) NULL,
-	Email varchar(100) NULL,
-	DienThoai varchar(50) NULL,
-	NoiDung nvarchar(500) NULL,
-	NgayCapNhat smalldatetime NULL,
-	CONSTRAINT PK_LIENHE PRIMARY KEY CLUSTERED  (MaLH ASC )
-)
-
 CREATE TABLE LOAISANPHAM
 ( 
 	MaLoai INT IDENTITY(1,1) NOT NULL,
@@ -184,6 +173,19 @@ CREATE TABLE PHIEUGIAOHANG
 	NgayTao datetime,
 	CONSTRAINT PK_PHIEUGIAOHANG PRIMARY KEY CLUSTERED  (MaGH  ASC),
     constraint FK_PHIEUGIAOHANG_PDH foreign key(MaPhieuDH) references PHIEUDATHANG(MaPhieuDH)
+)
+
+CREATE TABLE LIENHE(
+	MaLH int IDENTITY(1,1) NOT NULL,
+	MaPhieuDH INT,
+	HoTen nvarchar(50) NULL,
+	Email varchar(100) NULL,
+	DienThoai varchar(50) NULL,
+	NoiDung nvarchar(500) NULL,
+	HinhAnh  NVARCHAR(200),
+	NgayCapNhat smalldatetime NULL,
+	CONSTRAINT PK_LIENHE PRIMARY KEY CLUSTERED  (MaLH ASC ),
+	constraint FK_LIENHE_PHIEUDATHANG foreign key(MaPhieuDH) references PHIEUDATHANG(MaPhieuDH)
 )
 
 
@@ -354,7 +356,7 @@ INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,S
 																																							<br />
 																																							TRỌNG LƯỢNG	             1.45 kg
 																																							<br />
-																																							KÍCH THƯỚC	             37 × 8 × 4 cm', N'product-cap1-4.png',30,10)
+																																							KÍCH THƯỚC	             37 × 8 × 4 cm', N'product-cap1-4.png',0,10)
 
 INSERT THONGTINSANPHAM(MaLoai,MaNCC,TenSanPham,GiaSanPham,MoTa,HinhAnh,GiamGia,SLTon) VALUES (1,'NCC06', N'Bảng Dạy Học Mầm Non 72×56 có giá di động', 4500000, N' Bảng Dạy Học Mầm Non di động có chân bánh xe và có khung bao viền cạnh bằng nhựa định hình có kết cấu nhỏ gọn, thanh, tạo cảm giác nhẹ nhàng, kiểu dáng đẹp, phù hợp cho văn phòng nhỏ ,cao cấp, ít người, thông tin vừa phải.
 																																								<br />
