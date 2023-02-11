@@ -91,7 +91,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             ViewBag.MaLoai = new SelectList(db.LOAISANPHAMs.ToList().OrderBy(x => x.TenLoai), "MaLoai", "TenLoai", sanpham.MaLoai);
             ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.TenNCC), "MaNCC", "TenNCC", sanpham.MaNCC);
 
-
+            sanpham.GiamGia = 0;
             //Nếu không thay đổi ảnh bìa thì làm
             if (fileUpload == null)
             {
@@ -160,6 +160,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             ViewBag.MaLoai = new SelectList(db.LOAISANPHAMs.ToList().OrderBy(x => x.TenLoai), "MaLoai", "TenLoai", sanpham.MaLoai);
             ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.TenNCC), "MaNCC", "TenNCC", sanpham.MaNCC);
             sanpham.SLTon = 0;
+            sanpham.GiamGia = 0;
             //kiểm tra việc upload ảnh
             if (fileUpload == null)
             {
@@ -1094,6 +1095,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
 
                         ViewBag.Success = "Thêm mới thành công";
                         ModelState.Clear();
+                        return View();
                     }
                 }
                 else
@@ -1203,7 +1205,9 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                     ViewBag.success = "Đã Đăng Ký Tài Khoản Thành Công";
                     nhanvienstatic = nv;
                     Session["UserNV"] = model.TenDN;
-                    return RedirectToAction("AD_ShowAllNV", "Home");
+                    ModelState.Clear();
+                    //return RedirectToAction("AD_ShowAllNV", "Home");
+                    return View();
                 }
 
 

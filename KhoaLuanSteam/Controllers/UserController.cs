@@ -68,6 +68,8 @@ namespace KhoaLuanSteam.Controllers
             return View(model);
         }
 
+
+
         //GET : /User/Login : đăng nhập tài khoản
         //Parital View : Login
 

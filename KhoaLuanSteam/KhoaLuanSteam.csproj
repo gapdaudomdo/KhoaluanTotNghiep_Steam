@@ -177,6 +177,7 @@
     <Compile Include="Models\CT_PHIEUNHAPHANG.cs">
       <DependentUpon>STEAM_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DangKyModel.cs" />
     <Compile Include="Models\DistanceCalculation.cs" />
     <Compile Include="Models\DonDatHangNCC.cs">
       <DependentUpon>STEAM_Model.tt</DependentUpon>
