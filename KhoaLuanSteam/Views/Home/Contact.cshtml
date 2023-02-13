@@ -110,32 +110,33 @@
                         @Html.TextBoxFor(model => model.Email, new
                                         {
                                             @class = "form-control",
-                                            placeHolder = "Example@gmail.com"
+                                            placeHolder = "Example@gmail.com",
+                                            @required = "required"
                                         })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-lg-6 col-md-6 pb-3">
-                        @Html.TextBoxFor(model => model.HoTen, new { @class = "form-control", placeHolder = "Họ Và Tên" })
+                        @Html.TextBoxFor(model => model.HoTen, new { @class = "form-control", placeHolder = "Họ Và Tên", @required = "required" })
                         @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-lg-6 col-md-6 pb-3">
-                        @Html.TextBoxFor(model => model.DienThoai, new { @class = "form-control", placeHolder = "Điện thoại" })
+                        @Html.TextBoxFor(model => model.DienThoai, new { @class = "form-control", placeHolder = "Điện thoại", @required = "required" })
                         @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-lg-6 col-md-6 pb-3">
-                        @Html.DropDownList("MaPhieuDH", null, "Chọn phiếu đặt hàng", new { @class = "form-control", style = "height: 35px;" })
+                        @Html.DropDownList("MaPhieuDH", null, "Chọn phiếu đặt hàng", new { @class = "form-control", style = "height: 35px;", @required = "required" })
                         @Html.ValidationMessageFor(model => model.MaPhieuDH, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-lg-6 col-md-6 pb-3">
-                        <input type="file" name="fileUpload" /> Chọn ảnh
+                        <input type="file" name="fileUpload" required/> Chọn ảnh
                         @ViewBag.Alert
                     </div>
 
 
                     <div class="col-lg-12 text-center pb-3">
                         @* <textarea placeholder="Ý kiến của bạn"></textarea> *@
-                        @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control mb-3", @rows = "7", @placeholder = "Nhập tin nhắn bạn ở đây. Chúng tôi sẽ cố gắng phản hồi trong thời gian sớm nhất!" })
+                        @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control mb-3", @rows = "7", @placeholder = "Nhập tin nhắn bạn ở đây. Chúng tôi sẽ cố gắng phản hồi trong thời gian sớm nhất!", @required = "required" })
                         @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
                         @*<button type="submit" class="site-btn">Gửi</button>*@
                         <input type="submit" value="Gửi" class="btn btn-primary" />

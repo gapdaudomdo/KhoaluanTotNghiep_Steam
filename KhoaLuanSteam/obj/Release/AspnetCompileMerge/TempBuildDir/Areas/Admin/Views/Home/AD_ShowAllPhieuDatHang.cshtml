@@ -28,17 +28,20 @@
                 Mã đơn đặt hàng
             </th>
             <th>
-                @* @Html.DisplayNameFor(model => model.KHACHHANG.TenKH) *@
                 Tên khách hàng
             </th>
             <th>
-                @* @Html.DisplayNameFor(model => model.NgayDat) *@
                 Ngày đặt
             </th>
             <th>
-                @* @Html.DisplayNameFor(model => model.TinhTrang) *@
-                Tình trạng
+                Phí ship
             </th>
+            <th>
+                Tổng tiền
+            </th>
+            @*<th>
+            Tình trạng
+        </th>*@
             <th>Xử lý đơn hàng</th>
             <th></th>
         </tr>
@@ -57,8 +60,15 @@
                     @Html.DisplayFor(modelItem => item.NgayDat)
                 </td>
                 <td>
-                    <a href="#" class="btn-active" data-id="@item.MaKH">@Html.Raw(item.TinhTrang >= 0 ? "<strong>Xác Nhận Thành Công</strong>" : "Chưa Xác Nhận")</a>
+                    @string.Format("{0:n0} đ", item.PhiShip)
                 </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.ThanhTien)*@
+                    @string.Format("{0:n0} đ", item.ThanhTien)
+                </td>
+                @*<td>
+                    <a href="#" class="btn-active" data-id="@item.MaKH">@Html.Raw(item.TinhTrang >= 0 ? "<strong>Xác Nhận Thành Công</strong>" : "Chưa Xác Nhận")</a>
+                </td>*@
                 <td>
                     <form method="post" action='@Url.Action("CapNhatTinhTrangDonDatHang", "Home", new { maDonHang = item.MaPhieuDH})'>
                         @*@if (item.TinhTrang == true)

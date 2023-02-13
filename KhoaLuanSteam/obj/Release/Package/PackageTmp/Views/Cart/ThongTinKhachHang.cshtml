@@ -91,12 +91,26 @@
                 </div>
             </div>
             <br />
+            <div class="checkout-button">
+                <div class="checkout-selector">
+                    <input type="radio" name="PaymentMethod" value="3" onclick="handleClick(this)" class="btn btn-m2 btn-checkout">
+                </div>
+                <div class="content" style="display: flex;align-items: center;">
+                    <span class="checkout-title">
+                        Thanh toán bằng MoMo
+                    </span>
+                </div>
+            </div>
+            <br />
             <div class="col-md-offset-2 col-md-10">
                 <input style="background-color:#0094ff" type="submit" value="Gửi đơn hàng" class="btn btn-success" />
             </div>
 
             <script>
                 function handleClick(radioBtn) {
+                    if (radioBtn.value == 3) { // Thanh toan bang momo
+                        $("#type").val(3);
+                    }
                     if (radioBtn.value == 2) { // VNPay
                         $("#type").val(2);
                     }

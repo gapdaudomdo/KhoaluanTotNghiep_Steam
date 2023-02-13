@@ -20,7 +20,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Loại</label>
             <div class="col-md-10">
-                @Html.DropDownList("MaNCC", null, "Chọn Nhà Cung Cấp", new { @class = "form-control", style = "height: 35px" })
+                @Html.DropDownList("MaNCC", null, "Chọn Nhà Cung Cấp", new { @class = "form-control", style = "height: 35px", @required = "required" })
                 @Html.ValidationMessageFor(model => model.MaNCC, "", new { @class = "text-danger" })
             </div>
         </div>

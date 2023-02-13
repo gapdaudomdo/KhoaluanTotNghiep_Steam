@@ -18,25 +18,22 @@
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.MaNV)
         <div class="form-group">
-            @* @Html.LabelFor(model => model.TenNV, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <label class="control-label col-md-2">Tên nhân viên</label>
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.TenNV, new { @class = "form-control", placeHolder = "" })
+                @Html.TextBoxFor(model => model.TenNV, new { @class = "form-control", placeHolder = "", @required = "required" })
                 @Html.ValidationMessageFor(model => model.TenNV, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @* @Html.LabelFor(model => model.NgaySinh, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <label class="control-label col-md-2">Ngày sinh</label>
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.NgaySinh, new { @class = "form-control", placeHolder = "" })
+                @Html.TextBoxFor(model => model.NgaySinh, new { @class = "form-control", placeHolder = "", @required = "required" })
                 @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <fieldset class="form-group">
-            @* @Html.LabelFor(model => model.GioiTinh, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <label class="control-label col-md-2">Giới tính</label>
             <div class="col-md-10">
                 @Html.RadioButtonFor(Model => Model.GioiTinh, "Nam") Nam &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -45,19 +42,17 @@
         </fieldset>
 
         <fieldset class="form-group">
-            @* @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <label class="control-label col-md-2">Email</label>
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeHolder = "Example@gmail.com" })
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeHolder = "Example@gmail.com", @required = "required" })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </fieldset>
 
         <div class="form-group">
-            @* @Html.LabelFor(model => model.SoDT, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <label class="control-label col-md-2">Số điện thoại</label>
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.SoDT, new { @class = "form-control", placeHolder = "" })
+                @Html.TextBoxFor(model => model.SoDT, new { @class = "form-control", placeHolder = "", @required = "required" })
                 @Html.ValidationMessageFor(model => model.SoDT, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -74,19 +69,17 @@
 
 
         <div class="form-group">
-            @* @Html.LabelFor(model => model.TenDN, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <label class="control-label col-md-2">Tên đăng nhập</label>
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.TenDN, new { @class = "form-control", placeHolder = "" })
+                @Html.TextBoxFor(model => model.TenDN, new { @class = "form-control", placeHolder = "", @required = "required" })
                 @Html.ValidationMessageFor(model => model.TenDN, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @* @Html.LabelFor(model => model.MatKhau, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <label class="control-label col-md-2">Mật khẩu</label>
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.MatKhau, new { @class = "form-control", placeHolder = "" })
+                @Html.TextBoxFor(model => model.MatKhau, new { @class = "form-control", Type = "PassWord", placeHolder = "", @required = "required" })
                 @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -94,7 +87,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Phân quyền</label>
             <div class="col-md-10">
-                @Html.DropDownList("ID_PhanQuyen", null, new { @class = "form-control", style = "height: 35px" })
+                @Html.DropDownList("ID_PhanQuyen", null, new { @class = "form-control", style = "height: 35px", @required = "required" })
                 @Html.ValidationMessageFor(model => model.ID_PhanQuyen, "", new { @class = "text-danger" })
             </div>
         </div>

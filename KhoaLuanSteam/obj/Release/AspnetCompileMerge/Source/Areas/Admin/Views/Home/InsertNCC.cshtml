@@ -20,7 +20,7 @@
             <label class="control-label col-md-2">Mã nhà cung cấp</label>
             @* @Html.LabelFor(model => model.MaNCC, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.MaNCC, new { @class = "form-control", placeHolder = "" })
+                @Html.TextBoxFor(model => model.MaNCC, new { @class = "form-control", placeHolder = "", @required = "required" })
                 @Html.ValidationMessageFor(model => model.MaNCC,"", new { @class = "text-danger" })
             </div>
         </div>
@@ -28,7 +28,7 @@
             <label class="control-label col-md-2">Tên nhà cung cấp</label>
             @* @Html.LabelFor(model => model.TenNCC, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.TenNCC, new { @class = "form-control", placeHolder = "" })
+                @Html.TextBoxFor(model => model.TenNCC, new { @class = "form-control", placeHolder = "", @required = "required" })
                 @Html.ValidationMessageFor(model => model.TenNCC, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,7 +36,7 @@
             <label class="control-label col-md-2">Địa chỉ</label>
             @* @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DiaChi, new { @class = "form-control", placeHolder = "" })
+                @Html.TextBoxFor(model => model.DiaChi, new { @class = "form-control", placeHolder = "", @required = "required" })
                 @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +44,7 @@
             <label class="control-label col-md-2">Số điện thoại</label>
             @* @Html.LabelFor(model => model.DienThoai, htmlAttributes: new { @class = "control-label col-md-2" }) *@
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DienThoai, new { @class = "form-control", placeHolder = "" })
+                @Html.TextBoxFor(model => model.DienThoai, new { @class = "form-control", placeHolder = "", @required = "required" })
                 @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -31,7 +31,7 @@
                 </td>
                 <td>
                     <form method="post" action='@Url.Action("UpdateSPSALE", "Home", new { maSale = item.maSL, MaSanPham = item.MaSanPham }) '>
-                        <input type="text" name="GiamGia" value="@item.GiamGia" />
+                        <input type="text" name="GiamGia" value="@item.GiamGia" required/>
                         <input type="submit" value="Cập nhật" class="btn btn-primary" />
                     </form>
                     @Ajax.ActionLink("Xóa", "DeleteSPSale", new { masl = item.maSL, id = item.MaSanPham }, new AjaxOptions

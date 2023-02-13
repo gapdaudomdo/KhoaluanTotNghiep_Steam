@@ -31,7 +31,7 @@
                 </td>
                 <td>
                     <form method="post" action='@Url.Action("InsertSPSale", "Home", new { maSale = item.maSL, MaSanPham = item.MaSanPham }) '>
-                        <input type="text" name="GiamGia" />
+                        <input type="text" name="GiamGia" required/>
                         <input type="submit" value="Cập nhật" class="btn btn-primary" />
                     </form>
                 </td>
