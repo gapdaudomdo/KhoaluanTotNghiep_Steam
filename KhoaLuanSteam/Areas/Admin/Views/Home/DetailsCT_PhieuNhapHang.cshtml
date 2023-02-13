@@ -9,44 +9,66 @@
 <div class="card-body" style="padding: 0;">
     <div class="table-responsive">
         <table class="table">
-    <tr>
-        <th>
-            Mã Sản Phẩm
-        </th>
-        <th>
-           Mã Phiếu Nhập Hàng
-        </th>
-        <th>
-           Số Lượng
-        </th>
-        <th>
-            Đơn Giá Nhập
-        </th>
-        <th>
-           Tổng Tiền
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaSanPham)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PHIEUNHAPHANG.MaPhieuNhapHang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sluong)
-            </td>
-            <td>
-                <p>@String.Format("{0:0,0}", item.DonGiaNhap) VND</p>
-            </td>
-            <td>
-                <p>@String.Format("{0:0,0}", item.TongTien) VND</p>
-            </td>
-        </tr>
-    }
-</table>
+            <tr>
+                <th>
+                    Phiếu nhập hàng
+                </th>
+                <th>
+                    Mã Sản Phẩm
+                </th>
+                <th>
+                    Mã Phiếu Nhập Hàng
+                </th>
+                <th>
+                    Số Lượng
+                </th>
+                <th>
+                    Đơn Giá Nhập
+                </th>
+                <th>
+                    Tổng Tiền
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaPhieuNhapHang)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaSanPham)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PHIEUNHAPHANG.MaPhieuNhapHang)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sluong)
+                    </td>
+                    <td>
+                        <p>@String.Format("{0:0,0}", item.DonGiaNhap) đ</p>
+                    </td>
+                    <td>
+                        <p>@String.Format("{0:0,0}", item.TongTien) đ</p>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td style="text-align: end;">
+                    Tổng tiền nhập hàng
+                </td>
+                <td>
+                    @String.Format("{0:0,0}", ViewBag.TongTienNhapHang) đ
+                </td>
+            </tr>
+        </table>
     </div>
   </div>
 

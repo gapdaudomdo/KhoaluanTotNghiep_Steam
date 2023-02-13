@@ -273,7 +273,7 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         #endregion
 
 
-        //huy le 13/12
+        
         #region Admin_QuanLy_Người dùng nhân viên
 
         //GET : /Admin/Home/AD_ShowAllNV : trang quản lý nhân viên
@@ -302,17 +302,8 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         }
         #endregion
 
+        //huy le 13/02
         #region Admin_ThemXoaSua_Loai
-
-        //GET : /Admin/Home/AD_ShowAllLoaiSanPham: trang quản lý  loại
-        ////[HttpGet]
-        //public ActionResult AD_ShowAllLoaiSac()
-        //{
-        //    //gọi hàm ListAllCategory để hiện những thể loại trong db
-        //    var model = new AdminProcess().Ad_ThongTinSanPham();
-
-        //    return View(model);
-        //}
 
         [HttpGet]
         public ActionResult AD_ShowAllLoaiSanPham()
@@ -367,83 +358,6 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
             return View(model);
         }
 
-        //--------start
-        //GET : Admin/Home/InsertCT_PhieuNhapHang : trang thêm InsertCT_PhieuNhapHang
-        //[HttpGet]
-        //public ActionResult InsertCT_PhieuNhapHang()
-        //{
-        //    ViewBag.MaSanPham = new SelectList(db.THONGTINSANPHAMs.ToList().OrderBy(x => x.TenSanPham), "MaSanPham", "TenSanPham");
-        //    ViewBag.MaPhieuNhapHang = new SelectList(db.PHIEUNHAPHANGs.ToList().OrderBy(x => x.MaPhieuNhapHang), "MaPhieuNhapHang", "MaPhieuNhapHang");
-        //    return View();
-        //}
-
-        //POST : Admin/Home/InsertCT_PhieuNhapHang/:model : thực hiện việc thêm InsertCT_PhieuNhapHang vào db
-        [HttpPost]
-        //public ActionResult InsertCT_PhieuNhapHang(CT_PHIEUNHAPHANG model)
-        //{
-        //    //lấy mã mà hiển thị tên
-        //    //ViewBag.MaNCC = new SelectList(db.NHACUNGCAPs.ToList().OrderBy(x => x.MaNCC), "MaNCC", "TenNCC", pnhaphang.MaNCC);
-        //    ViewBag.MaSanPham = new SelectList(db.THONGTINSANPHAMs.ToList().OrderBy(x => x.TenSanPham), "MaSanPham", "TenSanPham", model.MaSanPham);
-        //    ViewBag.MaPhieuNhapHang = new SelectList(db.PHIEUNHAPHANGs.ToList().OrderBy(x => x.MaPhieuNhapHang), "MaPhieuNhapHang", "MaPhieuNhapHang", model.MaPhieuNhapHang);
-        //    //kiểm tra dữ liệu hợp lệ
-        //    if (ModelState.IsValid)
-        //    {
-        //        //khởi tao biến admin trong WebBanSach.Models.Process
-        //        var admin = new AdminProcess();
-
-        //        //khởi tạo biến thuộc đối tượng CT_PHIEUNHAPHANG trong db
-        //        var t2 = new CT_PHIEUNHAPHANG();
-
-        //        //gán thuộc tính tên thể loại
-        //        //tl.TenLoai = model.TenLoai;
-
-        //        t2.MaSanPham = model.MaSanPham;
-        //        //t2.MaPhieuNhapHang = (int)Session["getMaPNH"];
-        //        t2.MaPhieuNhapHang = (int)Session["getMaPNH"];
-        //        t2.Sluong = model.Sluong;
-        //        t2.DonGiaNhap = model.DonGiaNhap;
-        //        t2.TongTien = t2.Sluong * t2.DonGiaNhap;
-
-        //        //gọi hàm thêm CT_PHIEUNHAPHANG (InsertCT_PHIEUNHAPHANG) trong biến admin
-        //        var result = admin.InsertCT_PhieuNhapHang(t2);
-
-        //        //kiểm tra hàm
-        //        if (result > 0)
-        //        {
-        //            var MaxMaCTPhieuNhapHang = db.CT_PHIEUNHAPHANG.Where(p => p.MaCTPhieuNhapHang > 0).Max(p => p.MaCTPhieuNhapHang);
-        //            object[] parameters =
-        //            {
-        //                new SqlParameter("@MaCTPhieuNhapHang",MaxMaCTPhieuNhapHang),
-        //                new SqlParameter("@MaSP",t2.MaSanPham),
-        //                new SqlParameter("@MaPhieuNhapHang",t2.MaPhieuNhapHang)
-        //            };
-        //            db.Database.ExecuteSqlCommand("Update_SL_Ton @MaCTPhieuNhapHang,@MaSP,@MaPhieuNhapHang", parameters);
-
-        //            object[] update_TongSL_NhapHang =
-        //            {
-        //                new SqlParameter("@MaPhieuNhapHang",t2.MaPhieuNhapHang)
-        //            };
-        //            db.Database.ExecuteSqlCommand("Update_TongSL_PN @MaPhieuNhapHang", update_TongSL_NhapHang);
-
-        //            object[] update_TongTien_NhapHang =
-        //            {
-        //                new SqlParameter("@MaPhieuNhapHang",t2.MaPhieuNhapHang)
-        //            };
-        //            db.Database.ExecuteSqlCommand("Update_TongTien_PN @MaPhieuNhapHang", update_TongTien_NhapHang);
-        //            ViewBag.Success = "Thêm mới thành công";
-        //            //xóa trạng thái
-        //            ModelState.Clear();
-
-        //            return View();
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError("", "Thêm không thành công.");
-        //        }
-        //    }
-
-        //    return View(model);
-        //}
 
         //GET : Admin/Home/UpdateLoaiSanPham/:id : trang cập nhật loại
         [HttpGet]
@@ -468,7 +382,6 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
 
                 //gọi hàm cập nhật thể loại
                 var result = admin.UpdateLoaiSanPham(tl);
-
                 //thực hiện kiểm tra
                 if (result == 1)
                 {
@@ -1002,14 +915,16 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         public ActionResult DetailsCT_DonDatHangNCC(int id)
         {
             var result = new AdminProcess().detailsCT_DonDatHangNCC(id);
-
+            var tongTienDonDatHangNCC = db.DonDatHangNCCs.SingleOrDefault(x => x.MaDonDatHangNCC == id);
+            ViewBag.TongTienDonDatHangNCC = tongTienDonDatHangNCC.TongTien;
             return View(result);
         }
 
         public ActionResult DetailsCT_PhieuNhapHang(int id)
         {
             var result = new AdminProcess().detailsCT_PNhaphang(id);
-
+            var tongTienNhapHang = db.PHIEUNHAPHANGs.SingleOrDefault(x => x.MaPhieuNhapHang == id);
+            ViewBag.TongTienNhapHang = tongTienNhapHang.TongTien_NH;
             return View(result);
         }
 

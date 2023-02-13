@@ -60,7 +60,10 @@ namespace KhoaLuanSteam.Controllers
                     {
                         string result = await response.Content.ReadAsStringAsync();
                         var json = JsonConvert.DeserializeObject<dynamic>(result);
-                        Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 500;
+                        double soKilomet = (json.rows[0].elements[0].distance.value / 1000);
+                        double phiShipHang = new GioHangProcess().tinhPhiShipHang(soKilomet);
+                        Session["Kilomet"] = phiShipHang;
+                        //Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 500;
                     }
                 };
             }
@@ -855,8 +858,13 @@ namespace KhoaLuanSteam.Controllers
                     string result = await response.Content.ReadAsStringAsync();
                     var json = JsonConvert.DeserializeObject<dynamic>(result);
                     
+                    //if(endLocation.Contains("TP.HCM") || endLocation.Contains("TPHCM") || endLocation.Contains("Thành Phố Hồ Chí Minh") || endLocation.Contains("Hồ Chí Minh"))
+
                     //Thành tiền phí Ship
-                    Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 500;
+                    double soKilomet = (json.rows[0].elements[0].distance.value / 1000);
+                    double phiShipHang = new GioHangProcess().tinhPhiShipHang(soKilomet);
+                    Session["Kilomet"] = phiShipHang;
+                    //Session["Kilomet"] = (json.rows[0].elements[0].distance.value / 1000) * 500;
                 }
             }
             return RedirectToAction("Index", "Cart");

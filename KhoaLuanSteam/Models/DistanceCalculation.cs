@@ -12,10 +12,5 @@ namespace KhoaLuanSteam.Models
         public double Distance { get; set; }
     }
 
-    //public class DistanceCalculation
-    //{
-    //    public string Origin { get; set; }
-    //    public string Destination { get; set; }
-    //    public double Distance { get; set; }
-    //}
+
 }
