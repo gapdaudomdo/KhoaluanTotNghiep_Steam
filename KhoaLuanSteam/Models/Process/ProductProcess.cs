@@ -91,6 +91,23 @@ namespace KhoaLuanSteam.Models.Process
                      }).Take(3).ToList();
             return x;
         }
+
+        public List<ProductInSale> getAllSaleProduct()
+        {
+            //var spsale = (from sach in db.THONGTINSACHes join sale in db.SPSALEs on sach.MaSach equals sale.MaSach where sach.MaSach == sale.MaSach select new { sach.MaSach, sach.MaLoai, sach.MaTG, sach.MaNXB, sach.TenSach, sach.GiaSach, sach.MoTa, sach.HinhAnh, sale.GIAMGIA, sach.SLTon }).ToList();
+            ////return db.THONGTINSACHes.OrderByDescending(x => x.MaSach).ToList();
+            var x = (from s in db.SPSALEs
+                     join sps in db.SALEs on s.MASL equals sps.MASL
+                     join tts in db.THONGTINSANPHAMs on s.MaSanPham equals tts.MaSanPham
+                     where DateTime.Now > sps.NGAYBATDAU && DateTime.Now < sps.NGAYKETTHUC
+                     select new ProductInSale
+                     {
+                         THONGTINSANPHAM = tts,
+                         GIAMGIA = (int)s.GIAMGIA
+                     }).ToList();
+            return x;
+        }
+
         public double GiaSanPham(int masanpham)
         {
             THONGTINSANPHAM sanpham = db.THONGTINSANPHAMs.Single(s => s.MaSanPham == masanpham);

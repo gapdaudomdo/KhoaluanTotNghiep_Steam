@@ -3901,6 +3901,7 @@
     <Content Include="Views\Product\Productdiscounts.cshtml" />
     <Content Include="Views\Product\LatestProducts.cshtml" />
     <Content Include="Views\Cart\CalculateDistance.cshtml" />
+    <Content Include="Views\Product\AllProductDiscounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

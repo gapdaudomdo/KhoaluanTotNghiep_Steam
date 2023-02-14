@@ -204,7 +204,15 @@ namespace KhoaLuanSteam.Controllers
             return View(LSanPham);
         }
 
-
-
+        public ActionResult AllProductDiscounts()
+        {
+            ViewBag.AllSPGiam = "Tất cả sản phẩm giảm giá";
+            var result = new ProductProcess().getAllSaleProduct();
+            if (result.Count == 0)
+            {
+                ViewBag.AllSPGiam = "không có sản phẩm nào thuộc chủ đề này !";
+            }
+            return View(result);
+        }
     }
 }

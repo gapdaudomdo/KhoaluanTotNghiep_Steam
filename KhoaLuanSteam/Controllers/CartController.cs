@@ -818,13 +818,10 @@ namespace KhoaLuanSteam.Controllers
         //api chinh
         //private const string API_KEY = "AIzaSyAWOyX-d6CV4Z-58dGw1ujwVvMTctBykho";
         //private const string API_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={0}&destinations={1}&key=" + API_KEY;
-
-        //api thuê đến 07/02/2023.
-        ///private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=kI1M3A89bD1v1SLwSmpzZEnt1yfjf";
-        //api thuê đến 09/02/2023.
-        //private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=kJDjGaADDxxphXWSRxiKDY9gQjbyq";
         //api thuê đến 15/02/2023.
-        private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=0oFcQssi87L9DRl5QUnq3F3mfRsxu";
+        //private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=0oFcQssi87L9DRl5QUnq3F3mfRsxu";
+        //api thuê đến 21/02/2023.
+        private const string API_URL = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins={0}&destinations={1}&departure_time=now&key=FbMvE9zH5jdABVVxjzJrdkWc3lO1V";
         [HttpGet]
         public ActionResult CalculateDistance()
         {

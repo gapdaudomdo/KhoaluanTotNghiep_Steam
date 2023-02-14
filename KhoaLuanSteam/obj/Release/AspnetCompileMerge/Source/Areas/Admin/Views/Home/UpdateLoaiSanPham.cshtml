@@ -17,7 +17,7 @@
                         <label class="control-label col-md-2">Tên loại</label>
                         @* @Html.LabelFor(model => model.TenLoai, htmlAttributes: new { @class = "control-label col-md-2" }) *@
                         <div class="col-md-10">
-                            @Html.TextBoxFor(model => model.TenLoai, new { @class = "form-control", placeHolder = "" })
+                            @Html.TextBoxFor(model => model.TenLoai, new { @class = "form-control", placeHolder = "", @required = "required" })
                             @Html.ValidationMessageFor(model => model.TenLoai, "", new { @class = "text-danger" })
                         </div>
                     </div>

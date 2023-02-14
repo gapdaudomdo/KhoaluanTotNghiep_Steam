@@ -1321,9 +1321,9 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
         {
             using (QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1())
             {
-                var data = from phieunhaphang in db.PHIEUNHAPHANGs
+                var data = from phieunhaphang in db.PHIEUNHAPHANGs 
                            join nhanvien in db.NHANVIENs on phieunhaphang.MaNV equals nhanvien.MaNV
-                           join nhacungcap in db.NHACUNGCAPs on phieunhaphang.MaNCC equals nhacungcap.MaNCC
+                           join nhacungcap in db.NHACUNGCAPs on phieunhaphang.MaNCC equals nhacungcap.MaNCC 
                            select new { phieunhaphang.MaPhieuNhapHang, nhacungcap.TenNCC, nhanvien.TenNV, phieunhaphang.NgayLap_PN, phieunhaphang.TongSL, phieunhaphang.TongTien_NH };
                 DataTable dt = new DataTable();
                 dt.Columns.Add("Mã Phiếu Nhập Hàng");

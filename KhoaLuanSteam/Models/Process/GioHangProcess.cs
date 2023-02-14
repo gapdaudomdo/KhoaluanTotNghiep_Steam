@@ -113,17 +113,17 @@ namespace KhoaLuanSteam.Models.Process
         {
             if (kilomet < 10)
                 return 0;
-            else if (kilomet > 10 && kilomet < 100)
+            else if (kilomet >= 10 && kilomet < 100)
                 return 10000;
-            else if (kilomet > 100 && kilomet < 300)
+            else if (kilomet >= 100 && kilomet < 300)
                 return 20000;
-            else if (kilomet > 300 && kilomet < 600)
+            else if (kilomet >= 300 && kilomet < 600)
                 return 30000;
-            else if (kilomet > 600 && kilomet < 900)
+            else if (kilomet >= 600 && kilomet < 900)
                 return 40000;
-            else if (kilomet > 900 && kilomet < 1200)
+            else if (kilomet >= 900 && kilomet < 1200)
                 return 50000;
-            else if (kilomet > 1200 && kilomet < 1500)
+            else if (kilomet >= 1200 && kilomet < 1500)
                 return 60000;
           return 80000;
         }
