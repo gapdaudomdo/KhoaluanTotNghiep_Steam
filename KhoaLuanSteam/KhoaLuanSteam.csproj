@@ -3811,6 +3811,9 @@
     <Content Include="Areas\assets_admin\vendor\jquery\jquery.min.map" />
     <Content Include="Areas\assets_admin\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Areas\Admin\Views\Home\UpdateLoaiSanPham.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\ExportExcel_PhieuDatHang.cshtml" />
+    <Content Include="Areas\Admin\EmailPhanHoi\PhanHoi.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\InsertPhanHoiDoiTra.cshtml" />
     <EntityDeploy Include="Models\STEAM_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>STEAM_Model.Designer.cs</LastGenOutput>
@@ -3818,9 +3821,6 @@
     <Content Include="Models\STEAM_Model.edmx.diagram">
       <DependentUpon>STEAM_Model.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\Home\ExportExcel_PhieuDatHang.cshtml" />
-    <Content Include="Areas\Admin\EmailPhanHoi\PhanHoi.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\InsertPhanHoiDoiTra.cshtml" />
     <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <None Include="Scripts\jquery-1.8.2-vsdoc.js" />
     <Content Include="HinhAnhSach\phat-trien-kha-nang-ngon-ngu.jpg" />

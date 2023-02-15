@@ -10,13 +10,13 @@
         <div class="fw w_100" itemprop="offers">
 
             @*<div class="group-status" style="font-size: 14px; margin-bottom: 15px;">
-                <label style="text-transform:uppercase;font-weight:500;font-weight: bold;">Họ:</label>
-                <span class="first_status margin-bottom-10">
-                    <span class="status_name availabel" style="text-transform:capitalize">
-                        @Html.DisplayFor(model => model.Ho)
-                    </span>
+            <label style="text-transform:uppercase;font-weight:500;font-weight: bold;">Họ:</label>
+            <span class="first_status margin-bottom-10">
+                <span class="status_name availabel" style="text-transform:capitalize">
+                    @Html.DisplayFor(model => model.Ho)
                 </span>
-            </div>*@
+            </span>
+        </div>*@
             <div class="group-status" style="font-size: 14px; margin-bottom: 15px;">
                 <label style="text-transform:uppercase;font-weight:500;font-weight: bold;">Họ Và Tên:  </label>
                 <span class="first_status margin-bottom-10">
@@ -47,7 +47,16 @@
                 <label style="text-transform:uppercase;font-weight:500;font-weight: bold;">Hình ảnh hóa đơn: </label>
                 <span class="first_status margin-bottom-10">
                     <span class="status_name availabel" style="text-transform:capitalize">
-                        <img src="/HinhAnhSach/@Model.HinhAnh" width="105" height="140" />
+                        <img src="/HinhAnhSach/@Model.HinhAnhHD" width="105" height="140" />
+                    </span>
+                </span>
+            </div>
+
+            <div class="group-status" style="font-size: 14px; margin-bottom: 15px;">
+                <label style="text-transform:uppercase;font-weight:500;font-weight: bold;">Hình ảnh sản phẩm: </label>
+                <span class="first_status margin-bottom-10">
+                    <span class="status_name availabel" style="text-transform:capitalize">
+                        <img src="/HinhAnhSach/@Model.HinhAnhSP" width="105" height="140" />
                     </span>
                 </span>
             </div>

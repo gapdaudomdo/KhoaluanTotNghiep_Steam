@@ -4,19 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a780eb626c9f4b159410dd7259a70840" Name="Diagram1">
+      <Diagram DiagramId="ef4c2010fa0947c581c29e652e56cd36" Name="Diagram1">
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.CT_DonDatHangNCC" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.CT_PHIEUDATHANG" Width="1.5" PointX="11.25" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.CT_PHIEUNHAPHANG" Width="1.5" PointX="13.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.DOITRA" Width="1.5" PointX="13.5" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.DonDatHangNCC" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.KHACHHANG" Width="1.5" PointX="6.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.LIENHE" Width="1.5" PointX="11.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.LIENHE" Width="1.5" PointX="11.25" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.LOAISANPHAM" Width="1.5" PointX="3.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.NHACUNGCAP" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHANQUYEN" Width="1.5" PointX="1.5" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUDATHANG" Width="1.5" PointX="9" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUGIAOHANG" Width="1.5" PointX="11.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUGIAOHANG" Width="1.5" PointX="11.25" PointY="17.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.PHIEUNHAPHANG" Width="1.5" PointX="8.25" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.SALE" Width="1.5" PointX="9" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_THIETBISTEAMModel.SPSALE" Width="1.5" PointX="11.25" PointY="3.375" IsExpanded="true" />
@@ -28,6 +29,7 @@
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_CT_PHIEUDH_TTSP" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_CT_PHIEUNHAPHANG_PNH" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_CT_PHIEUNHAPHANG_TTSP" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_THIETBISTEAMModel.FK_LIENHE_DOITRA" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_DonDatHangNCC_NHACUNGCAP" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_DonDatHangNCC_NHANVIEN" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUNHAPHANG_DonDatHangNCC" ManuallyRouted="false" />
@@ -42,8 +44,6 @@
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUGIAOHANG_PDH" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_SL_SPSL" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_SANPHAM_SPSL" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.DOITRA" Width="1.5" PointX="13.5" PointY="13.75" />
-        <AssociationConnector Association="QL_THIETBISTEAMModel.FK_LIENHE_DOITRA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

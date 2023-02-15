@@ -559,3 +559,4 @@ D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\EPPlus.dll
 D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\EPPlus.Interfaces.dll
 D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\EPPlus.System.Drawing.dll
 D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\EPPlus.xml
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.csproj.AssemblyReference.cache

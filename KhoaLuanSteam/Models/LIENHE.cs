@@ -25,10 +25,11 @@ namespace KhoaLuanSteam.Models
         public string Email { get; set; }
         public string DienThoai { get; set; }
         public string NoiDung { get; set; }
-        public string HinhAnh { get; set; }
+        public string HinhAnhHD { get; set; }
+        public string HinhAnhSP { get; set; }
         public Nullable<System.DateTime> NgayCapNhat { get; set; }
     
-        public virtual PHIEUDATHANG PHIEUDATHANG { get; set; }
         public virtual ICollection<DOITRA> DOITRAs { get; set; }
+        public virtual PHIEUDATHANG PHIEUDATHANG { get; set; }
     }
 }

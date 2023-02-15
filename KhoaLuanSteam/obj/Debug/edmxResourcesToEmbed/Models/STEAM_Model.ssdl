@@ -83,7 +83,8 @@
     <Property Name="Email" Type="varchar" MaxLength="100" />
     <Property Name="DienThoai" Type="varchar" MaxLength="50" />
     <Property Name="NoiDung" Type="nvarchar" MaxLength="500" />
-    <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
+    <Property Name="HinhAnhHD" Type="nvarchar" MaxLength="200" />
+    <Property Name="HinhAnhSP" Type="nvarchar" MaxLength="200" />
     <Property Name="NgayCapNhat" Type="smalldatetime" />
   </EntityType>
   <EntityType Name="LOAISANPHAM">

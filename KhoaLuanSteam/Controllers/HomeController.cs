@@ -90,11 +90,37 @@ namespace KhoaLuanSteam.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Contact(LIENHE model, HttpPostedFileBase fileUpload) 
+        public ActionResult Contact(LIENHE model, HttpPostedFileBase fileUpload, HttpPostedFileBase fileUpload1) 
         {
+            var home = new HomeProcess();
+            var lh = new LIENHE();
+            if (fileUpload1 == null)
+            {
+                ViewBag.Alert = "Vui lòng chọn ảnh sản phẩm";
+                return View();
+            }
+            else
+            {
+                var fileName1 = Path.GetFileName(fileUpload1.FileName);
+                //chuyển file đường dẫn và biên dịch vào /images
+                var path = Path.Combine(Server.MapPath("/HinhAnhSach"), fileName1);
+
+                //kiểm tra đường dẫn ảnh có tồn tại?
+                if (System.IO.File.Exists(path))
+                {
+                    ViewBag.Alert = "Hình ảnh đã tồn tại";
+                }
+                else
+                {
+                    fileUpload.SaveAs(path);
+                }
+
+                lh.HinhAnhSP = fileName1;
+            }
+
             if (fileUpload == null)
             {
-                ViewBag.Alert = "Vui lòng chọn ảnh bìa";
+                ViewBag.Alert = "Vui lòng chọn ảnh hóa đơn";
                 return View();
             }
             else
@@ -116,8 +142,8 @@ namespace KhoaLuanSteam.Controllers
                         fileUpload.SaveAs(path);
                     }
 
-                    var home = new HomeProcess();
-                    var lh = new LIENHE();
+                    //var home = new HomeProcess();
+                    //var lh = new LIENHE();
 
                     if (Session["User"] != null)
                     {
@@ -134,7 +160,7 @@ namespace KhoaLuanSteam.Controllers
                     ViewBag.MaPhieuDH = new SelectList(db.PHIEUDATHANGs.ToList().OrderByDescending(x => x.MaPhieuDH), "MaPhieuDH", "MaPhieuDH", model.MaPhieuDH);
 
 
-                    lh.HinhAnh = fileName;
+                    lh.HinhAnhHD = fileName;
                     lh.MaPhieuDH = model.MaPhieuDH;
                     //gán dữ liệu từ client vào model
                     lh.HoTen = model.HoTen;
