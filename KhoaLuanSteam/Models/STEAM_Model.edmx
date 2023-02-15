@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QL_THIETBISTEAMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QL_THIETBISTEAMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CT_DonDatHangNCC">
           <Key>
             <PropertyRef Name="MaCT_DonDatHangNCC" />
@@ -38,6 +38,18 @@
           <Property Name="Sluong" Type="int" />
           <Property Name="DonGiaNhap" Type="float" />
           <Property Name="TongTien" Type="float" />
+        </EntityType>
+        <EntityType Name="DOITRA">
+          <Key>
+            <PropertyRef Name="MaDT" />
+          </Key>
+          <Property Name="MaDT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaLH" Type="int" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="50" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="500" />
+          <Property Name="NgayCapNhat" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="DonDatHangNCC">
           <Key>
@@ -287,6 +299,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LIENHE_DOITRA">
+          <End Role="LIENHE" Type="Self.LIENHE" Multiplicity="1" />
+          <End Role="DOITRA" Type="Self.DOITRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIENHE">
+              <PropertyRef Name="MaLH" />
+            </Principal>
+            <Dependent Role="DOITRA">
+              <PropertyRef Name="MaLH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LIENHE_PHIEUDATHANG">
           <End Role="PHIEUDATHANG" Type="Self.PHIEUDATHANG" Multiplicity="0..1" />
           <End Role="LIENHE" Type="Self.LIENHE" Multiplicity="*" />
@@ -455,6 +479,7 @@
           <EntitySet Name="CT_DonDatHangNCC" EntityType="Self.CT_DonDatHangNCC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CT_PHIEUDATHANG" EntityType="Self.CT_PHIEUDATHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CT_PHIEUNHAPHANG" EntityType="Self.CT_PHIEUNHAPHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOITRA" EntityType="Self.DOITRA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DonDatHangNCC" EntityType="Self.DonDatHangNCC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LIENHE" EntityType="Self.LIENHE" Schema="dbo" store:Type="Tables" />
@@ -500,6 +525,10 @@
           <AssociationSet Name="FK_DonDatHangNCC_NHANVIEN" Association="Self.FK_DonDatHangNCC_NHANVIEN">
             <End Role="NHANVIEN" EntitySet="NHANVIEN" />
             <End Role="DonDatHangNCC" EntitySet="DonDatHangNCC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIENHE_DOITRA" Association="Self.FK_LIENHE_DOITRA">
+            <End Role="LIENHE" EntitySet="LIENHE" />
+            <End Role="DOITRA" EntitySet="DOITRA" />
           </AssociationSet>
           <AssociationSet Name="FK_LIENHE_PHIEUDATHANG" Association="Self.FK_LIENHE_PHIEUDATHANG">
             <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANG" />
@@ -550,8 +579,7 @@
             <End Role="THONGTINSANPHAM" EntitySet="THONGTINSANPHAM" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QL_THIETBISTEAMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -640,6 +668,7 @@
           <Property Name="HinhAnh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
           <NavigationProperty Name="PHIEUDATHANG" Relationship="Self.FK_LIENHE_PHIEUDATHANG" FromRole="LIENHE" ToRole="PHIEUDATHANG" />
+          <NavigationProperty Name="DOITRAs" Relationship="QL_THIETBISTEAMModel.FK_LIENHE_DOITRA" FromRole="LIENHE" ToRole="DOITRA" />
         </EntityType>
         <EntityType Name="LOAISANPHAM">
           <Key>
@@ -1125,21 +1154,51 @@
             <Parameter Name="MaPhieuNhapHang" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Update_TongSL_DatHangNCC">
-            <Parameter Name="MaDonDHNCC" Mode="In" Type="String" />
+          <Parameter Name="MaDonDHNCC" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Update_TongSL_PN">
-            <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
+          <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Update_TongTien_DatHangNCC">
-            <Parameter Name="MaDonDHNCC" Mode="In" Type="String" />
+          <Parameter Name="MaDonDHNCC" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Update_TongTien_PN">
-            <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
+          <Parameter Name="MaPhieuNH" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Update_TrangThai_DatHangNCC">
-            <Parameter Name="MaDonDHNCC" Mode="In" Type="Int32" />
+          <Parameter Name="MaDonDHNCC" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="DOITRAs" EntityType="QL_THIETBISTEAMModel.DOITRA" />
+          <AssociationSet Name="FK_LIENHE_DOITRA" Association="QL_THIETBISTEAMModel.FK_LIENHE_DOITRA">
+            <End Role="LIENHE" EntitySet="LIENHEs" />
+            <End Role="DOITRA" EntitySet="DOITRAs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DOITRA">
+          <Key>
+            <PropertyRef Name="MaDT" />
+          </Key>
+          <Property Name="MaDT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaLH" Type="Int32" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="LIENHE" Relationship="QL_THIETBISTEAMModel.FK_LIENHE_DOITRA" FromRole="DOITRA" ToRole="LIENHE" />
+        </EntityType>
+        <Association Name="FK_LIENHE_DOITRA">
+          <End Type="QL_THIETBISTEAMModel.LIENHE" Role="LIENHE" Multiplicity="1" />
+          <End Type="QL_THIETBISTEAMModel.DOITRA" Role="DOITRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIENHE">
+              <PropertyRef Name="MaLH" />
+            </Principal>
+            <Dependent Role="DOITRA">
+              <PropertyRef Name="MaLH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1352,6 +1411,19 @@
           <FunctionImportMapping FunctionImportName="Update_TongTien_DatHangNCC" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongTien_DatHangNCC" />
           <FunctionImportMapping FunctionImportName="Update_TongTien_PN" FunctionName="QL_THIETBISTEAMModel.Store.Update_TongTien_PN" />
           <FunctionImportMapping FunctionImportName="Update_TrangThai_DatHangNCC" FunctionName="QL_THIETBISTEAMModel.Store.Update_TrangThai_DatHangNCC" />
+          <EntitySetMapping Name="DOITRAs">
+            <EntityTypeMapping TypeName="QL_THIETBISTEAMModel.DOITRA">
+              <MappingFragment StoreEntitySet="DOITRA">
+                <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="MaLH" ColumnName="MaLH" />
+                <ScalarProperty Name="MaDT" ColumnName="MaDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

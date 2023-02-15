@@ -257,7 +257,6 @@ D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\System.Web.Razor.xml
 D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\System.Web.WebPages.xml
 D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\System.Web.WebPages.Deployment.xml
 D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\System.Web.WebPages.Razor.xml
-D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.csproj.AssemblyReference.cache
 D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.csproj.CoreCompileInputs.cache
 D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.csproj.CopyComplete
 D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.dll

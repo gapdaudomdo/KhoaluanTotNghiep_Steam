@@ -50,6 +50,15 @@ namespace KhoaLuanSteam.Models.Process
             }
         }
 
+        #region Phan Hoi Khach Hang
+        public int InsertDoiTra(DOITRA entity)
+        {
+            db.DOITRAs.Add(entity);
+            db.SaveChanges();
+            return entity.MaDT;
+        }
+        #endregion
+
         //Xử Lý Thông Tin Sản Phẩm
         #region Xử Lý Thông Tin Sản Phẩm
         /// <summary>

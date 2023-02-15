@@ -42,6 +42,8 @@
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_PHIEUGIAOHANG_PDH" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_SL_SPSL" ManuallyRouted="false" />
         <AssociationConnector Association="QL_THIETBISTEAMModel.FK_SANPHAM_SPSL" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QL_THIETBISTEAMModel.DOITRA" Width="1.5" PointX="13.5" PointY="13.75" />
+        <AssociationConnector Association="QL_THIETBISTEAMModel.FK_LIENHE_DOITRA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

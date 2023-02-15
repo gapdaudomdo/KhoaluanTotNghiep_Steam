@@ -34,6 +34,18 @@
     <Property Name="DonGiaNhap" Type="float" />
     <Property Name="TongTien" Type="float" />
   </EntityType>
+  <EntityType Name="DOITRA">
+    <Key>
+      <PropertyRef Name="MaDT" />
+    </Key>
+    <Property Name="MaDT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaLH" Type="int" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="DienThoai" Type="varchar" MaxLength="50" />
+    <Property Name="NoiDung" Type="nvarchar" MaxLength="500" />
+    <Property Name="NgayCapNhat" Type="smalldatetime" />
+  </EntityType>
   <EntityType Name="DonDatHangNCC">
     <Key>
       <PropertyRef Name="MaDonDatHangNCC" />
@@ -282,6 +294,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_LIENHE_DOITRA">
+    <End Role="LIENHE" Type="Self.LIENHE" Multiplicity="1" />
+    <End Role="DOITRA" Type="Self.DOITRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LIENHE">
+        <PropertyRef Name="MaLH" />
+      </Principal>
+      <Dependent Role="DOITRA">
+        <PropertyRef Name="MaLH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_LIENHE_PHIEUDATHANG">
     <End Role="PHIEUDATHANG" Type="Self.PHIEUDATHANG" Multiplicity="0..1" />
     <End Role="LIENHE" Type="Self.LIENHE" Multiplicity="*" />
@@ -450,6 +474,7 @@
     <EntitySet Name="CT_DonDatHangNCC" EntityType="Self.CT_DonDatHangNCC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_PHIEUDATHANG" EntityType="Self.CT_PHIEUDATHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_PHIEUNHAPHANG" EntityType="Self.CT_PHIEUNHAPHANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DOITRA" EntityType="Self.DOITRA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DonDatHangNCC" EntityType="Self.DonDatHangNCC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LIENHE" EntityType="Self.LIENHE" Schema="dbo" store:Type="Tables" />
@@ -495,6 +520,10 @@
     <AssociationSet Name="FK_DonDatHangNCC_NHANVIEN" Association="Self.FK_DonDatHangNCC_NHANVIEN">
       <End Role="NHANVIEN" EntitySet="NHANVIEN" />
       <End Role="DonDatHangNCC" EntitySet="DonDatHangNCC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LIENHE_DOITRA" Association="Self.FK_LIENHE_DOITRA">
+      <End Role="LIENHE" EntitySet="LIENHE" />
+      <End Role="DOITRA" EntitySet="DOITRA" />
     </AssociationSet>
     <AssociationSet Name="FK_LIENHE_PHIEUDATHANG" Association="Self.FK_LIENHE_PHIEUDATHANG">
       <End Role="PHIEUDATHANG" EntitySet="PHIEUDATHANG" />

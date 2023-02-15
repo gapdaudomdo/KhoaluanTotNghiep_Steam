@@ -21,6 +21,10 @@ using KhoaLuanSteam.ViewModel;
 using KhoaLuanSteam.Areas.Models;
 using System.Drawing;
 using OfficeOpenXml;
+using System.Web.Hosting;
+using System.Text;
+using System.Net.Mail;
+using System.Net.Mime;
 
 namespace KhoaLuanSteam.Areas.Admin.Controllers
 {
@@ -1625,6 +1629,134 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
 
         }
 
+        public void BuildUserTemplate(int MaLH)
+        {
+            //thân của email sẽ dc gửi
+            string body =
+                System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/Areas/Admin/EmailPhanHoi/") + "PhanHoi" + ".cshtml");
+            var inforKH = db.LIENHEs.Include("PHIEUDATHANG").Where(x => x.MaLH == MaLH).First();
+            var inforAD = db.DOITRAs.Include("LIENHE").Where(x => x.MaLH == MaLH).First();
+
+
+
+
+            body = body.Replace("@ViewBag.MaDH", inforKH.MaPhieuDH.ToString());
+            body = body.Replace("@ViewBag.HoTen", inforKH.HoTen.ToString());
+            body = body.Replace("@ViewBag.Email", inforKH.Email.ToString());
+            body = body.Replace("@ViewBag.DienThoai", inforKH.DienThoai.ToString());
+            body = body.Replace("@ViewBag.NgayCapNhat", inforKH.NgayCapNhat.ToString());
+            body = body.Replace("@ViewBag.NoiDungPhanHoi", inforAD.NoiDung.ToString());
+            body = body.Replace("@ViewBag.ThoiGian", inforAD.NgayCapNhat.ToString());
+            body = body.Replace("@ViewBag.NoiDungTiepNhan", inforKH.NoiDung.ToString());
+
+            body = body.ToString();
+            //gọi hàm phía dưới và truyền tham số vào để tiến hành gửi email
+            BuildEmailTemplate("Phản hồi đổi trả thành công ", body, inforKH.Email);
+
+        }
+
+        public void BuildEmailTemplate(string subjectText, string bodyText, string sendTo)
+        {
+            string from, to, bcc, cc, subject, body;
+            //gmail của trang web
+            from = "gapdaudomdo01@gmail.com";
+            //gửi tến email kasch hàng
+            to = sendTo.Trim();
+            bcc = "";
+            cc = "";
+            subject = subjectText;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(bodyText);
+            body = sb.ToString();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(from);
+            mail.To.Add(new MailAddress(to));
+            if (!string.IsNullOrEmpty(bcc))
+            {
+                mail.Bcc.Add(new MailAddress(bcc));
+            }
+
+            if (!string.IsNullOrEmpty(cc))
+            {
+                mail.CC.Add(new MailAddress(cc));
+            }
+
+            mail.Subject = subject;
+            mail.Body = body;
+            mail.IsBodyHtml = true;
+            mail.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(body, new ContentType("text/html")));
+            SendEmail(mail);
+        }
+
+        public static void SendEmail(MailMessage mail)
+        {
+            SmtpClient client = new SmtpClient();
+            // Tạo SmtpClient kết nối đến smtp.gmail.com
+            client.Host = "smtp.gmail.com";
+            client.Port = 587; //gmail làm vc trên cổng này
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = false;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            // Tạo xác thực bằng địa chỉ gmail và password
+            client.Credentials = new System.Net.NetworkCredential("gapdaudomdo01@gmail.com", "ljopjautunjuygqc");
+            try
+            {
+                client.Send(mail);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult InsertPhanHoiDoiTra(int id)
+        {
+            return View();
+        }
+
+        //POST : Admin/Home/InsertLoaiSanPham/:model : thực hiện việc thêm loại vào db
+        [HttpPost]
+        public ActionResult InsertPhanHoiDoiTra(DOITRA model, FormCollection f, int id)
+        {
+            //kiểm tra dữ liệu hợp lệ
+            if (ModelState.IsValid)
+            {
+                //khởi tao biến admin trong WebBanSach.Models.Process
+                var admin = new AdminProcess();
+                LIENHE lIENHE = admin.GetIdContact(id);
+                //khởi tạo biến thuộc đối tượng thể loại trong db
+
+
+                //gán thuộc tính tên thể loại
+                model.MaLH = id;
+                model.HoTen = lIENHE.HoTen;
+                model.Email = lIENHE.Email;
+                model.DienThoai = lIENHE.DienThoai;
+                model.NgayCapNhat = DateTime.Now;
+                model.NoiDung = Convert.ToString(f["PhanHoi"]);
+                //gọi hàm thêm thể loại (InsertLoaiSach) trong biến admin
+                var result = admin.InsertDoiTra(model);
+                ViewBag.MaLH = model.MaLH;
+                //kiểm tra hàm
+                if (result > 0)
+                {
+                    BuildUserTemplate(ViewBag.MaLH);
+                    ViewBag.Success = "Phản hồi tới khách hàng đã được gửi";
+                    //xóa trạng thái
+                    ModelState.Clear();
+
+                    return View();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Phản hồi tới khách hàng không thành công.");
+                }
+            }
+
+            return View(model);
+        }
 
 
     }

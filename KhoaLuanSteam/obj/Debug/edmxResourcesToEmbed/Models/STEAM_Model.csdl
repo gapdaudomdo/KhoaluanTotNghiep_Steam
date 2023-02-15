@@ -85,6 +85,7 @@
     <Property Name="HinhAnh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
     <NavigationProperty Name="PHIEUDATHANG" Relationship="Self.FK_LIENHE_PHIEUDATHANG" FromRole="LIENHE" ToRole="PHIEUDATHANG" />
+    <NavigationProperty Name="DOITRAs" Relationship="QL_THIETBISTEAMModel.FK_LIENHE_DOITRA" FromRole="LIENHE" ToRole="DOITRA" />
   </EntityType>
   <EntityType Name="LOAISANPHAM">
     <Key>
@@ -584,5 +585,35 @@
     <FunctionImport Name="Update_TrangThai_DatHangNCC">
       <Parameter Name="MaDonDHNCC" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="DOITRAs" EntityType="QL_THIETBISTEAMModel.DOITRA" />
+    <AssociationSet Name="FK_LIENHE_DOITRA" Association="QL_THIETBISTEAMModel.FK_LIENHE_DOITRA">
+      <End Role="LIENHE" EntitySet="LIENHEs" />
+      <End Role="DOITRA" EntitySet="DOITRAs" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="DOITRA">
+    <Key>
+      <PropertyRef Name="MaDT" />
+    </Key>
+    <Property Name="MaDT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaLH" Type="Int32" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NoiDung" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="LIENHE" Relationship="QL_THIETBISTEAMModel.FK_LIENHE_DOITRA" FromRole="DOITRA" ToRole="LIENHE" />
+  </EntityType>
+  <Association Name="FK_LIENHE_DOITRA">
+    <End Type="QL_THIETBISTEAMModel.LIENHE" Role="LIENHE" Multiplicity="1" />
+    <End Type="QL_THIETBISTEAMModel.DOITRA" Role="DOITRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LIENHE">
+        <PropertyRef Name="MaLH" />
+      </Principal>
+      <Dependent Role="DOITRA">
+        <PropertyRef Name="MaLH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

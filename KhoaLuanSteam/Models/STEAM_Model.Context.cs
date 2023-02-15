@@ -45,6 +45,7 @@ namespace KhoaLuanSteam.Models
         public DbSet<SPSALE> SPSALEs { get; set; }
         public DbSet<THONGTINSANPHAM> THONGTINSANPHAMs { get; set; }
         public DbSet<TINHTRANGDH> TINHTRANGDHs { get; set; }
+        public DbSet<DOITRA> DOITRAs { get; set; }
     
         public virtual int Update_SL_Ton(Nullable<int> maCTPhieuNhapHang, Nullable<int> maSP, Nullable<int> maPhieuNhapHang)
         {

@@ -12,23 +12,16 @@ namespace KhoaLuanSteam.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class LIENHE
+    public partial class DOITRA
     {
-        public LIENHE()
-        {
-            this.DOITRAs = new HashSet<DOITRA>();
-        }
-    
+        public int MaDT { get; set; }
         public int MaLH { get; set; }
-        public Nullable<int> MaPhieuDH { get; set; }
         public string HoTen { get; set; }
         public string Email { get; set; }
         public string DienThoai { get; set; }
         public string NoiDung { get; set; }
-        public string HinhAnh { get; set; }
         public Nullable<System.DateTime> NgayCapNhat { get; set; }
     
-        public virtual PHIEUDATHANG PHIEUDATHANG { get; set; }
-        public virtual ICollection<DOITRA> DOITRAs { get; set; }
+        public virtual LIENHE LIENHE { get; set; }
     }
 }
