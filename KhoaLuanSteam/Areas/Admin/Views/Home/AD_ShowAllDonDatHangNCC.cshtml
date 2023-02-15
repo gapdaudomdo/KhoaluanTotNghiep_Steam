@@ -33,36 +33,40 @@
                         Tổng tiền
                     </th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     @*<tr id="row_@item.MaPhieuNhapHang.Trim()">*@
-                    <tr id="row_@item.MaDonDatHangNCC">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MaDonDatHangNCC)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NHACUNGCAP.MaNCC)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NHANVIEN.MaNV)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NgayLap)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TongSL)
-                        </td>
-                        <td>
-                            @*@Html.DisplayFor(modelItem => item.TongTien)*@
-                            @String.Format("{0:0,0}", item.TongTien) đ
-                        </td>
-                        <td>
-                            @Html.ActionLink("Xem", "DetailsCT_DonDatHangNCC", new { id = item.MaDonDatHangNCC }, new { @class = "btn btn-primary" })
-                        </td>
-                    </tr>
+                <tr id="row_@item.MaDonDatHangNCC">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaDonDatHangNCC)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NHACUNGCAP.MaNCC)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NHANVIEN.MaNV)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayLap)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TongSL)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.TongTien)*@
+                        @String.Format("{0:0,0}", item.TongTien) đ
+                    </td>
+                    <td>
+                        @Html.ActionLink("Xem", "DetailsCT_DonDatHangNCC", new { id = item.MaDonDatHangNCC }, new { @class = "btn btn-primary" })
+                    </td>
+                    <td>
+                        <input type="button" value="Xuất File Excel" class="btn btn-primary mb-3" onclick="location.href='@Url.Action("ExportToExcel_CTDonDatHangNhaCC", "Home", new { madondathangncc = item.MaDonDatHangNCC })'" />
+                    </td>
+                </tr>
                 }
             </tbody>
 

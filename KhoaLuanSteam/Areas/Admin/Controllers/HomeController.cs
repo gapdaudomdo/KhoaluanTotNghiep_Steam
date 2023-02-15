@@ -18,6 +18,9 @@ using NPOI.HSSF.Util;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using KhoaLuanSteam.ViewModel;
+using KhoaLuanSteam.Areas.Models;
+using System.Drawing;
+using OfficeOpenXml;
 
 namespace KhoaLuanSteam.Areas.Admin.Controllers
 {
@@ -1235,136 +1238,392 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
 
         //ExportPDF
         //Install-Package iTextSharp
-        private ICellStyle GetTitleStyle(IWorkbook workbook)
+        //private ICellStyle GetTitleStyle(IWorkbook workbook)
+        //{
+        //    ICellStyle style = workbook.CreateCellStyle();
+        //    style.FillForegroundColor = HSSFColor.Blue.Index;
+        //    style.FillPattern = FillPattern.SolidForeground;
+        //    IFont font = workbook.CreateFont();
+        //    font.Color = HSSFColor.White.Index;
+        //    font.Boldweight = (short)FontBoldWeight.Bold;
+        //    style.SetFont(font);
+        //    return style;
+        //}
+
+        //private ICellStyle GetDateStyle(IWorkbook workbook)
+        //{
+        //    ICellStyle dateStyle = workbook.CreateCellStyle();
+        //    IDataFormat dateFormat = workbook.CreateDataFormat();
+        //    dateStyle.DataFormat = dateFormat.GetFormat("dd-MM-yyyy");
+        //    return dateStyle;
+        //}
+
+
+        //public ActionResult ExportExcel_PhieuDatHang(string fileName)
+        //{
+        //    using (QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1())
+        //    {
+        //        var phieuDatHangs = db.PHIEUDATHANGs.ToList();
+        //        var data = from phieudathang in db.PHIEUDATHANGs
+        //                   join khachhang in db.KHACHHANGs on phieudathang.MaKH equals khachhang.MaKH
+        //                   select new { phieudathang.MaPhieuDH, khachhang.TenKH, phieudathang.NgayDat, phieudathang.Tong_SL_Dat, phieudathang.PhiShip, phieudathang.ThanhTien };
+        //        DataTable dt = new DataTable();
+        //        dt.Columns.Add("Mã phiếu đặt hàng");
+        //        dt.Columns.Add("Tên khách hàng");
+        //        dt.Columns.Add("Ngày Đặt");
+        //        dt.Columns.Add("Tổng số lượng đặt");
+        //        dt.Columns.Add("Phí Ship");
+        //        dt.Columns.Add("Thành Tiền");
+
+        //        foreach (var item in data)
+        //        {
+        //            dt.Rows.Add(item.MaPhieuDH, item.TenKH, item.NgayDat, item.Tong_SL_Dat, item.PhiShip, item.ThanhTien);
+        //        }
+
+        //        IWorkbook workbook = new HSSFWorkbook();
+        //        ISheet sheet = workbook.CreateSheet("Data");
+
+        //        Thêm tiêu đề vào file
+        //       IRow titleRow = sheet.CreateRow(0);
+        //        ICell titleCell = titleRow.CreateCell(0);
+        //        titleCell.SetCellValue("Phiếu đặt hàng");
+        //        sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 0, dt.Columns.Count - 1));
+        //        titleCell.CellStyle = GetTitleStyle(workbook);
+
+
+        //        IRow headerRow = sheet.CreateRow(1);
+
+        //        Thêm ngày xuất file vào file
+        //        IRow dateRow = sheet.CreateRow(2);
+        //        ICell dateCell = dateRow.CreateCell(0);
+        //        dateCell.SetCellValue("Ngày xuất: " + DateTime.Now.ToString("dd/MM/yyyy"));
+        //        sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(1, 1, 0, dt.Columns.Count - 1));
+        //        dateCell.CellStyle = GetDateStyle(workbook);
+
+        //        foreach (DataColumn column in dt.Columns)
+        //            headerRow.CreateCell(column.Ordinal).SetCellValue(column.Caption);
+        //        int rowIndex = 1;
+        //        foreach (DataRow row in dt.Rows)
+        //        {
+        //            IRow dataRow = sheet.CreateRow(rowIndex);
+        //            foreach (DataColumn column in dt.Columns)
+        //                dataRow.CreateCell(column.Ordinal).SetCellValue(row[column].ToString());
+        //            rowIndex++;
+        //        }
+
+
+        //        using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+        //        {
+        //            workbook.Write(ms);
+        //            return File(ms.ToArray(), "application/vnd.ms-excel", "PhieuDatHang.xls");
+        //        }
+        //    }
+        //}
+
+        //public ActionResult ExportPDF_PhieuNhapHang(string fileName)
+        //{
+        //    using (QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1())
+        //    {
+        //        var data = from phieunhaphang in db.PHIEUNHAPHANGs
+        //                   join nhanvien in db.NHANVIENs on phieunhaphang.MaNV equals nhanvien.MaNV
+        //                   join nhacungcap in db.NHACUNGCAPs on phieunhaphang.MaNCC equals nhacungcap.MaNCC
+        //                   select new { phieunhaphang.MaPhieuNhapHang, nhacungcap.TenNCC, nhanvien.TenNV, phieunhaphang.NgayLap_PN, phieunhaphang.TongSL, phieunhaphang.TongTien_NH };
+        //        DataTable dt = new DataTable();
+        //        dt.Columns.Add("Mã Phiếu Nhập Hàng");
+        //        dt.Columns.Add("Tên Nhà Cung Cấp");
+        //        dt.Columns.Add("Tên Nhân Viên");
+        //        dt.Columns.Add("Ngày Lập Phiếu");
+        //        dt.Columns.Add("Tổng số lượng");
+        //        dt.Columns.Add("Tổng tiền");
+
+        //        foreach (var item in data)
+        //        {
+        //            dt.Rows.Add(item.MaPhieuNhapHang, item.TenNCC, item.TenNV, item.NgayLap_PN, item.TongTien_NH);
+        //        }
+
+        //        using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+        //        {
+        //            Document document = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
+        //            PdfWriter writer = PdfWriter.GetInstance(document, ms);
+        //            document.Open();
+        //            PdfPTable table = new PdfPTable(dt.Columns.Count);
+        //            for (int i = 0; i < dt.Columns.Count; i++)
+        //            {
+        //                table.AddCell(dt.Columns[i].ColumnName);
+        //            }
+
+        //            for (int i = 0; i < dt.Rows.Count; i++)
+        //            {
+        //                for (int j = 0; j < dt.Columns.Count; j++)
+        //                {
+        //                    table.AddCell(dt.Rows[i][j].ToString());
+        //                }
+        //            }
+
+        //            document.Add(table);
+        //            document.Close();
+
+        //            return File(ms.ToArray(), "application/pdf", "PhieuNhapHang.pdf");
+        //        }
+        //    }
+        //}
+
+
+        public ActionResult ExportExcel_PhieuDatHang()
         {
-            ICellStyle style = workbook.CreateCellStyle();
-            style.FillForegroundColor = HSSFColor.Blue.Index;
-            style.FillPattern = FillPattern.SolidForeground;
-            IFont font = workbook.CreateFont();
-            font.Color = HSSFColor.White.Index;
-            font.Boldweight = (short)FontBoldWeight.Bold;
-            style.SetFont(font);
-            return style;
+
+            List<PhieuDatHangViewModel> emplist = db.PHIEUDATHANGs.Select(x => new PhieuDatHangViewModel
+            {
+                MaPhieuDH = x.MaPhieuDH,
+                MaKH = x.MaKH,
+                NgayDat = x.NgayDat,
+                Tong_SL_Dat = x.Tong_SL_Dat,
+                PhiShip = x.PhiShip,
+                ThanhTien = x.ThanhTien
+
+            }).ToList();
+
+            return View(emplist);
         }
 
-        private ICellStyle GetDateStyle(IWorkbook workbook)
+
+        public void ExportToExcel()
         {
-            ICellStyle dateStyle = workbook.CreateCellStyle();
-            IDataFormat dateFormat = workbook.CreateDataFormat();
-            dateStyle.DataFormat = dateFormat.GetFormat("dd-MM-yyyy");
-            return dateStyle;
+
+            List<PhieuDatHangViewModel> emplist = db.PHIEUDATHANGs.Select(x => new PhieuDatHangViewModel
+            {
+                MaPhieuDH = x.MaPhieuDH,
+                MaKH = x.MaKH,
+                NgayDat = x.NgayDat,
+                Tong_SL_Dat = x.Tong_SL_Dat,
+                PhiShip = x.PhiShip,
+                ThanhTien = x.ThanhTien
+            }).ToList();
+            DateTime date = new DateTime();
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ExcelPackage pck = new ExcelPackage();
+            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
+
+            ws.Cells["A1"].Value = "Xuất Báo Cáo";
+            ws.Cells["B1"].Value = "Báo Cáo ";
+
+            ws.Cells["A2"].Value = "Report";
+            ws.Cells["B2"].Value = "Report1";
+
+            ws.Cells["A3"].Value = "Date";
+            ws.Cells["B3"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", DateTimeOffset.Now);
+
+            ws.Cells["C4"].Value = string.Format("HÓA ĐƠN PHIẾU ĐẶT HÀNG CỦA KHÁCH HÀNG ");
+
+            ws.Cells["A6"].Value = "Mã Phiếu Đặt Hàng";
+            ws.Cells["B6"].Value = "Mã Khách Hàng";
+            ws.Cells["C6"].Value = "Ngày Đặt";
+            ws.Cells["D6"].Value = "Tổng Số Lượng Đặt";
+            ws.Cells["E6"].Value = "Phí Ship";
+            ws.Cells["F6"].Value = "Thành Tiền";
+
+            ws.Cells["E15"].Value = string.Format("Tổng Tiền:");
+
+
+            int rowStart = 7;
+            foreach (var item in emplist)
+            {
+                if (item.ThanhTien < 500000)
+                {
+                    ws.Row(rowStart).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                    ws.Row(rowStart).Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml(string.Format("pink")));
+
+                }
+
+                ws.Cells[string.Format("A{0}", rowStart)].Value = item.MaPhieuDH;
+                ws.Cells[string.Format("B{0}", rowStart)].Value = item.MaKH;
+                //ws.Cells[string.Format("C{0}", rowStart)].Value = item.NgayDat;
+                ws.Cells[string.Format("C{0}", rowStart)].Value = string.Format("{0:dd MMMM yyyy}", item.NgayDat);
+                ws.Cells[string.Format("D{0}", rowStart)].Value = item.Tong_SL_Dat;
+                ws.Cells[string.Format("E{0}", rowStart)].Value = item.PhiShip;
+                ws.Cells[string.Format("F{0}", rowStart)].Value = item.ThanhTien;
+                rowStart++;
+            }
+
+            ws.Cells["A:AZ"].AutoFitColumns();
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
+            Response.BinaryWrite(pck.GetAsByteArray());
+            Response.End();
+
         }
 
-
-        public ActionResult ExportExcel_PhieuDatHang(string fileName)
+        public void ExportToExcel_CTPhieuDatHang(int maphieudathang)
         {
             using (QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1())
             {
-                //var phieuDatHangs = db.PHIEUDATHANGs.ToList();
+                var result = db.PHIEUDATHANGs.SingleOrDefault(x => x.MaPhieuDH == maphieudathang);
+                double? tongtien = result.ThanhTien;
                 var data = from phieudathang in db.PHIEUDATHANGs
+                           join ct_phieudathang in db.CT_PHIEUDATHANG on phieudathang.MaPhieuDH equals ct_phieudathang.MaPhieuDH
                            join khachhang in db.KHACHHANGs on phieudathang.MaKH equals khachhang.MaKH
-                           select new { phieudathang.MaPhieuDH, khachhang.TenKH, phieudathang.NgayDat, phieudathang.Tong_SL_Dat, phieudathang.PhiShip, phieudathang.ThanhTien };
+                           join ttsp in db.THONGTINSANPHAMs on ct_phieudathang.MaSanPham equals ttsp.MaSanPham
+                           where phieudathang.MaPhieuDH == maphieudathang
+                           select new { phieudathang.MaPhieuDH, khachhang.TenKH, ttsp.TenSanPham, ct_phieudathang.SoLuong, ct_phieudathang.DonGia, phieudathang.ThanhTien };
                 DataTable dt = new DataTable();
-                dt.Columns.Add("Mã phiếu đặt hàng");
-                dt.Columns.Add("Tên khách hàng");
-                dt.Columns.Add("Ngày Đặt");
-                dt.Columns.Add("Tổng số lượng đặt");
-                dt.Columns.Add("Phí Ship");
-                dt.Columns.Add("Thành Tiền");
+                //dt.Columns.Add("Mã Phiếu Đặt Hàng");
+                //dt.Columns.Add("Tên Khách Hàng");
+                //dt.Columns.Add("Tên Sản Phẩm");
+                //dt.Columns.Add("Số Lượng");
+                //dt.Columns.Add("Đơn Gía");
+                //dt.Columns.Add("Thành Tiền");
 
+                DateTime date = new DateTime();
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                ExcelPackage pck = new ExcelPackage();
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
+
+                ws.Cells["A1"].Value = "Xuất Báo Cáo";
+                ws.Cells["B1"].Value = "Báo Cáo ";
+
+                ws.Cells["A2"].Value = "Report";
+                ws.Cells["B2"].Value = "Report1";
+
+                ws.Cells["A3"].Value = "Date";
+                ws.Cells["B3"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", DateTimeOffset.Now);
+
+                ws.Cells["C4"].Value = string.Format("HÓA ĐƠN PHIẾU ĐẶT HÀNG CỦA KHÁCH HÀNG ");
+
+                ws.Cells["A6"].Value = "Mã Phiếu Đặt Hàng";
+                ws.Cells["B6"].Value = "Tên Khách Hàng";
+                ws.Cells["C6"].Value = "Tên Sản Phẩm";
+                ws.Cells["D6"].Value = "Số Lượng";
+                ws.Cells["E6"].Value = "Đơn Giá";
+                ws.Cells["F6"].Value = "Thành Tiền";
+
+                //ws.Cells["E11"].Value = string.Format("Tổng Tiền:");
+
+
+                int rowStart = 7;
                 foreach (var item in data)
                 {
-                    dt.Rows.Add(item.MaPhieuDH, item.TenKH, item.NgayDat, item.Tong_SL_Dat, item.PhiShip, item.ThanhTien);
+                    if (item.ThanhTien < 500000)
+                    {
+                        ws.Row(rowStart).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                        ws.Row(rowStart).Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml(string.Format("pink")));
+
+                    }
+
+                    ws.Cells[string.Format("A{0}", rowStart)].Value = item.MaPhieuDH;
+                    ws.Cells[string.Format("B{0}", rowStart)].Value = item.TenKH;
+                    ws.Cells[string.Format("C{0}", rowStart)].Value = item.TenSanPham;
+                    ws.Cells[string.Format("D{0}", rowStart)].Value = item.SoLuong;
+                    ws.Cells[string.Format("E{0}", rowStart)].Value = item.DonGia;
+                    ws.Cells[string.Format("F{0}", rowStart)].Value = item.SoLuong * item.DonGia;
+                    rowStart++;
+
                 }
+                rowStart = rowStart + 1;
+                string STongTienF = string.Concat("F", rowStart.ToString());
+                string STongTienE = string.Concat("E", rowStart.ToString());
 
-                IWorkbook workbook = new HSSFWorkbook();
-                ISheet sheet = workbook.CreateSheet("Data");
+                ws.Cells[STongTienE].Value = string.Format("Tổng Tiền:");
 
-                // Thêm tiêu đề vào file
-                IRow titleRow = sheet.CreateRow(0);
-                ICell titleCell = titleRow.CreateCell(0);
-                titleCell.SetCellValue("Phiếu đặt hàng");
-                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 0, dt.Columns.Count - 1));
-                titleCell.CellStyle = GetTitleStyle(workbook);
-
-
-                IRow headerRow = sheet.CreateRow(1);
-
-                // Thêm ngày xuất file vào file
-                //IRow dateRow = sheet.CreateRow(2);
-                //ICell dateCell = dateRow.CreateCell(0);
-                //dateCell.SetCellValue("Ngày xuất: " + DateTime.Now.ToString("dd/MM/yyyy"));
-                //sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(1, 1, 0, dt.Columns.Count - 1));
-                //dateCell.CellStyle = GetDateStyle(workbook);
-
-                foreach (DataColumn column in dt.Columns)
-                    headerRow.CreateCell(column.Ordinal).SetCellValue(column.Caption);
-                int rowIndex = 1;
-                foreach (DataRow row in dt.Rows)
-                {
-                    IRow dataRow = sheet.CreateRow(rowIndex);
-                    foreach (DataColumn column in dt.Columns)
-                        dataRow.CreateCell(column.Ordinal).SetCellValue(row[column].ToString());
-                    rowIndex++;
-                }
-
-
-                using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
-                {
-                    workbook.Write(ms);
-                    return File(ms.ToArray(), "application/vnd.ms-excel", "PhieuDatHang.xls");
-                }
+                ws.Cells[string.Format(STongTienF, rowStart)].Value = tongtien;
+                ws.Cells["A:AZ"].AutoFitColumns();
+                Response.Clear();
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
+                Response.BinaryWrite(pck.GetAsByteArray());
+                Response.End();
             }
+
         }
 
-        public ActionResult ExportPDF_PhieuNhapHang(string fileName)
+        public void ExportToExcel_CTDonDatHangNhaCC(int madondathangncc)
         {
             using (QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1())
             {
-                var data = from phieunhaphang in db.PHIEUNHAPHANGs 
-                           join nhanvien in db.NHANVIENs on phieunhaphang.MaNV equals nhanvien.MaNV
-                           join nhacungcap in db.NHACUNGCAPs on phieunhaphang.MaNCC equals nhacungcap.MaNCC 
-                           select new { phieunhaphang.MaPhieuNhapHang, nhacungcap.TenNCC, nhanvien.TenNV, phieunhaphang.NgayLap_PN, phieunhaphang.TongSL, phieunhaphang.TongTien_NH };
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Mã Phiếu Nhập Hàng");
-                dt.Columns.Add("Tên Nhà Cung Cấp");
-                dt.Columns.Add("Tên Nhân Viên");
-                dt.Columns.Add("Ngày Lập Phiếu");
-                dt.Columns.Add("Tổng số lượng");
-                dt.Columns.Add("Tổng tiền");
+                var result = db.DonDatHangNCCs.SingleOrDefault(x => x.MaDonDatHangNCC == madondathangncc);
+                double? tongtien = result.TongTien;
+                //result.NgayLap
 
+
+                var getTenNCC = db.NHACUNGCAPs.SingleOrDefault(x => x.MaNCC == result.MaNCC);
+                string tenNCC = getTenNCC.TenNCC;
+
+                var data = from dondathangncc in db.DonDatHangNCCs
+                           join ct_dondathangncc in db.CT_DonDatHangNCC on dondathangncc.MaDonDatHangNCC equals ct_dondathangncc.MaCT_DonDatHangNCC
+                           join ncc in db.NHACUNGCAPs on dondathangncc.MaNCC equals ncc.MaNCC
+                           join nv in db.NHANVIENs on dondathangncc.MaNV equals nv.MaNV
+                           join ttsp in db.THONGTINSANPHAMs on ct_dondathangncc.MaSanPham equals ttsp.MaSanPham
+                           where dondathangncc.MaDonDatHangNCC == madondathangncc
+                           select new { ct_dondathangncc.MaDonDatHangNCC, nv.TenNV, ttsp.TenSanPham, ct_dondathangncc.Soluong, ct_dondathangncc.DonGiaDat, ct_dondathangncc.TongTien };
+                DataTable dt = new DataTable();
+
+                DateTime date = new DateTime();
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                ExcelPackage pck = new ExcelPackage();
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
+
+                ws.Cells["A1"].Value = "Xuất Báo Cáo";
+                ws.Cells["B1"].Value = "Báo Cáo ";
+
+                ws.Cells["A2"].Value = "Report";
+                ws.Cells["B2"].Value = "Report1";
+
+                ws.Cells["A3"].Value = "Date";
+                ws.Cells["B3"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", DateTimeOffset.Now);
+
+                ws.Cells["C4"].Value = string.Format("HÓA ĐƠN ĐẶT HÀNG NHÀ CUNG CẤP ");
+
+                ws.Cells["A6"].Value = "Mã Đơn Đặt Hàng Nhà Cung Cấp";
+                ws.Cells["B6"].Value = "Tên Nhà Cung Cấp";
+                ws.Cells["C6"].Value = "Tên Nhân Viên";
+                ws.Cells["D6"].Value = "Ngày Đặt";
+                ws.Cells["E6"].Value = "Tên Sản Phẩm";
+                ws.Cells["F6"].Value = "Số Lượng";
+                ws.Cells["G6"].Value = "Đơn Giá Đặt";
+                ws.Cells["H6"].Value = "Thành Tiền";
+
+                //ws.Cells["E11"].Value = string.Format("Tổng Tiền:");
+
+
+                int rowStart = 7;
+               
+               
                 foreach (var item in data)
                 {
-                    dt.Rows.Add(item.MaPhieuNhapHang, item.TenNCC, item.TenNV, item.NgayLap_PN, item.TongTien_NH);
-                }
-
-                using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
-                {
-                    Document document = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
-                    PdfWriter writer = PdfWriter.GetInstance(document, ms);
-                    document.Open();
-                    PdfPTable table = new PdfPTable(dt.Columns.Count);
-                    for (int i = 0; i < dt.Columns.Count; i++)
+                    if (item.TongTien < 500000)
                     {
-                        table.AddCell(dt.Columns[i].ColumnName);
+                        ws.Row(rowStart).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                        ws.Row(rowStart).Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml(string.Format("pink")));
+
                     }
 
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        for (int j = 0; j < dt.Columns.Count; j++)
-                        {
-                            table.AddCell(dt.Rows[i][j].ToString());
-                        }
-                    }
+                    ws.Cells[string.Format("A{0}", rowStart)].Value = item.MaDonDatHangNCC;
+                    ws.Cells[string.Format("B{0}", rowStart)].Value = tenNCC;
+                    ws.Cells[string.Format("C{0}", rowStart)].Value = item.TenNV;
+                    ws.Cells[string.Format("D{0}", rowStart)].Value = result.NgayLap;
+                    ws.Cells[string.Format("E{0}", rowStart)].Value = item.TenSanPham;
+                    ws.Cells[string.Format("F{0}", rowStart)].Value = item.Soluong;
+                    ws.Cells[string.Format("G{0}", rowStart)].Value = item.DonGiaDat;
+                    ws.Cells[string.Format("H{0}", rowStart)].Value = item.Soluong * item.DonGiaDat;
+                    rowStart++;
 
-                    document.Add(table);
-                    document.Close();
-
-                    return File(ms.ToArray(), "application/pdf", "PhieuNhapHang.pdf");
                 }
+                rowStart = rowStart + 1;
+                string STongTienH = string.Concat("H", rowStart.ToString());
+                string STongTienG = string.Concat("G", rowStart.ToString());
+
+                ws.Cells[STongTienG].Value = string.Format("Tổng Tiền:");
+
+                ws.Cells[string.Format(STongTienH, rowStart)].Value = tongtien;
+                ws.Cells["A:AZ"].AutoFitColumns();
+                Response.Clear();
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
+                Response.BinaryWrite(pck.GetAsByteArray());
+                Response.End();
             }
-        }
 
+        }
 
 
 

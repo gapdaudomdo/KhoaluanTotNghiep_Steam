@@ -556,3 +556,7 @@ D:\Webtest\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\System.Web.WebPages.Deploym
 D:\Webtest\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\System.Web.WebPages.Razor.xml
 D:\Webtest\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.dll
 D:\Webtest\KhoaluanTotNghiep_Steam\KhoaLuanSteam\obj\Debug\KhoaLuanSteam.pdb
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\EPPlus.dll
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\EPPlus.Interfaces.dll
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\EPPlus.System.Drawing.dll
+D:\GitHub_Desktop\KhoaluanTotNghiep_Steam\KhoaLuanSteam\bin\EPPlus.xml

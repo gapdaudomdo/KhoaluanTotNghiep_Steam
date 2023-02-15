@@ -6,11 +6,11 @@
 @model IEnumerable<KhoaLuanSteam.Models.PHIEUNHAPHANG>
 
 <h2 style="text-align: center;">Quản lý đơn nhập hàng</h2>
-<div class="row">
+@*<div class="row">
     <div class="col-md-12">
         <input type="button" value="Xuất File PDF" class="btn btn-primary mb-3" onclick="location.href='@Url.Action("ExportPDF_PhieuNhapHang", "Home")'" />
     </div>
-</div>
+</div>*@
 <p>
     @Html.ActionLink("Nhập hàng từ nhà cung cấp", "InsertDonNhapHang")
     @*@Html.ActionLink("Nhập hàng từ NCC", "InsertCT_PhieuNhapHang")*@
