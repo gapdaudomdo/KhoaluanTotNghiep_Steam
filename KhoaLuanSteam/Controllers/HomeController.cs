@@ -112,7 +112,7 @@ namespace KhoaLuanSteam.Controllers
                 }
                 else
                 {
-                    fileUpload.SaveAs(path);
+                    fileUpload1.SaveAs(path);
                 }
 
                 lh.HinhAnhSP = fileName1;

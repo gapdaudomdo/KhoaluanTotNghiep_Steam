@@ -1552,13 +1552,10 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                 var getTenNCC = db.NHACUNGCAPs.SingleOrDefault(x => x.MaNCC == result.MaNCC);
                 string tenNCC = getTenNCC.TenNCC;
 
-                var data = from dondathangncc in db.DonDatHangNCCs
-                           join ct_dondathangncc in db.CT_DonDatHangNCC on dondathangncc.MaDonDatHangNCC equals ct_dondathangncc.MaCT_DonDatHangNCC
-                           join ncc in db.NHACUNGCAPs on dondathangncc.MaNCC equals ncc.MaNCC
-                           join nv in db.NHANVIENs on dondathangncc.MaNV equals nv.MaNV
+                var data = from ct_dondathangncc in db.CT_DonDatHangNCC
                            join ttsp in db.THONGTINSANPHAMs on ct_dondathangncc.MaSanPham equals ttsp.MaSanPham
-                           where dondathangncc.MaDonDatHangNCC == madondathangncc
-                           select new { ct_dondathangncc.MaDonDatHangNCC, nv.TenNV, ttsp.TenSanPham, ct_dondathangncc.Soluong, ct_dondathangncc.DonGiaDat, ct_dondathangncc.TongTien };
+                           where ct_dondathangncc.MaDonDatHangNCC == madondathangncc
+                           select new { ct_dondathangncc.MaDonDatHangNCC, ttsp.TenSanPham, ct_dondathangncc.Soluong, ct_dondathangncc.DonGiaDat, ct_dondathangncc.TongTien };
                 DataTable dt = new DataTable();
 
                 DateTime date = new DateTime();
@@ -1566,30 +1563,33 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                 ExcelPackage pck = new ExcelPackage();
                 ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
 
-                ws.Cells["A1"].Value = "Xuất Báo Cáo";
-                ws.Cells["B1"].Value = "Báo Cáo ";
+                ws.Cells["A1"].Value = "Tên Nhân Viên";
+                ws.Cells["B1"].Value = result.NHANVIEN.TenNV;
 
-                ws.Cells["A2"].Value = "Report";
-                ws.Cells["B2"].Value = "Report1";
+                ws.Cells["A2"].Value = "Tên Nhà Cung Cấp";
+                ws.Cells["B2"].Value = tenNCC;
 
-                ws.Cells["A3"].Value = "Date";
-                ws.Cells["B3"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", DateTimeOffset.Now);
+                ws.Cells["A3"].Value = "Ngày Đặt";
+                ws.Cells["B3"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", result.NgayLap);
 
-                ws.Cells["C4"].Value = string.Format("HÓA ĐƠN ĐẶT HÀNG NHÀ CUNG CẤP ");
+                ws.Cells["A4"].Value = "Ngày Xuất Hóa Đơn";
+                ws.Cells["B4"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", DateTimeOffset.Now);
 
-                ws.Cells["A6"].Value = "Mã Đơn Đặt Hàng Nhà Cung Cấp";
-                ws.Cells["B6"].Value = "Tên Nhà Cung Cấp";
-                ws.Cells["C6"].Value = "Tên Nhân Viên";
-                ws.Cells["D6"].Value = "Ngày Đặt";
-                ws.Cells["E6"].Value = "Tên Sản Phẩm";
-                ws.Cells["F6"].Value = "Số Lượng";
-                ws.Cells["G6"].Value = "Đơn Giá Đặt";
-                ws.Cells["H6"].Value = "Thành Tiền";
+                ws.Cells["C5"].Value = string.Format("HÓA ĐƠN ĐẶT HÀNG NHÀ CUNG CẤP ");
+
+                ws.Cells["A7"].Value = "Mã Đơn Đặt Hàng Nhà Cung Cấp";
+                //ws.Cells["B6"].Value = "Tên Nhà Cung Cấp";
+                //ws.Cells["C6"].Value = "Tên Nhân Viên";
+                //ws.Cells["D6"].Value = "Ngày Đặt";
+                ws.Cells["B7"].Value = "Tên Sản Phẩm";
+                ws.Cells["C7"].Value = "Số Lượng";
+                ws.Cells["D7"].Value = "Đơn Giá Đặt";
+                ws.Cells["E7"].Value = "Thành Tiền";
 
                 //ws.Cells["E11"].Value = string.Format("Tổng Tiền:");
 
 
-                int rowStart = 7;
+                int rowStart = 8;
                
                
                 foreach (var item in data)
@@ -1602,23 +1602,118 @@ namespace KhoaLuanSteam.Areas.Admin.Controllers
                     }
 
                     ws.Cells[string.Format("A{0}", rowStart)].Value = item.MaDonDatHangNCC;
-                    ws.Cells[string.Format("B{0}", rowStart)].Value = tenNCC;
-                    ws.Cells[string.Format("C{0}", rowStart)].Value = item.TenNV;
-                    ws.Cells[string.Format("D{0}", rowStart)].Value = result.NgayLap;
-                    ws.Cells[string.Format("E{0}", rowStart)].Value = item.TenSanPham;
-                    ws.Cells[string.Format("F{0}", rowStart)].Value = item.Soluong;
-                    ws.Cells[string.Format("G{0}", rowStart)].Value = item.DonGiaDat;
-                    ws.Cells[string.Format("H{0}", rowStart)].Value = item.Soluong * item.DonGiaDat;
+                    //ws.Cells[string.Format("B{0}", rowStart)].Value = tenNCC;
+                    //ws.Cells[string.Format("C{0}", rowStart)].Value = item.TenNV;
+                    //ws.Cells[string.Format("D{0}", rowStart)].Value = result.NgayLap;
+                    ws.Cells[string.Format("B{0}", rowStart)].Value = item.TenSanPham;
+                    ws.Cells[string.Format("C{0}", rowStart)].Value = item.Soluong;
+                    ws.Cells[string.Format("D{0}", rowStart)].Value = item.DonGiaDat;
+                    ws.Cells[string.Format("E{0}", rowStart)].Value = item.Soluong * item.DonGiaDat;
                     rowStart++;
 
                 }
                 rowStart = rowStart + 1;
-                string STongTienH = string.Concat("H", rowStart.ToString());
-                string STongTienG = string.Concat("G", rowStart.ToString());
+                string STongTienE = string.Concat("E", rowStart.ToString());
+                string STongTienD = string.Concat("D", rowStart.ToString());
 
-                ws.Cells[STongTienG].Value = string.Format("Tổng Tiền:");
+                ws.Cells[STongTienD].Value = string.Format("Tổng Tiền:");
 
-                ws.Cells[string.Format(STongTienH, rowStart)].Value = tongtien;
+                ws.Cells[string.Format(STongTienE, rowStart)].Value = tongtien;
+                ws.Cells["A:AZ"].AutoFitColumns();
+                Response.Clear();
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
+                Response.BinaryWrite(pck.GetAsByteArray());
+                Response.End();
+            }
+
+        }
+
+
+
+
+        // hóa đơn phiếu nhập hàng
+
+        public void ExportToExcel_CTPhieuNhapHangNhaCC(int maphieunhaphang)
+        {
+            using (QL_THIETBISTEAMEntities1 db = new QL_THIETBISTEAMEntities1())
+            {
+                var result = db.PHIEUNHAPHANGs.SingleOrDefault(x => x.MaPhieuNhapHang == maphieunhaphang);
+                double? tongtien = result.TongTien_NH;
+                //result.NgayLap
+
+
+                var getTenNCC = db.NHACUNGCAPs.SingleOrDefault(x => x.MaNCC == result.MaNCC);
+                string tenNCC = getTenNCC.TenNCC;
+
+                var data = from ct_phieunhaphang in db.CT_PHIEUNHAPHANG
+                           join ttsp in db.THONGTINSANPHAMs on ct_phieunhaphang.MaSanPham equals ttsp.MaSanPham
+                           where ct_phieunhaphang.MaPhieuNhapHang == maphieunhaphang
+                           select new { ct_phieunhaphang.MaPhieuNhapHang, ttsp.TenSanPham, ct_phieunhaphang.Sluong, ct_phieunhaphang.DonGiaNhap, ct_phieunhaphang.TongTien };
+                DataTable dt = new DataTable();
+
+                DateTime date = new DateTime();
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                ExcelPackage pck = new ExcelPackage();
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
+
+                ws.Cells["A1"].Value = "Tên Nhân Viên";
+                ws.Cells["B1"].Value = result.NHANVIEN.TenNV;
+
+                ws.Cells["A2"].Value = "Tên Nhà Cung Cấp";
+                ws.Cells["B2"].Value = tenNCC;
+
+                ws.Cells["A3"].Value = "Ngày Đặt";
+                ws.Cells["B3"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", result.NgayLap_PN);
+
+                ws.Cells["A4"].Value = "Ngày Xuất Hóa Đơn";
+                ws.Cells["B4"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", DateTimeOffset.Now);
+
+
+                ws.Cells["C5"].Value = string.Format("HÓA ĐƠN NHẬP HÀNG ");
+
+                ws.Cells["A7"].Value = "Mã Phiếu Nhập Hàng";
+                //ws.Cells["B6"].Value = "Tên Nhà Cung Cấp";
+                //ws.Cells["C6"].Value = "Tên Nhân Viên";
+                //ws.Cells["D6"].Value = "Ngày Đặt";
+                ws.Cells["B7"].Value = "Tên Sản Phẩm";
+                ws.Cells["C7"].Value = "Số Lượng";
+                ws.Cells["D7"].Value = "Đơn Giá Nhập";
+                ws.Cells["E7"].Value = "Thành Tiền";
+
+                //ws.Cells["E11"].Value = string.Format("Tổng Tiền:");
+
+
+                int rowStart = 8;
+
+
+                foreach (var item in data)
+                {
+                    if (item.TongTien < 500000)
+                    {
+                        ws.Row(rowStart).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                        ws.Row(rowStart).Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml(string.Format("pink")));
+
+                    }
+
+                    ws.Cells[string.Format("A{0}", rowStart)].Value = item.MaPhieuNhapHang;
+                    //ws.Cells[string.Format("B{0}", rowStart)].Value = tenNCC;
+                    //ws.Cells[string.Format("C{0}", rowStart)].Value = item.TenNV;
+                    //ws.Cells[string.Format("D{0}", rowStart)].Value = result.NgayLap;
+                    ws.Cells[string.Format("B{0}", rowStart)].Value = item.TenSanPham;
+                    ws.Cells[string.Format("C{0}", rowStart)].Value = item.Sluong;
+                    ws.Cells[string.Format("D{0}", rowStart)].Value = item.DonGiaNhap;
+                    ws.Cells[string.Format("E{0}", rowStart)].Value = item.Sluong * item.DonGiaNhap;
+                    rowStart++;
+
+                }
+                rowStart = rowStart + 1;
+                string STongTienE = string.Concat("E", rowStart.ToString());
+                string STongTienD = string.Concat("D", rowStart.ToString());
+
+                ws.Cells[STongTienD].Value = string.Format("Tổng Tiền:");
+
+                ws.Cells[string.Format(STongTienE, rowStart)].Value = tongtien;
                 ws.Cells["A:AZ"].AutoFitColumns();
                 Response.Clear();
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
